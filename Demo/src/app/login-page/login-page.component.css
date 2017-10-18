@@ -1,0 +1,127 @@
+
+/*  {
+    width: 100%;
+    height: 100%;
+    display: table;
+    position: absolute;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+} */
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.logo a {
+    font-size: 25px;
+    letter-spacing: 2px;
+    color: red;
+}
+
+.logo a:hover {
+    text-decoration: none;
+}
+
+ h3 {
+    font-size: 22px;
+    margin-top: 10px;
+    letter-spacing: 1px;
+    font-weight: 100;
+}
+
+ .middle .login-panel {
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 320px;
+    max-width: auto;
+    min-height: 380px;
+    width: calc(100% - 40px);
+    padding: 36px;
+    background-color: #fff;
+    border: 1px solid #818c94;
+    border: 1px solid rgba(0, 0, 0, .4);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, .55);
+    -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, .55);
+    -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, .55);
+}
+
+ table {
+    width: 100%;
+}
+
+ table tr td {
+    padding: 8px 0;
+}
+
+ table tr td .input-text {
+    width: 100%;
+    height: 36px;
+    outline: none;
+    font-size: 15px;
+    padding: 6px 10px;
+    border: 1px solid rgba(0, 0, 0, .6);
+}
+
+ table tr td .input-text:focus {
+    border: 1px solid #0067b8;
+}
+
+ table tr td .btn-login {
+    width: 100%;
+    height: 36px;
+    color: #fff;
+    padding: 6px 10px;
+    font-size: 15px;
+    border: 1px solid #0067b8;
+    background-color: #0067b8;
+}
+
+ table tr td .btn-login:hover {
+    background-color: #005BA1;
+    border: 1px solid #005BA1;
+}
+
+ table tr td p {
+    font-size: 1.35rem;
+    margin: 0 0 5px;
+}
+
+ table tr td p a {
+    color: #107FD4;
+}
+
+ table tr td p a:hover {
+    color: #005BA1;
+    text-decoration: none;
+}
+
+
+/*=========================== FOOTER =============================*/
+
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+}
+
+footer p {
+    margin: 7px 15px 4px 15px;
+    text-align: right;
+    color: #B6B6B6;
+    font-size: 12px;
+}
+
+footer p a {
+    color: #B6B6B6;
+}
+
+footer p a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+/*======================== SCROLL TO TOP =========================*/
