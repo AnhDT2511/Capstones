@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule , ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component'
 // import { LoginPageComponent } from './login-page/login-page.component';
 
 const routesConfig: Routes = [
@@ -10,9 +10,11 @@ const routesConfig: Routes = [
     { path: '**', component: PageNotFoundComponent }
 ];
 
+const Routing: ModuleWithProviders = RouterModule.forRoot(routesConfig);
+
 @NgModule({
     imports: [
-        RouterModule.forRoot(routesConfig),
+        Routing
     ],
     declarations: [
         PageNotFoundComponent,

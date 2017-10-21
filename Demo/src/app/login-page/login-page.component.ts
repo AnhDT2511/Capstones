@@ -1,6 +1,6 @@
 import {Component , ViewEncapsulation} from '@angular/core';
 import {Observable}  from 'rxjs/Observable';
-import {LoginService} from '../service/login.service';
+import {LoginService} from '../shared';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

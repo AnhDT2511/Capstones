@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MenuTopComponent} from './sub-component/menu-top.component';
 import {HomePageComponent} from './home-page.component';
 import {HomePageRouter}  from './home-page.router';
 import {SectionCoverComponent}  from './sub-component/section-cover.component';
@@ -10,9 +9,7 @@ import {SectionProminentPlaceComponent}  from './sub-component/section-prominent
 import {SectionPlaceComponent}  from './sub-component/section-place.component';
 import {SectionContactComponent}  from './sub-component/section-contact.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
-import  {LoginPageComponent} from '../login-page/login-page.component'
 import { FormsModule } from '@angular/forms';
-import {LoginService} from '../service/login.service'
 
 @NgModule({
     imports: [
@@ -22,7 +19,6 @@ import {LoginService} from '../service/login.service'
         FormsModule
     ],
     declarations: [
-        MenuTopComponent,
         HomePageComponent,
         SectionCoverComponent,
         SectionSearchComponent,
@@ -30,10 +26,9 @@ import {LoginService} from '../service/login.service'
         SectionProminentPlaceComponent,
         SectionPlaceComponent,
         SectionContactComponent,
-        LoginPageComponent
         // NgbModule
     ],
-    providers :[LoginService]
+    providers :[]
 })
 
 export class HomePageModule {}
