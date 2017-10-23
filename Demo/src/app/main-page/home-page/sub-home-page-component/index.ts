@@ -1,0 +1,6 @@
+export * from './section-about.component'
+export * from './section-contact.component'
+export * from './section-cover.component'
+export * from './section-place.component'
+export * from './section-prominent-place.component'
+export * from './section-search.component'

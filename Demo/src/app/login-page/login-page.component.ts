@@ -22,6 +22,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   login() {
+    var a : string = "abc";
+    a = "bcd";
     this.loading = true;
     this.authenService.login(this.model).subscribe(data => {
       if(data !== null){
