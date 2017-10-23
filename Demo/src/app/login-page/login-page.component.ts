@@ -1,59 +1,41 @@
-import {Component , ViewEncapsulation} from '@angular/core';
-import {Observable}  from 'rxjs/Observable';
-import {LoginService} from '../shared';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
+import { NotificationService } from '../shared/service/notification.service';
+import { AuthenService } from '../shared/service/authen.service';
+import { MessageContstants } from '../shared/common/message.constants';
+import { UrlConstants } from '../shared/common/url.constants';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'ngbd-modal-basic',
-  encapsulation: ViewEncapsulation.None,
+  selector: 'app-login',
   templateUrl: './login-page.component.html',
-  styleUrls : ['./login-page.component.css']
+  styleUrls: ['./login-page.component.css']
 })
 
-export class LoginPageComponent {
-  closeResult: string;
-  private model = {'email':'', 'password':''};
-  private currentUserName;
+export class LoginComponent implements OnInit {
+  loading = false;
+  model: any = {};
+  returnUrl: string;
+  constructor(private authenService: AuthenService,
+    private notificationService: NotificationService,
+    private router: Router) { }
 
-  constructor(private modalService: NgbModal,private loginService: LoginService) {
-    this.currentUserName=localStorage.getItem("currentUserName");
+  ngOnInit() {
   }
-
-  open(content) {
-    this.modalService.open(content).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  login() {
+    this.loading = true;
+    this.authenService.login(this.model).subscribe(data => {
+      if(data !== null){
+        this.notificationService.printSuccessMessage(MessageContstants.LOGIN_SUCCESS);
+        this.router.navigate([UrlConstants.HOME]);
+        console.log(window.localStorage);
+      }else{
+        this.notificationService.printErrorMessage(MessageContstants.INFO_LOGIN_WRONG);
+        this.loading = false;
+      }
+    }, error => {
+      this.notificationService.printErrorMessage(MessageContstants.INFO_LOGIN_WRONG);
+      this.loading = false;
     });
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
-    }
-  }
-  
-  onSubmit() {
-    this.loginService.sendCredential(this.model).subscribe(
-      data => {
-                console.log(data);
-                // localStorage.setItem("token", JSON.parse(JSON.stringify(data))._body);
-                // this.loginService.sendToken(localStorage.getItem("token")).subscribe(
-                //   data => {
-                //             this.currentUserName=this.model.username;
-                //             localStorage.setItem("currentUserName", this.model.username);
-                //             this.model.username='';
-                //             this.model.password='';
-                //           },
-                //   error => console.log(error)
-                // );
-              },
-      error => console.log(error)
-    );
-
-  }
 }

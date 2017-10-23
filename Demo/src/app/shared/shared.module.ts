@@ -9,8 +9,7 @@ import { RouterModule } from '@angular/router';
 // import { ListErrorsComponent } from './list-errors.component';
 // import { ShowAuthedDirective } from './show-authed.directive';
 import { LayoutHeaderComponent, LayoutFooterComponent } from './layout'
-import { LoginPageComponent } from '../login-page/login-page.component'
-import { ModalComponent, DialogButtonComponent } from './modal/modal.component'
+import { ModalLoginComponent, DialogLoginButtonComponent } from './modal'
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -95,11 +94,10 @@ export class PlunkerMaterialModule {}
   declarations: [
     LayoutHeaderComponent,
     LayoutFooterComponent,
-    LoginPageComponent,
-    ModalComponent,
-    DialogButtonComponent
+    ModalLoginComponent,
+    DialogLoginButtonComponent
   ],
-  entryComponents: [ModalComponent],
+  entryComponents: [ModalLoginComponent],
   exports: [
     LayoutHeaderComponent,
     LayoutFooterComponent,
@@ -108,8 +106,8 @@ export class PlunkerMaterialModule {}
     ReactiveFormsModule,
     HttpModule,
     RouterModule,
-    ModalComponent,
-    DialogButtonComponent,
+    ModalLoginComponent,
+    DialogLoginButtonComponent,
     PlunkerMaterialModule
   ]
 })

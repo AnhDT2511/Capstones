@@ -21,9 +21,42 @@
                     <a class="page-scroll" href="#contact">Contact</a>
                 </li>
                 <li>
-                    <app-dialog-button></app-dialog-button>
+                    <!-- <app-dialog-login-button ></app-dialog-login-button> -->
+                    <ul class="nav navbar-nav navbar-right" >
+                        <li class="" >
+                          <a  href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <img [src]="baseFolder + user.avatar" alt="">{{userName}}
+                                <span class=" fa fa-angle-down"></span>
+                              </a>
+                          <ul class="dropdown-menu dropdown-usermenu pull-right">
+                            <li style="background-color:black!important"><a href="javascript:;"> Hồ sơ</a></li>
+                            <li style="background-color:black!important">
+                              <a href="javascript:;">
+                                    <span class="badge bg-red pull-right">50%</span>
+                                    <span>Cài đặt</span>
+                                  </a>
+                            </li>
+                            <li style="background-color:black!important"><a href="javascript:;">Trợ giúp</a></li>
+                            <li style="background-color:black!important"><a href="javascript:;" (click)="logout()"><i class="fa fa-sign-out pull-right"></i> Thoát</a></li>
+                          </ul>
+                        </li>
+
+                      </ul>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
+
+<!-- <div class="top_nav">
+    <div class="nav_menu">
+      <nav class="" role="navigation">
+        <div class="nav toggle">
+          <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+        </div>
+  
+        
+      </nav>
+    </div>
+  </div> -->

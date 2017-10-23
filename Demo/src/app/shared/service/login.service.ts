@@ -1,16 +1,15 @@
 import {Injectable} from "@angular/core";
 import {Http, Headers} from '@angular/http';
 import {Observable}     from 'rxjs/Observable';
+import {SystemConstants} from '../common/system.constants'
 
 @Injectable()
 export class LoginService {
   token: string = "123";
-  url : string = "https://tripnetapi.herokuapp.com";
-
   constructor (private http: Http) {}
 
   sendCredential(model) {
-    let tokenUrl1 = this.url + "/user/account/login";
+    let tokenUrl1 = SystemConstants.BASE_API + "/user/account/login";
     let headers1 = new Headers();
     headers1.append('Access-Control-Allow-Origin','*');
     headers1.append('Content-Type','application/json');

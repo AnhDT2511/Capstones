@@ -1,12 +1,11 @@
 import { NgModule , ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component'
-// import { LoginPageComponent } from './login-page/login-page.component';
 
 const routesConfig: Routes = [
-    { path: 'home-page', loadChildren : './home-page/home-page.module#HomePageModule'},
-    // { path: 'login', component : LoginPageComponent },
-    { path: '', redirectTo: '/home-page', pathMatch: 'full' },
+    { path: '', redirectTo: 'main', pathMatch: 'full' },
+    { path: 'main', loadChildren : './main-page/main-page.module#MainPageModule'},
+    { path: 'login', loadChildren : './login-page/login-page.module#LoginPageModule' },
     { path: '**', component: PageNotFoundComponent }
 ];
 

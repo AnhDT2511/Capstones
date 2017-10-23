@@ -1,5 +1,12 @@
+html,
+body {
+    height: 100%;
+    color: #262626;
+    text-align: left;
+    font-family: Arial;
+}
 
-/*  {
+#cover {
     width: 100%;
     height: 100%;
     display: table;
@@ -7,38 +14,39 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-} */
+}
 
-.middle {
+#cover .middle {
     display: table-cell;
     vertical-align: middle;
 }
 
-.logo a {
+#cover .logo a {
     font-size: 25px;
     letter-spacing: 2px;
     color: red;
 }
 
-.logo a:hover {
+#cover .logo a:hover {
     text-decoration: none;
 }
 
- h3 {
+#cover h3 {
     font-size: 22px;
     margin-top: 10px;
     letter-spacing: 1px;
     font-weight: 100;
 }
 
- .middle .login-panel {
+#cover .middle .login-panel {
     margin-left: auto;
     margin-right: auto;
     min-width: 320px;
-    max-width: auto;
+    max-width: 412px;
     min-height: 380px;
     width: calc(100% - 40px);
     padding: 36px;
+    margin-bottom: 28px;
     background-color: #fff;
     border: 1px solid #818c94;
     border: 1px solid rgba(0, 0, 0, .4);
@@ -47,15 +55,15 @@
     -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, .55);
 }
 
- table {
+#cover table {
     width: 100%;
 }
 
- table tr td {
+#cover table tr td {
     padding: 8px 0;
 }
 
- table tr td .input-text {
+#cover table tr td .input-text {
     width: 100%;
     height: 36px;
     outline: none;
@@ -64,11 +72,11 @@
     border: 1px solid rgba(0, 0, 0, .6);
 }
 
- table tr td .input-text:focus {
+#cover table tr td .input-text:focus {
     border: 1px solid #0067b8;
 }
 
- table tr td .btn-login {
+#cover table tr td .btn-login {
     width: 100%;
     height: 36px;
     color: #fff;
@@ -78,21 +86,21 @@
     background-color: #0067b8;
 }
 
- table tr td .btn-login:hover {
+#cover table tr td .btn-login:hover {
     background-color: #005BA1;
     border: 1px solid #005BA1;
 }
 
- table tr td p {
+#cover table tr td p {
     font-size: 1.35rem;
     margin: 0 0 5px;
 }
 
- table tr td p a {
+#cover table tr td p a {
     color: #107FD4;
 }
 
- table tr td p a:hover {
+#cover table tr td p a:hover {
     color: #005BA1;
     text-decoration: none;
 }

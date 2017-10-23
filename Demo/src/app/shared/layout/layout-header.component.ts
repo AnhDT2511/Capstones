@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ViewEncapsulation} from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-// import {LayoutFooterComponent} from './layout-footer.component'
+import { SystemConstants } from '../common/system.constants';
+import { UtilityService } from '../service/utility.service';
+import { UrlConstants } from '../common/url.constants';
 
 @Component({
     selector: 'app-layout-header',
@@ -11,16 +12,17 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class LayoutHeaderComponent implements OnInit {
 
-    constructor(
-        private ngbModal: NgbModal
+    userName : string = window.localStorage.getItem(SystemConstants.CURRENT_USER);
+    constructor( private utilityService : UtilityService
     ) { 
     }
 
     ngOnInit() {
     }
 
-//     openRegister(){
-//     const modalReg = this.ngbModal.open(LayoutFooterComponent);
-//    }
-
+    logout(){
+        localStorage.removeItem(SystemConstants.CURRENT_USER);
+        this.utilityService.navigate(UrlConstants.LOGIN);
+        console.log(window.localStorage);
+    }
 }

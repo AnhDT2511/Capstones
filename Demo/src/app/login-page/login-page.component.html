@@ -1,56 +1,50 @@
-<ng-template #content let-c="close" let-d="dismiss">
-    <!-- <div class="modal-header">
-      <h4 class="modal-title">Modal title</h4>
-      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div> -->
-    <div class="modal-body">
-          <div class="overlay"></div>
-          <div class="middle">
-              <div class="login-panel">
-                  <div class="logo"><a href=""> LOGO </a></div>
-                  <h3>Đăng nhập</h3>
-                  <form (ngSubmit)="onSubmit()" class="ui form" [hidden]="loginService.checkLogin()">
-                      <table>
-                          <tr>
-                              <td>
-                                  <input type="text" name="email" class="input-text" placeholder="Nhập email"  [(ngModel)]="model.email">
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <input type="password" name="password" class="input-text" placeholder="Nhập mật khẩu" [(ngModel)]="model.password">
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>
-                                <button type="submit" class="ui button">Đăng Nhập</button>
-                              </td>
-                          </tr>
-                          <tr>
-                              <td>
-                                  <p>
-                                      Không có tài khoản? 
-                                      <a href="register.html">Tạo tài khoản!</a>
-                                  </p>
-                                  <p>
-                                      <a href="forgotPassword.html">Quên mật khẩu?</a>
-                                  </p>
-                              </td>
-                          </tr>
-                      </table>
-                  </form>
-              </div>
-          </div>
+<section id="cover" style="background-image: url(../../assets/img/login.jpg);" >
+    <div class="overlay"></div>
+    <div class="middle">
+        <div class="login-panel">
+            <div class="logo"><a href=""> LOGO </a></div>
+            <h3>Đăng nhập</h3>
+            <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+                <table>
+                    <tr>
+                        <td [ngClass]="{ 'has-error' : f.submitted && !mail.valid }">
+                            <input type="text" name="email" class="form-control" placeholder="Nhập email" [(ngModel)]="model.email" #mail="ngModel" required>
+                            <div *ngIf="f.submitted && !mail.valid" class="help-block">Email được yêu cầu</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td [ngClass]="{ 'has-error' : f.submitted && !password.valid }">
+                            <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu" [(ngModel)]="model.password" #password="ngModel" required >
+                            <div *ngIf="f.submitted && !password.valid" class="help-block">Mật khẩu được yêu cầu</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button [disabled]="loading" class="btn btn-default" href="index.html">Đăng nhập</button>
+                            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                Không có tài khoản? 
+                                <a href="register.html">Tạo tài khoản!</a>
+                            </p>
+                            <p>
+                                <a href="forgotPassword.html">Quên mật khẩu?</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
     </div>
-    <!-- <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-    </div> -->
-    <div [hidden]="!loginService.checkLogin()">
-        <h3>Logged In Successfully! </h3>
-        <h2>Welcome back, {{currentUserName}}!</h2>
-      </div>
-  </ng-template>
-  
-  <a class="page-scroll" (click)="open(content)">Login</a>
+</section>
+
+
+<footer>
+    <p>
+        <a href="">Điều khoản sự dụng</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        ©2017 Trip Net                
+    </p>
+</footer>

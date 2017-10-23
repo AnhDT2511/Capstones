@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { Http , HttpModule} from '@angular/http';
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   LoginService
 } from './shared';
@@ -15,13 +15,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AppComponent,
   ],
   imports: [
-    SharedModule,
+    // SharedModule,
     BrowserModule,
     HttpModule,
     AppRoutingModule,
-    NgbModule.forRoot(),
+    // NgbModule.forRoot(),
     BrowserAnimationsModule,
-    
   ],
   providers: [LoginService],
   bootstrap: [AppComponent]
