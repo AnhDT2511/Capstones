@@ -1,0 +1,63 @@
+<section id="cover" style="background-image: url(../../assets/img/register.jpg);">
+  <div class="overlay"></div>
+  <div class="middle">
+    <div class="login-panel">
+      <div class="logo">
+        <a href=""> TRIPNET </a>
+      </div>
+      <h3>Đăng ký tài khoản</h3>
+      <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+        <table>
+          <tr>
+            <td [ngClass]="{ 'has-error' : f.submitted && !userName.valid }">
+              <input type="text" name="userName" class="form-control" placeholder="Nhập tên hiển thị" [(ngModel)]="model.userName" #userName="ngModel" required>
+              <div *ngIf="f.submitted && !userName.valid" class="help-block">Tên hiển thị được yêu cầu</div>
+            </td>
+          </tr>
+          <tr>
+            <td [ngClass]="{ 'has-error' : f.submitted && !email.valid }">
+              <input type="text" name="email" class="form-control" placeholder="Nhập email" [(ngModel)]="model.email" #mail="ngModel" required>
+              <div *ngIf="f.submitted && !email.valid" class="help-block">Email được yêu cầu</div>
+            </td>
+          </tr>
+          <tr>
+            <td [ngClass]="{ 'has-error' : f.submitted && !password.valid }">
+              <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu" [(ngModel)]="model.password" #password="ngModel"
+                required>
+              <div *ngIf="f.submitted && !password.valid" class="help-block">Mật khẩu được yêu cầu</div>
+            </td>
+          </tr>
+          <tr>
+            <td [ngClass]="{ 'has-error' : f.submitted && !password1.valid }">
+              <input type="password" name="password1" class="form-control" placeholder="Nhập lại mật khẩu" [(ngModel)]="model.password1"
+                #password1="ngModel" required>
+              <div *ngIf="f.submitted && !password1.valid" class="help-block">Mật khẩu lặp lại được được yêu cầu</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button [disabled]="loading" class="btn-login">Đăng ký tài khoản</button>
+              <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span>
+                Chọn
+                <b>Đăng ký tài khoản</b> có nghĩa là bạn đồng ý với
+                <a href="">Thỏa thuận Dịch vụ của TRIPNET</a>
+              </span>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- <footer>
+  <p>
+    <a href="">Điều khoản sự dụng</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ©2017 Trip Net
+  </p>
+</footer> -->

@@ -1,14 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { Http , HttpModule} from '@angular/http';
+import { Http, HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
-import {AppRoutingModule} from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {
-  LoginService
-} from './shared';
-import {SharedModule} from '../app/shared/shared.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { LoginService } from './shared';
+import { RegisterService } from './shared/service/register.service';
+import { SharedModule } from '../app/shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,10 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     // NgbModule.forRoot(),
     BrowserAnimationsModule,
   ],
-  providers: [LoginService],
+  providers: [
+    LoginService,
+    RegisterService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

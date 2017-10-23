@@ -6,6 +6,7 @@ const routesConfig: Routes = [
     { path: '', redirectTo: 'main', pathMatch: 'full' },
     { path: 'main', loadChildren : './main-page/main-page.module#MainPageModule'},
     { path: 'login', loadChildren : './login-page/login-page.module#LoginPageModule' },
+    { path: 'register', loadChildren : './register-page/register-page.module#RegisterPageModule' },
     { path: 'admin', loadChildren : './main-page/admin-page/admin-page.module#AdminPageModule' },
     { path: '**', component: PageNotFoundComponent }
 ];
