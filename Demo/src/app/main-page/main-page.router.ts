@@ -8,9 +8,8 @@ const MainPage_Router: Routes = [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             //localhost:4200/main/home
             { path: 'home', loadChildren: './home-page/home-page.module#HomePageModule' },
-            //localhost:4200/main/user
-            // { path: 'user', loadChildren: './user/user.module#UserModule' },
-
+            // localhost:4200/main/admin
+            { path: 'admin', loadChildren: './admin-page/admin-page.module#AdminPageModule' },
             // { path: 'role', loadChildren: './role/role.module#RoleModule' },
 
             // { path: 'function', loadChildren: './function/function.module#FunctionModule' },
