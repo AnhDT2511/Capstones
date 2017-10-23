@@ -53,7 +53,7 @@
                 </li>
                 <li><span class="rot">|</span></li>
                 <li>
-                    <a href="register.html" *ngIf="userName == null">
+                    <a routerLink="/register" href="#" *ngIf="userName == null">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Đăng ký
                     </a>
                     <a href="javascript:void(0)" (click)="logout()" *ngIf="userName !== null">
@@ -88,7 +88,7 @@
                             <a class="a-tours" href="">Chuyến đi</a>
                         </li>
                         <li>
-                            <a class="a-utility" href="">Tiện ích</a>
+                            <a routerLink="/utility" class="a-utility" href="#">Tiện ích</a>
                         </li>
                         <li>
                             <a class="a-category" href="">Thể loại</a>

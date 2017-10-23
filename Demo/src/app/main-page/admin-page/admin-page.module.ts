@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AdminPageComponent } from './admin-page.component';
 import { AdminPageRouter }  from './admin-page.router';
-
-import { FormsModule } from '@angular/forms';
+import { NotificationService } from '../../shared/service/notification.service';
 
 @NgModule({
     imports: [
@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
     declarations: [
         AdminPageComponent
     ],
-    // providers :[UtilityService, AuthenService, SignalrService]
+    providers :[NotificationService]
 })
 
 export class AdminPageModule {}

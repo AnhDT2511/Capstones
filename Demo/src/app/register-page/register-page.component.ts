@@ -13,8 +13,14 @@ import { Router } from '@angular/router';
 
 export class RegisterComponent implements OnInit {
   loading = false;
-  model: any = {};
-  returnUrl: string;
+  model: any = {
+    photoId: "../../assets/img/default-user-image.png",   //defaut
+    credit: 78,                                            //defaut
+    point: 55,                                             //defaut
+    deleted: 1,                                           //defaut
+    roleId: 2                                             //defaut
+  };
+  
   constructor(
     private registerService: RegisterService,
     private notificationService: NotificationService,
@@ -24,19 +30,20 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    console.log("Hello", this.model);
     this.loading = true;
-    // this.registerService.register(this.model).subscribe(data => {
-    //   if(data !== null){
-    //     this.notificationService.printSuccessMessage(MessageContstants.REGISTER_SUCCESS);
-    //     this.router.navigate([UrlConstants.HOME]);
-    //     console.log(data);
-    //   }else{
-    //     this.notificationService.printErrorMessage(MessageContstants.REGISTER_FAILED);
-    //     this.loading = false;
-    //   }
-    // }, error => {
-    //   this.notificationService.printErrorMessage(MessageContstants.REGISTER_FAILED);
-    //   this.loading = false;
-    // });
+    this.registerService.register(this.model).subscribe(data => {
+      if(data !== null){
+        this.notificationService.printSuccessMessage(MessageContstants.REGISTER_SUCCESS);
+        this.router.navigate([UrlConstants.LOGIN]);
+        //console.log(data);
+      }else{
+        this.notificationService.printErrorMessage(MessageContstants.REGISTER_FAILED);
+        this.loading = false;
+      }
+    }, error => {
+      this.notificationService.printErrorMessage(MessageContstants.REGISTER_FAILED);
+      this.loading = false;
+    });
   }
 }

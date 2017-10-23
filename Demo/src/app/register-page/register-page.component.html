@@ -9,31 +9,32 @@
       <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
         <table>
           <tr>
-            <td [ngClass]="{ 'has-error' : f.submitted && !userName.valid }">
+            <td>
               <input type="text" name="userName" class="form-control" placeholder="Nhập tên hiển thị" [(ngModel)]="model.userName" #userName="ngModel" required>
-              <div *ngIf="f.submitted && !userName.valid" class="help-block">Tên hiển thị được yêu cầu</div>
+              <!-- <div *ngIf="f.submitted && !userName.valid" class="help-block">Tên hiển thị được yêu cầu</div> -->
             </td>
           </tr>
           <tr>
-            <td [ngClass]="{ 'has-error' : f.submitted && !email.valid }">
+            <td>
               <input type="text" name="email" class="form-control" placeholder="Nhập email" [(ngModel)]="model.email" #mail="ngModel" required>
-              <div *ngIf="f.submitted && !email.valid" class="help-block">Email được yêu cầu</div>
+              <!-- <div *ngIf="f.submitted && !email.valid" class="help-block">Email được yêu cầu</div> -->
             </td>
           </tr>
           <tr>
-            <td [ngClass]="{ 'has-error' : f.submitted && !password.valid }">
+            <td>
               <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu" [(ngModel)]="model.password" #password="ngModel"
                 required>
-              <div *ngIf="f.submitted && !password.valid" class="help-block">Mật khẩu được yêu cầu</div>
+              <!-- <div *ngIf="f.submitted && !password.valid" class="help-block">Mật khẩu được yêu cầu</div> -->
             </td>
           </tr>
           <tr>
-            <td [ngClass]="{ 'has-error' : f.submitted && !password1.valid }">
+            <td>
               <input type="password" name="password1" class="form-control" placeholder="Nhập lại mật khẩu" [(ngModel)]="model.password1"
                 #password1="ngModel" required>
-              <div *ngIf="f.submitted && !password1.valid" class="help-block">Mật khẩu lặp lại được được yêu cầu</div>
+              <!-- <div *ngIf="f.submitted && !password1.valid" class="help-block">Mật khẩu lặp lại được được yêu cầu</div> -->
             </td>
           </tr>
+
           <tr>
             <td>
               <button [disabled]="loading" class="btn-login">Đăng ký tài khoản</button>

@@ -1,4 +1,46 @@
-<div>
-  <h3>404</h3>
-  <h2 style="color:red" >URL not Found</h2>
-</div>
+<!-- <body onload="javascript:generateStars()"> -->
+<body>
+  <div id="help">
+      <h1>Error 404</h1>
+      <h2>Page Not Found</h2>
+      <a routerLink="/main/index" href="#">Back to Home</a>
+  </div>
+  <div id="stars">
+  </div>
+  <div id="land">
+      
+      <div id="fire">
+          <div class="flame"></div>
+          <div class="flame"></div>
+          <div class="flame"></div>
+          <div class="flame"></div>
+          <div class="flame"></div>
+          <div id="logs">
+              <div id="logOne"></div>
+              <div id="logTwo"></div>
+              <div id="flicker"></div>
+          </div>
+      </div>
+      <div id="ground"></div>
+  </div>
+</body>
+
+
+<!-- <script>
+  function generateStars() {
+  for (var i = 0; i < 200; i++) {
+      document.getElementById('stars').innerHTML += '<div class="star"></div>';
+  }
+
+  var stars = document.getElementsByClassName('star');
+  for (var t = 0; t < stars.length; t++) {
+      stars[t].style.left = (Math.random() * 110) + "%";
+      stars[t].style.top = (Math.random() * 90) + "%";
+      var size = Math.random() * 4;
+      stars[t].style.height = size + "px";
+      stars[t].style.width = size + "px";
+      var animationTime = (Math.random() * 2) + 1;
+      stars[t].style.animation = "twinkle " + animationTime + "s infinite";
+  }
+}
+</script> -->
