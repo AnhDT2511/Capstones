@@ -9,6 +9,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module'
 import { HomePageModule } from './home-page/home-page.module'
+import { NotificationService } from '../shared/service/notification.service';
+import { DataService } from '../shared/service/data.service';
 
 @NgModule({
     imports: [
@@ -22,7 +24,7 @@ import { HomePageModule } from './home-page/home-page.module'
     declarations: [
         MainPageComponent
     ],
-    providers :[UtilityService, AuthenService, SignalrService]
+    providers :[UtilityService, AuthenService, SignalrService,NotificationService, DataService]
 })
 
 export class MainPageModule {}

@@ -4,6 +4,7 @@ import { ViewEncapsulation } from '@angular/core';
 import { UtilityService } from '../../shared/service/utility.service';
 import { UrlConstants } from '../../shared/common/url.constants';
 import { NotificationService } from '../../shared/service/notification.service';
+import { AuthenService } from '../../shared/service/authen.service';
 
 
 @Component({
@@ -14,17 +15,24 @@ import { NotificationService } from '../../shared/service/notification.service';
 })
   
 export class HomePageComponent implements OnInit {
-  public userName : string = window.localStorage.getItem("CURRENT_USER");
-  constructor(private utilityService : UtilityService, private notifyService : NotificationService) { 
+  user : any = this.authentication.getLoggedInUser();
+  constructor(
+    private utilityService : UtilityService, 
+    private notifyService : NotificationService,
+    private authentication : AuthenService
+  ) { 
   }
 
   ngOnInit() {
   }
-  
+  nagivateProfile(){
+    this.utilityService.navigate(UrlConstants.PROFILE); 
+  }
+
   logout(){
-    // console.log(this.userName);
     window.localStorage.removeItem("CURRENT_USER");
-    this.userName = null;    
+    this.user = this.authentication.getLoggedInUser();
+    this.notifyService.printSuccessMessage("Đăng xuất thành công");
     // this.notifyService.printConfirmationDialog("Bạn có chắc chắn muốn đăng xuất?" , this.resetLogin)
   }
 

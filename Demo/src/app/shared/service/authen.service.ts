@@ -20,13 +20,12 @@ export class AuthenService {
     return this._http.post(SystemConstants.BASE_API + '/user/account/login', model, options).map((response: Response) => {
       let _body = JSON.parse(JSON.parse(JSON.stringify(response))._body)[0];
       delete _body["password"];
-      delete _body["id"];
       delete _body["createTime"];
       delete _body["deleted"];
       let user: LoggedInUser = _body;
       if (user) {
         localStorage.removeItem(SystemConstants.CURRENT_USER);
-        localStorage.setItem(SystemConstants.CURRENT_USER, user.userName.toUpperCase());
+        localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(user));
       }
     });
   }
@@ -44,19 +43,21 @@ export class AuthenService {
   }
 
   getLoggedInUser(): LoggedInUser {
-    // let user: LoggedInUser;
-    // if (this.isUserAuthenticated()) {
-    //   var userData = JSON.parse(localStorage.getItem(SystemConstants.CURRENT_USER));
-    //   user = new LoggedInUser(userData.access_token,
-    //     userData.username,
-    //     userData.fullName,
-    //     userData.email,
-    //     userData.avatar, userData.roles, userData.permissions);
-    // }
-    // else
-    //   user = null;
-    // return user;
-    return null;
+    let user: LoggedInUser;
+    if (this.isUserAuthenticated()) {
+      var userData = JSON.parse(localStorage.getItem(SystemConstants.CURRENT_USER));
+      user = new LoggedInUser(
+        userData.id,
+        userData.userName,
+        userData.email,
+        userData.photoId,
+        userData.credit,
+        userData.point,
+        userData.roleId);
+    }
+    else
+      user = null;
+    return user;
   }
   // checkAccess(functionId: string) {
   //   var user = this.getLoggedInUser();

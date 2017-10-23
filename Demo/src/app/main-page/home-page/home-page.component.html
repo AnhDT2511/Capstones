@@ -56,17 +56,17 @@
                     <a routerLink="/register" href="#" *ngIf="userName == null">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Đăng ký
                     </a>
-                    <a href="javascript:void(0)" (click)="logout()" *ngIf="userName !== null">
+                    <a href="javascript:void(0)" (click)="logout()" *ngIf="user && user.userName  ">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Đăng xuất
                     </a>
                 </li>
                 <li><span class="rot">|</span></li>
                 <li>
-                    <a routerLink="/login" href="#" *ngIf="userName == null">
+                    <a routerLink="/login" href="#" *ngIf="user == null">
                         <i class="fa fa-sign-in" aria-hidden="true"></i> Đăng nhập
                     </a>
-                    <a href="#" *ngIf="userName !== null">
-                        <i class="fa fa-user-o" aria-hidden="true"></i> {{userName}}
+                    <a href="javascript:void(0)" (click)="nagivateProfile()" *ngIf="user && user.userName">
+                        <i class="fa fa-user-o" aria-hidden="true"></i> {{user.userName | uppercase}}
                     </a>
                 </li>
             </ul>

@@ -1,7 +1,8 @@
 export class LoggedInUser {
-    constructor( userName: string, credit: any, email: string, photoId: string,roleId:any,point:any
+    constructor( id : any , userName: string, email: string, photoId: string,credit: any, point:any , roleId:any
     ) {
         // this.access_token = access_token;
+        this.id = id;
         this.credit = credit;
         this.userName = userName;
         this.email = email;
