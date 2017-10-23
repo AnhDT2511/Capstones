@@ -14,7 +14,7 @@ import { NotificationService } from '../../shared/service/notification.service';
 })
   
 export class HomePageComponent implements OnInit {
-  userName : string = window.localStorage.getItem("CURRENT_USER");
+  public userName : string = window.localStorage.getItem("CURRENT_USER");
   constructor(private utilityService : UtilityService, private notifyService : NotificationService) { 
   }
 
@@ -22,15 +22,17 @@ export class HomePageComponent implements OnInit {
   }
   
   logout(){
-
-    this.notifyService.printConfirmationDialog("Bạn có chắc chắn muốn đăng xuất?" , this.resetLogin);
-  }
-
-  resetLogin()  {
-    console.log(this.userName);
+    // console.log(this.userName);
     window.localStorage.removeItem("CURRENT_USER");
-    // this.utilityService.navigate(UrlConstants.LOGIN); 
-    // this.userName = null;
-    console.log(this.userName);
+    this.userName = null;    
+    // this.notifyService.printConfirmationDialog("Bạn có chắc chắn muốn đăng xuất?" , this.resetLogin)
   }
+
+  // resetLogin()  {
+  //   // this.utilityService.navigate(UrlConstants.LOGIN); 
+  //   console.log(this.userName);
+  //   debugger;
+  //   // this.userName = null;
+  //   window.localStorage.removeItem("CURRENT_USER");
+  // }
 }
