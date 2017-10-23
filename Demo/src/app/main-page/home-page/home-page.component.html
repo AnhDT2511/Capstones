@@ -1,9 +1,477 @@
-
-    <app-section-cover></app-section-cover>
+<!-- <app-section-cover></app-section-cover>
     <app-section-search></app-section-search>
     <app-section-about></app-section-about>
     <app-section-prominent-place></app-section-prominent-place>
     <app-section-place></app-section-place>
-    <app-section-contact></app-section-contact>
+    <app-section-contact></app-section-contact> -->
 
 
+<section id="cover" style="background-image: url(../assets/img/pro.jpg);">
+    <!-- <div class="overlay"></div> -->
+    <div class="header-topbar">
+        <div class="container">
+            <ul class="pull-left">
+                <li>
+                    <a href="#" style="border-right: 1px solid rgba(255, 255, 255, 0.3);">
+                        <i class="fa fa-phone" aria-hidden="true"></i> +024 236 255
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-google-plus" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="pull-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-globe" aria-hidden="true"></i> Ngôn ngữ
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-angle-right" aria-hidden="true"></i> English
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-angle-right" aria-hidden="true"></i> Vietnamese
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li><span class="rot">|</span></li>
+                <li>
+                    <a href="register.html" *ngIf="userName == null">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Đăng ký
+                    </a>
+                    <a href="javascript:void(0)" (click)="logout()" *ngIf="userName !== null">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Đăng xuất
+                    </a>
+                </li>
+                <li><span class="rot">|</span></li>
+                <li>
+                    <a routerLink="/login" href="#" *ngIf="userName == null">
+                        <i class="fa fa-sign-in" aria-hidden="true"></i> Đăng nhập
+                    </a>
+                    <a href="#" *ngIf="userName !== null">
+                        <i class="fa fa-user-o" aria-hidden="true"></i> {{userName}}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="header-main">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="logox">
+                    <h1>TRIPNET</h1>
+                </div>
+                <div class="navigation">
+                    <ul>
+                        <li>
+                            <a href="">Trang chủ</a>
+                        </li>
+                        <li>
+                            <a class="a-tours" href="">Chuyến đi</a>
+                        </li>
+                        <li>
+                            <a class="a-utility" href="">Tiện ích</a>
+                        </li>
+                        <li>
+                            <a class="a-category" href="">Thể loại</a>
+                        </li>
+                        <li>
+                            <a class="a-about" href="">Thông tin</a>
+                        </li>
+                        <li>
+                            <a class="a-contact" href="#contact">LIÊN HỆ</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 col-sm-12 text-center">
+                        <h1 class="banner" style="font-size: 45px; margin-bottom: 10px; letter-spacing: 1px;">THE WORLD IS YOURS</h1>
+                        <h4 style="letter-spacing: 3px;">EXPLORE OUR ECO AND ADVENTURE TRAVEL ITINERARIES</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="search">
+    <div class="container">
+        <ul class="nav nav-tabs" style="text-align: center;">
+            <li class="active">
+                <a data-toggle="tab" href="#post" style="border-radius: 15px 0 0 0">
+                        <i class="fa fa-files-o" aria-hidden="true"></i> Bài đăng
+                    </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#tours">
+                        <i class="fa fa-train" aria-hidden="true"></i> Chuyến đi
+                    </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#location">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i> Địa điểm
+                    </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#category">
+                        <i class="fa fa-bars" aria-hidden="true"></i> Thể loại
+                    </a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#date" style="border-radius: 0 15px 0 0">
+                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i> Ngày
+                    </a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="post" class="tab-pane fade in active">
+                <h2>
+                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i> Tìm kiếm bài đăng
+                    <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                </h2>
+                <form class="form-horizontal" action="">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="text" name="" class="form-control" placeholder="Nhập từ khóa bài đăng">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <button type="submit" class="btn btn-search">
+                                    <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
+                                </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="tours" class="tab-pane fade">
+                <h2>
+                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i> Tìm kiếm chuyến đi
+                    <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                </h2>
+                <form class="form-horizontal" action="">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="text" name="" class="form-control" placeholder="Nhập từ khóa chuyến đi">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <button type="submit" class="btn btn-search">
+                                    <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
+                                </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="location" class="tab-pane fade">
+                <h2>
+                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i> Tìm kiếm theo địa điểm
+                    <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                </h2>
+                <form class="form-horizontal" action="">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="text" name="" class="form-control" placeholder="Nhập địa điểm">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <button type="submit" class="btn btn-search">
+                                    <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
+                                </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="category" class="tab-pane fade">
+                <h2>Tìm bài đăng</h2>
+                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+            </div>
+            <div id="date" class="tab-pane fade">
+                <h2>
+                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i> Tìm kiếm theo số ngày
+                    <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                </h2>
+                <form class="form-horizontal" action="">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="text" name="" class="form-control" placeholder="Nhập số ngày">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <button type="submit" class="btn btn-search">
+                                    <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
+                                </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- <section id="about">
+        <div class="container">
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                vvvvvvvvvv
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                cccccccccccccc
+            </div>
+        </div>
+    </section> -->
+<app-section-about></app-section-about>
+<section id="top-post" style="background-image: url(../assets/img/most.jpg);">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <div class="thumbnail">
+                    <div class="container">
+                        <img src="../assets/img/2.jpg" alt="Avatar" class="image">
+                        <div class="overlay">
+                            <div class="text">Hello World</div>
+                        </div>
+                    </div>
+                    <strong> Pha Luông </strong>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <div class="thumbnail">
+                    <div class="container">
+                        <img src="../assets/img/2.jpg" alt="Avatar" class="image">
+                        <div class="overlay">
+                            <div class="text">Hello World</div>
+                        </div>
+                    </div>
+                    <strong> Pha Luông </strong>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <div class="thumbnail">
+                    <div class="container">
+                        <img src="../assets/img/2.jpg" alt="Avatar" class="image">
+                        <div class="overlay">
+                            <div class="text">Hello World</div>
+                        </div>
+                    </div>
+                    <strong> Pha Luông </strong>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- <section id="top-place">
+        <div class="container">
+        </div>
+    </section> -->
+
+
+<!-- <section id="prominent-place">
+        <div class="container-fluid">
+            <div class="col-xs-12 col-sm-6 col-md-6 left">
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 right">
+            </div>
+        </div>
+    </section> -->
+
+<!--
+    <section id="place">
+        <div class="container-fluid">
+            <h1><span class="title"><i class="fa fa-map-marker" aria-hidden="true"></i><i> Top Place </i></span></h1>
+            <div class="arrow-right"></div>
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <div class="container">
+                            <img src="../assets/img/1.jpg" alt="Avatar" class="image">
+                            <div class="overlay">
+                                <div class="text">
+                                    <p class="start-end-place">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i> Hà Nội
+                                        <i class="fa fa-long-arrow-right" aria-hidden="true" style="margin-left: 10px;"></i>
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i> Mộc Châu
+                                    </p>
+                                    <p>
+                                        <i class="fa fa-sun-o" aria-hidden="true" style="font-size: 17px;"></i> 3 ngày
+                                    </p>
+                                    <p class="descreption-place">
+                                        <i class="fa fa-slack" aria-hidden="true" style="font-size: 16px;"></i> Ha lo Ha lo Ha Ha lo Ha lo Ha...
+                                </div>
+                            </div>
+                        </div>
+                        <a href=""><strong> Pha Luông </strong></a>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <div class="container">
+                            <img src="../assets/img/2.jpg" alt="Avatar" class="image">
+                            <div class="overlay">
+                                <div class="text">Hello World</div>
+                            </div>
+                        </div>
+                        <strong> Pha Luông </strong>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <div class="container">
+                            <img src="../assets/img/3.jpg" alt="Avatar" class="image">
+                            <div class="overlay">
+                                <div class="text">Hello World</div>
+                            </div>
+                        </div>
+                        <strong> Pha Luông </strong>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <div class="container">
+                            <img src="../assets/img/4.jpg" alt="Avatar" class="image">
+                            <div class="overlay">
+                                <div class="text">Hello World</div>
+                            </div>
+                        </div>
+                        <strong> Pha Luông </strong>
+                    </div>
+                </div>
+            </div>
+
+            <h1><span class="title"><i class="fa fa-location-arrow" aria-hidden="true"></i><i> New Place </i></span></h1>
+            <div class="arrow-right"></div>
+
+            <div class="row text-center">
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <div class="container">
+                            <img src="../assets/img/4.jpg" alt="Avatar" class="image">
+                            <div class="overlay">
+                                <div class="text">Hello World</div>
+                            </div>
+                        </div>
+                        <strong> Pha Luông </strong>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <div class="container">
+                            <img src="../assets/img/1.jpg" alt="Avatar" class="image">
+                            <div class="overlay">
+                                <div class="text">Hello World</div>
+                            </div>
+                        </div>
+                        <strong> Pha Luông </strong>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <div class="container">
+                            <img src="../assets/img/3.jpg" alt="Avatar" class="image">
+                            <div class="overlay">
+                                <div class="text">Hello World</div>
+                            </div>
+                        </div>
+                        <strong> Pha Luông </strong>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <div class="container">
+                            <img src="../assets/img/2.jpg" alt="Avatar" class="image">
+                            <div class="overlay">
+                                <div class="text">Hello World</div>
+                            </div>
+                        </div>
+                        <strong> Pha Luông </strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+-->
+<!-- <section id="ccc" style="background-image: url(../assets/img/bg-section-banner.jpg);">
+        <div class="" style="width: 100%; height: 50%; display: table;">
+            <div class="banner-left">
+                <h1>CCCCCCC</h1>
+            </div>
+            <div class="banner-right">
+                <h1>VVVVVVVVVVVV</h1>
+            </div>
+        </div>
+    </section> -->
+
+<!-- <section id="x" style="width: 100%; height: 300px;"></section> -->
+
+<section id="contact" style="background-image: url(../assets/img/contact.jpg);">
+
+    <div class="container-fluid" style="padding: 0;">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-6">
+            <div class="panel-contact">
+                <h2>LIÊN HỆ</h2>
+                <p><i>Mọi ý kiến, đóng góp vui lòng gửi tin nhắn cho chúng tôi!</i></p>
+                <form class="form-horizontal" action="">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="email" placeholder="Họ và tên" name="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="email" class="form-control" id="pwd" placeholder="Email" name="pwd">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <textarea class="form-control" rows="5" id="comment" placeholder="Tin nhắn của bạn..."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-submit">
+                                    <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                    &nbsp;&nbsp;Gửi tin nhắn
+                                </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section>

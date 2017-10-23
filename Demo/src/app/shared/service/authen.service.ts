@@ -26,7 +26,7 @@ export class AuthenService {
       let user: LoggedInUser = _body;
       if (user) {
         localStorage.removeItem(SystemConstants.CURRENT_USER);
-        localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(user.userName));
+        localStorage.setItem(SystemConstants.CURRENT_USER, user.userName.toUpperCase());
       }
     });
   }

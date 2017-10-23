@@ -5,13 +5,15 @@ import { HomePageRouter }  from './home-page.router';
 // import { UtilityService } from '../shared/service/utility.service';
 // import { AuthenService } from '../shared/service/authen.service';
 // import { SignalrService } from '../shared/service/signalr.service';
+import { NotificationService } from '../../shared/service/notification.service';
+
 import {
-    SectionAboutComponent,
-    SectionContactComponent,
-    SectionCoverComponent,
-    SectionPlaceComponent,
-    SectionProminentPlaceComponent,
-    SectionSearchComponent
+       SectionAboutComponent,
+//     SectionContactComponent,
+//     SectionCoverComponent,
+//     SectionPlaceComponent,
+//     SectionProminentPlaceComponent,
+//     SectionSearchComponent
 } from './sub-home-page-component'
 import { FormsModule } from '@angular/forms';
 
@@ -22,15 +24,15 @@ import { FormsModule } from '@angular/forms';
         FormsModule,
     ],
     declarations: [
-        SectionCoverComponent,
-        SectionSearchComponent,
+        // SectionCoverComponent,
+        // SectionSearchComponent,
         SectionAboutComponent,
-        SectionProminentPlaceComponent,
-        SectionPlaceComponent,
-        SectionContactComponent,
+        // SectionProminentPlaceComponent,
+        // SectionPlaceComponent,
+        // SectionContactComponent,
         HomePageComponent
     ],
-    // providers :[UtilityService, AuthenService, SignalrService]
+    providers :[NotificationService]
 })
 
 export class HomePageModule {}

@@ -6,9 +6,9 @@ import { UrlConstants } from '../common/url.constants';
 
 @Component({
     selector: 'app-layout-header',
-    
     encapsulation: ViewEncapsulation.None,
-    templateUrl:'./layout-header.component.html'
+    templateUrl:'./layout-header.component.html',
+    // styleUrls : ['../../main-page/home-page/home-page.component.css'] 
 })
 export class LayoutHeaderComponent implements OnInit {
 
