@@ -21,19 +21,17 @@ export class DataService {
   get(uri: string) {
     // this.headers.delete("Authorization");
     // this.headers.append("Authorization", "Bearer " + this._authenService.getLoggedInUser().access_token);
-    console.log(SystemConstants.BASE_API + uri);
-    console.log(this.headers);
     return this._http.get(SystemConstants.BASE_API + uri, { headers: this.headers }).map(this.extractData);
   }
   post(uri: string, data?: any) {
-    this.headers.delete("Authorization");
-    this.headers.append("Authorization", "Bearer " + this._authenService.getLoggedInUser().access_token);
-    return this._http.post(SystemConstants.BASE_API + uri, data, { headers: this.headers }).map(this.extractData);
+    // this.headers.delete("Authorization");
+    // this.headers.append("Authorization", "Bearer " + this._authenService.getLoggedInUser().access_token);
+    return this._http.post(SystemConstants.BASE_API + uri, data, { headers: this.headers });
   }
   put(uri: string, data?: any) {
-    this.headers.delete("Authorization");
-    this.headers.append("Authorization", "Bearer " + this._authenService.getLoggedInUser().access_token);
-    return this._http.put(SystemConstants.BASE_API + uri, data, { headers: this.headers }).map(this.extractData);
+    // this.headers.delete("Authorization");
+    // this.headers.append("Authorization", "Bearer " + this._authenService.getLoggedInUser().access_token);
+    return this._http.put(SystemConstants.BASE_API + uri, data, { headers: this.headers });
   }
   delete(uri: string, key: string, id: string) {
     this.headers.delete("Authorization");

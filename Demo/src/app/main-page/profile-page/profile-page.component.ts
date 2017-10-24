@@ -33,7 +33,6 @@ export class ProfilePageComponent implements OnInit {
 
   getUserDetails(){
     this.dataService.get("/user/accountdetails/1").subscribe((response: any) => {
-      console.log(response);
       this.userDetails["fullName"] = response.firstName + " " + response.lastName;
       this.userDetails["address"] = response.address;
       this.userDetails["gender"] = response.gender;
@@ -42,7 +41,15 @@ export class ProfilePageComponent implements OnInit {
       this.userDetails["dob"] = response.dob;
     });;
   }
-
+  saveUserInfo(){
+    this.userDetails['firstName'] = this.userDetails.fullName.substr(0,this.userDetails.fullName.indexOf(' '));
+    this.userDetails['lastName'] = this.userDetails.fullName.substr(this.userDetails.fullName.indexOf(' ')+1);
+    delete this.userDetails['fullName'];
+    this.userDetails['id'] = this.user.id;
+    this.dataService.put("/user/account",JSON.stringify(this.userDetails)).subscribe((response: any) => {
+        console.log(response);
+    })
+  }
   logout(){
     window.localStorage.removeItem("CURRENT_USER");
     this.notifyService.printSuccessMessage("Đăng xuất thành công");
