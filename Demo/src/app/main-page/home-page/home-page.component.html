@@ -53,7 +53,7 @@
                 </li>
                 <li><span class="rot">|</span></li>
                 <li>
-                    <a routerLink="/register" href="#" *ngIf="userName == null">
+                    <a routerLink="/register" href="#" *ngIf="user == null">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Đăng ký
                     </a>
                     <a href="javascript:void(0)" (click)="logout()" *ngIf="user && user.userName  ">
