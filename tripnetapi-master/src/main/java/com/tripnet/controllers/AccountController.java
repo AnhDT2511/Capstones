@@ -32,7 +32,7 @@ public class AccountController {
 		return new ResponseEntity<Account>(account, HttpStatus.OK);
 	}
 	
-	@GetMapping("account/get_all")
+	@GetMapping("account/get-all")
 	public ResponseEntity<List<Account>> getAllAccounts() {
 		List<Account> list = commonService.getAll();
 		return new ResponseEntity<List<Account>>(list, HttpStatus.OK);
