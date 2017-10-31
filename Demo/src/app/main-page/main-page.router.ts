@@ -1,5 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { MainPageComponent } from './main-page.component';
+import {AuthGuard} from '../shared/guards/auth.guard';
 
 const MainPage_Router: Routes = [
     {
@@ -9,9 +10,9 @@ const MainPage_Router: Routes = [
             //localhost:4200/main/home
             { path: 'home', loadChildren: './home-page/home-page.module#HomePageModule' },
             // localhost:4200/main/admin
-            { path: 'admin', loadChildren: './admin-page/admin-page.module#AdminPageModule' },
+            { path: 'admin', loadChildren: './admin-page/admin-page.module#AdminPageModule', canActivate : [AuthGuard] },
             // localhost:4200/main/profile
-            { path: 'profile', loadChildren: './profile-page/profile-page.module#ProfilePageModule' },
+            { path: 'profile', loadChildren: './profile-page/profile-page.module#ProfilePageModule', canActivate : [AuthGuard] },
             // { path: 'function', loadChildren: './function/function.module#FunctionModule' },
 
             // { path: 'product-category', loadChildren: './product-category/product-category.module#ProductCategoryModule' },

@@ -45,7 +45,9 @@ export class ProfilePageComponent implements OnInit {
     this.userDetails['firstName'] = this.userDetails.fullName.substr(0,this.userDetails.fullName.indexOf(' '));
     this.userDetails['lastName'] = this.userDetails.fullName.substr(this.userDetails.fullName.indexOf(' ')+1);
     delete this.userDetails['fullName'];
-    this.userDetails['id'] = this.user.id;
+    this.userDetails['id'] = 1;
+    console.log(this.userDetails);
+    
     this.dataService.put("/user/account",JSON.stringify(this.userDetails)).subscribe((response: any) => {
         console.log(response);
     })
