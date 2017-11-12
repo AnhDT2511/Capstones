@@ -15,6 +15,7 @@ export class DataService {
   constructor(private _http: Http, private _router: Router, private _authenService: AuthenService,
     private _notificationService: NotificationService, private _utilityService: UtilityService) {
     this.headers = new Headers();
+    this.headers.append('Access-Control-Allow-Origin', '*');
     this.headers.append('Content-Type', 'application/json');
   }
 

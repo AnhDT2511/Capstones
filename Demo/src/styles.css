@@ -2,7 +2,7 @@
   font-family: SourceSansPro;
   src: url(/fonts/SourceSansPro.OTF);
 }
-
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 html,
 body {
   height: 100%;
@@ -57,7 +57,7 @@ body {
 }
 
 #cover .middle .login-panel {
-position: relative;
+  position: relative;
   margin-left: auto;
   margin-right: auto;
   min-width: 320px;
@@ -132,20 +132,25 @@ position: relative;
   text-decoration: none;
 }
 
+#cover table tr td span a:focus {
+  text-decoration: none !important;
+  outline: none;
+}
+
 
 /*=========================== FOOTER =============================*/
 
 footer {
   width: 100%;
-  position: fixed;
+  /* position: fixed; */
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.45);
 }
 
 footer p {
-  margin: 7px 15px 4px 15px;
+  margin: 6px 15px;
   text-align: right;
-  color: #B6B6B6;
+  color: rgb(211, 211, 211);
   font-size: 12px;
 }
 
@@ -156,6 +161,12 @@ footer p a {
 footer p a:hover {
   color: #fff;
   text-decoration: none;
+}
+
+footer p a:focus {
+  outline: none;
+  text-decoration: none;
+  color: #B6B6B6;
 }
 
 

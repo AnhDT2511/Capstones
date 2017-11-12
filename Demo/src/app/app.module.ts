@@ -8,18 +8,19 @@ import { LoginService } from './shared';
 import { RegisterService } from './shared/service/register.service';
 import { SharedModule } from '../app/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
-    // SharedModule,
     BrowserModule,
     HttpModule,
     AppRoutingModule,
-    // NgbModule.forRoot(),
+    MatTooltipModule,
     BrowserAnimationsModule,
+    SharedModule
   ],
   providers: [
     LoginService,

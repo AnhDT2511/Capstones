@@ -30,7 +30,6 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log("Hello", this.model);
     this.loading = true;
     this.registerService.register(this.model).subscribe(data => {
       if(data !== null){

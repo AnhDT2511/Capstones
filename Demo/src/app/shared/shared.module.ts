@@ -8,8 +8,9 @@ import { RouterModule } from '@angular/router';
 // import { FavoriteButtonComponent, FollowButtonComponent } from './buttons';
 // import { ListErrorsComponent } from './list-errors.component';
 // import { ShowAuthedDirective } from './show-authed.directive';
-import { LayoutHeaderComponent, LayoutFooterComponent } from './layout'
-import { ModalLoginComponent, DialogLoginButtonComponent } from './modal'
+// import { LayoutHeaderComponent, LayoutFooterComponent } from './layout'
+// import { ModalLoginComponent, DialogLoginButtonComponent } from './modal'
+
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -20,6 +21,7 @@ import {
   MatDatepickerModule,
   MatDialogModule,
   MatExpansionModule,
+  MatFormFieldModule,
   MatGridListModule,
   MatIconModule,
   MatInputModule,
@@ -43,26 +45,33 @@ import {
   MatTooltipModule,
   MatStepperModule,
 } from '@angular/material';
-import {CdkTableModule} from '@angular/cdk/table';
+import { CdkTableModule } from '@angular/cdk/table';
+import { A11yModule } from '@angular/cdk/a11y';
+import { BidiModule } from '@angular/cdk/bidi';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { PlatformModule } from '@angular/cdk/platform';
+import { ObserversModule } from '@angular/cdk/observers';
+import { PortalModule } from '@angular/cdk/portal';
 
 @NgModule({
   exports: [
+    // Material Modules
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
     MatCardModule,
     MatCheckboxModule,
     MatChipsModule,
-    MatStepperModule,
+    MatTableModule,
     MatDatepickerModule,
     MatDialogModule,
     MatExpansionModule,
+    MatFormFieldModule,
     MatGridListModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
     MatMenuModule,
-    MatNativeDateModule,
     MatPaginatorModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
@@ -70,17 +79,26 @@ import {CdkTableModule} from '@angular/cdk/table';
     MatRippleModule,
     MatSelectModule,
     MatSidenavModule,
-    MatSliderModule,
     MatSlideToggleModule,
+    MatSliderModule,
     MatSnackBarModule,
     MatSortModule,
-    MatTableModule,
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-  ]
+    MatNativeDateModule,
+    MatStepperModule,
+    CdkTableModule,
+    A11yModule,
+    BidiModule,
+    ObserversModule,
+    OverlayModule,
+    PlatformModule,
+    PortalModule,
+  ],
+  declarations: []
 })
-export class PlunkerMaterialModule {}
+export class AppMaterialModules { }
 
 @NgModule({
   imports: [
@@ -89,26 +107,26 @@ export class PlunkerMaterialModule {}
     ReactiveFormsModule,
     HttpModule,
     RouterModule,
-    PlunkerMaterialModule
+    AppMaterialModules
   ],
   declarations: [
-    LayoutHeaderComponent,
-    LayoutFooterComponent,
-    ModalLoginComponent,
-    DialogLoginButtonComponent
+    // LayoutHeaderComponent,
+    // LayoutFooterComponent,
+    // ModalLoginComponent,
+    // DialogLoginButtonComponent
   ],
-  entryComponents: [ModalLoginComponent],
+  // entryComponents: [ModalLoginComponent],
   exports: [
-    LayoutHeaderComponent,
-    LayoutFooterComponent,
+    // LayoutHeaderComponent,
+    // LayoutFooterComponent,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
     RouterModule,
-    ModalLoginComponent,
-    DialogLoginButtonComponent,
-    PlunkerMaterialModule
+    // ModalLoginComponent,
+    // DialogLoginButtonComponent,
+    AppMaterialModules
   ]
 })
 export class SharedModule { }

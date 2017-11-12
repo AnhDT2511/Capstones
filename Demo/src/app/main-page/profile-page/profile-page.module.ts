@@ -6,12 +6,14 @@ import { ProfilePageRouter }  from './profile-page.router';
 // import { AuthenService } from '../shared/service/authen.service';
 // import { SignalrService } from '../shared/service/signalr.service';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
     imports: [
         ProfilePageRouter,
         CommonModule,
         FormsModule,
+        SharedModule
     ],
     declarations: [
         ProfilePageComponent

@@ -19,9 +19,9 @@ export class AuthenService {
 
     return this._http.post(SystemConstants.BASE_API + '/user/account/login', model, options).map((response: Response) => {
       let _body = JSON.parse(JSON.parse(JSON.stringify(response))._body)[0];
-      delete _body["password"];
-      delete _body["createTime"];
-      delete _body["deleted"];
+      // delete _body["password"];
+      // delete _body["createTime"];
+      // delete _body["deleted"];
       let user: LoggedInUser = _body;
       if (user) {
         localStorage.removeItem(SystemConstants.CURRENT_USER);
@@ -53,7 +53,11 @@ export class AuthenService {
         userData.photoId,
         userData.credit,
         userData.point,
-        userData.roleId);
+        userData.roleId,
+        userData.password,
+        userData.createTime,
+        userData.deleted
+        )        
     }
     else
       user = null;

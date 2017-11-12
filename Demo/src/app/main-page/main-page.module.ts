@@ -7,7 +7,6 @@ import { AuthenService } from '../shared/service/authen.service';
 import { SignalrService } from '../shared/service/signalr.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { FormsModule } from '@angular/forms';
-import { SharedModule } from '../shared/shared.module'
 import { HomePageModule } from './home-page/home-page.module'
 import { NotificationService } from '../shared/service/notification.service';
 import { DataService } from '../shared/service/data.service';
@@ -19,7 +18,6 @@ import {AuthGuard} from '../shared/guards/auth.guard';
         CommonModule,
         NgbModule,
         FormsModule,
-        SharedModule,
         HomePageModule        
     ],
     declarations: [

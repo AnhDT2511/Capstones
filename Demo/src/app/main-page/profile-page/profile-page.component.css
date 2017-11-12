@@ -667,3 +667,12 @@
 .tab-menu .label-change-password .form-control {
     padding: 5px 12px 7px;
 }
+
+
+mat-form-field.mat-form-field {
+    font-size: 16px;
+  }
+
+.text-red{
+    color:#FF0000;
+}
