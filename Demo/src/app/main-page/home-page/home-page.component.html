@@ -276,9 +276,9 @@
                                             <i class="fa fa-eye" aria-hidden="true" style="font-size: 17px;"></i>1357
                                         </span>
                                     </div>
-                                    <div class="col-xs-12 col-sm-4 col-md-4 s-border">
+                                    <div class="col-xs-12 col-sm-4 col-md-4 s-border" (click)=likeTourPost(tourPost)>
                                         <span>
-                                            <i class="fa fa-heart" aria-hidden="true"></i> {{tourPost.countLike}}
+                                            <i class="fa fa-heart" aria-hidden="true" [ngStyle]="{'color': tourPost.liked ? 'red': 'gray'}"></i> {{tourPost.countLike}}
                                         </span>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
@@ -295,7 +295,7 @@
                                     <p>{{tourPost.description}}</p>
                                 </div>
                                 <div class="a-more">
-                                    <a href="javascript:void(0)" (click) = detailTourPost(tourPost.id) >Chi tiết</a>
+                                    <a href="javascript:void(0)" (click) = detailTourPost(tourPost) >Chi tiết</a>
                                 </div>
                             </div>
                         </div>

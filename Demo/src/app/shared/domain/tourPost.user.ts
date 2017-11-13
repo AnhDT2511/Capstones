@@ -26,4 +26,7 @@ export class TourPost {
     public createTime: any;
     public description: any;
     public vehicle:any;
+    public countLike: any  = 0;
+    public liked: boolean  = false;
+    public likedID: any ;
 }

@@ -6,7 +6,10 @@ import { UrlConstants } from '../../shared/common/url.constants';
 import { NotificationService } from '../../shared/service/notification.service';
 import { AuthenService } from '../../shared/service/authen.service';
 import { DataService } from '../../shared/service/data.service';
-import {Router , ActivatedRoute , Params } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { debug } from 'util';
+import { TourPost } from '../../shared/domain/tourPost.user';
+import { Like } from '../../shared/domain/like.user';
 
 
 @Component({
@@ -17,47 +20,45 @@ import {Router , ActivatedRoute , Params } from '@angular/router';
 })
 
 export class TourPostPageComponent implements OnInit {
-  user : any = this.authentication.getLoggedInUser();
+  user: any = this.authentication.getLoggedInUser();
   // userDetails : any = {};
-  tourPostId : string ;
-  tourPost : any = {};
+  tourPostId: string;
+  tourPost: any;
   tourByDay: any = [];
   tourByDayDetail: any = [];
-  statusComment : boolean = true;
+  statusComment: boolean = true;
 
   constructor(
-    private utilityService : UtilityService, 
-    private notifyService : NotificationService , 
-    private authentication : AuthenService,
-    private dataService : DataService,
+    private utilityService: UtilityService,
+    private notifyService: NotificationService,
+    private authentication: AuthenService,
+    private dataService: DataService,
     private activatedRoute: ActivatedRoute
-  ) { 
-    this.activatedRoute.params.subscribe((params: Params) => {
-      this.tourPostId = params.id;
-      this.dataService.get('/tours/post/'+ params.id).subscribe((response: any) => {
-        // console.log(response);
-        this.tourPost = response;
-      }, error => {
-      });
-    });
-
-    this.dataService.get('/tours/post/'+ this.tourPostId +'/day/get-all').subscribe((response: any) => {
+  ) {
+    // this.activatedRoute.params.subscribe((params: Params) => {
+    //   this.tourPostId = params.id;
+    //   this.dataService.get('/tours/post/'+ params.id).subscribe((response: any) => {
+    //     // console.log(response);
+    //     this.tourPost = response;
+    //   }, error => {
+    //   });
+    // });
+    this.tourPost = JSON.parse(localStorage.getItem("tourPost"));
+    this.dataService.get('/tours/post/' + this.tourPost.id + '/get-all').subscribe((response: any) => {
       // console.log(response);
-       this.tourByDay = response;
+      this.tourByDay = response;
     }, error => {
     });
 
-    this.dataService.get('/tours/post/'+ this.tourPostId +'/day/1/detail/get-all').subscribe((response: any) => {
+    this.dataService.get('/tours/post/' + this.tourPost.id + '/day/1/detail/get-all').subscribe((response: any) => {
       // console.log(response);
-      for(let i in response){
-        if(response[i].tourByDayID == this.tourByDay[0].id){
+      for (let i in response) {
+        if (response[i].tourByDayID == this.tourByDay[0].id) {
           this.tourByDayDetail.push(response[i]);
         }
       }
     }, error => {
     });
-
-    console.log(this.tourByDayDetail);
   }
 
   ngOnInit() {
@@ -69,8 +70,33 @@ export class TourPostPageComponent implements OnInit {
     this.utilityService.navigate(UrlConstants.PROFILE);
   }
 
-  openCloseCmt(){
+  openCloseCmt() {
     this.statusComment = !this.statusComment;
+  }
+
+  likeTourPost(tourPost: any) {
+    if (this.user != null && !tourPost.liked) {
+      let _like = new Like(null, tourPost.id, this.user.id, 0);
+      this.dataService.post('/tours/post/' + tourPost.id + '/Like', _like).subscribe((response: any) => {
+        this.tourPost.liked = true;
+        this.tourPost.countLike++;
+        localStorage.removeItem("tourPost");
+        localStorage.setItem("tourPost",JSON.stringify(this.tourPost));
+      }, error => {
+      });
+      this.notifyService.printSuccessMessage("Thích bài viết thành công");
+    } else if (this.user != null && tourPost.liked) {
+      // let _dislike = new Like(tourPost.likedID,tourPost.id,this.user.id,1);
+      // console.log(_dislike);
+      // this.dataService.put('/tours/post/' + tourPost.id + '/Like',_dislike).subscribe((response: any) => {
+      //   var item = this.listTourPost.findIndex(item => item.id === response[0].tourPostID);
+      //   this.listTourPost[item]["countLike"] = response.length;
+      // }, error => {
+      // });
+      this.notifyService.printSuccessMessage("Bỏ thích bài viết thành công");
+    } else {
+      this.notifyService.printErrorMessage("Xin hãy đăng nhập trước khi thực hiện hành động này");
+    }
   }
 
   logout() {
@@ -80,5 +106,5 @@ export class TourPostPageComponent implements OnInit {
     // this.notifyService.printConfirmationDialog("Bạn có chắc chắn muốn đăng xuất?" , this.resetLogin)
   }
 
-  
+
 }

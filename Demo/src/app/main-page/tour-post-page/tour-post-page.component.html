@@ -73,8 +73,8 @@
     <!-- Begin: Like, View, Comment, Report -->
     <div class="view container">
         <div class="col-sm-5 col-md-5 v-left">
-            <a href="#" data-toggle="tooltip" data-placement="top" title="Thích">
-                <i class="fa fa-heart " aria-hidden="true "></i> 550
+            <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Thích" (click)=likeTourPost(tourPost)>
+                <i class="fa fa-heart " aria-hidden="true " [ngStyle]="{'color': tourPost.liked ? 'red': 'white'}"></i> {{tourPost.countLike}}
             </a>
             <a href="#" data-toggle="tooltip" data-placement="top" title="Lượt xem">
                 <i class="fa fa-eye " aria-hidden="true " style="font-size: 23px; "></i> 1225
