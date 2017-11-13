@@ -22,6 +22,7 @@ export class ProfilePageComponent implements OnInit {
   model: any = {};
   hide = true;
   passOldValid = true;
+  checkUserDetails: boolean = true;
   constructor(
     private utilityService: UtilityService,
     private notifyService: NotificationService,
@@ -35,7 +36,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   checkPassOld() {
-     this.user.password == this.model.oldpwd ? this.passOldValid = true : this.passOldValid = false;
+    this.user.password == this.model.oldpwd ? this.passOldValid = true : this.passOldValid = false;
   }
 
   getUserDetails(id: string) {
@@ -47,7 +48,9 @@ export class ProfilePageComponent implements OnInit {
       this.userDetails["phoneNumber"] = response.phoneNumber;
       this.userDetails["dob"] = response.dob;
       this.userDetails['id'] = response.id;
-    });;
+    }, error => {
+      this.checkUserDetails = false;
+    });
   }
   savePassChanged() {
     this.checkPassOld();
@@ -58,13 +61,12 @@ export class ProfilePageComponent implements OnInit {
         localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(this.user));
         this.notifyService.printSuccessMessage("Cập nhật mật khẩu thành công");
       }, error => {
-         this.notifyService.printErrorMessage("Có lỗi xảy ra khi cập nhật thông tin người dùng, xin hãy thử lại!!");
+        this.notifyService.printErrorMessage("Có lỗi xảy ra khi cập nhật thông tin người dùng, xin hãy thử lại!!");
       });
     }
 
   }
   saveUserInfo() {
-    //warning about email
     this.dataService.put("/user/account", JSON.stringify(this.user)).subscribe((response: any) => {
       localStorage.removeItem(SystemConstants.CURRENT_USER);
       localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(this.user));
@@ -77,17 +79,28 @@ export class ProfilePageComponent implements OnInit {
     this.userDetails['accountId'] = this.user.id;
     delete this.userDetails['fullName'];
 
-    this.dataService.put("/user/accountdetails", JSON.stringify(this.userDetails)).subscribe((response: any) => {
-      this.userDetails["fullName"] = this.userDetails.firstName + " " + this.userDetails.lastName;
-    }, error => {
-      this.valid = false;
-    });
+    this.getUserDetails(this.user.id);
+    if(this.checkUserDetails){
+      this.dataService.put("/user/accountdetails", JSON.stringify(this.userDetails)).subscribe((response: any) => {
+        this.userDetails["fullName"] = this.userDetails.firstName + " " + this.userDetails.lastName;
+      }, error => {
+        this.valid = false;
+      });
+    }else{
+      this.dataService.post("/user/accountdetails", JSON.stringify(this.userDetails)).subscribe((response: any) => {
+        this.userDetails["fullName"] = this.userDetails.firstName + " " + this.userDetails.lastName;
+      }, error => {
+        this.valid = false;
+      });
+    }
+    
 
     if (this.valid) {
       this.notifyService.printSuccessMessage("Cập nhật thông tin người dùng thành công");
     } else {
       this.notifyService.printErrorMessage("Có lỗi xảy ra khi cập nhật thông tin người dùng, xin hãy thử lại!!");
     }
+
   }
   logout() {
     window.localStorage.removeItem("CURRENT_USER");

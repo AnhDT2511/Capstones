@@ -27,7 +27,14 @@ export class TourPostPageComponent implements OnInit {
   tourByDay: any = [];
   tourByDayDetail: any = [];
   statusComment: boolean = true;
-
+  hideForm : boolean = true;
+  listPlace : any = ['Ha Noi',
+    'Da Nang',
+    'Sai Gon',
+    'Quang Ninh',
+    'Hai Phong',
+    'Bac Lieu',
+    'Nha Trang'];
   constructor(
     private utilityService: UtilityService,
     private notifyService: NotificationService,
@@ -49,7 +56,6 @@ export class TourPostPageComponent implements OnInit {
       this.tourByDay = response;
     }, error => {
     });
-
     this.dataService.get('/tours/post/' + this.tourPost.id + '/day/1/detail/get-all').subscribe((response: any) => {
       // console.log(response);
       for (let i in response) {
