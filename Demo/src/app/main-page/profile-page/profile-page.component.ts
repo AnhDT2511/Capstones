@@ -19,7 +19,7 @@ export class ProfilePageComponent implements OnInit {
   user: any = this.authentication.getLoggedInUser();
   userDetails: any = {};
   valid: boolean = true;
-  model : any = {};
+  model: any = {};
   hide = true;
   passOldValid = true;
   constructor(
@@ -34,10 +34,10 @@ export class ProfilePageComponent implements OnInit {
     this.getUserDetails(this.user.id);
   }
 
-  checkPassOld(){
-    this.user.password == this.model.oldpwd ? this.passOldValid = true : this.passOldValid = false ;
+  checkPassOld() {
+     this.user.password == this.model.oldpwd ? this.passOldValid = true : this.passOldValid = false;
   }
-  
+
   getUserDetails(id: string) {
     this.dataService.get("/user/accountdetails/" + id).subscribe((response: any) => {
       this.userDetails["fullName"] = response.firstName + " " + response.lastName;
@@ -49,8 +49,19 @@ export class ProfilePageComponent implements OnInit {
       this.userDetails['id'] = response.id;
     });;
   }
-  savePassChanged(){
-    alert('Good');
+  savePassChanged() {
+    this.checkPassOld();
+    if (this.model.renewpwd == this.model.newpwd && this.passOldValid) {
+      this.user.password = this.model.renewpwd;
+      this.dataService.put("/user/account", JSON.stringify(this.user)).subscribe((response: any) => {
+        localStorage.removeItem(SystemConstants.CURRENT_USER);
+        localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(this.user));
+        this.notifyService.printSuccessMessage("Cập nhật mật khẩu thành công");
+      }, error => {
+         this.notifyService.printErrorMessage("Có lỗi xảy ra khi cập nhật thông tin người dùng, xin hãy thử lại!!");
+      });
+    }
+
   }
   saveUserInfo() {
     //warning about email
