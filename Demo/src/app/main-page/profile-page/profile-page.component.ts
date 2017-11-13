@@ -49,7 +49,9 @@ export class ProfilePageComponent implements OnInit {
       this.userDetails['id'] = response.id;
     });;
   }
-
+  savePassChanged(){
+    alert('Good');
+  }
   saveUserInfo() {
     //warning about email
     this.dataService.put("/user/account", JSON.stringify(this.user)).subscribe((response: any) => {

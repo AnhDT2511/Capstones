@@ -344,7 +344,7 @@
             <div id="change-password" class="tab-pane fade">
                 <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2">
                     <h3>Đổi mật khẩu</h3>
-                     <form name="form" (ngSubmit)="checkPassOld() && f.form.valid " class="form-horizontal" #f="ngForm" novalidate>
+                     <form name="form" (ngSubmit)="checkPassOld() && f.form.valid && saveInfoChanged() " class="form-horizontal" #f="ngForm" novalidate>
                             <!-- <label class="control-label col-sm-4" for="oldpwd"> Mật khẩu cũ :</label> -->
                             <i class="material-icons text-success" ></i>
                             <div class="col-sm-offset-4 col-sm-8">
