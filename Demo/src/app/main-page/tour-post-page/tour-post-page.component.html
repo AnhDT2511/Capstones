@@ -87,7 +87,7 @@
         <div class="col-sm-2 col-md-2"></div>
         <div class="col-sm-5 col-md-5 v-right">
             <a href="javascript:void(0)" (click)="openCloseCmt()" data-toggle="tooltip" data-placement="top" title="Bình luận">
-                <i class="fa fa-comment " aria-hidden="true "></i> 440
+                <i class="fa fa-comment " aria-hidden="true "></i> 
             </a>
             <a href="#" data-toggle="tooltip" data-placement="top" title="Tố cáo">
                 <i class="fa fa-flag" aria-hidden="true"></i> 0
@@ -150,7 +150,6 @@
     </section>
     <!-- End: Timeline -->
 
-    <!-- Begin: Comment -->
 
     <footer>
         <div class="row">
@@ -167,51 +166,41 @@
 
 
 
-<!-- Begin: Footer -->
+    <!-- Begin: Comment -->
 <div id="comment" class="comment" [hidden]="statusComment">
     <header>
         <h5>Bình luận </h5>
         <a href="javascript:void(0)" class="closebtn" (click)="openCloseCmt()">&times;</a>
     </header>
     <div class="write-comment">
-        <form class="form-horizontal" action="">
+        <!-- <form class="form-horizontal" action=""> -->
             <div class="form-group">
                 <div class="col-sm-12">
-                    <textarea class="form-control" rows="3" id="comment" placeholder="Bình luận của bạn..."></textarea>
+                    <textarea class="form-control" rows="3" id="comment" placeholder="Bình luận của bạn..." 
+                    name="comment" [(ngModel)] = "comment"></textarea>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-12 text-right">
-                    <button type="submit" class="btn btn-submit">
-                        <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp;Gửi bình luận
+                    <button type="button" class="btn btn-submit">
+                        <i class="fa fa-paper-plane" aria-hidden="true" (click)="sendComment()"></i>&nbsp;&nbsp;Gửi bình luận
                     </button>
                     <button class="btn btn-close" (click)="openCloseCmt()">
                         <i class="fa fa-times" aria-hidden="true"></i>&nbsp;&nbsp;Đóng
                     </button>
                 </div>
             </div>
-        </form>
+        <!-- </form> -->
     </div>
     <main>
         <!-- Left-aligned media object -->
-        <div class="media">
+        <div class="media" *ngFor="let item of listComment ; let i = index;">
             <div class="media-left">
                 <img src="/assets/img/default-user-image.png" class="media-object" style="width:60px">
             </div>
             <div class="media-body">
-                <h5 class="media-heading">Đinh Tuấn Anh</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua.</p>
-            </div>
-        </div>
-        <hr>
-        <div class="media">
-            <div class="media-left">
-                <img src="/assets/img/default-user-image.png" class="media-object" style="width:60px">
-            </div>
-            <div class="media-body">
-                <h5 class="media-heading">Đào Thu Thủy</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <h5 class="media-heading">{{item.userName |  uppercase}}</h5>
+                <p>{{item.content}}</p>
             </div>
         </div>
         <hr>

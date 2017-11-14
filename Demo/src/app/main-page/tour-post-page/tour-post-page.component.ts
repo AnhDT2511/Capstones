@@ -10,6 +10,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { debug } from 'util';
 import { TourPost } from '../../shared/domain/tourPost.user';
 import { Like } from '../../shared/domain/like.user';
+import { resetFakeAsyncZone } from '@angular/core/testing';
 
 
 @Component({
@@ -27,14 +28,16 @@ export class TourPostPageComponent implements OnInit {
   tourByDay: any = [];
   tourByDayDetail: any = [];
   statusComment: boolean = true;
-  hideForm : boolean = true;
-  listPlace : any = ['Ha Noi',
+  hideForm: boolean = true;
+  comment : string  = "";
+  listPlace: any = ['Ha Noi',
     'Da Nang',
     'Sai Gon',
     'Quang Ninh',
     'Hai Phong',
     'Bac Lieu',
     'Nha Trang'];
+  listComment: any;
   constructor(
     private utilityService: UtilityService,
     private notifyService: NotificationService,
@@ -75,8 +78,26 @@ export class TourPostPageComponent implements OnInit {
   nagivateProfile() {
     this.utilityService.navigate(UrlConstants.PROFILE);
   }
-
+  sendComment(){
+    this.dataService.post('/tours/post/' + this.tourPost.id + '/comment', ).subscribe((response: any) => {
+      // this.tourPost.liked = true;
+      // this.tourPost.countLike++;
+      // localStorage.removeItem("tourPost");
+      // localStorage.setItem("tourPost", JSON.stringify(this.tourPost));
+    }, error => {
+    });
+  }
   openCloseCmt() {
+      this.dataService.get('/tours/post/' + this.tourPost.id + '/comment/get-all').subscribe((response: any) => {
+        this.listComment = response;
+        for (var i in this.listComment) {
+          this.dataService.get('/user/account/' + this.listComment[i].commentByID).subscribe((response: any) => {
+            this.listComment[this.listComment.findIndex(item => item.commentByID === response.id)]["userName"] = response.userName;
+          }, error => {
+          });
+        }
+      }, error => {
+      });
     this.statusComment = !this.statusComment;
   }
 
@@ -87,7 +108,7 @@ export class TourPostPageComponent implements OnInit {
         this.tourPost.liked = true;
         this.tourPost.countLike++;
         localStorage.removeItem("tourPost");
-        localStorage.setItem("tourPost",JSON.stringify(this.tourPost));
+        localStorage.setItem("tourPost", JSON.stringify(this.tourPost));
       }, error => {
       });
       this.notifyService.printSuccessMessage("Thích bài viết thành công");
