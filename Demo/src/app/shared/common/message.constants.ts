@@ -10,4 +10,6 @@ export class MessageContstants {
     public static  LOGIN_SUCCESS = "Đăng nhập thành công!";
     public static  REGISTER_SUCCESS = "Đăng kí thành công!";
     public static  REGISTER_FAILED = "Đăng kí không thành công. Vui lòng thử lại!";
+    public static CREATE_POST_SUCCESS = "Đăng bài thành công!";
+    public static CREATE_POST_FAILED = "Đăng bài không thành công. Vui lòng thử lại!";
 }

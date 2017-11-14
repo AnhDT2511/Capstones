@@ -6,9 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginService } from './shared';
 import { RegisterService } from './shared/service/register.service';
+import { CreatePostService } from './shared/service/createpost.service';
 import { SharedModule } from '../app/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { ShareModule } from 'ng2share/share.module';
 
 @NgModule({
   declarations: [
@@ -20,11 +22,13 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     AppRoutingModule,
     MatTooltipModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    ShareModule
   ],
   providers: [
     LoginService,
-    RegisterService
+    RegisterService,
+    CreatePostService
   ],
   bootstrap: [AppComponent]
 })

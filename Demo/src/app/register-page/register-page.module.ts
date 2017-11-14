@@ -7,7 +7,6 @@ import { NotificationService } from '../shared/service/notification.service';
 import { AuthenService } from '../shared/service/authen.service';
 
 export const routes: Routes = [
-  //localhost:4200/login
   { path: '', component: RegisterComponent }
 ];
 
@@ -20,4 +19,5 @@ export const routes: Routes = [
   providers: [NotificationService],
   declarations: [RegisterComponent]
 })
-export class RegisterPageModule { }
+
+export class RegisterPageModule {}

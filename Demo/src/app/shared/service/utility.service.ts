@@ -13,7 +13,7 @@ export class UtilityService {
   }
 
   convertDateTime(date: Date) {
-    var _formattedDate = new Date(date.toString());
+    const _formattedDate = new Date(date.toString());
     return _formattedDate.toDateString();
   }
 
