@@ -1,0 +1,478 @@
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <title>TRIP NET - Trang cá nhân</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="fontAwesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/create-post.css">
+</head> -->
+<!-- <body> -->
+<div id="cover" style="background-image: url(../assets/img/pro.jpg);">
+    <div class="header-topbar">
+        <div class="container">
+            <ul class="pull-left">
+                <li>
+                    <a href="#" style="border-right: 1px solid rgba(255, 255, 255, 0.3);">
+                        <i class="fa fa-phone" aria-hidden="true"></i> +024 236 255
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-google-plus" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="pull-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-globe" aria-hidden="true"></i> Ngôn ngữ
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu top-menu">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-angle-right" aria-hidden="true"></i> English
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-angle-right" aria-hidden="true"></i> Vietnamese
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <span class="rot">|</span>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa fa-question-circle" aria-hidden="true"></i> Giúp đỡ
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <nav id="mainNav" class="navbar navbar-default">
+        <div class="container">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="index.html" style="letter-spacing: 2px; color: #00d26c;">TRIPNET</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="index.html">
+                            <i class="fa fa-home" aria-hidden="true"></i> Trang chủ
+                        </a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="">
+                            <i class="fa fa-superpowers" aria-hidden="true"></i> Tiện ích
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-user-circle-o" aria-hidden="true"></i> {{userName}}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu main-menu">
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#modalMyInfo">
+                                    <i class="fa fa-user" aria-hidden="true"></i> Thông tin
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#modalChangePassword">
+                                    <i class="fa fa-key" aria-hidden="true"></i> Đổi mật khẩu
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalMyInfo" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thông tin cá nhân</h4>
+            </div>
+            <form action="" method="">
+                <div class="modal-body" style="padding-top: 30px;">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="email">Tên hiển thị:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="email" placeholder="" name="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="pwd">Họ và tên:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="pwd" placeholder="" name="pwd">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="pwd">Email:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="pwd" placeholder="" name="pwd">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">&nbsp;
+                        <i class="fa fa-check" aria-hidden="true"></i> Xác nhận&nbsp;</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalChangePassword" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Đổi mật khẩu</h4>
+            </div>
+            <form action="" method="">
+                <div class="modal-body" style="padding-top: 30px;">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="email">Nhập mật khẩu cũ:</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="oldPassword" placeholder="" name="oldPassword">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="pwd">Nhập mật khẩu mới:</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="newPassword1" placeholder="" name="newPassword1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4" for="pwd">Nhập lại mật khẩu mới:</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="newPassword2" placeholder="" name="newPassword2">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">&nbsp;
+                        <i class="fa fa-check" aria-hidden="true"></i> Xác nhận&nbsp;</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy bỏ</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<div id="" class="container">
+
+    <!-- LEFT SIDE -->
+    <div class="col-xs-12 col-sm-3 col-md-3 profile-side">
+        <div class="profile-img">
+            <img src="../assets/img/default-user-image.png" alt="Avatar" class="image">
+            <!-- <div class="overlay">
+                <div class="text">
+                    <a href="">
+                        <i class="fa fa-camera-retro" aria-hidden="true"></i>Cập nhật ảnh đại diện
+                    </a>
+                </div>
+            </div> -->
+        </div>
+        <!-- <div class="level-info">
+            <h5>Dinh Tuan Anh {{userName}}</h5>
+            <h5>Cấp độ: 4</h5>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                    aria-valuemax="100" style="width:40%">
+
+                </div>
+            </div>
+        </div> -->
+
+        <div class="btn-tour">
+            <a href="" class="btn-create-tour" data-toggle="modal" data-target="#modalCreateTour">
+                <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Tạo chuyến đi
+            </a>
+        </div>
+
+        <div class="calendar">
+            <script src="js/calendar.js"></script>
+        </div>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="col-xs-12 col-sm-9 col-md-9 create-post">
+        <div class="title-post">
+            <span>B</span>ài đăng mới
+        </div>
+
+        <!-- <div class="text-left des-post">
+            <h4>Mộc Châu - mùa nắng vàng</h4>
+            <p>Lượn lờ trung tâm mua sắm khi vi vu đến Singapore giờ là xưa rồi, mình sẽ gợi ý cho bạn những điểm hay ho hơn
+                thế nhiều. Trong bài đầu này, chúng ta sẽ ghé chân qua Haji Lane - một trong những con phố "chất lừ lừ "
+                nhất tại Singapore đấy nhé.
+            </p>
+        </div> -->
+
+        <div id="timeline-content">
+            <ul id="timeline">
+                <li class="work">
+                    <input class="radio" id="work3" name="works" type="radio" checked>
+                    <div class="relative">
+                        <label for="work3">Viết nội dung tại đây</label>
+                        <span class="date">Ngày 1</span>
+                        <span class="circle"></span>
+                    </div>
+                    <div class="content">
+                        <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && createPost()" #f="ngForm" novalidate>
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Xuất phát" name="startPlace" [(ngModel)]="model.startPlace" #startPlace="ngModel"
+                                        required>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Điểm đến" name="endPlace" [(ngModel)]="model.endPlace" #endPlace="ngModel"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" placeholder="Ở đâu?" name="stay" [(ngModel)]="model.stay" #stay="ngModel" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" placeholder="Ăn gì?" name="food" [(ngModel)]="model.food" #food="ngModel" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="checkbox veh">
+                                        <div class="col-sm-2">
+                                            <input type="checkbox" value="motorcycle" name="vehicle">
+                                            <i class="fa fa-motorcycle" aria-hidden="true" data-toggle="tooltip" title="Xe máy" style="font-size: 24px;"></i>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input type="checkbox" value="true" name="vehicle">
+                                            <i class="fa fa-taxi" aria-hidden="true" data-toggle="tooltip" title="Ô tô" style="font-size: 20px;"></i>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input type="checkbox" value="train" name="vehicle">
+                                            <i class="fa fa-bus" aria-hidden="true" data-toggle="tooltip" title="Tàu" style="font-size: 20px;"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <textarea class="form-control" rows="4" id="comment" placeholder="Mô tả về chuyến đi..." name="Description" [(ngModel)]="model.Description"
+                                        #desc="ngModel" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12 text-right">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fa fa-check" aria-hidden="true"></i> Lưu
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+                <li class="work">
+                    <input class="radio" id="work2" name="works" type="radio">
+                    <div class="relative">
+                        <label for="work2">Viết nội dung tại đây</label>
+                        <span class="date">Ngày 2</span>
+                        <span class="circle"></span>
+                    </div>
+                    <div class="content">
+                        <form class="form-horizontal" action="">
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Xuất phát" name="email">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Điểm đến" name="email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" placeholder="Ở đâu?" name="stay">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" placeholder="Ăn gì?" name="food">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="checkbox veh">
+                                        <div class="col-sm-2">
+                                            <input type="checkbox" name="remember">
+                                            <i class="fa fa-motorcycle" aria-hidden="true" data-toggle="tooltip" title="Xe máy" style="font-size: 24px;"></i>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input type="checkbox" name="remember">
+                                            <i class="fa fa-taxi" aria-hidden="true" data-toggle="tooltip" title="Ô tô" style="font-size: 20px;"></i>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input type="checkbox" name="remember">
+                                            <i class="fa fa-bus" aria-hidden="true" data-toggle="tooltip" title="Tàu" style="font-size: 20px;"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <textarea class="form-control" rows="4" id="comment" placeholder="Mô tả về chuyến đi..."></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12 text-right">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fa fa-check" aria-hidden="true"></i> Lưu
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+                <li class="work">
+                    <input class="radio" id="work1" name="works" type="radio">
+                    <div class="relative">
+                        <label for="work1">Viết nội dung tại đây</label>
+                        <span class="date">Ngày 3</span>
+                        <span class="circle"></span>
+                    </div>
+                    <div class="content">
+                        <form class="form-horizontal" action="">
+                            <div class="form-group">
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Xuất phát" name="email">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Điểm đến" name="email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" placeholder="Ở đâu?" name="stay">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" placeholder="Ăn gì?" name="food">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="checkbox veh">
+                                        <div class="col-sm-2">
+                                            <input type="checkbox" name="remember">
+                                            <i class="fa fa-motorcycle" aria-hidden="true" data-toggle="tooltip" title="Xe máy" style="font-size: 24px;"></i>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input type="checkbox" name="remember">
+                                            <i class="fa fa-taxi" aria-hidden="true" data-toggle="tooltip" title="Ô tô" style="font-size: 20px;"></i>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <input type="checkbox" name="remember">
+                                            <i class="fa fa-bus" aria-hidden="true" data-toggle="tooltip" title="Tàu" style="font-size: 20px;"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <textarea class="form-control" rows="4" id="comment" placeholder="Mô tả về chuyến đi..."></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12 text-right">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fa fa-check" aria-hidden="true"></i> Lưu
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- <share-container
+    direction="horizontal"
+    addedText="your creation"
+    [expandable]="true"
+    [textEnabled]="true"
+    [platforms]="['reddit','twitter','facebook','mail']">
+</share-container> -->
+<!-- <div class="sharethis-inline-share-buttons">SHARE THIS</div> -->
+<div style="height: 100px; width: 100%;"></div>
+<!-- <footer>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                Copyright 2017 - TRIP NET
+            </div>
+        </div>
+        <a href="#" class="scrollToTop"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+    </footer> -->
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script> -->
+<app-layout-footer></app-layout-footer>
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+<!-- </body> -->
