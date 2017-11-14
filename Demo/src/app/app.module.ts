@@ -10,7 +10,6 @@ import { CreatePostService } from './shared/service/createpost.service';
 import { SharedModule } from '../app/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ShareModule } from 'ng2share/share.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +22,6 @@ import { ShareModule } from 'ng2share/share.module';
     MatTooltipModule,
     BrowserAnimationsModule,
     SharedModule,
-    ShareModule
   ],
   providers: [
     LoginService,
