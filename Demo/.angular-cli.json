@@ -34,8 +34,7 @@
         "../src/assets/js/smoothScrolling.js",
         "../src/assets/js/timeline.js",
         "../src/assets/js/nav.js",
-        "../systemjs.config.js",
-        "../src/assets/js/sharebutton.js"
+        "../systemjs.config.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

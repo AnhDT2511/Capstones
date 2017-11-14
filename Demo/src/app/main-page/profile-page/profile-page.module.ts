@@ -8,7 +8,6 @@ import { ProfilePageRouter } from './profile-page.router';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 // import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
-// import { ShareButtonsModule } from 'ngx-sharebuttons';
 
 @NgModule({
     imports: [
