@@ -1,5 +1,7 @@
-/*========================== COVER ============================*/
+/* cam xoa */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+/*========================== COVER ============================*/
 #cover {
   position: relative;
   width: 100%;

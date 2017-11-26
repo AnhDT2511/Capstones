@@ -1,0 +1,46 @@
+<form name="form" (ngSubmit)="f.form.valid && savePassChanged() " #f="ngForm" novalidate>
+<h1 mat-dialog-title>Đổi Mật Khẩu</h1>
+  <div mat-dialog-content>
+    <mat-form-field [color]="!passOldValid ? 'warn' : 'primary'" fullWidth={true}>
+      <input matInput [type]="hide ? 'password' : 'text'" placeholder="Nhập mật khẩu cũ" [(ngModel)]="model.oldpwd" #oldpwd="ngModel"
+        name="oldpwd" required>
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      <mat-hint>
+        <span *ngIf="!passOldValid" class="text-red">
+          Mật khẩu không hợp lệ
+        </span>
+        <span *ngIf="oldpwd.touched && !oldpwd.valid" class="text-red">Mật khẩu phải ít nhất 8 ký tự</span>
+      </mat-hint>
+    </mat-form-field>
+    <!-- mat khau moi -->
+    <mat-form-field fullWidth={true}>
+      <input matInput [type]="hide ? 'password' : 'text'" placeholder="Nhập mật khẩu mới:" [(ngModel)]="model.newpwd" #newpwd="ngModel"
+        name="newpwd" minlength="8" maxlength="20" required>
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      <mat-hint>
+        <!-- <span *ngIf="newpwd.valid && !passOldValid" class="text-red">
+                                              Mật khẩu không hợp lệ   
+                                          </span> -->
+        <span *ngIf="newpwd.touched && !newpwd.valid" class="text-red">Mật khẩu phải ít nhất 8 ký tự</span>
+      </mat-hint>
+    </mat-form-field>
+
+    <!-- nhap lai mat khau moi -->
+    <mat-form-field [color]="model.newpwd != model.renewpwd ? 'warn' : 'primary'" fullWidth={true}>
+      <input matInput [type]="hide ? 'password' : 'text'" placeholder="Nhập lại mật khẩu mới:" [(ngModel)]="model.renewpwd" #renewpwd="ngModel"
+        name="renewpwd" required>
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      <mat-hint>
+        <span *ngIf="renewpwd.valid && model.newpwd != model.renewpwd" class="text-red">
+          Mật khẩu không khớp
+        </span>
+        <span *ngIf="renewpwd.touched && !renewpwd.valid" class="text-red">Trường Bắt Buộc</span>
+      </mat-hint>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button type="submit" [disabled]="model.newpwd != model.renewpwd || !f.form.valid" mat-raised-button>
+      <i class="fa fa-check" aria-hidden="true"></i> Lưu </button>
+    <button mat-button (click)="onNoClick()" tabindex="-1">No Thanks</button>
+  </div>
+</form>

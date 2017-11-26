@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ViewChild } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
-import { UtilityService } from '../../shared/service/utility.service';
-import { UrlConstants } from '../../shared/common/url.constants';
-import { NotificationService } from '../../shared/service/notification.service';
-import { AuthenService } from '../../shared/service/authen.service';
-import { DataService } from '../../shared/service/data.service';
-import { SystemConstants } from '../../shared/common/system.constants';
+import { UrlConstants, SystemConstants} from '../../shared/common';
+import { TextChangePassComponent } from './dialog-change-pass/dialog-change-pass.component';
+import { DataService, 
+  NotificationService , 
+  AuthenService, 
+  UtilityService 
+} from '../../shared/service';
 
 @Component({
   selector: 'app-profile-page',
@@ -15,12 +16,13 @@ import { SystemConstants } from '../../shared/common/system.constants';
 })
 
 export class ProfilePageComponent implements OnInit {
+  @ViewChild(TextChangePassComponent)
+  private textChangePass: TextChangePassComponent;
+
   user: any = this.authentication.getLoggedInUser();
   userDetails: any = {};
   valid = true;
-  model: any = {};
-  hide = true;
-  passOldValid = true;
+  // model: any = {};
   checkUserDetails: boolean = true;
   constructor(
     private utilityService: UtilityService,
@@ -30,12 +32,12 @@ export class ProfilePageComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
-    this.getUserDetails(this.user.id);
+  openChangePass(){
+    this.textChangePass.openDialog();
   }
 
-  checkPassOld() {
-     this.user.password === this.model.oldpwd ? this.passOldValid = true : this.passOldValid = false;
+  ngOnInit() {
+    this.getUserDetails(this.user.id);
   }
 
   getUserDetails(id: string) {
@@ -51,20 +53,7 @@ export class ProfilePageComponent implements OnInit {
       this.checkUserDetails = false;
     });
   }
-  savePassChanged() {
-    this.checkPassOld();
-    if (this.model.renewpwd === this.model.newpwd && this.passOldValid) {
-      this.user.password = this.model.renewpwd;
-      this.dataService.put('/user/account', JSON.stringify(this.user)).subscribe((response: any) => {
-        localStorage.removeItem(SystemConstants.CURRENT_USER);
-        localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(this.user));
-        this.notifyService.printSuccessMessage('Cập nhật mật khẩu thành công');
-      }, error => {
-        this.notifyService.printErrorMessage("Có lỗi xảy ra khi cập nhật thông tin người dùng, xin hãy thử lại!!");
-      });
-    }
-
-  }
+  
   saveUserInfo() {
     this.dataService.put("/user/account", JSON.stringify(this.user)).subscribe((response: any) => {
       localStorage.removeItem(SystemConstants.CURRENT_USER);
@@ -104,7 +93,6 @@ export class ProfilePageComponent implements OnInit {
     window.localStorage.removeItem('CURRENT_USER');
     this.notifyService.printSuccessMessage('Đăng xuất thành công!');
     this.utilityService.navigate(UrlConstants.LOGIN);
-    // this.notifyService.printConfirmationDialog("Bạn có chắc chắn muốn đăng xuất?" , this.resetLogin)
   }
   
   openCreatePost() {

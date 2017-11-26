@@ -7,6 +7,7 @@ import { ProfilePageRouter } from './profile-page.router';
 // import { SignalrService } from '../shared/service/signalr.service';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
+import { DialogChangePassComponent, TextChangePassComponent } from './dialog-change-pass/dialog-change-pass.component';
 // import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 
 @NgModule({
@@ -17,8 +18,11 @@ import { SharedModule } from '../../shared/shared.module';
         SharedModule
     ],
     declarations: [
-        ProfilePageComponent
+        ProfilePageComponent,
+        TextChangePassComponent,
+        DialogChangePassComponent
     ],
+    entryComponents: [DialogChangePassComponent]
 })
 
 export class ProfilePageModule {}
