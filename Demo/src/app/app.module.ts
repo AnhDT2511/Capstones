@@ -26,7 +26,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   providers: [
     LoginService,
     RegisterService,
-    CreatePostService
+    CreatePostService,
+    // AccountService
   ],
   bootstrap: [AppComponent]
 })

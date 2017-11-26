@@ -35,9 +35,9 @@ export class HomePageComponent implements OnInit {
   }
 
   detailTourPost(_tourPost){
-    this.utilityService.navigate('/main/tourpost/index');
     localStorage.removeItem("tourPost");
     localStorage.setItem("tourPost",JSON.stringify(_tourPost));
+    this.utilityService.navigate('/main/tourpost/index');
   }
   
   likeTourPost(tourPost : any){

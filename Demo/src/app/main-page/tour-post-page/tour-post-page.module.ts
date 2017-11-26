@@ -5,7 +5,9 @@ import { TourPostPageRouter }  from './tour-post-page.router';
 // import { UtilityService } from '../shared/service/utility.service';
 // import { AuthenService } from '../shared/service/authen.service';
 // import { SignalrService } from '../shared/service/signalr.service';
+import { CommonService } from '../../shared/service/common.service'
 import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
     imports: [
@@ -16,6 +18,7 @@ import { FormsModule } from '@angular/forms';
     declarations: [
         TourPostPageComponent
     ],
+    providers: [CommonService],
 })
 
 export class TourPostPageModule {}

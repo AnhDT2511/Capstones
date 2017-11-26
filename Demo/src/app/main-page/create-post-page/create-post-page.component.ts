@@ -43,13 +43,14 @@ export class CreatePostComponent implements OnInit {
   }
 
   createPost() {
+    console.log("test");
     this.loading = true;
-    console.log(this.model);
+    this.model["tourByDayID"] = 2;
+    this.model["vehicle"] = 1;
+    this.model["placeID"] = 5;
     this.createPostService.createPost(this.model).subscribe(data => {
       if (data !== null) {
         this.notificationService.printSuccessMessage(MessageContstants.CREATE_POST_SUCCESS);
-        // this.router.navigate([UrlConstants.LOGIN]);
-        console.log(data);
       }else {
         this.notificationService.printErrorMessage(MessageContstants.CREATE_POST_FAILED);
         this.loading = false;
@@ -57,6 +58,7 @@ export class CreatePostComponent implements OnInit {
     }, error => {
       this.notificationService.printErrorMessage(MessageContstants.CREATE_POST_FAILED);
       this.loading = false;
+      console.log(error);
     });
   }
 

@@ -269,7 +269,7 @@
                         <span class="circle"></span>
                     </div>
                     <div class="content">
-                        <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && createPost()" #f="ngForm" novalidate>
+                        <form class="form-horizontal" name="form" (ngSubmit)=" createPost()" #f="ngForm" novalidate>
                             <div class="form-group">
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" placeholder="Xuất phát" name="startPlace" [(ngModel)]="model.startPlace" #startPlace="ngModel"
@@ -282,7 +282,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <input type="text" class="form-control" placeholder="Ở đâu?" name="stay" [(ngModel)]="model.stay" #stay="ngModel" required>
+                                    <input type="text" class="form-control" placeholder="Ở đâu?" name="stay" [(ngModel)]="model.hotel" #stay="ngModel" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -310,7 +310,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <textarea class="form-control" rows="4" id="comment" placeholder="Mô tả về chuyến đi..." name="Description" [(ngModel)]="model.Description"
+                                    <textarea class="form-control" rows="4" id="comment" placeholder="Mô tả về chuyến đi..." name="description" [(ngModel)]="model.description"
                                         #desc="ngModel" required></textarea>
                                 </div>
                             </div>

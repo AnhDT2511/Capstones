@@ -31,12 +31,18 @@ body {
     font-family: SourceSansPro;
     font-size: 15px;
     font-weight: 400;
-    background-color: #3F51B5;
 }
 
 section {
     padding: 50px 0 0;
-    background-color: #393d4a;
+    /*background-color: #393d4a;*/
+    background: #0F0F0F;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiP…Igd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g);
+    background-size: 100%;
+    background-image: -moz-linear-gradient(0deg, #0f0f0f 0%, #0f0f0f 99px, #000000 100px);
+    background-image: -webkit-linear-gradient(0deg, #0f0f0f 0%, #0f0f0f 99px, #000000 100px);
+    background-image: linear-gradient(90deg, #0f0f0f 0%, #0f0f0f 99px, #000000 100px);
+    background-size: 100px 100px;
 }
 
 div view {
@@ -48,7 +54,7 @@ div view {
 h1 {
     font-size: 200%;
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     font-weight: 400;
 }
 
@@ -68,17 +74,48 @@ h6 {
 }
 
 header {
-    background: #3F51B5;
-    color: #FFFFFF;
-    padding: 0 0 125px;
+    color: rgb(190, 32, 32);
+    background-color: #b73333;
+    padding: 0 0 135px;
+}
+
+header h4 {
+    font-family: 'Allura';
+    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: 0;
+    font-size: 60px;
+    margin-top: -5px;
 }
 
 header p {
-    font-family: 'Allura';
-    color: rgba(255, 255, 255, 0.2);
-    margin-bottom: 0;
-    font-size: 60px;
-    margin-top: -15px;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 10px;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+header .logox {
+    font-style: italic;
+    display: block;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    font-weight: bold;
+}
+
+header .logox h1 a {
+    color: #dedede;
+    letter-spacing: 2px;
+    font-size: 36px;
+}
+
+header .logox h1 a:hover {
+    text-decoration: none;
+}
+
+header .logox h1 {
+    margin-top: 25px;
+    margin-bottom: 60px;
 }
 
 header .header-topbar {
@@ -89,7 +126,6 @@ header .header-topbar {
     position: relative;
     width: 100%;
     background-color: transparent;
-    margin-bottom: 135px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
@@ -151,13 +187,17 @@ header .header-topbar .container>ul>li>a:focus {
 
 header .header-topbar ul>li>span.rot {
     color: #fff;
-    padding: 9px 0 8px;
+    padding: 7px 0 10px;
     display: block;
 }
 
+
+/*============= VIEW ==============*/
+.view{
+    background-color: #b73333;
+}
 .view a {
     padding: 5px 25px 15px;
-    background-color: #3F51B5;
     font-size: 20px;
     letter-spacing: 1px;
     color: #efefef;
@@ -197,8 +237,18 @@ header .header-topbar ul>li>span.rot {
     text-align: center;
 }
 
+
+/*============= TIMELINE BODY ==============*/
+
 .poster {
-    background-color: #393d4a;
+    /*background-color: #393d4a;*/
+    background: #0F0F0F;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiP…Igd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g);
+    background-size: 100%;
+    background-image: -moz-linear-gradient(0deg, #0f0f0f 0%, #0f0f0f 99px, #000000 100px);
+    background-image: -webkit-linear-gradient(0deg, #0f0f0f 0%, #0f0f0f 99px, #000000 100px);
+    background-image: linear-gradient(90deg, #0f0f0f 0%, #0f0f0f 99px, #000000 100px);
+    background-size: 100px 100px;
 }
 
 .poster a {
@@ -240,7 +290,7 @@ header .header-topbar ul>li>span.rot {
 
 .timeline::before {
     content: '';
-    background: #C5CAE9;
+    background: #fff;
     width: 5px;
     height: 97%;
     position: absolute;
@@ -308,7 +358,6 @@ header .header-topbar ul>li>span.rot {
 .timeline-img {
     width: 30px;
     height: 30px;
-    background: #3F51B5;
     border-radius: 50%;
     position: absolute;
     left: 50%;
@@ -362,7 +411,7 @@ header .header-topbar ul>li>span.rot {
 }
 
 
-/* TIMELINE CAROUSEL */
+/*========== TIMELINE CAROUSEL ==========*/
 
 .timeline .timeline-item #myCarousel img {
     height: 280px;
@@ -388,24 +437,27 @@ header .header-topbar ul>li>span.rot {
     font-size: 40px;
     color: #fff;
     width: 0;
+    margin-left: -6px;
 }
 
 blockquote {
-    margin-top: 30px;
+    margin-top: 20px;
     color: #757575;
     border-left-color: #3F51B5;
     padding: 0 20px;
+    font-size: 16px;
 }
 
-.date {
+.timeline .date {
     background: #FF4081;
     display: inline-block;
     color: #FFFFFF;
-    padding: 10px 25px;
+    padding: 10px 20px;
     position: absolute;
     top: 0;
     right: 0;
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 @media screen and (max-width: 768px) {
@@ -437,11 +489,11 @@ blockquote {
 }
 
 
-/* COMMENT */
+/*============= COMMENT ==============*/
 
 .comment {
     height: 100%;
-    width: 450px;
+    width: 400px;
     position: fixed;
     z-index: 1000;
     top: 0;
@@ -525,7 +577,7 @@ blockquote {
     border-color: #337ab7;
     background-color: #337ab7;
     color: #fff;
-    font-size: 13px;
+    font-size: 14px;
     margin-right: 5px;
 }
 
@@ -536,52 +588,420 @@ blockquote {
     transition: 0.6s;
 }
 
-.comment .write-comment .btn-close {
-    border-color: #ccc;
-    background-color: #eaeaea;
-    font-size: 13px;
+
+/*============= REPORT ==============*/
+
+.report {
+    height: 100%;
+    width: 400px;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+    transition: 0.8s;
 }
 
-.comment .write-comment .btn-close:hover {
-    border-color: #d9534f;
-    background-color: #d9534f;
+.report .closebtn {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    font-size: 26px;
+    margin-left: 50px;
+    color: #000;
+}
+
+.report .closebtn:hover {
+    color: #d9534f;
+    text-decoration: none;
+}
+
+.report .closebtn:focus {
+    color: transparent;
+    text-decoration: none;
+}
+
+#myContent {
+    transition: margin-right .8s;
+}
+
+@media screen and (max-height: 450px) {
+    .report {
+        padding-top: 15px;
+    }
+    .report a {
+        font-size: 18px;
+    }
+}
+
+.report header {
+    padding: 12px 15px 11px;
+    color: #000;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+}
+
+.report header h5 {
+    margin: 0;
+    font-size: 14px;
+}
+
+.report main {
+    padding: 20px 15px;
+    color: #000;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+.report main h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.report main .form-group {
+    margin-bottom: 5px;
+}
+
+.report .btn-submit {
+    border-color: #337ab7;
+    background-color: #337ab7;
+    color: #fff;
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.report .btn-submit:hover {
+    background-color: #00bd61;
+    border-color: #00bd61;
     color: #fff;
     transition: 0.6s;
 }
 
 
-/*=========================== FOOTER =============================*/
+/*============= BUTTON LIKE ===============*/
 
-footer {
-    padding: 50px !important;
-    background-color: #1a1a1b;
-    color: #9a9a9a;
+#ilike {
+    transition: 0.8s;
+}
+
+.ilike {
+    width: 80px;
+    height: 40px;
+    padding: 9px 0;
+    text-align: center;
+    color: #ffffff;
+    text-decoration: none;
+    position: fixed;
+    bottom: 225px;
+    right: 0px;
+    /* display: none; */
+    border: 1px solid #9e0fa2;
+    border-right: none;
+    border-left: none;
+    font-size: 14px;
+    background-color: #9e0fa2;
+    letter-spacing: 1px;
+    z-index: 1000;
+}
+
+.ilike:focus {
+    text-decoration: none;
+    color: #fff;
+}
+
+.ilike:hover {
+    text-decoration: none;
+    color: #fff;
+    opacity: 0.8;
+    transition: 0.5s;
+}
+
+.ilike:before,
+.ilike:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border: solid transparent;
+    position: absolute;
+    pointer-events: none;
+    right: 100%;
+}
+
+.ilike:before {
+    border-right-color: #9e0fa2;
+    border-width: 20px;
+    top: 50%;
+    margin-top: -20px;
+}
+
+.ilike:after {
+    border-right-color: #9e0fa2;
+    border-width: 17px;
+    top: 50%;
+    margin-top: -17px;
 }
 
 
-/*======================== SCROLL TO TOP =========================*/
+/*============= BUTTON COMMENT ===============*/
 
-.scrollToTop {
-    width: 40px;
+#icomment {
+    transition: 0.8s;
+}
+
+.icomment {
+    width: 80px;
     height: 40px;
+    padding: 9px 0;
     text-align: center;
-    font-weight: bold;
-    color: #9c9999;
+    color: #ffffff;
     text-decoration: none;
     position: fixed;
-    bottom: 15px;
-    right: 15px;
-    display: none;
-    border: 1px solid #9c9999;
-    font-size: 25px;
-    border-radius: 50%;
+    bottom: 175px;
+    right: 0px;
+    /* display: none; */
+    border: 1px solid #b73333;
+    border-right: none;
+    border-left: none;
+    font-size: 14px;
+    background-color: #b73333;
+    letter-spacing: 1px;
     z-index: 1000;
+}
+
+.icomment:focus {
+    text-decoration: none;
+    color: #fff;
+}
+
+.icomment:hover {
+    text-decoration: none;
+    color: #fff;
+    opacity: 0.8;
+    transition: 0.5s;
+}
+
+.icomment:before,
+.ilicommentike:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border: solid transparent;
+    position: absolute;
+    pointer-events: none;
+    right: 100%;
+}
+
+.icomment:before {
+    border-right-color: #b73333;
+    border-width: 20px;
+    top: 50%;
+    margin-top: -20px;
+}
+
+.icomment:after {
+    border-right-color: #b73333;
+    border-width: 17px;
+    top: 50%;
+    margin-top: -17px;
+}
+
+
+/*============= BUTTON REPORT ==============*/
+
+#ireport {
+    transition: 0.8s;
+}
+
+.ireport {
+    width: 80px;
+    height: 40px;
+    padding: 9px 0;
+    text-align: center;
+    color: #ffffff;
+    text-decoration: none;
+    position: fixed;
+    bottom: 125px;
+    right: 0px;
+    /* display: none; */
+    border: 1px solid #d27200;
+    border-right: none;
+    border-left: none;
+    font-size: 14px;
+    background-color: #d27200;
+    letter-spacing: 1px;
+    z-index: 1000;
+}
+
+.ireport:focus {
+    text-decoration: none;
+    color: #fff;
+}
+
+.ireport:hover {
+    text-decoration: none;
+    color: #fff;
+    opacity: 0.8;
+    transition: 0.5s;
+}
+
+.ireport:before,
+.ireport:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border: solid transparent;
+    position: absolute;
+    pointer-events: none;
+    right: 100%;
+}
+
+.ireport:before {
+    border-right-color: #d27200;
+    border-width: 20px;
+    top: 50%;
+    margin-top: -20px;
+}
+
+.ireport:after {
+    border-right-color: #d27200;
+    border-width: 17px;
+    top: 50%;
+    margin-top: -17px;
+}
+
+
+/*============= BUTTON SAVE LINK ================*/
+
+#saveLink {
+    transition: 0.8s;
+}
+
+.save-link {
+    width: 80px;
+    height: 40px;
+    padding: 9px 0;
+    text-align: center;
+    color: #ffffff;
+    text-decoration: none;
+    position: fixed;
+    bottom: 75px;
+    right: 0px;
+    /* display: none; */
+    border: 1px solid #3f51b5;
+    border-right: none;
+    border-left: none;
+    font-size: 14px;
+    background-color: #3f51b5;
+    letter-spacing: 1px;
+    z-index: 1000;
+}
+
+.save-link:focus {
+    text-decoration: none;
+    color: #fff;
+}
+
+.save-link:hover {
+    text-decoration: none;
+    color: #fff;
+    opacity: 0.8;
+    transition: 0.5s;
+}
+
+.save-link:before,
+.save-link:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border: solid transparent;
+    position: absolute;
+    pointer-events: none;
+    right: 100%;
+}
+
+.save-link:before {
+    border-right-color: #3f51b5;
+    border-width: 20px;
+    top: 50%;
+    margin-top: -20px;
+}
+
+.save-link:after {
+    border-right-color: #3f51b5;
+    border-width: 17px;
+    top: 50%;
+    margin-top: -17px;
+}
+
+
+/*============ SCROLL TO TOP =============*/
+
+#toTop {
+    transition: 0.8s;
+}
+
+.scrollToTop {
+    width: 80px;
+    height: 40px;
+    padding: 9px 0;
+    text-align: center;
+    color: #ffffff;
+    text-decoration: none;
+    position: fixed;
+    bottom: 25px;
+    right: 0px;
+    /* display: none; */
+    border: 1px solid #00bd61;
+    border-right: none;
+    border-left: none;
+    font-size: 14px;
+    background-color: #00bd61;
+    z-index: 1000;
+    letter-spacing: 1px;
+}
+
+.scrollToTop:focus {
+    text-decoration: none;
+    color: #fff;
 }
 
 .scrollToTop:hover {
     text-decoration: none;
-    border: 1px solid #00bd61;
     color: #fff;
-    background-color: #00bd61;
+    opacity: 0.8;
     transition: 0.5s;
+}
+
+.scrollToTop:before,
+.scrollToTop:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border: solid transparent;
+    position: absolute;
+    pointer-events: none;
+    right: 100%;
+}
+
+.scrollToTop:before {
+    border-right-color: #00bd61;
+    border-width: 20px;
+    top: 50%;
+    margin-top: -20px;
+}
+
+.scrollToTop:after {
+    border-right-color: #00bd61;
+    border-width: 17px;
+    top: 50%;
+    margin-top: -17px;
+}
+
+
+/**/
+
+.padding-zero {
+    padding-left: 0;
+    padding-right: 0;
 }
