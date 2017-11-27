@@ -210,161 +210,22 @@
                 </div>
             </div>
         </div>
-
-        <div class="btn-post">
-            <a href="javascript:void(0)" (click)="openCreatePost()" class="btn-create-post">
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Tạo bài mới
-            </a>
-        </div>
         <div class="btn-tour">
-            <a href="" class="btn-create-tour" data-toggle="modal" data-target="#modalCreateTour">
-                <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Tạo chuyến đi
+            <a href="javascript:void(0)" class="btn-create-tour" routerLink="overview" >
+                <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Thông Tin Tài Khoản
             </a>
         </div>
+        <div class="btn-post">
+            <a href="javascript:void(0)" class="btn-create-post" routerLink="createPost" >
+                <i class="fa fa-pencil-square-o" aria-hidden="true" ></i> Tạo bài mới
+            </a>
+        </div>
+        
         <!-- <div class="calendar">
             <script src="js/calendar.js"></script>
         </div> -->
     </div>
-
-    <div class="col-xs-12 col-sm-9 col-md-9 tab-menu">
-        <div class="my-profile">
-            <span>T</span>rang cá nhân
-        </div>
-
-        <ul class="nav nav-tabs">
-            <li class="active">
-                <a data-toggle="tab" href="#dashboard">
-                    <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard
-                </a>
-            </li>
-            <li>
-                <a data-toggle="tab" href="#activities">
-                    <i class="fa fa-bell-o" aria-hidden="true"></i> Hoạt động
-                </a>
-            </li>
-            <li>
-                <a data-toggle="tab" href="#manage-post">
-                    <i class="fa fa-file-text-o" aria-hidden="true"></i> Quản lý bài đăng
-                </a>
-            </li>
-            <li>
-                <a data-toggle="tab" href="#save-link">
-                    <i class="fa fa-link" aria-hidden="true"></i> Link đã lưu
-                </a>
-            </li>
-        </ul>
-
-        <div class="tab-content">
-
-            <div id="dashboard" class="tab-pane fade in active">
-                <div class="col-xs-12 col-sm-12 col-md-12 label-dashboard">
-                    <div class="col-xs-12 col-sm-6 col-md-6 mark1">
-                        <div class="tile total-post">
-                            <div class="icon-total-post">
-                                <i class="fa fa-files-o" aria-hidden="true"></i>
-                            </div>
-                            <div class="number">30</div>
-                            <h3>Tổng số bài viết đã đăng</h3>
-                            <p>số bài viết đã đăng lên website.</p>
-                        </div>
-                        <hr>
-                        <div class="panel panel-default save-link">
-                            <div class="panel-heading">
-                                <i class="fa fa-link" aria-hidden="true"></i>Link mới lưu
-                            </div>
-                            <ul>
-                                <li>
-                                    <a href="">
-                                        <i class="fa fa-bookmark" aria-hidden="true"></i>Khoe ảnh Ngải Thầu (Bát Xát, Lào Cai)
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <i class="fa fa-bookmark" aria-hidden="true"></i>Quy Nhơn - Những điều chưa kể
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <i class="fa fa-bookmark" aria-hidden="true"></i>Quy Nhơn - Những điều chưa kể
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <i class="fa fa-bookmark" aria-hidden="true"></i>Quy Nhơn - Những điều chưa kể
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <i class="fa fa-bookmark" aria-hidden="true"></i>Quy Nhơn - Những điều chưa kể
-                                    </a>
-                                </li>
-                                <li>
-                                    <a data-toggle="tab" href="#save-link" class="more">
-                                        Xem thêm...
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6 col-md-6 mark2">
-                        <div class="tile total-post">
-                            <div class="icon-total-post">
-                                <i class="fa fa-files-o" aria-hidden="true"></i>
-                            </div>
-                            <div class="number">30</div>
-                            <h3>Tổng số bài viết đã đăng</h3>
-                            <p>số bài viết đã đăng lên website.</p>
-                        </div>
-                        <hr>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <i class="fa fa-users" aria-hidden="true"></i>Các nhóm đã tham gia
-                            </div>
-                            <div class="panel-body">Panel Content</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div id="activities" class="tab-pane fade">
-                <div class="col-xs-12 col-sm-12 col-md-12 label-activities">
-                    <div class="alert alert-success">
-                        <strong>Success!</strong> Indicates a successful or positive action.
-                    </div>
-
-                    <div class="alert alert-info">
-                        <strong>Info!</strong> Indicates a neutral informative change or action.
-                    </div>
-
-                    <div class="alert alert-warning">
-                        <strong>Warning!</strong> Indicates a warning that might need attention.
-                    </div>
-
-                    <div class="alert alert-danger">
-                        <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
-                    </div>
-                </div>
-            </div>
-
-            <div id="manage-post" class="tab-pane fade">
-                <div class="col-xs-12 col-sm-12 col-md-12 label-manage-post">
-                    <h3>Manage post</h3>
-                    <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                </div>
-            </div>
-
-            <div id="save-link" class="tab-pane fade">
-                <div class="col-xs-12 col-sm-12 col-md-12 label-save-link">
-                    <h3>Save link</h3>
-                    <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <router-outlet></router-outlet>
 </div>
 <div style="height: 300px; width: 100%;"></div>
 <!-- Begin: Footer -->

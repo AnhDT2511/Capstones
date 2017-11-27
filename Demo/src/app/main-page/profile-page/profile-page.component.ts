@@ -95,7 +95,7 @@ export class ProfilePageComponent implements OnInit {
     this.utilityService.navigate(UrlConstants.LOGIN);
   }
   
-  openCreatePost() {
-    this.utilityService.navigate('/main/createpost');
-  }
+  // openCreatePost() {
+  //   this.utilityService.navigate('/main/createpost');
+  // }
 }

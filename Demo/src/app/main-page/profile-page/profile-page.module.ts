@@ -8,6 +8,8 @@ import { ProfilePageRouter } from './profile-page.router';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { DialogChangePassComponent, TextChangePassComponent } from './dialog-change-pass/dialog-change-pass.component';
+import { CreatePostComponent } from './create-post/create-post.component';
+import { OverViewPageModule } from './overview-info/overview-info.module';
 // import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 
 @NgModule({
@@ -15,12 +17,14 @@ import { DialogChangePassComponent, TextChangePassComponent } from './dialog-cha
         ProfilePageRouter,
         CommonModule,
         FormsModule,
-        SharedModule
+        SharedModule,
+        OverViewPageModule
     ],
     declarations: [
         ProfilePageComponent,
         TextChangePassComponent,
-        DialogChangePassComponent
+        DialogChangePassComponent,
+        CreatePostComponent,
     ],
     entryComponents: [DialogChangePassComponent]
 })
