@@ -18,9 +18,11 @@ export class CreatePostComponent implements OnInit {
   showList(){
     console.log(this.listTourDetail);
   }
+
   saveTourPost(){
     
   }
+  
   addMoreDetails(){
     this.listTourDetail.push({checkbox : []});
   }
