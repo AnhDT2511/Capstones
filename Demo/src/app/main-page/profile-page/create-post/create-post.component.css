@@ -327,46 +327,6 @@
 }
 
 
-/* BUTTON CREATE POST */
-
-.profile-side .btn-post a {
-    color: #fff;
-    font-size: 18px;
-    padding: 17px 15px;
-    display: block;
-    text-align: center;
-    border-radius: 4px;
-}
-
-.profile-side .btn-post a:hover {
-    text-decoration: none;
-}
-
-.profile-side .btn-post a i {
-    width: 30px;
-    text-align: center;
-}
-
-.profile-side .btn-post .btn-create-post {
-    border: 1px solid #d9534f;
-    background-color: #d9534f;
-    margin-bottom: 20px;
-}
-
-.profile-side .btn-post .btn-create-post:hover {
-    border: 1px solid #00bd61;
-    background-color: #00bd61;
-    outline: none;
-    text-decoration: none;
-    transition: 0.6s;
-}
-
-.profile-side .btn-post .btn-create-post:focus {
-    outline: none;
-    text-decoration: none;
-}
-
-
 /* BUTTON CREATE TOUR */
 
 .profile-side .btn-tour a {
@@ -407,66 +367,6 @@
 }
 
 
-/* PANEL POST */
-
-.panel {
-    background-color: #fff;
-    border-radius: 4px;
-}
-
-.panel-default {
-    border-color: #c3c3c3;
-}
-
-.panel .panel-heading>i {
-    width: 20px;
-    margin-right: 5px;
-}
-
-.profile-side .panel-success {
-    border-color: #00bd61;
-}
-
-.profile-side .panel-success>.panel-heading {
-    color: #FFF;
-    font-size: 16px;
-    padding: 8px 15px 11px;
-    background-color: #00bd61;
-    border-color: #00bd61;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
-
-.profile-side ul {
-    padding: 0;
-    margin-bottom: 0;
-}
-
-.profile-side ul li {
-    list-style: none;
-}
-
-.profile-side ul>li>a {
-    color: #000;
-    font-size: 15px;
-    padding: 8px 15px 11px;
-    display: block;
-    border-bottom: 1px solid #00bd61;
-    background-color: #fff;
-}
-
-.profile-side ul>li>a:hover,
-.profile-side ul>li>a:focus {
-    text-decoration: none;
-    color: #00bd61;
-}
-
-.profile-side ul>li>a>i {
-    width: 20px;
-    margin-right: 5px;
-}
-
-
 /* CALENDAR */
 
 .calendar {
@@ -501,58 +401,26 @@
 
 /*===================== RIGHT SIDE =====================*/
 
-
-/* TAB MENU */
-
-.tab-menu {
+.create-post {
     padding-top: 30px;
 }
 
-.tab-menu .my-profile {
+.create-post .title-post {
     font-size: 60px;
     margin-top: -153px;
     color: #fff;
     font-weight: 900;
     text-transform: uppercase;
+    margin-left: -10px;
     line-height: 1.05;
     letter-spacing: 5px;
-    padding-bottom: 3px;
 }
 
-.tab-menu .my-profile span {
+.create-post .title-post span {
     font-size: 140px;
-    margin-right: -10px;
 }
 
-.tab-menu .nav>li>a {
-    font-size: 15px;
-    padding: 10px 15px;
-    color: #363636;
-}
-
-.tab-menu .nav-tabs {
-    margin-bottom: 15px;
-    border-bottom: 1px solid #c3c3c3;
-}
-
-.tab-menu .nav-tabs>li>a:hover {
-    border-color: #c3c3c3;
-}
-
-.tab-menu .nav>li>a>i {
-    width: 20px;
-}
-
-.tab-menu .nav-tabs>li.active>a,
-.nav-tabs>li.active>a:focus,
-.nav-tabs>li.active>a:hover {
-    color: #00bd61;
-    background-color: #fff;
-    border: 1px solid #c3c3c3;
-    border-bottom-color: transparent;
-}
-
-.my-profile {
+.create-post .title-post {
     background: linear-gradient(to right, #ffffff 0%, #ffffff 15%, #ffffff 35%, #ffffff 50%, #ffffff 85%, #ffdd00 90%, #ffffff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -571,159 +439,151 @@
     }
 }
 
-
-/* TAB DASHBOARD */
-
-.tab-menu .label-dashboard {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border-radius: 4px;
-    border: 1px solid transparent;
+.create-post .h h2 {
+    color: rgb(82, 82, 82);
+    margin-top: 24px;
+    font-size: 28px;
 }
 
-.tab-menu .label-dashboard .mark1 {
-    padding-left: 0 !important;
+
+/*========== COLLAPSE ==========*/
+
+#accordion {
+    margin-top: 25px;
+    padding-left: 27px;
+    border-left: 3px solid #00ca67;
 }
 
-.tab-menu .label-dashboard .mark2 {
-    padding-right: 0 !important;
-}
-
-@media screen and (max-width: 768px) {
-    .tab-menu .label-dashboard .mark1 {
-        padding-left: 15px !important;
-    }
-    .tab-menu .label-dashboard .mark2 {
-        padding-right: 15px !important;
-    }
-}
-
-.tab-menu #dashboard .tile {
-    position: relative;
+#accordion h4 a {
     display: block;
-    padding: 10px 20px 20px;
-    border-radius: 5px;
 }
 
-.tab-menu #dashboard .tile .icon-total-post {
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-    z-index: 1;
-}
-
-.tab-menu #dashboard .tile .icon-total-post i {
-    font-size: 120px;
-    color: rgba(0, 0, 0, 0.1);
-}
-
-.tab-menu #dashboard .tile .number {
-    color: #fff;
-    font-size: 68px;
-    font-weight: bold;
-}
-
-.tab-menu #dashboard .tile h3 {
-    color: #fff;
-    font-size: 25px;
-    margin-top: 5px;
-    margin-bottom: 0 !important;
-}
-
-.tab-menu #dashboard .tile p {
-    color: #fff;
-    font-size: 14px;
-    margin-top: 5px;
-    margin-bottom: 0 !important;
-}
-
-.tab-menu #dashboard .tile.total-post {
-    background: rgb(93, 206, 0);
-}
-
-.tab-menu #dashboard hr {
-    border-top: 1px solid #e0e0e0;
-}
-
-.tab-menu .label-dashboard .panel-default>.panel-heading {
-    color: #333;
-    background-color: #ececec;
-    border-color: #c3c3c3;
-    font-size: 16px;
-    padding: 9px 15px 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-radius: 4px 4px 0 0;
-}
-
-.tab-menu .label-dashboard .mark1 .save-link ul {
-    padding: 0;
-    margin: 0;
-}
-
-.tab-menu .label-dashboard .mark1 .save-link ul li {
-    list-style: none;
-}
-
-.tab-menu .label-dashboard .mark1 .save-link ul li a {
-    padding: 10px 15px;
-    display: block;
-    font-size: 14px;
-    color: #337ab7;
-    border-bottom: 1px solid #ddd;
-}
-
-.tab-menu .label-dashboard .mark1 .save-link ul li a:hover {
-    color: #337ab7;
+#accordion h4 a:focus,
+#accordion h4 a:hover {
     text-decoration: none;
-    color: #00bd61;
 }
 
-.tab-menu .label-dashboard .mark1 .save-link ul li a i {
+#accordion .panel-default {
+    border-color: #00ca67;
+}
+
+#accordion .panel-default h4>a>i {
+    width: 25px;
+}
+
+#accordion .panel-body {
+    font-size: 15px;
+}
+
+#accordion .panel-body .form-group .checkbox i {
+    margin-right: 25px;
+    margin-left: 2px;
+    font-size: 18px;
+    text-align: center;
+}
+
+#accordion .panel-default>.panel-heading+.panel-collapse>.panel-body {
+    border-top-color: #00ca67;
+}
+
+.panel-group .panel+.panel {
+    margin-top: 12px;
+}
+
+#accordion .panel-default>.panel-heading {
+    color: #fff;
+    background-color: #00bd61;
+    border-color: #00bd61;
+}
+
+
+/*========= TIMELINE ==========*/
+
+#timeline {
+    list-style: none;
+    margin: 30px 0 30px 120px;
+    padding-left: 30px;
+    border-left: 6px solid #00ca67;
+    font-size: 15px;
+}
+
+#timeline li {
+    margin: 30px 0;
+    position: relative;
+}
+
+#timeline p {
+    margin: 0 0 15px;
+}
+
+.date {
+    margin-top: -9px;
+    top: 50%;
+    left: -125px;
+    line-height: 20px;
+    position: absolute;
+}
+
+.circle {
+    margin-top: -10px;
+    top: 50%;
+    left: -43px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 5px solid #00ca67;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+}
+
+.relative label {
+    color: #484848;
+    font-size: 18px;
+    position: absolute;
+    z-index: 100;
+    cursor: pointer;
+    top: 14px;
+    transition: transform 0.2s linear;
+}
+
+.radio {
+    display: none;
+}
+
+#timeline .btn-file::-webkit-file-upload-button {
+    background-color: #00bd61;
+    border: none;
+    color: #fff;
+    padding: 7px 12px 8px;
+    border-radius: 4px;
+}
+
+#timeline .form-horizontal .btn {
+    padding: 5px 12px;
+}
+
+
+/* BUTTON */
+
+.create-post .btn-function {
+    margin-top: 15px;
+}
+
+.create-post .btn-function .btn {
+    font-size: 15px;
+    margin-left: 5px;
+}
+
+.create-post .btn-function i {
     width: 20px;
     margin-right: 5px;
 }
 
-.tab-menu .label-dashboard .mark1 .save-link ul li .more {
-    border-bottom: none;
-    text-align: right;
-}
 
+/**/
 
-/* TAB ACTIVITIES */
-
-.tab-menu .label-activities {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border-radius: 4px;
-    border: 1px solid transparent;
-}
-
-
-/* TAB MANAGE POST */
-
-.tab-menu .label-manage-post {
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-
-
-/* TAB SAVE LINK */
-
-.tab-menu .label-save-link {
-    padding-top: 15px;
-    padding-bottom: 15px;
-}
-
-#uploader{
-    width:100%; color:#fff; 
-    font-family:Verdana, Geneva, Tahoma, sans-serif; 
-     background:#0094ff;
-      text-align:center;
-       padding:50px;
-        cursor:pointer;
+.m-left {
+    margin-right: -15px;
+    margin-left: -15px;
 }
