@@ -1,0 +1,227 @@
+<div class="col-xs-12 col-sm-9 col-md-9 create-post">
+  <div class="title-post">
+    <span>B</span>ài đăng mới
+  </div>
+
+  <div class="text-left h">
+    <h2>Tạo bài viết mới</h2>
+  </div>
+
+  <div class="panel-group" id="accordion">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+            Tiêu đề
+          </a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <form class="form-horizontal" action="">
+            <div class="form-group">
+              <div class="col-sm-12">
+                <textarea class="form-control" rows="3" name="title" placeholder="Tiêu đề bài viết..."  [(ngModel)]="tourPost.title"></textarea>
+              </div>
+            </div>
+            <!-- <div class="m-left">
+              <div class="col-sm-12 text-right">
+                <button type="submit" class="btn btn-default">
+                  <i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;Lưu
+                </button>
+              </div>
+            </div> -->
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+            Mô tả ngắn về chuyến đi
+          </a>
+        </h4>
+      </div>
+      <div id="collapse2" class="panel-collapse collapse">
+        <div class="panel-body">
+          <form class="form-horizontal" action="">
+            <div class="form-group">
+              <div class="col-sm-12">
+                <textarea class="form-control" rows="3" name="description" placeholder="Mô tả ngắn về chuyến đi..." [(ngModel)]="tourPost.descriptionTourPost"></textarea>
+              </div>
+            </div>
+            <!-- <div class="m-left">
+              <div class="col-sm-12 text-right">
+                <button type="submit" class="btn btn-default">
+                  <i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;Lưu
+                </button>
+              </div>
+            </div> -->
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+            Chuẩn bị
+          </a>
+        </h4>
+      </div>
+      <div id="collapse3" class="panel-collapse collapse">
+        <div class="panel-body">
+          <form class="form-horizontal" action="">
+            <div class="form-group">
+              <div class="col-sm-12">
+                <textarea class="form-control" rows="3" name="setup" placeholder="Chuẩn bị..." [(ngModel)]="tourPost.prepare"></textarea>
+              </div>
+            </div>
+            <!-- <div class="m-left">
+              <div class="col-sm-12 text-right">
+                <button type="submit" class="btn btn-default">
+                  <i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;Lưu
+                </button>
+              </div>
+            </div> -->
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default tour-details">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+            Hành trình chi tiết
+          </a>
+        </h4>
+      </div>
+      <div id="collapse4" class="panel-collapse collapse">
+        <div class="panel-body">
+          <div id="timeline-content">
+            <ul id="timeline" >
+              <li class="work" *ngFor="let tourDetail of listTourDetail; let i = index;">
+                <input class="radio" id="work {{i}}" name="works" type="radio" checked>
+                <div class="relative">
+                  <span class="date">Ngày {{i + 1}}</span>
+                  <span class="circle"></span>
+                </div>
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#sub-accordion" href="#c{{i}}">Viết nội dung ở đây</a>
+                    </h4>
+                  </div>
+                  <div id="c{{i}}" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <form class="form-horizontal" action="">
+                        <div class="form-group">
+                          <div class="col-sm-12">
+                            <input type="file" class="btn-file" name="file">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="Điểm bắt đầu" name="startLocation"  [(ngModel)]="listTourDetail[i].startLocation">
+                          </div>
+                          <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="Điểm dừng" name="endLocation" [(ngModel)]="listTourDetail[i].endLocation">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-sm-12">
+                            <input type="text" class="form-control" placeholder="Nghỉ ở đâu ?" name="stayIn" [(ngModel)]="listTourDetail[i].stayIn">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-sm-12">
+                            <input type="text" class="form-control" placeholder="Ăn gì?" name="food" [(ngModel)]="listTourDetail[i].food">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-sm-6">
+                            <div class="checkbox">
+                              <label *ngFor="let option of options,let j = index;">
+                                <input type="checkbox" name="options" value="{{option.value}}" [(ngModel)]="listTourDetail[i].checkbox[j+1]">
+                                <i class="fa fa-{{option.name}}" style aria-hidden="true" data-toggle="tooltip" title="{{option.name}}"></i>
+                              </label>
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <input type="text" class="form-control" placeholder="Khác..." name="other" [(ngModel)]="listTourDetail[i].other">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-sm-12">
+                            <textarea class="form-control" rows="3" name="setup" placeholder="Mô tả ngắn..." [(ngModel)]="listTourDetail[i].descriptionTourDetail"></textarea>
+                          </div>
+                        </div>
+                        <!-- <div style="margin-right: -15px;">
+                          <div class="col-sm-12 text-right">
+                            <button type="submit" class="btn btn-default" (click)="showList()">
+                              <i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;Lưu
+                            </button>
+                          </div>
+                        </div> -->
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+              </li>
+            </ul>
+          </div>
+          <div class="text-right">
+            <button type="button" class="btn btn-danger" (click)="addMoreDetails()">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+            Lưu ý
+          </a>
+        </h4>
+      </div>
+      <div id="collapse5" class="panel-collapse collapse">
+        <div class="panel-body">
+          <form class="form-horizontal" action="">
+            <div class="form-group">
+              <div class="col-sm-12">
+                <textarea class="form-control" rows="3" name="noti" placeholder="Lưu ý..." [(ngModel)]="tourPost.notice"></textarea>
+              </div>
+            </div>
+            <!-- <div class="m-left">
+              <div class="col-sm-12 text-right">
+                <button type="submit" class="btn btn-default">
+                  <i class="fa fa-check" aria-hidden="true"></i>&nbsp;&nbsp;Lưu
+                </button>
+              </div>
+            </div> -->
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="btn-function text-right">
+    <button type="button" class="btn btn-primary" (click)="saveTourPost()">
+      <i class="fa fa-paper-plane" aria-hidden="true"></i>Đăng bài</button>
+    <!-- <button type="button" class="btn btn-warning">
+      <i class="fa fa-eye" aria-hidden="true"></i>Xem trước</button> -->
+    <button type="button" class="btn btn-danger">
+      <i class="fa fa-times" aria-hidden="true"></i>Hủy</button>
+  </div>
+</div>
