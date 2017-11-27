@@ -273,17 +273,7 @@ export class UserManagementPageComponent implements OnInit {
         title: 'Full Name'
       },
       username: {
-        title: 'User Name',
-        filter: {
-          type: 'completer',
-          config: {
-            completer: {
-              data: this.data,
-              searchFields: 'email',
-              titleField: 'email',
-            },
-          },
-        },
+        title: 'User Name'
       },
       email: {
         title: 'Email'

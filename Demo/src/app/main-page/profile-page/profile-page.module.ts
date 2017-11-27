@@ -11,6 +11,8 @@ import { DialogChangePassComponent, TextChangePassComponent } from './dialog-cha
 import { CreatePostComponent } from './create-post/create-post.component';
 import { OverViewPageModule } from './overview-info/overview-info.module';
 // import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { AvatarModule } from 'ngx-avatar';
+import { ImageUploadModule } from "angular2-image-upload";
 
 @NgModule({
     imports: [
@@ -18,7 +20,9 @@ import { OverViewPageModule } from './overview-info/overview-info.module';
         CommonModule,
         FormsModule,
         SharedModule,
-        OverViewPageModule
+        OverViewPageModule,
+        AvatarModule,
+        ImageUploadModule.forRoot()
     ],
     declarations: [
         ProfilePageComponent,

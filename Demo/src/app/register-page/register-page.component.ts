@@ -20,7 +20,6 @@ export class RegisterComponent implements OnInit {
     deleted: 1,                                           //defaut
     roleId: 2                                             //defaut
   };
-  
   constructor(
     private registerService: RegisterService,
     private notificationService: NotificationService,
@@ -32,11 +31,11 @@ export class RegisterComponent implements OnInit {
   register() {
     this.loading = true;
     this.registerService.register(this.model).subscribe(data => {
-      if(data !== null){
+      if (data !== null) {
         this.notificationService.printSuccessMessage(MessageContstants.REGISTER_SUCCESS);
         this.router.navigate([UrlConstants.LOGIN]);
         //console.log(data);
-      }else{
+      } else {
         this.notificationService.printErrorMessage(MessageContstants.REGISTER_FAILED);
         this.loading = false;
       }

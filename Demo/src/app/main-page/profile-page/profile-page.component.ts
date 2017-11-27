@@ -32,7 +32,7 @@ export class ProfilePageComponent implements OnInit {
   ) {
   }
 
-  openChangePass(){
+  openChangePass() {
     this.textChangePass.openDialog();
   }
 

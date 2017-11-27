@@ -11,6 +11,8 @@ import { SharedModule } from '../app/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { AvatarModule } from 'ngx-avatar';
+import { ImageUploadModule } from 'angular2-image-upload';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     MatTooltipModule,
     BrowserAnimationsModule,
     SharedModule,
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    AvatarModule,
+    ImageUploadModule.forRoot()
   ],
   providers: [
     LoginService,

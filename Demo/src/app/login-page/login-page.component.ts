@@ -21,14 +21,15 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
+
   login() {
     this.loading = true;
     this.authenService.login(this.model).subscribe(data => {
-      if(data !== null){
+      if (data !== null) {
         this.notificationService.printSuccessMessage(MessageContstants.LOGIN_SUCCESS);
         this.router.navigate([UrlConstants.HOME]);
         console.log(window.localStorage);
-      }else{
+      } else {
         this.notificationService.printErrorMessage(MessageContstants.INFO_LOGIN_WRONG);
         this.loading = false;
       }

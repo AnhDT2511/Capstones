@@ -10,34 +10,50 @@
         <table>
           <tr>
             <td>
-              <input type="text" name="userName" class="form-control" placeholder="Nhập tên hiển thị" [(ngModel)]="model.userName" #userName="ngModel" required>
-              <!-- <div *ngIf="f.submitted && !userName.valid" class="help-block">Tên hiển thị được yêu cầu</div> -->
+              <input type="text" name="userName" class="form-control" placeholder="Nhập tên hiển thị" [(ngModel)]="model.userName" #userName="ngModel"
+                required minlength="6" maxlength="20">
+              <div [hidden]="userName.valid || userName.pristine" class="alert alert-danger">
+                <!-- <div [hidden]="!userName.hasError('required')">Tên hiển thị được yêu cầu (Tối thiểu 6 kí tự)</div> -->
+                Tên hiển thị được yêu cầu (Tối thiểu 6 kí tự)
+              </div>
             </td>
           </tr>
           <tr>
             <td>
-              <input type="text" name="email" class="form-control" placeholder="Nhập email" [(ngModel)]="model.email" #mail="ngModel" required>
-              <!-- <div *ngIf="f.submitted && !email.valid" class="help-block">Email được yêu cầu</div> -->
+              <input type="text" name="email" class="form-control" placeholder="Nhập email" [(ngModel)]="model.email" #mail="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                required>
+              <div [hidden]="mail.valid || mail.pristine" class="alert alert-danger">
+                <div [hidden]="!mail.hasError('required')">Email được yêu cầu</div>
+                <div [hidden]="!mail.hasError('pattern')">Email không hợp lệ.
+                  <small>
+                    <b>tripnet@abc.com</b>
+                  </small>
+                </div>
+              </div>
             </td>
           </tr>
           <tr>
             <td>
               <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu" [(ngModel)]="model.password" #password="ngModel"
                 required>
-              <!-- <div *ngIf="f.submitted && !password.valid" class="help-block">Mật khẩu được yêu cầu</div> -->
+              <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+                Mật khẩu được yêu cầu
+              </div>
             </td>
           </tr>
           <tr>
             <td>
               <input type="password" name="password1" class="form-control" placeholder="Nhập lại mật khẩu" [(ngModel)]="model.password1"
-                #password1="ngModel" required>
-              <!-- <div *ngIf="f.submitted && !password1.valid" class="help-block">Mật khẩu lặp lại được được yêu cầu</div> -->
+                #password1="ngModel" validateEqual="password" required>
+              <div [hidden]="password1.valid || password1.pristine" class="alert alert-danger">
+                Mật khẩu không đúng
+              </div>
             </td>
           </tr>
 
           <tr>
             <td>
-              <button [disabled]="loading" class="btn-login">Đăng ký tài khoản</button>
+              <button [disabled]="!f.form.valid" [disabled]="loading" class="btn-login">Đăng ký tài khoản</button>
               <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
               />
             </td>

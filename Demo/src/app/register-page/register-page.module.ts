@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { EqualValidator } from './equal-validator.directive';
 import { RegisterComponent } from './register-page.component';
 import { FormsModule } from '@angular/forms';
 import { NotificationService } from '../shared/service/notification.service';
@@ -17,7 +18,7 @@ export const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   providers: [NotificationService],
-  declarations: [RegisterComponent]
+  declarations: [RegisterComponent, EqualValidator]
 })
 
 export class RegisterPageModule {}

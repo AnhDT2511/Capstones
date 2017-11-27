@@ -172,15 +172,11 @@
 <div id="" class="container">
     <div class="col-xs-12 col-sm-3 col-md-3 profile-side">
         <div class="profile-img">
-            <img src="../assets/img/default-user-image.png" alt="Avatar" class="image">
-            <div class="overlay">
-                <div class="text">
-                    <a href="">
-                        <i class="fa fa-camera-retro" aria-hidden="true"></i>Cập nhật ảnh đại diện
-                    </a>
-                </div>
-            </div>
+            <ngx-avatar size="261" cornerRadius="4" [round]="false" name={{userDetails.fullName}}></ngx-avatar>
         </div>
+        
+        <image-upload url="https://ibb.co/album/exB93v"></image-upload>
+        
         <div class="level-info">
             <h5>
                 <b>{{userDetails.fullName}}</b>
@@ -211,16 +207,16 @@
             </div>
         </div>
         <div class="btn-tour">
-            <a href="javascript:void(0)" class="btn-create-tour" routerLink="overview" >
+            <a href="javascript:void(0)" class="btn-create-tour" routerLink="overview">
                 <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Thông Tin Tài Khoản
             </a>
         </div>
         <div class="btn-post">
-            <a href="javascript:void(0)" class="btn-create-post" routerLink="createPost" >
-                <i class="fa fa-pencil-square-o" aria-hidden="true" ></i> Tạo bài mới
+            <a href="javascript:void(0)" class="btn-create-post" routerLink="createPost">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Tạo bài mới
             </a>
         </div>
-        
+
         <!-- <div class="calendar">
             <script src="js/calendar.js"></script>
         </div> -->
