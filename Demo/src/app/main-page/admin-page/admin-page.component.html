@@ -12,7 +12,7 @@
           <i class="fa fa-tachometer fx-size point" aria-hidden="true"></i>
           <ul style="top: 91px;">
             <li>
-              <a href=""> Dashboard </a>
+              <a routerLink="dashboard" href="#"> Dashboard </a>
             </li>
           </ul>
         </li>
@@ -20,19 +20,15 @@
           <i class="fa fa-users fx-size point" aria-hidden="true"></i>
           <ul style="top: 132px;">
             <li>
-              <a href="#"> Quản lý thành viên </a>
+              <a routerLink="usermanagement" href="#"> Quản lý thành viên </a>
             </li>
           </ul>
         </li>
         <li>
           <i class="fa fa-area-chart fx-size point" aria-hidden="true"></i>
           <ul style="top: 173px;">
-            <li class="stitle"> Quản lý bài đăng </li>
             <li class="sli">
-              <a href="quanly.html"> Bài đăng tìm việc </a>
-            </li>
-            <li class="sli">
-              <a href="#"> Bài đăng tìm người </a>
+              <a routerLink="postmanagement" href="#"> Quản lý bài đăng </a>
             </li>
           </ul>
         </li>
@@ -94,28 +90,19 @@
       </div>
       <ul id="menu-big" class="menu-point-big">
         <li>
-          <a href="Admin.html">
+          <a href="#">
             <i class="fa fa-tachometer fx-size" aria-hidden="true"></i> Dashboard
           </a>
         </li>
         <li>
-          <a href="#">
+          <a routerLink="usermanagement" href="#">
             <i class="fa fa-users fx-size" aria-hidden="true"></i> Quản lý thành viên
           </a>
         </li>
         <li>
-          <a href="#">
+          <a routerLink="postmanagement" href="#">
             <i class="fa fa-area-chart fx-size" aria-hidden="true"></i> Quản lý bài đăng
-            <i class="fa fa-chevron-right bt-right" aria-hidden="true"></i>
           </a>
-          <ul>
-            <li>
-              <a href="quanly.html"> Bài đăng tìm việc </a>
-            </li>
-            <li>
-              <a href="#"> Bài đăng tìm người </a>
-            </li>
-          </ul>
         </li>
         <li>
           <a href="#">
@@ -179,11 +166,15 @@
     </div>
     <hr>
     <!-- End: Header -->
-    <h4 id="loading" style="text-align: center;">
+    <!-- <h4 id="loading" style="text-align: center;">
       <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
       <br/>
       <br/>Loading...
-      <!-- <ng2-smart-table [settings]="settings"></ng2-smart-table> -->
-    </h4>
+    </h4> -->
+
+    <!-- Table -->
+    <!-- <ng2-smart-table [settings]="settings1" [source]="data"></ng2-smart-table>
+    <ng2-smart-table [settings]="settings2"></ng2-smart-table> -->
+    <router-outlet></router-outlet>
   </main>
 </div>

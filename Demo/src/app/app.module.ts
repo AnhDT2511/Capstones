@@ -10,6 +10,7 @@ import { CreatePostService } from './shared/service/createpost.service';
 import { SharedModule } from '../app/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatTooltipModule,
     BrowserAnimationsModule,
     SharedModule,
+    Ng2SmartTableModule
   ],
   providers: [
     LoginService,

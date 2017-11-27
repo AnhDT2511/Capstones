@@ -10,6 +10,23 @@ import { ViewEncapsulation } from '@angular/core';
   
 export class MainPageComponent implements OnInit {
 
+  // settings = {
+  //   columns: {
+  //     id: {
+  //       title: 'ID'
+  //     },
+  //     name: {
+  //       title: 'Full Name'
+  //     },
+  //     username: {
+  //       title: 'User Name'
+  //     },
+  //     email: {
+  //       title: 'Email'
+  //     }
+  //   }
+  // };
+
   constructor() { }
 
   ngOnInit() {
