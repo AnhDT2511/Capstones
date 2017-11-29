@@ -51,7 +51,9 @@
                         </li>
                     </ul>
                 </li>
-                <li><span class="rot">|</span></li>
+                <li>
+                    <span class="rot">|</span>
+                </li>
                 <li>
                     <a routerLink="/register" href="#" *ngIf="user == null">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Đăng ký
@@ -60,7 +62,9 @@
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Đăng xuất
                     </a>
                 </li>
-                <li><span class="rot">|</span></li>
+                <li>
+                    <span class="rot">|</span>
+                </li>
                 <li>
                     <a routerLink="/login" href="#" *ngIf="user == null">
                         <i class="fa fa-sign-in" aria-hidden="true"></i> Đăng nhập
@@ -124,28 +128,28 @@
         <ul class="nav nav-tabs" style="text-align: center;">
             <li class="active">
                 <a data-toggle="tab" href="#post" style="border-radius: 15px 0 0 0">
-                        <i class="fa fa-files-o" aria-hidden="true"></i> Bài đăng
-                    </a>
+                    <i class="fa fa-files-o" aria-hidden="true"></i> Bài đăng
+                </a>
             </li>
             <li>
                 <a data-toggle="tab" href="#tours">
-                        <i class="fa fa-train" aria-hidden="true"></i> Chuyến đi
-                    </a>
+                    <i class="fa fa-train" aria-hidden="true"></i> Chuyến đi
+                </a>
             </li>
             <li>
                 <a data-toggle="tab" href="#location">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i> Địa điểm
-                    </a>
+                    <i class="fa fa-map-marker" aria-hidden="true"></i> Địa điểm
+                </a>
             </li>
             <li>
                 <a data-toggle="tab" href="#category">
-                        <i class="fa fa-bars" aria-hidden="true"></i> Thể loại
-                    </a>
+                    <i class="fa fa-bars" aria-hidden="true"></i> Thể loại
+                </a>
             </li>
             <li>
                 <a data-toggle="tab" href="#date" style="border-radius: 0 15px 0 0">
-                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i> Ngày
-                    </a>
+                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i> Ngày
+                </a>
             </li>
         </ul>
 
@@ -163,9 +167,12 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-4">
-                            <button type="submit" class="btn btn-search">
-                                    <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
-                                </button>
+                            <!-- <button type="submit" class="btn btn-search">
+                                <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
+                            </button> -->
+                            <a class="btn btn-search" routerLink="/main/search" href="#">
+                                <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
+                            </a>
                         </div>
                     </div>
                 </form>
@@ -183,9 +190,12 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-4">
-                            <button type="submit" class="btn btn-search">
-                                    <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
-                                </button>
+                            <!-- <button type="submit" class="btn btn-search">
+                                <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
+                            </button> -->
+                            <a class="btn btn-search" routerLink="/main/search" href="#">
+                                <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
+                            </a>
                         </div>
                     </div>
                 </form>
@@ -203,9 +213,12 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-4">
-                            <button type="submit" class="btn btn-search">
-                                    <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
-                                </button>
+                            <!-- <button type="submit" class="btn btn-search">
+                                <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
+                            </button> -->
+                            <a class="btn btn-search" routerLink="/main/search" href="#">
+                                <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
+                            </a>
                         </div>
                     </div>
                 </form>
@@ -227,9 +240,12 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-4">
-                            <button type="submit" class="btn btn-search">
-                                    <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
-                                </button>
+                            <!-- <button type="submit" class="btn btn-search">
+                                <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
+                            </button> -->
+                            <a class="btn btn-search" routerLink="/main/search" href="#">
+                                <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
+                            </a>
                         </div>
                     </div>
                 </form>
@@ -283,7 +299,7 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <span>
-                                            <i class="fa fa-comment" aria-hidden="true"></i> 
+                                            <i class="fa fa-comment" aria-hidden="true"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -295,7 +311,7 @@
                                     <p>{{tourPost.description}}</p>
                                 </div>
                                 <div class="a-more">
-                                    <a href="javascript:void(0)" (click) = detailTourPost(tourPost) >Chi tiết</a>
+                                    <a href="javascript:void(0)" (click)=detailTourPost(tourPost)>Chi tiết</a>
                                 </div>
                             </div>
                         </div>
@@ -314,7 +330,7 @@
         </div>
 
         <div class="btn-show-more">
-            <a href="">Xem thêm</a>
+            <a routerLink="/main/listpost" href="#">Xem thêm</a>
         </div>
     </div>
 </section>
@@ -348,7 +364,9 @@
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-6">
             <div class="panel-contact">
                 <h2>LIÊN HỆ</h2>
-                <p><i>Mọi ý kiến, đóng góp vui lòng gửi tin nhắn cho chúng tôi!</i></p>
+                <p>
+                    <i>Mọi ý kiến, đóng góp vui lòng gửi tin nhắn cho chúng tôi!</i>
+                </p>
                 <form class="form-horizontal" action="">
                     <div class="form-group">
                         <div class="col-sm-12">

@@ -12,11 +12,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { AvatarModule } from 'ngx-avatar';
-import { ImageUploadModule } from 'angular2-image-upload';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -26,8 +25,8 @@ import { ImageUploadModule } from 'angular2-image-upload';
     BrowserAnimationsModule,
     SharedModule,
     Ng2SmartTableModule,
-    AvatarModule,
-    ImageUploadModule.forRoot()
+    AvatarModule
+    // AngularFireModule.initializeApp(firebaseConfig)
   ],
   providers: [
     LoginService,

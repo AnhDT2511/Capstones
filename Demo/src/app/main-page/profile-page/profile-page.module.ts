@@ -8,11 +8,9 @@ import { ProfilePageRouter } from './profile-page.router';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { DialogChangePassComponent, TextChangePassComponent } from './dialog-change-pass/dialog-change-pass.component';
+import { AvatarModule } from 'ngx-avatar';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { OverViewPageModule } from './overview-info/overview-info.module';
-// import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
-import { AvatarModule } from 'ngx-avatar';
-import { ImageUploadModule } from "angular2-image-upload";
 
 @NgModule({
     imports: [
@@ -21,8 +19,7 @@ import { ImageUploadModule } from "angular2-image-upload";
         FormsModule,
         SharedModule,
         OverViewPageModule,
-        AvatarModule,
-        ImageUploadModule.forRoot()
+        AvatarModule
     ],
     declarations: [
         ProfilePageComponent,

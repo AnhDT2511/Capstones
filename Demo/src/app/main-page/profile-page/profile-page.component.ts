@@ -1,11 +1,12 @@
-import { Component, OnInit , ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
-import { UrlConstants, SystemConstants} from '../../shared/common';
+import { UrlConstants, SystemConstants } from '../../shared/common';
 import { TextChangePassComponent } from './dialog-change-pass/dialog-change-pass.component';
-import { DataService, 
-  NotificationService , 
-  AuthenService, 
-  UtilityService 
+import {
+  DataService,
+  NotificationService,
+  AuthenService,
+  UtilityService
 } from '../../shared/service';
 
 @Component({
@@ -24,6 +25,7 @@ export class ProfilePageComponent implements OnInit {
   valid = true;
   // model: any = {};
   checkUserDetails: boolean = true;
+
   constructor(
     private utilityService: UtilityService,
     private notifyService: NotificationService,
@@ -53,7 +55,7 @@ export class ProfilePageComponent implements OnInit {
       this.checkUserDetails = false;
     });
   }
-  
+
   saveUserInfo() {
     this.dataService.put("/user/account", JSON.stringify(this.user)).subscribe((response: any) => {
       localStorage.removeItem(SystemConstants.CURRENT_USER);
@@ -68,13 +70,13 @@ export class ProfilePageComponent implements OnInit {
     delete this.userDetails['fullName'];
 
     this.getUserDetails(this.user.id);
-    if(this.checkUserDetails){
+    if (this.checkUserDetails) {
       this.dataService.put("/user/accountdetails", JSON.stringify(this.userDetails)).subscribe((response: any) => {
         this.userDetails["fullName"] = this.userDetails.firstName + " " + this.userDetails.lastName;
       }, error => {
         this.valid = false;
       });
-    }else{
+    } else {
       this.dataService.post("/user/accountdetails", JSON.stringify(this.userDetails)).subscribe((response: any) => {
         this.userDetails["fullName"] = this.userDetails.firstName + " " + this.userDetails.lastName;
       }, error => {
@@ -94,7 +96,7 @@ export class ProfilePageComponent implements OnInit {
     this.notifyService.printSuccessMessage('Đăng xuất thành công!');
     this.utilityService.navigate(UrlConstants.LOGIN);
   }
-  
+
   // openCreatePost() {
   //   this.utilityService.navigate('/main/createpost');
   // }

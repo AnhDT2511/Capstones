@@ -14,7 +14,6 @@ import { Like } from '../../shared/domain/like.user';
 import { Comment } from '../../shared/domain/comment.user';
 import { resetFakeAsyncZone } from '@angular/core/testing';
 
-
 @Component({
   selector: 'app-tour-post-page',
   encapsulation: ViewEncapsulation.None,
@@ -27,7 +26,7 @@ export class TourPostPageComponent implements OnInit {
   // userDetails : any = {};
   tourPostId: string;
   tourPost: any;
-  tourByDay: any ;
+  tourByDay: any;
   tourByDayDetail: any = [];
   statusComment: boolean = true;
   statusReport: boolean = true;
@@ -41,6 +40,9 @@ export class TourPostPageComponent implements OnInit {
     'Bac Lieu',
     'Nha Trang'];
   listComment: any;
+
+  public tourpostId: number;
+
   constructor(
     private utilityService: UtilityService,
     private notifyService: NotificationService,
@@ -48,23 +50,24 @@ export class TourPostPageComponent implements OnInit {
     private dataService: DataService,
     private activatedRoute: ActivatedRoute,
     private commonService: CommonService
-  ) {
+  ) {}
+
+  ngOnInit() {
+
     // this.activatedRoute.params.subscribe((params: Params) => {
     //   this.tourPostId = params.id;
-    //   this.dataService.get('/tours/post/'+ params.id).subscribe((response: any) => {
+    //   this.dataService.get('/tourpost/' + params.id).subscribe((response: any) => {
     //     // console.log(response);
     //     this.tourPost = response;
     //   }, error => {
     //   });
     // });
 
-  }
-
-  ngOnInit() {
     this.tourPost = JSON.parse(localStorage.getItem("tourPost"));
     this.commonService.getTourByDay(this.tourPost.id, data => {
       this.tourByDay = data[0];
     });
+
     this.commonService.getTourByDayDetails(this.tourPost.id, data => {
       for (let i in data) {
         if (data[i].tourByDayID == this.tourByDay.id) {
@@ -72,9 +75,11 @@ export class TourPostPageComponent implements OnInit {
         }
       }
     });
+
     this.commonService.getAccountDetailsInfo(this.tourPost.accountID, data => {
       this.tourPost["author"] = data.firstName + " " + data.lastName;
     });
+    
     this.commonService.getAccountInfo(this.tourPost.accountID, data => {
       this.tourPost["level"] = data.level;
     });
@@ -85,16 +90,23 @@ export class TourPostPageComponent implements OnInit {
   nagivateProfile() {
     this.utilityService.navigate(UrlConstants.PROFILE);
   }
+
   sendComment() {
-    let _comment = new Comment(this.comment, this.tourPost.id, this.user.id);
-    this.dataService.post('/tours/post/' + this.tourPost.id + '/comment', _comment).subscribe((response: any) => {
-      this.loadComment();
-    }, error => {
-    });
+    if (this.user != null) {
+      let _comment = new Comment(this.comment, this.tourPost.id, this.user.id);
+      this.dataService.post('/tours/post/' + this.tourPost.id + '/comment', _comment).subscribe((response: any) => {
+        this.loadComment();
+      }, error => {
+      });
+    } else {
+      this.notifyService.printErrorMessage("Xin hãy đăng nhập trước khi thực hiện hành động này!");
+    }
   }
+
   loadComment() {
     this.dataService.get('/tours/post/' + this.tourPost.id + '/comment/get-all').subscribe((response: any) => {
       this.listComment = response;
+      console.log(this.listComment.length);
       for (var i in this.listComment) {
         this.dataService.get('/user/account/' + this.listComment[i].commentByID).subscribe((response: any) => {
           for (var i in this.listComment) {
@@ -109,6 +121,7 @@ export class TourPostPageComponent implements OnInit {
     }, error => {
     });
   }
+
   openCloseCmt() {
     this.loadComment();
     this.statusComment = !this.statusComment;
@@ -117,6 +130,7 @@ export class TourPostPageComponent implements OnInit {
   openCloseReport() {
     this.statusReport = !this.statusReport;
   }
+
   likeTourPost(tourPost: any) {
     if (this.user != null && !tourPost.liked) {
       let _like = new Like(null, tourPost.id, this.user.id, 0);
@@ -134,9 +148,9 @@ export class TourPostPageComponent implements OnInit {
       // this.commonService.disLike(tourPost.id, _dislike, data => {
       //   console.log(data);
       // }); 
-      this.notifyService.printSuccessMessage("Bỏ thích bài viết thành công");
+      this.notifyService.printSuccessMessage("Bỏ thích bài viết thành công!");
     } else {
-      this.notifyService.printErrorMessage("Xin hãy đăng nhập trước khi thực hiện hành động này");
+      this.notifyService.printErrorMessage("Xin hãy đăng nhập trước khi thực hiện hành động này!");
     }
   }
 

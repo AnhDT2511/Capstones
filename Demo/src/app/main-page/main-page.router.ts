@@ -15,18 +15,10 @@ const MainPage_Router: Routes = [
             { path: 'admin', loadChildren: './admin-page/admin-page.module#AdminPageModule', canActivate : [AuthGuard] },
             // localhost:4200/main/profile 
             { path: 'profile', loadChildren: './profile-page/profile-page.module#ProfilePageModule', canActivate : [AuthGuard] },
-            // { path: 'function', loadChildren: './function/function.module#FunctionModule' },
-
-            // { path: 'product-category', loadChildren: './product-category/product-category.module#ProductCategoryModule' },
-
-            // { path: 'product', loadChildren: './product/product.module#ProductModule' },
-
-            // { path: 'order', loadChildren: './order/order.module#OrderModule' },
-
-            // { path: 'announcement', loadChildren: './announcement/announcement.module#AnnouncementModule' },
-
-            // { path: 'report', loadChildren: './report/report.module#ReportModule' },
-
+            // localhost:4200/main/search
+            { path: 'search', loadChildren: './search-page/search-page.module#SearchPageModule' },
+            // localhost:4200/main/listpost
+            { path: 'listpost', loadChildren: './list-post-page/list-post-page.module#ListPostPageModule' }
         ]
         // path : '' , component : MainPageComponent
     }

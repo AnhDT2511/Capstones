@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 import { UtilityService } from '../../shared/service/utility.service';
@@ -86,7 +85,6 @@ export class HomePageComponent implements OnInit {
     }, error => {
     });
   }
-
 
   getTourPost(tourpost): TourPost {
     let _tourPost: TourPost;

@@ -1,9 +1,14 @@
 import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from './home-page.component';
+// import { SearchPageComponent } from './search-page/search-page.component'
 
 const HomePage_Router: Routes = [
-    //localhost:4200/main/home
-    { path: '',  component: HomePageComponent , pathMatch: 'full' }
-]
+    {
+        path: '', component: HomePageComponent, children: [
+            // { path: '', redirectTo: 'searchresult', pathMatch: 'full' },
+            // { path: 'searchresult', component: SearchPageComponent }
+        ]
+    }
+];
 
-export const HomePageRouter = RouterModule.forChild(HomePage_Router);
+export const HomePageRouter = RouterModule.forChild(HomePage_Router); 

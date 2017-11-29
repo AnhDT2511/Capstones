@@ -1,3 +1,4 @@
+import { DataService } from './../../../shared/service/data.service';
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../../../shared/service/notification.service';
 import { AuthenService } from '../../../shared/service/authen.service';
@@ -13,13 +14,32 @@ import { Router } from '@angular/router';
 
 export class DashboardPageComponent implements OnInit {
 
-  loading = false;
   model: any = {};
   returnUrl: string;
+  listUser: any;
+  listPost: any;
+
   constructor(private authenService: AuthenService,
     private notificationService: NotificationService,
-    private router: Router) { }
+    private router: Router,
+    private dataService: DataService) { }
 
   ngOnInit() {
+    this.getAllUser();
+    this.getAllPost();
+  }
+
+  getAllUser() {
+    this.dataService.get('/user/account/get-all').subscribe((response: any) => {
+      this.listUser = response;
+    }, error => {
+    });
+  }
+
+  getAllPost() {
+    this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
+      this.listPost = response;
+    }, error => {
+    });
   }
 }

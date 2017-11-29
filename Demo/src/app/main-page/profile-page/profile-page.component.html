@@ -175,15 +175,6 @@
             <ngx-avatar size="261" cornerRadius="4" [round]="false" name={{userDetails.fullName}}></ngx-avatar>
         </div>
 
-        <!-- <input type="file" id="fileUploadInput" accept="images/*" (change)="fileChange($event)" />
-        <div id="uploader" (click)="doUploadFile()">
-            <i class="fa fa-picture-o"></i> {{uploadResult.uploadingText}}
-        </div>
-        <div class="progress progress-striped" *ngIf="uploadResult.progress > 0">
-            <div class="progress-bar progress-bar-success" [ngStyle]="{'width':  uploadResult.progress+'%'}">{{uploadResult.progress}}%</div>
-        </div>
-        <img *ngIf="uploadResult.fileUrl" src="{{uploadResult.fileUrl}}" style="width:100%;" class="img-response"> -->
-
         <div class="level-info">
             <h5>
                 <b>{{userDetails.fullName}}</b>
@@ -244,6 +235,8 @@
             <i class="fa fa-instagram" aria-hidden="true"></i>
         </a>
     </div>
+
+    
 
     <div class="container-fruid f-info">
         <div class="container">

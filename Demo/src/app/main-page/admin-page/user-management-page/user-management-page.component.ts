@@ -4,6 +4,7 @@ import { AuthenService } from '../../../shared/service/authen.service';
 import { MessageContstants } from '../../../shared/common/message.constants';
 import { UrlConstants } from '../../../shared/common/url.constants';
 import { Router } from '@angular/router';
+import { DataService } from './../../../shared/service/data.service';
 
 @Component({
   selector: 'app-user-management',
@@ -12,271 +13,25 @@ import { Router } from '@angular/router';
 })
 
 export class UserManagementPageComponent implements OnInit {
-
-  data = [
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-    {
-      id: 2,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Ervin Howell",
-      username: "Antonette",
-      email: "Shanna@melissa.tv",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-    {
-      id: 11,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Nicholas DuBuque",
-      username: "Nicholas.Stanton",
-      email: "Rey.Padberg@rosamond.biz",
-      gender: "Male",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    },
-
-    {
-      id: 1,
-      photo: "http://demo.neontheme.com/assets/images/thumb-1@2x.png",
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz",
-      gender: "Female",
-      address: "Hanoi",
-      phone: "059225626",
-      point: "155"
-    }
-  ];
+  
+  listUser: any;
 
   settings = {
     columns: {
       id: {
         title: 'ID'
       },
-      photo: {
-        title: ''
+      username: {
+        title: 'User Name'
       },
       name: {
         title: 'Full Name'
       },
-      username: {
-        title: 'User Name'
+      dob: {
+        title: 'DOB'
       },
-      email: {
-        title: 'Email'
+      Job: {
+        title: 'Job'
       },
       gender: {
         title: 'Gender'
@@ -293,13 +48,23 @@ export class UserManagementPageComponent implements OnInit {
     }
   };
 
-  loading = false;
   model: any = {};
   returnUrl: string;
+
   constructor(private authenService: AuthenService,
     private notificationService: NotificationService,
-    private router: Router) { }
+    private router: Router,
+    private dataService: DataService) { }
 
   ngOnInit() {
+    this.getAllUser();
+  }
+
+  getAllUser() {
+    this.dataService.get('/user/account/get-all').subscribe((response: any) => {
+      this.listUser = response;
+      console.log(this.listUser);
+    }, error => {
+    });
   }
 }
