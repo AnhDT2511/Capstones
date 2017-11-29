@@ -35,47 +35,26 @@
                         <div class="icon-total-post">
                             <i class="fa fa-files-o" aria-hidden="true"></i>
                         </div>
-                        <div class="number">30</div>
+                        <div class="number">{{amount}}</div>
                         <h3>Tổng số bài viết đã đăng</h3>
                         <p>số bài viết đã đăng lên website.</p>
                     </div>
                     <hr>
                     <div class="panel panel-default save-link">
                         <div class="panel-heading">
-                            <i class="fa fa-link" aria-hidden="true"></i>Link mới lưu
+                            <i class="fa fa-link" aria-hidden="true"></i>Danh sách bài đăng
                         </div>
                         <ul>
-                            <li>
-                                <a href="">
-                                    <i class="fa fa-bookmark" aria-hidden="true"></i>Khoe ảnh Ngải Thầu (Bát Xát, Lào Cai)
+                            <li *ngFor="let item of listTourPost" >
+                                <a  href="javascript:void(0)" (click)="updateTourPost(item.tourPostID)">
+                                    <i class="fa fa-bookmark" aria-hidden="true"></i>{{item.title}}
                                 </a>
                             </li>
-                            <li>
-                                <a href="">
-                                    <i class="fa fa-bookmark" aria-hidden="true"></i>Quy Nhơn - Những điều chưa kể
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <i class="fa fa-bookmark" aria-hidden="true"></i>Quy Nhơn - Những điều chưa kể
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <i class="fa fa-bookmark" aria-hidden="true"></i>Quy Nhơn - Những điều chưa kể
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <i class="fa fa-bookmark" aria-hidden="true"></i>Quy Nhơn - Những điều chưa kể
-                                </a>
-                            </li>
-                            <li>
+                            <!-- <li>
                                 <a data-toggle="tab" href="#save-link" class="more">
                                     Xem thêm...
                                 </a>
-                            </li>
-
+                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -123,8 +102,23 @@
 
         <div id="manage-post" class="tab-pane fade">
             <div class="col-xs-12 col-sm-12 col-md-12 label-manage-post">
-                <h3>Manage post</h3>
-                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                <div class="panel panel-default save-link">
+                    <div class="panel-heading">
+                        <i class="fa fa-link" aria-hidden="true"></i>Danh sách bài đăng
+                    </div>
+                    <ul *ngFor="let item of listTourPost">
+                        <li>
+                            <a href="">
+                                <i class="fa fa-bookmark" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <a data-toggle="tab" href="#save-link" class="more">
+                                Xem thêm...
+                            </a>
+                        </li> -->
+                    </ul>
+                </div>
             </div>
         </div>
 

@@ -11,6 +11,7 @@ import { HomePageModule } from './home-page/home-page.module';
 import { NotificationService } from '../shared/service/notification.service';
 import { DataService } from '../shared/service/data.service';
 import { AuthGuard } from '../shared/guards/auth.guard';
+import { CommonService } from '../shared/index';
 
 @NgModule({
     imports: [
@@ -23,7 +24,7 @@ import { AuthGuard } from '../shared/guards/auth.guard';
     declarations: [
         MainPageComponent
     ],
-    providers : [ UtilityService, AuthenService, SignalrService, NotificationService, DataService, AuthGuard ]
+    providers : [ UtilityService, AuthenService, SignalrService, NotificationService, DataService, AuthGuard , CommonService]
 })
 
 export class MainPageModule {}

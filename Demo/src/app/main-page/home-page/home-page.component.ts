@@ -19,7 +19,7 @@ import { debug } from 'util';
 export class HomePageComponent implements OnInit {
 
   public user: any = this.authentication.getLoggedInUser();
-  public listTourPost: TourPost[] = [];
+  public listTourPost: any[] = [];
   countI = 0;
   constructor(
     private utilityService: UtilityService,
@@ -48,14 +48,14 @@ export class HomePageComponent implements OnInit {
       });
      this.notifyService.printSuccessMessage("Thích bài viết thành công");
     }else if(this.user != null && tourPost.liked){
-      // let _dislike = new Like(tourPost.likedID,tourPost.id,this.user.id,1);
-      // console.log(_dislike);
-      // this.dataService.put('/tours/post/' + tourPost.id + '/Like',_dislike).subscribe((response: any) => {
-      //   var item = this.listTourPost.findIndex(item => item.id === response[0].tourPostID);
-      //   this.listTourPost[item]["countLike"] = response.length;
-      // }, error => {
-      // });
-     this.notifyService.printSuccessMessage("Bỏ thích bài viết thành công");
+      let _dislike = new Like(tourPost.likedID,tourPost.id,this.user.id,1);
+      console.log(_dislike);
+      this.dataService.put('/tours/post/' + tourPost.id + '/Like',_dislike).subscribe((response: any) => {
+        var item = this.listTourPost.findIndex(item => item.id === response[0].tourPostID);
+        this.listTourPost[item]["countLike"] = response.length;
+      }, error => {
+      });
+      this.notifyService.printSuccessMessage("Bỏ thích bài viết thành công");
     }else{
      this.notifyService.printErrorMessage("Xin hãy đăng nhập trước khi thực hiện hành động này");
     }
@@ -79,7 +79,11 @@ export class HomePageComponent implements OnInit {
   getAllTourPost() {
     this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
       for (var i in response) {
-        this.listTourPost.push(this.getTourPost(response[i]));
+        var _tourPost = this.getTourPost(response[i]);
+        _tourPost['countLike'] = 0;
+        _tourPost['liked'] = false;
+        _tourPost['likedID'] = null;
+        this.listTourPost.push(_tourPost);
       }
       this.countLike();
     }, error => {
@@ -98,7 +102,9 @@ export class HomePageComponent implements OnInit {
       tourpost.deleted,
       tourpost.createTime,
       tourpost.description,
-      tourpost.vehicle,
+      tourpost.postViewNumber,
+      tourpost.note,
+      tourpost.prepare
     )
     return _tourPost;
   }

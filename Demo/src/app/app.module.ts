@@ -12,10 +12,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { AvatarModule } from 'ngx-avatar';
+import { UploadComponent } from './shared/upload/upload.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,

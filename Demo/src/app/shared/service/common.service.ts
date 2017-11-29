@@ -54,4 +54,12 @@ export class CommonService {
         }, error => {
         });
     }
+    createPost(_tourPost,  callback: (data) => void) {
+        this.dataService.post('/tours/post/', _tourPost).subscribe(res => {
+            callback(res);
+        }, error => {
+            callback(error);
+        });
+    }
+
 }

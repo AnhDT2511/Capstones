@@ -10,7 +10,7 @@ const ProfilePage_Router: Routes = [
         children: [
             { path: '', redirectTo: 'overview', pathMatch: 'full' },
             { path: 'overview', component: OverviewInfoComponent },
-            { path: 'createPost', component: CreatePostComponent },
+            { path: 'createPost/:id', component: CreatePostComponent },
         ]
     },
 ]

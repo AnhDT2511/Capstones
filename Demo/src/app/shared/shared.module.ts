@@ -96,7 +96,6 @@ import { PortalModule } from '@angular/cdk/portal';
     PlatformModule,
     PortalModule,
   ],
-  declarations: []
 })
 export class AppMaterialModules { }
 

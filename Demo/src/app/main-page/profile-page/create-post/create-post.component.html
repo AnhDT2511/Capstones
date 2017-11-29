@@ -128,15 +128,15 @@
                         </div>
                         <div class="form-group">
                           <div class="col-sm-6">
-                            <input type="text" class="form-control" placeholder="Điểm bắt đầu" name="startLocation"  [(ngModel)]="listTourDetail[i].startLocation">
+                            <input type="text" class="form-control" placeholder="Tỉnh/Thành Phố" name="placeID"  [(ngModel)]="listTourDetail[i].placeID">
                           </div>
                           <div class="col-sm-6">
-                            <input type="text" class="form-control" placeholder="Điểm dừng" name="endLocation" [(ngModel)]="listTourDetail[i].endLocation">
+                            <input type="text" class="form-control" placeholder="Địa điểm cụ thể" name="placeDetail" [(ngModel)]="listTourDetail[i].placeDetail">
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="col-sm-12">
-                            <input type="text" class="form-control" placeholder="Nghỉ ở đâu ?" name="stayIn" [(ngModel)]="listTourDetail[i].stayIn">
+                            <input type="text" class="form-control" placeholder="Nghỉ ở đâu ?" name="hotel" [(ngModel)]="listTourDetail[i].hotel">
                           </div>
                         </div>
                         <div class="form-group">
@@ -148,7 +148,8 @@
                           <div class="col-sm-6">
                             <div class="checkbox">
                               <label *ngFor="let option of options,let j = index;">
-                                <input type="checkbox" name="options" value="{{option.value}}" [(ngModel)]="listTourDetail[i].checkbox[j+1]">
+                                <input type="checkbox" name="options" value="{{option.value}}" 
+                                [checked]="listTourDetail[i].checkbox[j+1]" (click)="setDisplayValue(i,j+1,$event.target.checked)">
                                 <i class="fa fa-{{option.name}}" style aria-hidden="true" data-toggle="tooltip" title="{{option.name}}"></i>
                               </label>
                             </div>
@@ -159,7 +160,7 @@
                         </div>
                         <div class="form-group">
                           <div class="col-sm-12">
-                            <textarea class="form-control" rows="3" name="setup" placeholder="Mô tả ngắn..." [(ngModel)]="listTourDetail[i].descriptionTourDetail"></textarea>
+                            <textarea class="form-control" rows="3" name="setup" placeholder="Mô tả ngắn..." [(ngModel)]="listTourDetail[i].description"></textarea>
                           </div>
                         </div>
                         <!-- <div style="margin-right: -15px;">
@@ -199,7 +200,7 @@
           <form class="form-horizontal" action="">
             <div class="form-group">
               <div class="col-sm-12">
-                <textarea class="form-control" rows="3" name="noti" placeholder="Lưu ý..." [(ngModel)]="tourPost.notice"></textarea>
+                <textarea class="form-control" rows="3" name="noti" placeholder="Lưu ý..." [(ngModel)]="tourPost.note"></textarea>
               </div>
             </div>
             <!-- <div class="m-left">
