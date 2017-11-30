@@ -64,15 +64,13 @@ export class TourPostPageComponent implements OnInit {
     // });
 
     this.tourPost = JSON.parse(localStorage.getItem('tourPost'));
-    this.commonService.getTourByDay(this.tourPost.id, data => {
-      this.tourByDay = data[0];
-    });
+    // this.commonService.getTourByDay(this.tourPost.id, data => {
+    //   this.tourByDay = data[0];
+    // });
 
     this.commonService.getTourByDayDetails(this.tourPost.id, data => {
       for (let i in data) {
-        if (data[i].tourByDayID == this.tourByDay.id) {
           this.tourByDayDetail.push(data[i]);
-        }
       }
     });
 
@@ -83,7 +81,7 @@ export class TourPostPageComponent implements OnInit {
     this.commonService.getAccountInfo(this.tourPost.accountID, data => {
       this.tourPost['level'] = data.level;
     });
-    console.log(this.tourByDayDetail);
+    // console.log(this.tourByDayDetail);
     console.log(this.tourPost);
   }
 
@@ -106,7 +104,6 @@ export class TourPostPageComponent implements OnInit {
   loadComment() {
     this.dataService.get('/tours/post/' + this.tourPost.id + '/comment/get-all').subscribe((response: any) => {
       this.listComment = response;
-      console.log(this.listComment.length);
       for (var i in this.listComment) {
         this.dataService.get('/user/account/' + this.listComment[i].commentByID).subscribe((response: any) => {
           for (var i in this.listComment) {

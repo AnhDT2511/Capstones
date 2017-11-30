@@ -20,7 +20,6 @@ export class TextChangePassComponent {
       data : this.userInfo
     });
 
-    console.log(this.userInfo);
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });

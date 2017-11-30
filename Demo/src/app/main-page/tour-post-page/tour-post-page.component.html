@@ -119,6 +119,18 @@
     <!-- Begin: Timeline -->
     <section class="timeline">
         <div class="container ">
+            <div class="timeline-item " *ngIf="tourPost.prepare != null">
+                <div class="timeline-img "></div>
+                <div class="timeline-content js--fadeInLeft ">
+                    <div class="date ">Bắt đầu</div>
+                    <h3>Chuẩn bị</h3>
+                    <blockquote>
+                        {{tourPost.prepare}}
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+        <div class="container ">
             <div class="timeline-item " *ngFor="let tourDetail of tourByDayDetail ; let i = index;">
                 <div class="timeline-img "></div>
                 <div class="timeline-content timeline-card js--fadeInLeft ">
@@ -151,8 +163,8 @@
                     </div>
                     <div class="t-content">
                         <h4>
-                            <i class="fa fa-map-marker " aria-hidden="true " style="font-size: 24px; ">{{listPlace[tourDetail.placeID]}}</i>
-                            <i class="fa fa-long-arrow-right " aria-hidden="true " style="margin-left: 10px; "></i>Hà Nội
+                            <i class="fa fa-map-marker " aria-hidden="true " style="font-size: 24px; ">{{tourDetail.placeID}}</i>
+                            <!-- <i class="fa fa-long-arrow-right " aria-hidden="true " style="margin-left: 10px; "></i>Hà Nội -->
                         </h4>
                         <div class="date ">Ngày {{i+1}}</div>
                         <div [hidden]="hideForm">
@@ -160,7 +172,7 @@
                                 <i class="fa fa-building " aria-hidden="true "></i>{{tourDetail.hotel}}
                             </h4>
                             <h4>
-                                <i class="fa fa-cutlery " aria-hidden="true "></i>Cơm lam, thịt xông khói
+                                <i class="fa fa-cutlery " aria-hidden="true "></i>{{tourDetail.food}}
                             </h4>
                             <h4>
                                 <i class="fa fa-motorcycle " aria-hidden="true " [ngStyle]="{'color': tourDetail.vehicle == '1' ? '#FF1654' : 'gray','font-weight': tourDetail.vehicle == '1' ? 'bold' :''}"></i>
@@ -174,6 +186,16 @@
                         <a class="bnt-more " (click)="hideForm = !hideForm" *ngIf="hideForm" href="javascript:void(0)">More</a>
                         <a class="bnt-more " (click)="hideForm = !hideForm" *ngIf="!hideForm" href="javascript:void(0)">Less</a>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="container ">
+            <div class="timeline-item" *ngIf="tourPost.note != null">
+                <div class="timeline-img"></div>
+                <div class="timeline-content js--fadeInRight ">
+                    <div class="date">Kết thúc</div>
+                    <h3>Lưu ý</h3>
+                    <blockquote>{{tourPost.note}}</blockquote>
                 </div>
             </div>
         </div>

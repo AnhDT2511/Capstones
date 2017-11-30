@@ -37,7 +37,7 @@ export class CommonService {
     }
 
     getTourByDayDetails(id, callback: (data) => void) {
-        return this.dataService.get('/tours/post/' + id + '/day/1/detail/get-all').subscribe(res => {
+        return this.dataService.get('/tours/post/' + id + '/get-all').subscribe(res => {
             callback(res);
         });
     }
@@ -61,5 +61,11 @@ export class CommonService {
             callback(error);
         });
     }
-
+    updatePost(_tourPost,  callback: (data) => void) {
+        this.dataService.put('/tours/post/', _tourPost).subscribe(res => {
+            callback(res);
+        }, error => {
+            callback(error);
+        });
+    }
 }

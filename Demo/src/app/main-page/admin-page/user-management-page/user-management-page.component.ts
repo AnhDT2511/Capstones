@@ -63,7 +63,6 @@ export class UserManagementPageComponent implements OnInit {
   getAllUser() {
     this.dataService.get('/user/account/get-all').subscribe((response: any) => {
       this.listUser = response;
-      console.log(this.listUser);
     }, error => {
     });
   }

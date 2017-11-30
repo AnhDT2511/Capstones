@@ -273,12 +273,12 @@
             <i class="fa fa-map-marker" aria-hidden="true"></i>
             <span class="color-run m-title">Bài viết nổi bật</span>
         </h1>
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-flickity='{ "groupCells": 8, "autoPlay": true }'>
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
                 <div class="item active">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-4 col-md-4" *ngFor="let tourPost of listTourPost">
+                        <div class="col-xs-12 col-sm-4 col-md-4" *ngFor="let tourPost of listTourPostFavoriteBefore">
                             <div class="thumbnail">
                                 <div class="m-container">
                                     <img src="../assets/img/3.jpg" alt="Avatar" class="image">
@@ -315,9 +315,49 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
+                <div class="item ">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4 col-md-4" *ngFor="let tourPost of listTourPostFavoriteAfter">
+                                <div class="thumbnail">
+                                    <div class="m-container">
+                                        <img src="../assets/img/3.jpg" alt="Avatar" class="image">
+                                        <div class="overlay">
+                                            <div class="text">{{tourPost.tourArticleTitle}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="summary">
+                                        <div class="col-xs-12 col-sm-4 col-md-4">
+                                            <span>
+                                                <i class="fa fa-eye" aria-hidden="true" style="font-size: 17px;"></i>1357
+                                            </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4 col-md-4 s-border" (click)=likeTourPost(tourPost)>
+                                            <span>
+                                                <i class="fa fa-heart" aria-hidden="true" [ngStyle]="{'color': tourPost.liked ? 'red': 'gray'}"></i> {{tourPost.countLike}}
+                                            </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4 col-md-4">
+                                            <span>
+                                                <i class="fa fa-comment" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="clear-fix"></div>
+                                    <div class="description">
+                                        <h3>
+                                            <span>{{tourPost.tourArticleTitle}}</span>
+                                        </h3>
+                                        <p>{{tourPost.description}}</p>
+                                    </div>
+                                    <div class="a-more">
+                                        <a href="javascript:void(0)" (click)=detailTourPost(tourPost)>Chi tiết</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
 
             <!-- Left and right controls -->
@@ -330,7 +370,7 @@
         </div>
 
         <div class="btn-show-more">
-            <a routerLink="/main/listpost" href="#">Xem thêm</a>
+            <a (click)="seeMore()" href="javascript:void(0)">Xem thêm</a>
         </div>
     </div>
 </section>
