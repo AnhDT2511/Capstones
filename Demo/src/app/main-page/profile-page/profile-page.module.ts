@@ -11,6 +11,7 @@ import { DialogChangePassComponent, TextChangePassComponent } from './dialog-cha
 import { AvatarModule } from 'ngx-avatar';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { OverViewPageModule } from './overview-info/overview-info.module';
+import { CreateTourComponent } from './create-tour/create-tour.component';
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import { OverViewPageModule } from './overview-info/overview-info.module';
         TextChangePassComponent,
         DialogChangePassComponent,
         CreatePostComponent,
+        CreateTourComponent
     ],
     entryComponents: [DialogChangePassComponent]
 })

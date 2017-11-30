@@ -50,7 +50,7 @@ export class TourPostPageComponent implements OnInit {
     private dataService: DataService,
     private activatedRoute: ActivatedRoute,
     private commonService: CommonService
-  ) {}
+  ) { }
 
   ngOnInit() {
 
@@ -63,7 +63,7 @@ export class TourPostPageComponent implements OnInit {
     //   });
     // });
 
-    this.tourPost = JSON.parse(localStorage.getItem("tourPost"));
+    this.tourPost = JSON.parse(localStorage.getItem('tourPost'));
     this.commonService.getTourByDay(this.tourPost.id, data => {
       this.tourByDay = data[0];
     });
@@ -77,11 +77,11 @@ export class TourPostPageComponent implements OnInit {
     });
 
     this.commonService.getAccountDetailsInfo(this.tourPost.accountID, data => {
-      this.tourPost["author"] = data.firstName + " " + data.lastName;
+      this.tourPost['author'] = data.firstName + ' ' + data.lastName;
     });
-    
+
     this.commonService.getAccountInfo(this.tourPost.accountID, data => {
-      this.tourPost["level"] = data.level;
+      this.tourPost['level'] = data.level;
     });
     console.log(this.tourByDayDetail);
     console.log(this.tourPost);
@@ -99,7 +99,7 @@ export class TourPostPageComponent implements OnInit {
       }, error => {
       });
     } else {
-      this.notifyService.printErrorMessage("Xin hãy đăng nhập trước khi thực hiện hành động này!");
+      this.notifyService.printErrorMessage('Xin hãy đăng nhập trước khi thực hiện hành động này!');
     }
   }
 
@@ -111,7 +111,7 @@ export class TourPostPageComponent implements OnInit {
         this.dataService.get('/user/account/' + this.listComment[i].commentByID).subscribe((response: any) => {
           for (var i in this.listComment) {
             if (this.listComment[i].commentByID == response.id) {
-              this.listComment[i]["userName"] = response.userName;
+              this.listComment[i]['userName'] = response.userName;
             }
           }
           // this.listComment[this.listComment.findIndex(item => item.commentByID === response.id)]["userName"] = response.userName;
@@ -137,27 +137,38 @@ export class TourPostPageComponent implements OnInit {
       this.dataService.post('/tours/post/' + tourPost.id + '/Like', _like).subscribe((response: any) => {
         this.tourPost.liked = true;
         this.tourPost.countLike++;
-        localStorage.removeItem("tourPost");
-        localStorage.setItem("tourPost", JSON.stringify(this.tourPost));
+        localStorage.removeItem('tourPost');
+        localStorage.setItem('tourPost', JSON.stringify(this.tourPost));
       }, error => {
       });
-      this.notifyService.printSuccessMessage("Thích bài viết thành công");
+      this.notifyService.printSuccessMessage('Thích bài viết thành công!');
     } else if (this.user != null && tourPost.liked) {
-      // let _dislike = new Like(tourPost.likedID,tourPost.id,this.user.id,1);
+      // let _dislike = new Like(tourPost.likedID, tourPost.id, this.user.id, 1);
       // console.log(_dislike);
       // this.commonService.disLike(tourPost.id, _dislike, data => {
       //   console.log(data);
-      // }); 
-      this.notifyService.printSuccessMessage("Bỏ thích bài viết thành công!");
+      // });
+      let _dislike = new Like(tourPost.likedID, tourPost.id, this.user.id, 1);
+      console.log(_dislike);
+      this.dataService.post('/tours/post/' + tourPost.id + '/Like', _dislike).subscribe((response: any) => {
+        this.tourPost.liked = false;
+        this.tourPost.countLike--;
+        console.log(this.tourPost.countLike);
+        localStorage.removeItem('tourPost');
+        localStorage.setItem('tourPost', JSON.stringify(this.tourPost));
+      }, error => {
+      });
+
+      this.notifyService.printSuccessMessage('Bỏ thích bài viết thành công!');
     } else {
-      this.notifyService.printErrorMessage("Xin hãy đăng nhập trước khi thực hiện hành động này!");
+      this.notifyService.printErrorMessage('Xin hãy đăng nhập trước khi thực hiện hành động này!');
     }
   }
 
   logout() {
-    window.localStorage.removeItem("CURRENT_USER");
+    window.localStorage.removeItem('CURRENT_USER');
     this.user = this.authentication.getLoggedInUser();
-    this.notifyService.printSuccessMessage("Đăng xuất thành công");
+    this.notifyService.printSuccessMessage('Đăng xuất thành công!');
     // this.notifyService.printConfirmationDialog("Bạn có chắc chắn muốn đăng xuất?" , this.resetLogin)
   }
 
