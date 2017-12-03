@@ -727,3 +727,68 @@
        padding:50px;
         cursor:pointer;
 }
+
+/*================== FOOTER ===================*/
+
+footer {
+    background-color: #f1f1f1;
+    color: #000;
+    font-size: 15px;
+}
+
+footer .f-social {
+    padding: 40px;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+footer .f-social a {
+    padding: 14px 13px 12px;
+    border: none;
+    margin: 0 15px;
+    border-radius: 50%;
+}
+
+footer .f-social a:hover {
+    opacity: 0.8;
+}
+
+footer .f-social a i {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+    color: #fff;
+}
+
+.btn-gplus {
+    background-color: #DD4B39;
+}
+
+.btn-fb {
+    background-color: #3B5998;
+}
+
+.btn-instagram {
+    background-color: rgb(190, 30, 164);
+}
+
+footer .f-info {
+    padding: 13px 0;
+    background-color: #d4d4d4;
+    font-size: 13px;
+}
+
+footer .f-info a {
+    color: #000;
+    padding: 0 10px;
+}
+
+footer .f-info a:hover {
+    text-decoration: none;
+    color: #00bd61;
+}
+
+.clear-fix {
+    clear: both;
+    content: "";
+    display: block;
+}

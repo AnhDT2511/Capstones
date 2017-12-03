@@ -123,8 +123,8 @@
 
 #mainNav .nav>li>a {
     padding: 30px 15px;
-    font-size: 15px;
     letter-spacing: 1px;
+    font-size: 15px;
     text-transform: uppercase;
 }
 
@@ -217,11 +217,198 @@
 }
 
 
-/*========== LIST MEMBER ==========*/
+/*===================== LEFT SIDE =====================*/
 
-.container .brand {
+
+/* IMAGE */
+
+.profile-side .profile-img .image {
+    width: 100%;
+    max-width: 262px;
+    height: 262px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 4px;
+    display: block;
+    margin-top: -191px;
+    margin-bottom: 30px;
+}
+
+.profile-side .profile-img {
+    position: relative;
+}
+
+.profile-side .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.733);
+    overflow: hidden;
+    width: 100%;
+    height: 0;
+    transition: .5s ease;
+    border-radius: 0 0 4px 4px;
+}
+
+.profile-side .profile-img:hover .overlay {
+    height: 27%;
+}
+
+.profile-side .text {
+    white-space: nowrap;
+    color: white;
+    font-size: 15px;
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+.profile-side .text a {
+    color: #fff;
+}
+
+.profile-side .text a:hover {
+    text-decoration: none;
+}
+
+.profile-side .text a i {
+    width: 20px;
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.profile-side hr {
+    border-top: 1px solid #e0e0e0;
+}
+
+.profile-side button {
+    padding: 3px 10px 5px;
+    position: absolute;
+    right: 25px;
+    top: 10px;
+    color: #fff;
+    border: transparent;
+    background-color: transparent;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.profile-side button:hover i:before {
+    content: "Cập nhật ảnh đại diện \f030";
+}
+
+.profile-side button:hover,
+.profile-side button:focus {
+    background-color: rgba(0, 0, 0, 0.589);
+    outline: transparent;
+}
+
+
+/* LEVEL INFO */
+
+.profile-side .level-info {
+    padding: 15px;
+    border: 1px solid #00bd61;
+    margin-bottom: 30px;
+    border-radius: 4px;
+}
+
+.profile-side .level-info h5 {
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.profile-side .level-info .progress {
+    height: 8px;
+    margin-bottom: 0;
+}
+
+
+/* BUTTON CREATE POST */
+
+.profile-side .btn-post a {
+    color: #fff;
+    font-size: 18px;
+    padding: 17px 15px;
+    display: block;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.profile-side .btn-post a:hover {
+    text-decoration: none;
+}
+
+.profile-side .btn-post a i {
+    width: 30px;
+    text-align: center;
+}
+
+.profile-side .btn-post .btn-create-post {
+    border: 1px solid #d9534f;
+    background-color: #d9534f;
+    margin-bottom: 20px;
+}
+
+.profile-side .btn-post .btn-create-post:hover {
+    border: 1px solid #00bd61;
+    background-color: #00bd61;
+    outline: none;
+    text-decoration: none;
+    transition: 0.6s;
+}
+
+.profile-side .btn-post .btn-create-post:focus {
+    outline: none;
+    text-decoration: none;
+}
+
+
+/* CALENDAR */
+
+.calendar {
+    margin-top: 30px;
+}
+
+.calendar>table {
+    border-color: transparent;
+}
+
+.calendar tbody>tr>td td {
+    border: 1px solid #00ca67;
+    border-collapse: collapse;
+}
+
+.calendar tbody>tr>td td {
+    width: 37px;
+}
+
+.calendar tbody>tr>td td>table {
+    width: 100%;
+}
+
+.calendar tbody>tr>td td>table tr td b {
+    color: red;
+}
+
+.calendar tbody>tr>td td center {
+    padding: 3px 5px;
+}
+
+
+/*===================== RIGHT SIDE =====================*/
+
+.create-post {
+    padding-top: 30px;
+}
+
+.create-post .title-post {
     font-size: 60px;
-    margin-top: -123px;
+    margin-top: -153px;
     color: #fff;
     font-weight: 900;
     text-transform: uppercase;
@@ -229,17 +416,15 @@
     letter-spacing: 5px;
 }
 
-.container .brand span {
+.create-post .title-post span {
     font-size: 140px;
-    margin-right: -7px;
-    margin-left: -10px;
 }
 
-.brand {
+.create-post .title-post {
     background: linear-gradient(to right, #ffffff 0%, #ffffff 15%, #ffffff 35%, #ffffff 50%, #ffffff 85%, #ffdd00 90%, #ffffff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    -webkit-animation: color-text 10s linear infinite;
+    -webkit-animation: color-text 8s linear infinite;
 }
 
 @keyframes color-text {
@@ -254,97 +439,167 @@
     }
 }
 
-.list-member {
-    margin-top: 10px;
-}
-
-.list-member>h3 {
-    font-size: 20px;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 15px;
-    margin-bottom: 10px;
-}
-
-.list-member>h3>i {
-    margin-right: 10px;
-}
-
-.list-member .media {
-    border-bottom: 1px solid #ccc;
-    margin-top: 10px;
-}
-
-.list-member .media .media-heading {
-    margin-top: 3px;
-    margin-bottom: 2px;
-    font-size: 16px;
-}
-
-.list-member img {
-    border-radius: 50%;
+.create-post .h h2 {
+    color: rgb(82, 82, 82);
+    margin-top: 24px;
+    font-size: 28px;
 }
 
 
-/*========== CHAT BOX ==========*/
+/*========== COLLAPSE ==========*/
 
-.live-chat {
-    margin-top: 10px;
+#accordion {
+    margin-top: 25px;
+    padding-left: 27px;
+    border-left: 3px solid #00ca67;
 }
 
-.live-chat>h3 {
-    font-size: 20px;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 15px;
-    margin-bottom: 10px;
+#accordion h4 a {
+    display: block;
 }
 
-.live-chat>h3>i {
-    margin-right: 10px;
+#accordion h4 a:focus,
+#accordion h4 a:hover {
+    text-decoration: none;
 }
 
-
-/*========== TOUR INFO ==========*/
-
-.info-tour>i {
-    position: absolute;
-    font-size: 65px;
-    margin-top: -130px;
-    color: #ffdd00;
-    margin-left: 320px;
+#accordion .panel-default {
+    border-color: #00ca67;
 }
 
-.info-tour .box {
-    background-color: #ffdd00;
-    padding: 36px 20px;
-    margin-top: -68px;
+#accordion .panel-default h4>a>i {
+    width: 25px;
 }
 
-.info-tour .box i {
-    width: 20px;
-    margin-right: 10px;
+#accordion .panel-body {
+    font-size: 15px;
+}
+
+#accordion .panel-body .form-group .checkbox i {
+    margin-right: 25px;
+    margin-left: 2px;
+    font-size: 18px;
     text-align: center;
 }
 
-.info-tour .box label {
-    font-weight: normal;
+#accordion .panel-default>.panel-heading+.panel-collapse>.panel-body {
+    border-top-color: #00ca67;
+}
+
+.panel-group .panel+.panel {
+    margin-top: 12px;
+}
+
+#accordion .panel-default>.panel-heading {
+    color: #fff;
+    background-color: #00bd61;
+    border-color: #00bd61;
+}
+
+
+/*========= LINK REF ==========*/
+
+.tour-details #linkRef {
+    margin-top: 20px;
+    display: none;
+    transition: 0.6s;
+}
+
+.tour-details #timeline-content {
+    display: none;
+    transition: 0.6s;
+}
+
+
+/*========= TIMELINE ==========*/
+
+#timeline {
+    list-style: none;
+    margin: 30px 0 30px 120px;
+    padding-left: 30px;
+    border-left: 6px solid #00ca67;
+    font-size: 15px;
+}
+
+#timeline li {
+    margin: 30px 0;
+    position: relative;
+}
+
+#timeline p {
+    margin: 0 0 15px;
+}
+
+.date {
+    margin-top: -9px;
+    top: 50%;
+    left: -125px;
+    line-height: 20px;
+    position: absolute;
+}
+
+.circle {
+    margin-top: -10px;
+    top: 50%;
+    left: -43px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 5px solid #00ca67;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+}
+
+.relative label {
+    color: #484848;
     font-size: 18px;
-    margin-bottom: 3px;
+    position: absolute;
+    z-index: 100;
+    cursor: pointer;
+    top: 14px;
+    transition: transform 0.2s linear;
 }
 
-.info-tour .box .mg-l {
-    margin-left: 35px;
+.radio {
+    display: none;
 }
 
-.info-tour .box .title h3 {
-    font-family: 'Allura';
+#timeline .btn-file::-webkit-file-upload-button {
+    background-color: #00bd61;
+    border: none;
+    color: #fff;
+    padding: 7px 12px 8px;
+    border-radius: 4px;
 }
 
-.info-tour .box .descreption {
+#timeline .form-horizontal .btn {
+    padding: 5px 12px;
+}
+
+
+/* BUTTON */
+
+.create-post .btn-function {
     margin-top: 15px;
 }
 
-.info-tour .box p {
+.create-post .btn-function .btn {
     font-size: 15px;
+    margin-left: 5px;
+}
+
+.create-post .btn-function i {
+    width: 20px;
+    margin-right: 5px;
+}
+
+
+/**/
+
+.m-left {
+    margin-right: -15px;
+    margin-left: -15px;
 }
 
 /*================== FOOTER ===================*/

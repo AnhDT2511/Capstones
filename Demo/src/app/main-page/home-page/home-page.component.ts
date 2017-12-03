@@ -28,8 +28,7 @@ export class HomePageComponent implements OnInit {
     private notifyService: NotificationService,
     private authentication: AuthenService,
     private dataService: DataService
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.getAllTourPost();

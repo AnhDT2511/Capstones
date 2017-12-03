@@ -18,7 +18,9 @@ const MainPage_Router: Routes = [
             // localhost:4200/main/search
             { path: 'search', loadChildren: './search-page/search-page.module#SearchPageModule' },
             // localhost:4200/main/listpost
-            { path: 'listpost', loadChildren: './list-post-page/list-post-page.module#ListPostPageModule' }
+            { path: 'listpost', loadChildren: './list-post-page/list-post-page.module#ListPostPageModule' },
+            // localhost:4200/main/grouptour
+            { path: 'grouptour', loadChildren: './group-page/group-page.module#GroupPageModule' }
         ]
         // path : '' , component : MainPageComponent
     }

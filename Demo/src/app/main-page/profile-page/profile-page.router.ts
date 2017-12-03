@@ -12,7 +12,7 @@ const ProfilePage_Router: Routes = [
             { path: '', redirectTo: 'overview', pathMatch: 'full' },
             { path: 'overview', component: OverviewInfoComponent },
             { path: 'createPost/:id', component: CreatePostComponent },
-            { path: 'createTour', component: CreateTourComponent}
+            { path: 'createTour', component: CreateTourComponent }
         ]
     },
 ]
