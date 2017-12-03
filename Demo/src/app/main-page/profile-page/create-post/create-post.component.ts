@@ -94,15 +94,14 @@ export class CreatePostComponent implements OnInit {
       } else if(this.id == 0) {
         this.notifyservice.printErrorMessage("Tên bài viết đã tồn tại trong hệ thống, vui lòng thử lại!!");
       }else{
-        // this.commonservice.updatePost(_tourPost, data => {
-        //   console.log(data);
-        // })
+        _tourPost.id = this.id;
+        this.commonservice.updatePost(_tourPost, data => {
+        })
         for (let i = 0; i < this.listTourDetail.length; i++) {
           let listVehicle = this.listTourDetail[i].checkbox;
           this.listTourDetail[i]['vehicle'] = this.getKeyByValue(listVehicle, true).substring(0, this.getKeyByValue(listVehicle, true).length - 1);
           this.listTourDetail[i]['updated_time'] = Date.now();
           this.dataservice.put('/tours/post/' + this.id + '/day', this.listTourDetail[i]).subscribe((response: any) => {
-            console.log(response);
           }, error => {
           });;
         }

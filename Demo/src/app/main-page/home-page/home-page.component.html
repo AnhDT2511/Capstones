@@ -294,7 +294,7 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4 s-border" (click)=likeTourPost(tourPost)>
                                         <span>
-                                            <i class="fa fa-heart" aria-hidden="true" [ngStyle]="{'color': tourPost.liked ? 'red': 'gray'}"></i> {{tourPost.countLike}}
+                                            <i class="fa fa-heart" aria-hidden="true" [ngStyle]="{'color': (tourPost.liked && tourPost.likedID != 0) ? 'red': 'gray'}"></i> {{tourPost.countLike}}
                                         </span>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
@@ -335,7 +335,7 @@
                                         </div>
                                         <div class="col-xs-12 col-sm-4 col-md-4 s-border" (click)=likeTourPost(tourPost)>
                                             <span>
-                                                <i class="fa fa-heart" aria-hidden="true" [ngStyle]="{'color': tourPost.liked ? 'red': 'gray'}"></i> {{tourPost.countLike}}
+                                                <i class="fa fa-heart" aria-hidden="true" [ngStyle]="{'color': (tourPost.liked && tourPost.likedID != 0) ? 'red': 'gray'}"></i> {{tourPost.countLike}}
                                             </span>
                                         </div>
                                         <div class="col-xs-12 col-sm-4 col-md-4">
