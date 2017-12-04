@@ -32,7 +32,6 @@
         "../node_modules/alertifyjs/build/alertify.js",
         "../src/assets/js/scrollToTop.js",
         "../src/assets/js/smoothScrolling.js",
-        "../src/assets/js/timeline.js",
         "../src/assets/js/nav.js",
         "../systemjs.config.js"
       ],

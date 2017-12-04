@@ -19,6 +19,7 @@ import { debug } from 'util';
 export class HomePageComponent implements OnInit {
 
   public user: any = this.authentication.getLoggedInUser();
+  public searchWord : any;
   public listTourPost: any[] = [];
   public listTourPostFavoriteBefore: any[] = [];
   public listTourPostFavoriteAfter: any[] = [];
@@ -32,6 +33,9 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
     this.getAllTourPost();
+  }
+  search(){
+    console.log(this.searchWord);
   }
   seeMore() {
     localStorage.removeItem("listTourPost");
@@ -49,18 +53,30 @@ export class HomePageComponent implements OnInit {
     if (this.user != null && !tourPost.liked) {
       let _like = new Like(null, tourPost.id, this.user.id, 0);
       this.dataService.post('/tours/post/' + tourPost.id + '/Like', _like).subscribe((response: any) => {
-        this.countLike();
+        this.listTourPost[this.listTourPost.findIndex(item => item === tourPost)].liked = true;
+        this.listTourPost[this.listTourPost.findIndex(item => item === tourPost)].likedID = response.id;
+        this.listTourPost[this.listTourPost.findIndex(item => item === tourPost)].countLike++;
       }, error => {
       });
       this.notifyService.printSuccessMessage("Thích bài viết thành công");
     } else if (this.user != null && tourPost.liked) {
-      let _dislike = new Like(tourPost.likedID, tourPost.id, this.user.id, 1);
-      this.dataService.put('/tours/post/' + tourPost.id + '/Like', _dislike).subscribe((response: any) => {
-        var item = this.listTourPost.findIndex(item => item.id === response[0].tourPostID);
-        this.listTourPost[item]["countLike"] = response.length;
-      }, error => {
-      });
-      this.notifyService.printSuccessMessage("Bỏ thích bài viết thành công");
+      if(tourPost.likedID == 0){
+        let _relike = new Like(tourPost.likedID, tourPost.id, this.user.id, 0);
+        this.dataService.put('/tours/post/' + tourPost.id + '/Like', _relike).subscribe((response: any) => {
+          this.listTourPost[this.listTourPost.findIndex(item => item === tourPost)].likedID = response.id;
+          this.listTourPost[this.listTourPost.findIndex(item => item === tourPost)].countLike++;
+        }, error => {
+        });
+        this.notifyService.printSuccessMessage('Thích bài viết thành công!');
+      }else{
+        let _dislike = new Like(tourPost.likedID, tourPost.id, this.user.id, 1);
+        this.dataService.put('/tours/post/' + tourPost.id + '/Like', _dislike).subscribe((response: any) => {
+          this.listTourPost[this.listTourPost.findIndex(item => item === tourPost)].likedID = 0;
+          this.listTourPost[this.listTourPost.findIndex(item => item === tourPost)].countLike--;
+        }, error => {
+        });
+        this.notifyService.printSuccessMessage('Bỏ thích bài viết thành công!');
+      }
     } else {
       this.notifyService.printErrorMessage("Xin hãy đăng nhập trước khi thực hiện hành động này");
     }
@@ -69,17 +85,20 @@ export class HomePageComponent implements OnInit {
   countLike() {
     for (var i in this.listTourPost) {
       this.dataService.get('/tours/post/' + this.listTourPost[i].id + '/like/get-all').subscribe((response: any) => {
-        console.log(response);
+        // console.log(response);
         if (response != null) {
-          if (this.user && response.findIndex(item => item.likeByID === this.user.id) != -1) {
+          if (this.user && response.findIndex(item => item.likeByID === this.user.id && item.deleted == 0) != -1) {
             this.listTourPost[this.listTourPost.findIndex(item => item.id === response[0].tourPostID)].liked = true;
             this.listTourPost[this.listTourPost.findIndex(item => item.id === response[0].tourPostID)].likedID
               = response[response.findIndex(item => item.likeByID === this.user.id)].id;
-          } else {
+          } else if (this.user && response.findIndex(item => item.likeByID === this.user.id && item.deleted == 1) != -1) {
+            this.listTourPost[this.listTourPost.findIndex(item => item.id === response[0].tourPostID)].liked = true;
+            this.listTourPost[this.listTourPost.findIndex(item => item.id === response[0].tourPostID)].likedID = 0
+          } else{
             this.listTourPost[this.listTourPost.findIndex(item => item.id === response[0].tourPostID)].liked = false;
           }
           var item = this.listTourPost.findIndex(item => item.id === response[0].tourPostID);
-          this.listTourPost[item]["countLike"] = response.length;
+          this.listTourPost[item]["countLike"] = response.filter(item => item.deleted == 0).length;
         }
       }, error => {
       });
