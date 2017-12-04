@@ -162,7 +162,7 @@
                 <form class="form-horizontal" action="">
                     <div class="form-group">
                         <div class="col-sm-12">
-                            <input type="text" name="" class="form-control" placeholder="Nhập từ khóa bài đăng">
+                            <input type="text" name="" class="form-control" placeholder="Nhập từ khóa bài đăng" [(ngModel)]="searchWord">
                         </div>
                     </div>
                     <div class="form-group">
@@ -170,7 +170,7 @@
                             <!-- <button type="submit" class="btn btn-search">
                                 <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
                             </button> -->
-                            <a class="btn btn-search" routerLink="/main/search" href="#">
+                            <a class="btn btn-search" (submit)="search()" href="javascript:void(0)">
                                 <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
                             </a>
                         </div>

@@ -19,6 +19,7 @@ import { debug } from 'util';
 export class HomePageComponent implements OnInit {
 
   public user: any = this.authentication.getLoggedInUser();
+  public searchWord : any;
   public listTourPost: any[] = [];
   public listTourPostFavoriteBefore: any[] = [];
   public listTourPostFavoriteAfter: any[] = [];
@@ -33,6 +34,9 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
     this.getAllTourPost();
+  }
+  search(){
+    console.log(this.searchWord);
   }
   seeMore() {
     localStorage.removeItem("listTourPost");
@@ -97,7 +101,6 @@ export class HomePageComponent implements OnInit {
           var item = this.listTourPost.findIndex(item => item.id === response[0].tourPostID);
           this.listTourPost[item]["countLike"] = response.filter(item => item.deleted == 0).length;
         }
-        console.log(this.listTourPost);
       }, error => {
       });
     }
