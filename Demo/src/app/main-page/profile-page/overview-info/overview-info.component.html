@@ -35,7 +35,7 @@
                         <div class="icon-total-post">
                             <i class="fa fa-files-o" aria-hidden="true"></i>
                         </div>
-                        <div class="number">{{amount}}</div>
+                        <div class="number">{{listTourPost.length}}</div>
                         <h3>Tổng số bài viết đã đăng</h3>
                         <p>số bài viết đã đăng lên website.</p>
                     </div>
@@ -50,11 +50,6 @@
                                     <i class="fa fa-bookmark" aria-hidden="true"></i>{{item.title}}
                                 </a>
                             </li>
-                            <!-- <li>
-                                <a data-toggle="tab" href="#save-link" class="more">
-                                    Xem thêm...
-                                </a>
-                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -64,16 +59,22 @@
                         <div class="icon-total-post">
                             <i class="fa fa-files-o" aria-hidden="true"></i>
                         </div>
-                        <div class="number">30</div>
-                        <h3>Tổng số bài viết đã đăng</h3>
-                        <p>số bài viết đã đăng lên website.</p>
+                        <div class="number">{{listGroupPost.length}}</div>
+                        <h3>Tổng số nhóm đã tạo</h3>
+                        <p></p>
                     </div>
                     <hr>
-                    <div class="panel panel-default">
+                    <div class="panel panel-default save-link">
                         <div class="panel-heading">
-                            <i class="fa fa-users" aria-hidden="true"></i>Các nhóm đã tham gia
+                            <i class="fa fa-users" aria-hidden="true"></i>Các nhóm đã tạo
                         </div>
-                        <div class="panel-body">Panel Content</div>
+                        <ul>
+                            <li *ngFor="let item of listGroupPost" >
+                                <a  href="javascript:void(0)" (click)="updateGroupPost(item.tourPostID)">
+                                    <i class="fa fa-bookmark" aria-hidden="true"></i>{{item.title}}
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 

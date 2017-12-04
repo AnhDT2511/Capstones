@@ -13,7 +13,7 @@ import { Comment } from '../../shared/domain/comment.user';
 export class GroupPageComponent implements OnInit {
   user: any = this.authentication.getLoggedInUser();
   groupTourId: string;
-  listComment : any;
+  listComment: any;
   comment: string = "";
   groupTour: any = {
     // 'tourArticleTitle': 'Khám phá Ninh Bình',
@@ -30,6 +30,11 @@ export class GroupPageComponent implements OnInit {
     '2': 'Hành trình',
     '3': 'Văn Hóa',
   }
+  listCity: any = {
+    '1': 'Hà Nội',
+    '2': 'Hải Phòng',
+    '3': 'Đà Nẵng',
+  }
 
   constructor(
     private dataService: DataService,
@@ -38,7 +43,7 @@ export class GroupPageComponent implements OnInit {
     private commonService: CommonService,
     private activatedRoute: ActivatedRoute,
     private authentication: AuthenService
-  ) { 
+  ) {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.groupTourId = params.id;
       this.dataService.get('/tours/post/' + params.id).subscribe((response: any) => {

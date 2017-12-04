@@ -139,10 +139,16 @@ export class HomePageComponent implements OnInit {
     this.utilityService.navigate('/main/tourpost/'+ _tourPost.id);
   }
 
-  seeMore() {
-    localStorage.removeItem("listTourPost");
-    localStorage.setItem("listTourPost", JSON.stringify(this.listTourPost));
-    this.utilityService.navigate("/main/listpost");
+  seeMore(id) {
+    if(id == 1){
+      localStorage.removeItem("listTourPost");
+      localStorage.setItem("listTourPost", JSON.stringify(this.listTourPost));
+      this.utilityService.navigate("/main/listpost");
+    }else{
+      localStorage.removeItem("listGroupPost");
+      localStorage.setItem("listGroupPost", JSON.stringify(this.listTourPost));
+      this.utilityService.navigate("/main/listpost");
+    }
   }
 
   getTourPost(tourpost): TourPost {

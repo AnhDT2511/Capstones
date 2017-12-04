@@ -10,20 +10,51 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./create-tour.component.css']
 })
 export class CreateTourComponent implements OnInit {
-    
+
   user: any = JSON.parse(localStorage.getItem(SystemConstants.CURRENT_USER));
   groupTour: any = {};
+  place: any = {
+    '1': 'Ha'
+  }
+  id = 0;
   constructor(
-    private dataservice: DataService,
-    private utiliservice: UtilityService,
-    private notifyservice: NotificationService,
-    private commonservice: CommonService,
+    private dataService: DataService,
+    private utiliService: UtilityService,
+    private notifyService: NotificationService,
+    private commonService: CommonService,
     private activatedRoute: ActivatedRoute
-  ) {}
-  showGroupTour(){
+  ) {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.groupTour = {};
+      this.id = params.id;
+      if (params.id != 0) {
+        this.dataService.get('/tours/post/' + params.id).subscribe((response: any) => {
+          this.groupTour = response;
+        console.log(this.groupTour);
+        })
+      } 
+    });
+  }
+
+  ngOnInit() {
+  }
+  showGroupTour() {
     console.log(this.groupTour);
   }
-  ngOnInit() {
+  saveGroupTour() {
+    let date = Date.now();
+    let _groupTour: TourPost = new TourPost(0, this.user.id, this.groupTour.startPlaceID, this.groupTour.endPlaceID, this.groupTour.duration, this.groupTour.tourArticleTitle, 0,
+      date, this.groupTour.description, 0, this.groupTour.note, this.groupTour.prepare, 1, this.groupTour.startTime, this.groupTour.category, this.groupTour.referenceLink);
+    if (this.id == 0) {
+      this.commonService.createPost(_groupTour, data => {
+      })
+    }else{
+      console.log(_groupTour);
+      _groupTour.id = this.id;
+      this.commonService.updatePost(_groupTour, data => {
+      })
+    }
+
   }
 
 }

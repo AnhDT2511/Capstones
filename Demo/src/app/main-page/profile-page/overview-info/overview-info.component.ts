@@ -11,7 +11,7 @@ import { DataService, UtilityService , NotificationService , CommonService} from
 export class OverviewInfoComponent implements OnInit {
   user: any = JSON.parse(localStorage.getItem(SystemConstants.CURRENT_USER));
   listTourPost : any = [];  
-  amount : any = 0 ;
+  listGroupPost : any = [];
   constructor(
     private dataService : DataService,
     private utilityService : UtilityService
@@ -20,15 +20,19 @@ export class OverviewInfoComponent implements OnInit {
   ngOnInit() {
     this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
         response.forEach(element => {
-          if(element.accountID === this.user.id){
+          if(element.accountID === this.user.id && element.type == 0){
             this.listTourPost.push({'tourPostID':element.id,'title':element.tourArticleTitle})
+          }else if(element.accountID === this.user.id && element.type == 1){
+            this.listGroupPost.push({'tourPostID':element.id,'title':element.tourArticleTitle})
           }
         });
-        this.amount = this.listTourPost.length;
     }, error => {
     });
   }
   updateTourPost(id){
     this.utilityService.navigate('/main/profile/createPost/'+ id);
+  }
+  updateGroupPost(id){
+    this.utilityService.navigate('/main/profile/createTour/'+ id);
   }
 }
