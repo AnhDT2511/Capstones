@@ -501,12 +501,10 @@
 
 .tour-details #linkRef {
     margin-top: 20px;
-    display: none;
     transition: 0.6s;
 }
 
 .tour-details #timeline-content {
-    display: none;
     transition: 0.6s;
 }
 
