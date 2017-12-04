@@ -406,6 +406,43 @@
     text-decoration: none;
 }
 
+/* OVERVIEW */
+.profile-side .btn-overview a {
+    color: #fff;
+    font-size: 18px;
+    padding: 17px 15px;
+    display: block;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.profile-side .btn-tour a:hover {
+    text-decoration: none;
+}
+
+.profile-side .btn-tour a i {
+    width: 30px;
+    text-align: center;
+}
+
+.profile-side .btn-tour .btn-overview {
+    border: 1px solid #008357;
+    background-color: #008357;
+    margin-bottom: 20px;
+}
+
+.profile-side .btn-tour .btn-overview:hover {
+    border: 1px solid #00bd61;
+    background-color: #00bd61;
+    outline: none;
+    text-decoration: none;
+    transition: 0.6s;
+}
+
+.profile-side .btn-tour .btn-overview:focus {
+    outline: none;
+    text-decoration: none;
+}
 
 /* PANEL POST */
 

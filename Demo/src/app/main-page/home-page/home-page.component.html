@@ -94,12 +94,12 @@
                             <a class="page-scroll" routerLink="/login" href="#" *ngIf="user == null">
                                 <i class="fa fa-sign-in" aria-hidden="true"></i> ĐĂNG NHẬP
                             </a>
-                        </li> 
+                        </li>
                         <li>
                             <a class="page-scroll" routerLink="/register" href="#" *ngIf="user == null">
                                 <i class="fa fa-user-plus" aria-hidden="true"></i> ĐĂNG KÍ
                             </a>
-                        </li> 
+                        </li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#" *ngIf="user && user.userName">
                                 <i class="fa fa-user-circle-o" aria-hidden="true"></i> {{user.userName | uppercase}}
@@ -182,7 +182,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-4">
-                            <a type="submit" class="btn btn-search" routerLink="/main/search" href="#">
+                            <!-- <a type="submit" class="btn btn-search" routerLink="/main/search" href="#">
                                 <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
                             </button> -->
                             <a class="btn btn-search" href="javascript:void(0)">
@@ -260,9 +260,9 @@
     </div>
 </section>
 
-<section id="about">
+<!-- <section id="about">
 
-</section>
+</section> -->
 
 <section id="top-place" style="background-image: url(../assets/img/most.jpg);">
     <div class="container">
@@ -315,46 +315,46 @@
                     </div>
                 </div>
                 <div class="item ">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-4 col-md-4" *ngFor="let tourPost of listTourPostFavoriteAfter">
-                                <div class="thumbnail">
-                                    <div class="m-container">
-                                        <img src="../assets/img/3.jpg" alt="Avatar" class="image">
-                                        <div class="overlay">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 col-md-4" *ngFor="let tourPost of listTourPostFavoriteAfter">
+                            <div class="thumbnail">
+                                <div class="m-container">
+                                    <img src="../assets/img/3.jpg" alt="Avatar" class="image">
+                                    <!-- <div class="overlay">
                                             <div class="text">{{tourPost.tourArticleTitle}}</div>
-                                        </div>
+                                        </div> -->
+                                </div>
+                                <div class="summary">
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <span>
+                                            <i class="fa fa-eye" aria-hidden="true" style="font-size: 17px;"></i>1357
+                                        </span>
                                     </div>
-                                    <div class="summary">
-                                        <div class="col-xs-12 col-sm-4 col-md-4">
-                                            <span>
-                                                <i class="fa fa-eye" aria-hidden="true" style="font-size: 17px;"></i>1357
-                                            </span>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-4 col-md-4 s-border" (click)=likeTourPost(tourPost)>
-                                            <span>
-                                                <i class="fa fa-heart" aria-hidden="true" [ngStyle]="{'color': (tourPost.liked && tourPost.likedID != 0) ? 'red': 'gray'}"></i> {{tourPost.countLike}}
-                                            </span>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-4 col-md-4">
-                                            <span>
-                                                <i class="fa fa-comment" aria-hidden="true"></i>
-                                            </span>
-                                        </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 s-border" (click)=likeTourPost(tourPost)>
+                                        <span>
+                                            <i class="fa fa-heart" aria-hidden="true" [ngStyle]="{'color': (tourPost.liked && tourPost.likedID != 0) ? 'red': 'gray'}"></i> {{tourPost.countLike}}
+                                        </span>
                                     </div>
-                                    <div class="clear-fix"></div>
-                                    <div class="description">
-                                        <h3>
-                                            <span>{{tourPost.tourArticleTitle}}</span>
-                                        </h3>
-                                        <p>{{tourPost.description}}</p>
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <span>
+                                            <i class="fa fa-comment" aria-hidden="true"></i>
+                                        </span>
                                     </div>
-                                    <div class="a-more">
-                                        <a href="javascript:void(0)" (click)=detailTourPost(tourPost)>Chi tiết</a>
-                                    </div>
+                                </div>
+                                <div class="clear-fix"></div>
+                                <div class="description">
+                                    <h3>
+                                        <span>{{tourPost.tourArticleTitle}}</span>
+                                    </h3>
+                                    <p>{{tourPost.description}}</p>
+                                </div>
+                                <div class="a-more">
+                                    <a href="javascript:void(0)" (click)=detailTourPost(tourPost)>Chi tiết</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
 
             <!-- Left and right controls -->
@@ -371,6 +371,112 @@
         </div>
     </div>
 </section>
+
+<section id="top-place" style="background-image: url(../assets/img/forestbridge.jpg);">
+    <div class="container">
+        <h1>
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+            <span class="color-run m-title">Nhóm nổi bật</span>
+        </h1>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-flickity='{ "groupCells": 8, "autoPlay": true }'>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 col-md-4" *ngFor="let groupTour of listGroupTour">
+                            <div class="thumbnail">
+                                <div class="m-container">
+                                    <img src="../assets/img/3.jpg" alt="Avatar" class="image">
+                                    <!-- <div class="overlay">
+                                        <div class="text">{{tourPost.tourArticleTitle}}</div>
+                                    </div> -->
+                                </div>
+                                <div class="summary">
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <span>
+                                            <i class="fa fa-eye" aria-hidden="true" style="font-size: 17px;"></i> 2125
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 s-border" (click)=likegroupTour(groupTour)>
+                                        <span>
+                                            <i class="fa fa-heart" aria-hidden="true" [ngStyle]="{'color': (groupTour.liked && groupTour.likedID != 0) ? 'red': 'gray'}"></i> {{groupTour.countLike}}
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <span>
+                                            <i class="fa fa-comment" aria-hidden="true"></i> 440
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="clear-fix"></div>
+                                <div class="description">
+                                    <h3>
+                                        <span>{{groupTour.tourArticleTitle}}</span>
+                                    </h3>
+                                    <p>{{groupTour.description}}</p>
+                                </div>
+                                <div class="a-more">
+                                    <a href="javascript:void(0)" (click)=detailGroupTour(groupTour)>Khám Phá</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="item ">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-4 col-md-4" *ngFor="let tourPost of listTourPostFavoriteAfter">
+                            <div class="thumbnail">
+                                <div class="m-container">
+                                    <img src="../assets/img/3.jpg" alt="Avatar" class="image">
+                                </div>
+                                <div class="summary">
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <span>
+                                            <i class="fa fa-eye" aria-hidden="true" style="font-size: 17px;"></i>1357
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 s-border" (click)=likeTourPost(tourPost)>
+                                        <span>
+                                            <i class="fa fa-heart" aria-hidden="true" [ngStyle]="{'color': (tourPost.liked && tourPost.likedID != 0) ? 'red': 'gray'}"></i> {{tourPost.countLike}}
+                                        </span>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <span>
+                                            <i class="fa fa-comment" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="clear-fix"></div>
+                                <div class="description">
+                                    <h3>
+                                        <span>{{tourPost.tourArticleTitle}}</span>
+                                    </h3>
+                                    <p>{{tourPost.description}}</p>
+                                </div>
+                                <div class="a-more">
+                                    <a href="javascript:void(0)" (click)=detailTourPost(tourPost)>Chi tiết</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div class="btn-show-more">
+            <a (click)="seeMore()" href="javascript:void(0)">Xem thêm</a>
+        </div>
+    </div>
+</section>
+
 
 <section id="prominent-place" style="width: 100%; height: 300px;">
     <div class="container">
@@ -465,7 +571,7 @@
                     });
                     infowindow.open(map, marker);
                 }
-              
+
             </script>
 
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2LlIj3sk2akFpnpNcXzX9_NS08Xda1sE&callback=myMap"></script>

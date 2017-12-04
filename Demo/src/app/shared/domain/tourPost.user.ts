@@ -2,7 +2,8 @@ export class TourPost {
 
     constructor( id : any , accountID: any, startPlaceID: any, 
         endPlaceID: any,duration: any, tourArticleTitle:any , deleted:any , createTime : any,
-        description  : any  , postViewNumber  : any , note : any ,prepare  : any 
+        description  : any  , postViewNumber  : any , note : any ,prepare  : any , type  : any,
+        startTime  : any , category  : any , referenceLink : any
     ) {
         // this.access_token = access_token;
         this.id = id;
@@ -17,6 +18,10 @@ export class TourPost {
         this.postViewNumber = postViewNumber;
         this.note = note;
         this.prepare = prepare;
+        this.type = type;
+        this.startTime = startTime;
+        this.category = category;
+        this.referenceLink = referenceLink;
     }
     public id: any;
     public accountID: any;
@@ -30,4 +35,8 @@ export class TourPost {
     public postViewNumber: any ;
     public note: any ;
     public prepare: any ;
+    public type: any ;
+    public startTime: any ;
+    public category: any ;
+    public referenceLink: any ;
 }

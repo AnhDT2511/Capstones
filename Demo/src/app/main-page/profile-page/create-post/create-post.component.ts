@@ -76,7 +76,7 @@ export class CreatePostComponent implements OnInit {
   saveTourPost() {
     let date = Date.now();
     let _tourPost: TourPost = new TourPost(0, this.user.id, 0, 0, 0, this.tourPost.title, 0,
-      date, this.tourPost.descriptionTourPost, 0, this.tourPost.note, this.tourPost.prepare);
+      date, this.tourPost.descriptionTourPost, 0, this.tourPost.note, this.tourPost.prepare,0,'13/12/1995',1,'');
     this.commonservice.createPost(_tourPost, data => {
       let responseID = 0;
       responseID = data._body;

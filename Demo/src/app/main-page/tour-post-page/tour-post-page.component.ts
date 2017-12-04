@@ -23,9 +23,8 @@ import { resetFakeAsyncZone } from '@angular/core/testing';
 
 export class TourPostPageComponent implements OnInit {
   user: any = this.authentication.getLoggedInUser();
-  // userDetails : any = {};
   tourPostId: string;
-  tourPost: any;
+  tourPost: any = { 'liked': false, 'likedID': 0, 'countLiked': 0 };
   tourByDay: any;
   tourByDayDetail: any = [];
   statusComment: boolean = true;
@@ -50,39 +49,45 @@ export class TourPostPageComponent implements OnInit {
     private dataService: DataService,
     private activatedRoute: ActivatedRoute,
     private commonService: CommonService
-  ) { }
+  ) {
+    // let localData = JSON.parse(localStorage.getItem('tourPost'));
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.tourPostId = params.id;
+      this.dataService.get('/tours/post/' + params.id).subscribe((response: any) => {
+        this.tourPost = response;
+        this.dataService.get('/tours/post/' + response.id + '/like/get-all').subscribe((response: any) => {
+          this.tourPost["countLike"] = response.filter(item => item.deleted == 0).length;
+          if (response != null) {
+            if (this.user && response.findIndex(item => item.likeByID === this.user.id && item.deleted == 0) != -1) {
+              this.tourPost.liked = true;
+              this.tourPost.likedID = response[response.findIndex(item => item.likeByID === this.user.id)].id;
+            } else if (this.user && response.findIndex(item => item.likeByID === this.user.id && item.deleted == 1) != -1) {
+              this.tourPost.liked = true;
+              this.tourPost.likedID = 0
+            } else {
+              this.tourPost.liked = false;
+            }
+          }
+        }, error => {
+        });
+        this.commonService.getTourByDayDetails(response.id, data => {
+          for (let i in data) {
+            this.tourByDayDetail.push(data[i]);
+          }
+        });
+        this.commonService.getAccountDetailsInfo(this.tourPost.accountID, data => {
+          this.tourPost['author'] = data.firstName + ' ' + data.lastName;
+        });
+
+        this.commonService.getAccountInfo(this.tourPost.accountID, data => {
+          this.tourPost['level'] = data.level;
+        });
+      }, error => {
+      });
+    });
+  }
 
   ngOnInit() {
-
-    // this.activatedRoute.params.subscribe((params: Params) => {
-    //   this.tourPostId = params.id;
-    //   this.dataService.get('/tourpost/' + params.id).subscribe((response: any) => {
-    //     // console.log(response);
-    //     this.tourPost = response;
-    //   }, error => {
-    //   });
-    // });
-
-    this.tourPost = JSON.parse(localStorage.getItem('tourPost'));
-    // this.commonService.getTourByDay(this.tourPost.id, data => {
-    //   this.tourByDay = data[0];
-    // });
-
-    this.commonService.getTourByDayDetails(this.tourPost.id, data => {
-      for (let i in data) {
-          this.tourByDayDetail.push(data[i]);
-      }
-    });
-
-    this.commonService.getAccountDetailsInfo(this.tourPost.accountID, data => {
-      this.tourPost['author'] = data.firstName + ' ' + data.lastName;
-    });
-
-    this.commonService.getAccountInfo(this.tourPost.accountID, data => {
-      this.tourPost['level'] = data.level;
-    });
-    // console.log(this.tourByDayDetail);
-    // console.log(this.tourPost);
   }
 
   nagivateProfile() {
@@ -142,7 +147,7 @@ export class TourPostPageComponent implements OnInit {
       });
       this.notifyService.printSuccessMessage('Thích bài viết thành công!');
     } else if (this.user != null && tourPost.liked) {
-      if(tourPost.likedID == 0){
+      if (tourPost.likedID == 0) {
         let _relike = new Like(tourPost.likedID, tourPost.id, this.user.id, 0);
         this.dataService.put('/tours/post/' + tourPost.id + '/Like', _relike).subscribe((response: any) => {
           this.tourPost.likedID = response.id;
@@ -152,7 +157,7 @@ export class TourPostPageComponent implements OnInit {
         }, error => {
         });
         this.notifyService.printSuccessMessage('Thích bài viết thành công!');
-      }else{
+      } else {
         let _dislike = new Like(tourPost.likedID, tourPost.id, this.user.id, 1);
         this.dataService.put('/tours/post/' + tourPost.id + '/Like', _dislike).subscribe((response: any) => {
           this.tourPost.likedID = 0;

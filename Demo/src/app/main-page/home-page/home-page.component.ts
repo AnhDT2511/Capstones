@@ -23,6 +23,7 @@ export class HomePageComponent implements OnInit {
   public listTourPost: any[] = [];
   public listTourPostFavoriteBefore: any[] = [];
   public listTourPostFavoriteAfter: any[] = [];
+  public listGroupTour: any[] = [];
   countI = 0;
   constructor(
     private utilityService: UtilityService,
@@ -37,18 +38,7 @@ export class HomePageComponent implements OnInit {
   search(){
     console.log(this.searchWord);
   }
-  seeMore() {
-    localStorage.removeItem("listTourPost");
-    localStorage.setItem("listTourPost", JSON.stringify(this.listTourPost));
-    this.utilityService.navigate("/main/listpost");
-  }
-
-  detailTourPost(_tourPost) {
-    localStorage.removeItem("tourPost");
-    localStorage.setItem("tourPost", JSON.stringify(_tourPost));
-    this.utilityService.navigate('/main/tourpost');
-  }
-
+  
   likeTourPost(tourPost: any) {
     if (this.user != null && !tourPost.liked) {
       let _like = new Like(null, tourPost.id, this.user.id, 0);
@@ -118,15 +108,41 @@ export class HomePageComponent implements OnInit {
   getAllTourPost() {
     this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
       for (var i in response) {
-        var _tourPost = this.getTourPost(response[i]);
-        _tourPost['countLike'] = 0;
-        _tourPost['liked'] = false;
-        _tourPost['likedID'] = 0;
-        this.listTourPost.push(_tourPost);
+        if(response[i].type == 0){
+          var _tourPost = this.getTourPost(response[i]);
+          _tourPost['countLike'] = 0;
+          _tourPost['liked'] = false;
+          _tourPost['likedID'] = 0;
+          this.listTourPost.push(_tourPost);
+        }else{
+          var _tourPost = this.getTourPost(response[i]);
+          _tourPost['countLike'] = 0;
+          _tourPost['liked'] = false;
+          _tourPost['likedID'] = 0;
+          this.listGroupTour.push(_tourPost);
+        }
       }
       this.countLike();
     }, error => {
     });
+  }
+  detailGroupTour(_groupTour){
+    // localStorage.removeItem("groupTour");
+    // localStorage.setItem("groupTour", JSON.stringify(_groupTour));
+    this.utilityService.navigate('/main/grouptour/'+ _groupTour.id);
+  }
+ 
+
+  detailTourPost(_tourPost) {
+    // localStorage.removeItem("tourPost");
+    // localStorage.setItem("tourPost", JSON.stringify(_tourPost));
+    this.utilityService.navigate('/main/tourpost/'+ _tourPost.id);
+  }
+
+  seeMore() {
+    localStorage.removeItem("listTourPost");
+    localStorage.setItem("listTourPost", JSON.stringify(this.listTourPost));
+    this.utilityService.navigate("/main/listpost");
   }
 
   getTourPost(tourpost): TourPost {
@@ -143,7 +159,11 @@ export class HomePageComponent implements OnInit {
       tourpost.description,
       tourpost.postViewNumber,
       tourpost.note,
-      tourpost.prepare
+      tourpost.prepare,
+      tourpost.type,
+      tourpost.startTime,
+      tourpost.category,
+      tourpost.referenceLink
     )
     return _tourPost;
   }

@@ -10,7 +10,7 @@ const MainPage_Router: Routes = [
             // localhost:4200/main/home
             { path: 'home', loadChildren: './home-page/home-page.module#HomePageModule' },
             // localhost:4200/main/tourpost
-            { path: 'tourpost', loadChildren: './tour-post-page/tour-post-page.module#TourPostPageModule' },
+            { path: 'tourpost/:id', loadChildren: './tour-post-page/tour-post-page.module#TourPostPageModule' },
             // localhost:4200/main/admin
             { path: 'admin', loadChildren: './admin-page/admin-page.module#AdminPageModule', canActivate : [AuthGuard] },
             // localhost:4200/main/profile 
@@ -20,7 +20,7 @@ const MainPage_Router: Routes = [
             // localhost:4200/main/listpost
             { path: 'listpost', loadChildren: './list-post-page/list-post-page.module#ListPostPageModule' },
             // localhost:4200/main/grouptour
-            { path: 'grouptour', loadChildren: './group-page/group-page.module#GroupPageModule' }
+            { path: 'grouptour/:id', loadChildren: './group-page/group-page.module#GroupPageModule' }
         ]
         // path : '' , component : MainPageComponent
     }
