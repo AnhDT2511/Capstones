@@ -8,6 +8,9 @@ import {
   AuthenService,
   UtilityService
 } from '../../shared/service';
+import { ActivatedRoute, Params } from '@angular/router';
+import { TextChangeInfoComponent } from './dialog-change-info/dialog-change-info.component';
+import { CommonService } from '../../shared/index';
 
 @Component({
   selector: 'app-profile-page',
@@ -20,26 +23,52 @@ export class ProfilePageComponent implements OnInit {
   @ViewChild(TextChangePassComponent)
   private textChangePass: TextChangePassComponent;
 
-  user: any = this.authentication.getLoggedInUser();
+  @ViewChild(TextChangeInfoComponent)
+  private textChangeInfo: TextChangeInfoComponent;
+
+
+  user: any = {};
   userDetails: any = {};
   valid = true;
   // model: any = {};
+  viewPersionInfo: boolean = true;
   checkUserDetails: boolean = true;
 
   constructor(
     private utilityService: UtilityService,
     private notifyService: NotificationService,
     private authentication: AuthenService,
-    private dataService: DataService
+    private dataService: DataService,
+    private activatedRoute: ActivatedRoute,
+    private commonService: CommonService
   ) {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.user['id'] = params['id'];
+      if (this.user.id == 0) {
+        this.viewPersionInfo = false;
+        this.user = this.authentication.getLoggedInUser();
+      } else {
+        this.commonService.getAccountInfo(this.user.id, data => {
+          this.user = data;
+        });
+        this.viewPersionInfo = true;
+      }
+      localStorage.removeItem('userID');
+      localStorage.setItem('userID',this.user.id);
+      localStorage.removeItem('viewPersional');
+      localStorage.setItem('viewPersional',this.viewPersionInfo.toString());
+      this.getUserDetails(this.user.id);
+    });
   }
 
   openChangePass() {
     this.textChangePass.openDialog();
   }
+  openChangeInfo() {
+    this.textChangeInfo.openDialog();
+  }
 
   ngOnInit() {
-    this.getUserDetails(this.user.id);
   }
 
   getUserDetails(id: string) {
@@ -94,7 +123,7 @@ export class ProfilePageComponent implements OnInit {
   logout() {
     window.localStorage.removeItem('CURRENT_USER');
     this.notifyService.printSuccessMessage('Đăng xuất thành công!');
-    this.utilityService.navigate(UrlConstants.LOGIN);
+    this.utilityService.navigate(UrlConstants.HOME);
   }
 
   // openCreatePost() {

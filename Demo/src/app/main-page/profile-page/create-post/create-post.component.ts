@@ -90,7 +90,7 @@ export class CreatePostComponent implements OnInit {
           });;
         }
         this.notifyservice.printSuccessMessage("Tạo bài viết thành công");
-        this.utiliservice.navigate('/main/profile');
+        this.utiliservice.navigate('/main/profile/0');
       } else if(this.id == 0) {
         this.notifyservice.printErrorMessage("Tên bài viết đã tồn tại trong hệ thống, vui lòng thử lại!!");
       }else{
@@ -106,7 +106,7 @@ export class CreatePostComponent implements OnInit {
           });;
         }
         this.notifyservice.printSuccessMessage("Cập nhật bài viết thành công");
-        this.utiliservice.navigate('/main/profile');
+        this.utiliservice.navigate('/main/profile/0');
       }
     })
   }

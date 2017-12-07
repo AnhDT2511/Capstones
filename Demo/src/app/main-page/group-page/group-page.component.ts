@@ -27,8 +27,8 @@ export class GroupPageComponent implements OnInit {
   };
   listCategory: any = {
     '1': 'Leo núi',
-    '2': 'Hành trình',
-    '3': 'Văn Hóa',
+    '2': 'Văn Hóa',
+    '3': 'Hành trình',
   }
   listCity: any = {
     '1': 'Hà Nội',

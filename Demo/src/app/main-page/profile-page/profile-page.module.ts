@@ -8,6 +8,7 @@ import { ProfilePageRouter } from './profile-page.router';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { DialogChangePassComponent, TextChangePassComponent } from './dialog-change-pass/dialog-change-pass.component';
+import { DialogChangeInfoComponent, TextChangeInfoComponent } from './dialog-change-info/dialog-change-info.component';
 import { AvatarModule } from 'ngx-avatar';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { CreateTourComponent } from './create-tour/create-tour.component';
@@ -25,11 +26,13 @@ import { OverViewPageModule } from './overview-info/overview-info.module';
     declarations: [
         ProfilePageComponent,
         TextChangePassComponent,
+        TextChangeInfoComponent,
         DialogChangePassComponent,
+        DialogChangeInfoComponent,
         CreatePostComponent,
         CreateTourComponent
     ],
-    entryComponents: [DialogChangePassComponent]
+    entryComponents: [DialogChangePassComponent, DialogChangeInfoComponent ]
 })
 
 export class ProfilePageModule {}

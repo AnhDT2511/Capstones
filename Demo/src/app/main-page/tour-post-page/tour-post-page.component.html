@@ -87,7 +87,7 @@
                 <i class="fa fa-heart " aria-hidden="true " [ngStyle]="{'color': (tourPost.liked && tourPost.likedID != 0) ? 'red': 'white'}"></i> {{tourPost.countLike}}
             </a>
             <a href="#" data-toggle="tooltip" data-placement="top" title="Lượt xem">
-                <i class="fa fa-eye " aria-hidden="true " style="font-size: 23px; "></i> 1225
+                <i class="fa fa-eye " aria-hidden="true " style="font-size: 23px; "></i> {{tourPost.postViewNumber}}
             </a>
         </div>
         <div class="col-sm-2 col-md-2"></div>
@@ -106,7 +106,7 @@
     <div class="poster">
         <div class="container">
             <div class=" col-xs-12 col-sm-12 col-md-12 text-center ">
-                <a href="#">
+                <a href="javascript:void(0)" (click)="showPersonalInfo()">
                     <img src="/assets/img/default-user-image.png" class="img-circle" width="120" height="120">
                     <p class="full-name">{{tourPost.author}}</p>
                     <p class="level">{{tourPost.level}}</p>
@@ -336,10 +336,10 @@
             </div>
         </div>
 
-        <a href="javascript:void(0)" id="ilike" (click)=likeTourPost(tourPost) class="ilike">Thích</a>
+        <a href="javascript:void(0)" id="ilike" (click)=likeTourPost(tourPost) class="ilike">{{(tourPost.liked && tourPost.likedID != 0) ? 'Bỏ thích' : 'Thích'}}</a>
         <a href="javascript:void(0)" id="icomment" class="icomment" (click)="openCloseCmt()">Bình luận</a>
         <a href="javascript:void(0)" id="ireport" class="ireport" (click)="openCloseReport()">Tố cáo</a>
-        <a href="javascript:void(0)" id="saveLink" class="save-link">Lưu</a>
+        <a href="javascript:void(0)" id="saveLink" class="save-link" (click)="bookMark(tourPost)">Lưu</a>
         <a href="#" id="toTop" class="scrollToTop">To Top</a>
     </footer>
 

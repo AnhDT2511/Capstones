@@ -144,7 +144,7 @@
 
                         <div class="">
                             <button type="button" class="btn btn-warning" (click)="linkRefShow = !linkRefShow" style="margin-right: 5px;">Dẫn link tham khảo</button>
-                            <button type="button" class="btn btn-info" routerLink="/main/profile/createPost/0">Viết hành trình mới</button>
+                            <button type="button" class="btn btn-info" routerLink="/main/profile/0/createPost/0">Viết hành trình mới</button>
                         </div>
 
                         <div id="linkRef" [hidden] = "!linkRefShow">
@@ -187,8 +187,8 @@
         <div class="btn-function text-right">
             <button type="button" class="btn btn-primary" (click)="saveGroupTour()">
                 <i class="fa fa-paper-plane" aria-hidden="true"></i>Đăng bài</button>
-            <button type="button" class="btn btn-warning">
-                <i class="fa fa-eye" aria-hidden="true"></i>Xem trước</button>
+            <!-- <button type="button" class="btn btn-warning">
+                <i class="fa fa-eye" aria-hidden="true"></i>Xem trước</button> -->
             <button type="button" class="btn btn-danger">
                 <i class="fa fa-times" aria-hidden="true"></i>Hủy</button>
         </div>

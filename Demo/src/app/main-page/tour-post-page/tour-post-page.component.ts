@@ -82,6 +82,7 @@ export class TourPostPageComponent implements OnInit {
         });
 
         this.commonService.getAccountInfo(this.tourPost.accountID, data => {
+          this.tourPost['authorID'] = data.id;
           this.tourPost['level'] = data.level;
         });
       }, error => {
@@ -95,7 +96,28 @@ export class TourPostPageComponent implements OnInit {
   nagivateProfile() {
     this.utilityService.navigate(UrlConstants.PROFILE);
   }
-
+  showPersonalInfo(){
+    this.utilityService.navigate('/main/profile/'+ this.tourPost.authorID);
+  }
+  bookMark(tourPost: any){
+    if (this.user != null) {
+      let _bookmark = {
+        'tourPostID' : tourPost.id,
+        'accountID' : this.user.id,
+        'deleted' : 0,
+        'createdTime' : Date.now()
+      };
+      this.dataService.post('/user/account/'+ this.user.id +'/Marking/',_bookmark).subscribe((response: any) => {
+        console.log(response);
+      }, error => {
+      });
+      this.notifyService.printSuccessMessage('Lưu bài viết thành công!');
+    } else if (this.user != null && tourPost.liked) {
+      
+    } else {
+      this.notifyService.printErrorMessage('Xin hãy đăng nhập trước khi thực hiện hành động này!');
+    }
+  }
 
   sendComment() {
     if (this.user != null) {
@@ -137,7 +159,6 @@ export class TourPostPageComponent implements OnInit {
   }
 
   likeTourPost(tourPost: any) {
-    console.log(tourPost.liked);
     if (this.user != null && !tourPost.liked) {
       let _like = new Like(null, tourPost.id, this.user.id, 0);
       this.dataService.post('/tours/post/' + tourPost.id + '/Like', _like).subscribe((response: any) => {

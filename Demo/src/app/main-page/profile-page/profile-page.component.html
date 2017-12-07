@@ -62,7 +62,7 @@
                     <span class="sr-only">Toggle navigation</span>
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#" routerLink="/main/home" style="letter-spacing: 2px; color: #00d26c;">TRIPNET</a>
+                <a class="navbar-brand page-scroll" href="#" routerLink="/main" style="letter-spacing: 2px; color: #00d26c;">TRIPNET</a>
             </div>
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -83,12 +83,19 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu main-menu">
-                            <li>
-                                <a href="javascript:void(0)" data-toggle="modal" data-target="#modalMyInfo">
+                            <li [hidden]="!viewPersionInfo">
+                                <a href="javascript:void(0)" routerLink="/main/profile/0">
+                                    <i class="fa fa-user" aria-hidden="true"></i> Trang Cá Nhân
+                                </a>
+                                <!-- <app-text-change-info [userInfo]="user"></app-text-change-info> -->
+                            </li>
+                            <li [hidden]="viewPersionInfo">
+                                <a href="javascript:void(0)" (click)="openChangeInfo()">
                                     <i class="fa fa-user" aria-hidden="true"></i> Thông tin
                                 </a>
+                                <!-- <app-text-change-info [userInfo]="user"></app-text-change-info> -->
                             </li>
-                            <li>
+                            <li [hidden]="viewPersionInfo">
                                 <a href="javascript:void(0)" (click)="openChangePass()">
                                     <i class="fa fa-key" aria-hidden="true"></i> Đổi mật khẩu
                                 </a>
@@ -184,10 +191,19 @@
 
     </div>
 </div>
+
 <div id="" class="container">
     <div class="col-xs-12 col-sm-3 col-md-3 profile-side">
         <div class="profile-img">
-            <ngx-avatar size="261" cornerRadius="4" [round]="false" name={{userDetails.fullName}}></ngx-avatar>
+            <img src="../assets/img/default-user-image.png" alt="Avatar" class="image">
+            <div class="overlay" [hidden] = "viewPersionInfo">
+                <div class="text">
+                    <a href="">
+                        <i class="fa fa-camera-retro" aria-hidden="true"></i>Cập nhật ảnh đại diện
+                    </a>
+                </div>
+            </div>
+            <!-- <ngx-avatar size="261" cornerRadius="4" [round]="false" name={{userDetails.fullName}}></ngx-avatar> -->
         </div>
 
         <div class="level-info">
@@ -219,17 +235,17 @@
                 </div>
             </div>
         </div>
-        <div class="btn-tour">
-            <a href="javascript:void(0)" class="btn-overview" routerLink="overview">
+        <div class="btn-tour" [hidden]="viewPersionInfo">
+            <a href="javascript:void(0)" class="btn-overview" routerLink="/main/profile/0">
                 <i class="fa fa-address-card-o" aria-hidden="true"></i> Thông Tin Cá Nhân
             </a>
         </div>
-        <div class="btn-tour">
+        <div class="btn-tour" [hidden]="viewPersionInfo">
             <a href="javascript:void(0)" class="btn-create-tour" routerLink="createTour/0">
                 <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Tạo chuyến đi
             </a>
         </div>
-        <div class="btn-post">
+        <div class="btn-post" [hidden]="viewPersionInfo">
             <a href="javascript:void(0)" class="btn-create-post" routerLink="createPost/0">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Tạo bài mới
             </a>

@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
     this.registerService.register(this.model).subscribe(data => {
       if (data !== null) {
         this.notificationService.printSuccessMessage(MessageContstants.REGISTER_SUCCESS);
-        this.router.navigate([UrlConstants.LOGIN]);
+        this.router.navigate([UrlConstants.HOME]);
         //console.log(data);
       } else {
         this.notificationService.printErrorMessage(MessageContstants.REGISTER_FAILED);

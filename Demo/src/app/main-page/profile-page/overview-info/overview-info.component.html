@@ -9,18 +9,18 @@
                 <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard
             </a>
         </li>
-        <li>
+        <!-- <li>
             <a data-toggle="tab" href="#activities">
                 <i class="fa fa-bell-o" aria-hidden="true"></i> Hoạt động
             </a>
-        </li>
+        </li> -->
         <li>
             <a data-toggle="tab" href="#manage-post">
                 <i class="fa fa-file-text-o" aria-hidden="true"></i> Quản lý bài đăng
             </a>
         </li>
-        <li>
-            <a data-toggle="tab" href="#save-link">
+        <li *ngIf = "!viewPersionInfo">
+            <a data-toggle="tab" href="#save-link" >
                 <i class="fa fa-link" aria-hidden="true"></i> Link đã lưu
             </a>
         </li>

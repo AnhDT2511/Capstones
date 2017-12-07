@@ -45,13 +45,17 @@ export class CreateTourComponent implements OnInit {
     let date = Date.now();
     let _groupTour: TourPost = new TourPost(0, this.user.id, this.groupTour.startPlaceID, this.groupTour.endPlaceID, this.groupTour.duration, this.groupTour.tourArticleTitle, 0,
       date, this.groupTour.description, 0, this.groupTour.note, this.groupTour.prepare, 1, this.groupTour.startTime, this.groupTour.category, this.groupTour.referenceLink);
+      console.log(_groupTour);
     if (this.id == 0) {
       this.commonService.createPost(_groupTour, data => {
+        this.notifyService.printSuccessMessage("Tạo chuyến đi thành công");
+        this.utiliService.navigate('/main/profile/0');
       })
     }else{
-      console.log(_groupTour);
       _groupTour.id = this.id;
       this.commonService.updatePost(_groupTour, data => {
+        this.notifyService.printSuccessMessage("Cập nhật chuyến đi thành công");
+        this.utiliService.navigate('/main/grouptour/' + _groupTour.id);
       })
     }
 
