@@ -1,0 +1,11 @@
+<form name="form" (ngSubmit)="f.form.valid && savePassChanged() " #f="ngForm" novalidate>
+  <h1 mat-dialog-title>Thay đổi thông tin cá nhân</h1>
+  <mat-form-field>
+    <input matInput placeholder="Tên hiển thị:" [(ngModel)]="user.userName" #userName="ngModel" name="userName" required>
+  </mat-form-field>
+  <div mat-dialog-actions>
+    <button type="submit" [disabled]="model.newpwd != model.renewpwd || !f.form.valid" mat-raised-button>
+      <i class="fa fa-check" aria-hidden="true"></i> Lưu </button>
+    <button mat-button (click)="onNoClick()" tabindex="-1">No Thanks</button>
+  </div>
+</form>
