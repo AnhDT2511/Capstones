@@ -7,7 +7,6 @@ import { NotificationService } from '../../shared/service/notification.service';
 import { DashboardPageModule } from './dashboard-page/dashboard-page.module';
 import { UserManagementPageModule } from './user-management-page/user-management-page.module';
 import { PostManagementPageModule } from './post-management-page/post-management-page.module';
-import { PlaceManagementPageModule } from './place-management-page/place-management-page.module';
 
 @NgModule({
     imports: [
@@ -17,7 +16,6 @@ import { PlaceManagementPageModule } from './place-management-page/place-managem
         DashboardPageModule,
         UserManagementPageModule,
         PostManagementPageModule,
-        PlaceManagementPageModule
     ],
     declarations: [
         AdminPageComponent

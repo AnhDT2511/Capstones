@@ -1,4 +1,3 @@
-import { Report } from './../../shared/domain/report.user';
 import { Component, OnInit } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 import { UtilityService } from '../../shared/service/utility.service';
@@ -12,7 +11,6 @@ import { debug } from 'util';
 import { TourPost } from '../../shared/domain/tourPost.user';
 import { Like } from '../../shared/domain/like.user';
 import { Comment } from '../../shared/domain/comment.user';
-import { Bookmark } from '../../shared/domain/bookmark.user';
 import { resetFakeAsyncZone } from '@angular/core/testing';
 
 @Component({
@@ -57,6 +55,9 @@ export class TourPostPageComponent implements OnInit {
       this.tourPostId = params.id;
       this.dataService.get('/tours/post/' + params.id).subscribe((response: any) => {
         this.tourPost = response;
+        this.tourPost.postViewNumber += 1 ; 
+        this.commonService.updatePost(this.tourPost, data => {
+        });
         this.dataService.get('/tours/post/' + response.id + '/like/get-all').subscribe((response: any) => {
           this.tourPost["countLike"] = response.filter(item => item.deleted == 0).length;
           if (response != null) {

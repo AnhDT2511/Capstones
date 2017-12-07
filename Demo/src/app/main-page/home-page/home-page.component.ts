@@ -74,6 +74,7 @@ export class HomePageComponent implements OnInit {
 
   countLike() {
     for (var i in this.listTourPost) {
+      //countLike
       this.dataService.get('/tours/post/' + this.listTourPost[i].id + '/like/get-all').subscribe((response: any) => {
         // console.log(response);
         if (response != null) {
@@ -92,6 +93,12 @@ export class HomePageComponent implements OnInit {
         }
       }, error => {
       });
+      //count comment
+      this.dataService.get('/tours/post/' + this.listTourPost[i].id + '/comment/get-all').subscribe((response: any) => {
+        this.listTourPost[this.listTourPost.findIndex(item => item.id === response[0].tourPostID)].comment = response.length;
+      }, error => {
+      });
+      console.log(this.listTourPost);
     }
     for (let i = 0; i < 3; i++) {
       if (this.listTourPost[i]) {
@@ -113,12 +120,14 @@ export class HomePageComponent implements OnInit {
           _tourPost['countLike'] = 0;
           _tourPost['liked'] = false;
           _tourPost['likedID'] = 0;
+          _tourPost['comment'] = 0;
           this.listTourPost.push(_tourPost);
         }else{
           var _tourPost = this.getTourPost(response[i]);
           _tourPost['countLike'] = 0;
           _tourPost['liked'] = false;
           _tourPost['likedID'] = 0;
+          _tourPost['comment'] = 0;
           this.listGroupTour.push(_tourPost);
         }
       }

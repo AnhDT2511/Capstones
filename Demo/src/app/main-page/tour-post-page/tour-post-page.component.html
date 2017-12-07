@@ -207,6 +207,19 @@
             <h5>Bình luận </h5>
             <a href="javascript:void(0)" class="closebtn" (click)="openCloseCmt()">&times;</a>
         </header>
+        <main>
+            <!-- Left-aligned media object -->
+            <div class="media" *ngFor="let item of listComment ; let i = index;">
+                <div class="media-left">
+                    <img src="/assets/img/default-user-image.png" class="media-object" style="width:60px">
+                </div>
+                <div class="media-body">
+                    <h5 class="media-heading">{{item.userName | uppercase}}</h5>
+                    <p>{{item.content}}</p>
+                </div>
+            </div>
+            <hr>
+        </main>
         <div class="write-comment">
             <!-- <form class="form-horizontal" action=""> -->
             <div class="form-group">
@@ -226,19 +239,7 @@
             </div>
             <!-- </form> -->
         </div>
-        <main>
-            <!-- Left-aligned media object -->
-            <div class="media" *ngFor="let item of listComment ; let i = index;">
-                <div class="media-left">
-                    <img src="/assets/img/default-user-image.png" class="media-object" style="width:60px">
-                </div>
-                <div class="media-body">
-                    <h5 class="media-heading">{{item.userName | uppercase}}</h5>
-                    <p>{{item.content}}</p>
-                </div>
-            </div>
-            <hr>
-        </main>
+
     </div>
 
     <!-- Begin: Report -->
