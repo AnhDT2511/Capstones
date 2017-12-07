@@ -13,43 +13,9 @@ import { DataService } from './../../../shared/service/data.service';
 })
 
 export class UserManagementPageComponent implements OnInit {
-  
-  listUser: any;
 
-  settings = {
-    columns: {
-      id: {
-        title: 'ID'
-      },
-      username: {
-        title: 'User Name'
-      },
-      name: {
-        title: 'Full Name'
-      },
-      dob: {
-        title: 'DOB'
-      },
-      Job: {
-        title: 'Job'
-      },
-      gender: {
-        title: 'Gender'
-      },
-      address: {
-        title: 'Address'
-      },
-      phone: {
-        title: 'Phone'
-      },
-      point: {
-        title: 'Point'
-      }
-    }
-  };
-
-  model: any = {};
-  returnUrl: string;
+  data = [];
+  public filterQuery = '';
 
   constructor(private authenService: AuthenService,
     private notificationService: NotificationService,
@@ -62,8 +28,10 @@ export class UserManagementPageComponent implements OnInit {
 
   getAllUser() {
     this.dataService.get('/user/account/get-all').subscribe((response: any) => {
-      this.listUser = response;
+      this.data = response;
+      console.log(response);
     }, error => {
     });
   }
+  
 }

@@ -1,1 +1,53 @@
-<ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
+<!-- <ng2-smart-table [settings]="settings" [source]="listUser"></ng2-smart-table> -->
+<div class="panel panel-primary">
+    <div class="panel-heading">DANH SÁCH BÀI ĐĂNG </div>
+    <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
+        <thead>
+            <tr>
+                <th style="width: 5%">
+                    <mfDefaultSorter by="name">ID</mfDefaultSorter>
+                </th>
+                <th style="width: 25%">
+                    <mfDefaultSorter by="tourArticleTitle">Tiêu đề</mfDefaultSorter>
+                </th>
+                <th style="width: 40%">
+                    <mfDefaultSorter by="description">Mô tả</mfDefaultSorter>
+                </th>
+                <th style="width: 10%">
+                    <mfDefaultSorter by="duration">Thời gian</mfDefaultSorter>
+                </th>
+                <th style="width: 10%">
+                    <mfDefaultSorter by="accountID">Đăng bởi</mfDefaultSorter>
+                </th>
+                <th style="width: 10%">
+                    <mfDefaultSorter>Action</mfDefaultSorter>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="6">
+                    Tìm kiếm bài đăng
+                    <input class="form-control" [(ngModel)]="filterQuery"/>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of mf.data">
+                <td>{{item.id}}</td>
+                <td>{{item.tourArticleTitle}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.duration}}</td>
+                <td>{{item.accountID}}</td>
+                <td>
+                    <button class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">
+                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

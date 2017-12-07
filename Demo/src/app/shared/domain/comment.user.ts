@@ -11,5 +11,5 @@ export class Comment {
         public tourPostID: any;
         public commentByID: any;
         public deleted: any = 0;
-        public createTime: any ;
+        public createTime: any;
     }

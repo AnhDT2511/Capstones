@@ -1,4 +1,4 @@
-
+import { Report } from './../../shared/domain/report.user';
 import { Component, OnInit } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 import { UtilityService } from '../../shared/service/utility.service';
@@ -12,6 +12,7 @@ import { debug } from 'util';
 import { TourPost } from '../../shared/domain/tourPost.user';
 import { Like } from '../../shared/domain/like.user';
 import { Comment } from '../../shared/domain/comment.user';
+import { Bookmark } from '../../shared/domain/bookmark.user';
 import { resetFakeAsyncZone } from '@angular/core/testing';
 
 @Component({
@@ -24,13 +25,14 @@ import { resetFakeAsyncZone } from '@angular/core/testing';
 export class TourPostPageComponent implements OnInit {
   user: any = this.authentication.getLoggedInUser();
   tourPostId: string;
-  tourPost: any = { 'liked': false, 'likedID': 0, 'countLiked': 0 };
+  tourPost: any = { 'liked': false, 'likedID': 0, 'countLiked': 0, 'bookmark': false };
   tourByDay: any;
   tourByDayDetail: any = [];
   statusComment: boolean = true;
   statusReport: boolean = true;
   hideForm: boolean = true;
   comment: string = "";
+  report: any;
   listPlace: any = ['Ha Noi',
     'Da Nang',
     'Sai Gon',
@@ -93,6 +95,7 @@ export class TourPostPageComponent implements OnInit {
   nagivateProfile() {
     this.utilityService.navigate(UrlConstants.PROFILE);
   }
+
 
   sendComment() {
     if (this.user != null) {
@@ -179,6 +182,4 @@ export class TourPostPageComponent implements OnInit {
     this.notifyService.printSuccessMessage('Đăng xuất thành công!');
     // this.notifyService.printConfirmationDialog("Bạn có chắc chắn muốn đăng xuất?" , this.resetLogin)
   }
-
-
 }

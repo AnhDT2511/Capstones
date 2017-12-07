@@ -84,7 +84,7 @@ export class HomePageComponent implements OnInit {
           } else if (this.user && response.findIndex(item => item.likeByID === this.user.id && item.deleted == 1) != -1) {
             this.listTourPost[this.listTourPost.findIndex(item => item.id === response[0].tourPostID)].liked = true;
             this.listTourPost[this.listTourPost.findIndex(item => item.id === response[0].tourPostID)].likedID = 0
-          } else{
+          } else {
             this.listTourPost[this.listTourPost.findIndex(item => item.id === response[0].tourPostID)].liked = false;
           }
           var item = this.listTourPost.findIndex(item => item.id === response[0].tourPostID);

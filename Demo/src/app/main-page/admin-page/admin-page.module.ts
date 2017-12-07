@@ -4,18 +4,20 @@ import { CommonModule } from '@angular/common';
 import { AdminPageComponent } from './admin-page.component';
 import { AdminPageRouter } from './admin-page.router';
 import { NotificationService } from '../../shared/service/notification.service';
+import { DashboardPageModule } from './dashboard-page/dashboard-page.module';
 import { UserManagementPageModule } from './user-management-page/user-management-page.module';
 import { PostManagementPageModule } from './post-management-page/post-management-page.module';
-import { DashboardPageModule } from './dashboard-page/dashboard-page.module';
+import { PlaceManagementPageModule } from './place-management-page/place-management-page.module';
 
 @NgModule({
     imports: [
         AdminPageRouter,
         CommonModule,
         FormsModule,
+        DashboardPageModule,
         UserManagementPageModule,
         PostManagementPageModule,
-        DashboardPageModule
+        PlaceManagementPageModule
     ],
     declarations: [
         AdminPageComponent

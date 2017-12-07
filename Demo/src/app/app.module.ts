@@ -10,7 +10,6 @@ import { CreatePostService } from './shared/service/createpost.service';
 import { SharedModule } from '../app/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { AvatarModule } from 'ngx-avatar';
 import { UploadComponent } from './shared/upload/upload.component';
 
@@ -26,7 +25,6 @@ import { UploadComponent } from './shared/upload/upload.component';
     MatTooltipModule,
     BrowserAnimationsModule,
     SharedModule,
-    Ng2SmartTableModule,
     AvatarModule
     // AngularFireModule.initializeApp(firebaseConfig)
   ],
