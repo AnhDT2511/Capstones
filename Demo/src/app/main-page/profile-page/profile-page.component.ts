@@ -28,7 +28,9 @@ export class ProfilePageComponent implements OnInit {
 
 
   user: any = {};
+  userTemp: any = {};
   userDetails: any = {};
+  userDetailsTemp: any = {};
   valid = true;
   // model: any = {};
   viewPersionInfo: boolean = true;
@@ -54,9 +56,9 @@ export class ProfilePageComponent implements OnInit {
         this.viewPersionInfo = true;
       }
       localStorage.removeItem('userID');
-      localStorage.setItem('userID',this.user.id);
+      localStorage.setItem('userID', this.user.id);
       localStorage.removeItem('viewPersional');
-      localStorage.setItem('viewPersional',this.viewPersionInfo.toString());
+      localStorage.setItem('viewPersional', this.viewPersionInfo.toString());
       this.getUserDetails(this.user.id);
     });
   }
@@ -69,6 +71,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   getUserDetails(id: string) {
@@ -119,7 +122,14 @@ export class ProfilePageComponent implements OnInit {
     }
 
   }
-
+  openInfo(){
+    this.userTemp = JSON.parse(JSON.stringify(this.user));
+    this.userDetailsTemp = JSON.parse(JSON.stringify(this.userDetails));
+  }
+  closeInfo() {
+    this.user = this.userTemp;
+    this.userDetails = this.userDetailsTemp;
+  }
   logout() {
     window.localStorage.removeItem('CURRENT_USER');
     this.notifyService.printSuccessMessage('Đăng xuất thành công!');

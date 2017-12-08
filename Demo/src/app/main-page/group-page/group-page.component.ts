@@ -49,6 +49,9 @@ export class GroupPageComponent implements OnInit {
       this.dataService.get('/tours/post/' + params.id).subscribe((response: any) => {
         this.groupTour = response;
         this.loadComment();
+        this.groupTour.postViewNumber += 1 ; 
+        this.commonService.updatePost(this.groupTour, data => {
+        });
       }, error => {
       });
     });
