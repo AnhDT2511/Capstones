@@ -25,7 +25,7 @@
                     </li>
                 </ul>
                 <ul class="pull-right">
-                    <li class="dropdown">
+                    <!-- <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <i class="fa fa-globe" aria-hidden="true"></i> Ngôn ngữ
                             <span class="caret"></span>
@@ -42,8 +42,8 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
-                    <li>
+                    </li> -->
+                    <!-- <li>
                         <span class="rot">|</span>
                     </li>
                     <li>
@@ -64,15 +64,68 @@
                         <a href="javascript:void(0)" (click)="nagivateProfile()" *ngIf="user && user.userName">
                             <i class="fa fa-user-o" aria-hidden="true"></i> {{user.userName | uppercase}}
                         </a>
+                    </li> -->
+                    <li>
+                        <a href="">
+                            <i class="fa fa-question-circle" aria-hidden="true"></i> Giúp đỡ
+                        </a>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="container logox">
-            <h1>
-                <a href="index.html">TRIPNET</a>
-            </h1>
-        </div>
+
+        <nav id="mainNav" class="navbar navbar-default">
+            <div class="container padding-zero">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand page-scroll" href="index.html" style="letter-spacing: 2px; color: #fff;">TRIPNET</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="searchResult.html">
+                                <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" routerLink="/main/profile/0/createTour/0">
+                                <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Tạo chuyến đi
+                            </a>
+                        </li>
+                        <!-- <li>
+                                <a href="login.html">
+                                    <i class="fa fa-sign-in" aria-hidden="true" style="font-size: 18px;"></i> Đăng nhập
+                                </a>
+                            </li> -->
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+                                <i class="fa fa-user-circle-o" aria-hidden="true"></i> {{user.userName | uppercase}}
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu main-menu">
+                                <li>
+                                    <a href="javascript:void(0)" (click)="nagivateProfile()">
+                                        <i class="fa fa-user" aria-hidden="true"></i> Trang cá nhân
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" (click)="logout()">
+                                        <i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
         <div class="container text-center">
             <h1 class="color-run" routerLink="/main/home">Chi tiết hành trình</h1>
             <h4>{{tourPost.tourArticleTitle}}</h4>
@@ -343,6 +396,6 @@
         <a href="javascript:void(0)" id="saveLink" class="save-link" (click)="bookMark(tourPost)">Lưu</a>
         <a href="#" id="toTop" class="scrollToTop">To Top</a>
     </footer>
-
 </div>
+
 <!-- Begin: Comment -->

@@ -12,7 +12,7 @@ import { debug } from 'util';
 
 @Component({
   selector: 'app-home-page',
-  encapsulation: ViewEncapsulation.None,
+  // encapsulation: ViewEncapsulation.None,
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })

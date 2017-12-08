@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 import { UtilityService } from '../../shared/service/utility.service';
 import { UrlConstants } from '../../shared/common/url.constants';
@@ -12,6 +12,7 @@ import { TourPost } from '../../shared/domain/tourPost.user';
 import { Like } from '../../shared/domain/like.user';
 import { Comment } from '../../shared/domain/comment.user';
 import { resetFakeAsyncZone } from '@angular/core/testing';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-tour-post-page',
@@ -20,7 +21,8 @@ import { resetFakeAsyncZone } from '@angular/core/testing';
   styleUrls: ['./tour-post-page.component.css']
 })
 
-export class TourPostPageComponent implements OnInit {
+export class TourPostPageComponent implements OnInit, OnDestroy {
+
   user: any = this.authentication.getLoggedInUser();
   tourPostId: string;
   tourPost: any = { 'liked': false, 'likedID': 0, 'countLiked': 0, 'bookmark': false };
@@ -31,6 +33,7 @@ export class TourPostPageComponent implements OnInit {
   hideForm: boolean = true;
   comment: string = "";
   report: any;
+  randomIndex : any;
   listPlace: any = ['Ha Noi',
     'Da Nang',
     'Sai Gon',
@@ -38,6 +41,12 @@ export class TourPostPageComponent implements OnInit {
     'Hai Phong',
     'Bac Lieu',
     'Nha Trang'];
+  textArray = [
+    'red',
+    'blue',
+    'purple',
+    'green',
+  ];
   listComment: any;
 
   public tourpostId: number;
@@ -48,14 +57,15 @@ export class TourPostPageComponent implements OnInit {
     private authentication: AuthenService,
     private dataService: DataService,
     private activatedRoute: ActivatedRoute,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private renderer: Renderer2
   ) {
     // let localData = JSON.parse(localStorage.getItem('tourPost'));
     this.activatedRoute.params.subscribe((params: Params) => {
       this.tourPostId = params.id;
       this.dataService.get('/tours/post/' + params.id).subscribe((response: any) => {
         this.tourPost = response;
-        this.tourPost.postViewNumber += 1 ; 
+        this.tourPost.postViewNumber += 1;
         this.commonService.updatePost(this.tourPost, data => {
         });
         this.dataService.get('/tours/post/' + response.id + '/like/get-all').subscribe((response: any) => {
@@ -92,29 +102,34 @@ export class TourPostPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.randomIndex = Math.floor(Math.random() * this.textArray.length);
+    this.renderer.addClass(document.body, 'body-' + this.textArray[this.randomIndex]);
   }
-
+  ngOnDestroy(): void {
+    this.renderer.removeClass(document.body, 'body-'+ this.textArray[this.randomIndex]);
+  }
   nagivateProfile() {
     this.utilityService.navigate(UrlConstants.PROFILE);
   }
-  showPersonalInfo(){
-    this.utilityService.navigate('/main/profile/'+ this.tourPost.authorID);
+  showPersonalInfo() {
+    this.utilityService.navigate('/main/profile/' + this.tourPost.authorID);
   }
-  bookMark(tourPost: any){
+  
+  bookMark(tourPost: any) {
     if (this.user != null) {
       let _bookmark = {
-        'tourPostID' : tourPost.id,
-        'accountID' : this.user.id,
-        'deleted' : 0,
-        'createdTime' : Date.now()
+        'tourPostID': tourPost.id,
+        'accountID': this.user.id,
+        'deleted': 0,
+        'createdTime': Date.now()
       };
-      this.dataService.post('/user/account/'+ this.user.id +'/Marking/',_bookmark).subscribe((response: any) => {
+      this.dataService.post('/user/account/' + this.user.id + '/Marking/', _bookmark).subscribe((response: any) => {
         console.log(response);
       }, error => {
       });
       this.notifyService.printSuccessMessage('Lưu bài viết thành công!');
     } else if (this.user != null && tourPost.liked) {
-      
+
     } else {
       this.notifyService.printErrorMessage('Xin hãy đăng nhập trước khi thực hiện hành động này!');
     }
