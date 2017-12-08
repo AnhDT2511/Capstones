@@ -32,6 +32,5 @@ export class UserManagementPageComponent implements OnInit {
       console.log(response);
     }, error => {
     });
-  }
-  
+  } 
 }
