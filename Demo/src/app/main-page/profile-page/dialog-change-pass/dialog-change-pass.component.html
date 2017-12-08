@@ -1,5 +1,5 @@
 <form name="form" (ngSubmit)="f.form.valid && savePassChanged() " #f="ngForm" novalidate>
-<h1 mat-dialog-title>Đổi Mật Khẩu</h1>
+  <h1 mat-dialog-title>Đổi Mật Khẩu</h1>
   <div mat-dialog-content>
     <mat-form-field [color]="!passOldValid ? 'warn' : 'primary'" fullWidth={true}>
       <input matInput [type]="hide ? 'password' : 'text'" placeholder="Nhập mật khẩu cũ" [(ngModel)]="model.oldpwd" #oldpwd="ngModel"

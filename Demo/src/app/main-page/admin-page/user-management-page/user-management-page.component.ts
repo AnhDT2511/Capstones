@@ -33,4 +33,13 @@ export class UserManagementPageComponent implements OnInit {
     }, error => {
     });
   } 
+
+  openInfo(){
+    // this.userTemp = JSON.parse(JSON.stringify(this.user));
+    // this.userDetailsTemp = JSON.parse(JSON.stringify(this.userDetails));
+  }
+  closeInfo() {
+      // this.user = this.userTemp;
+      // this.userDetails = this.userDetailsTemp;
+  }
 }

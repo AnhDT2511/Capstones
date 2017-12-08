@@ -14,10 +14,12 @@ import { Router } from '@angular/router';
 
 export class DashboardPageComponent implements OnInit {
 
-  model: any = {};
-  returnUrl: string;
   listUser: any;
   listPost: any;
+  listComment: any;
+  public numUsers;
+  public numPosts;
+  public numComments;
 
   constructor(private authenService: AuthenService,
     private notificationService: NotificationService,
@@ -27,11 +29,13 @@ export class DashboardPageComponent implements OnInit {
   ngOnInit() {
     this.getAllUser();
     this.getAllPost();
+    this.getAllComment();
   }
 
   getAllUser() {
     this.dataService.get('/user/account/get-all').subscribe((response: any) => {
       this.listUser = response;
+      this.numUsers = response.length;
     }, error => {
     });
   }
@@ -39,6 +43,15 @@ export class DashboardPageComponent implements OnInit {
   getAllPost() {
     this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
       this.listPost = response;
+      this.numPosts = response.length;
+    }, error => {
+    });
+  }
+
+  getAllComment() {
+    this.dataService.get('/tours/post/comment/get-all').subscribe((response: any) => {
+      this.listComment = response;
+      this.numComments = response.length;
     }, error => {
     });
   }
