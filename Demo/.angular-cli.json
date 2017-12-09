@@ -33,6 +33,7 @@
         "../src/assets/js/scrollToTop.js",
         "../src/assets/js/smoothScrolling.js",
         "../src/assets/js/nav.js",
+        "../src/assets/js/timeline.js",
         "../systemjs.config.js"
       ],
       "environmentSource": "environments/environment.ts",

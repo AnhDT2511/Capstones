@@ -107,81 +107,25 @@
         <h3 style="margin-top: 18px;">Danh sách kết quả: </h3>
 
         <hr>
-        <div class="media">
+        <div class="media" *ngFor="let item of listResult">
             <div class="media-left">
-                <img src="../assets/img/default-user-image.png" class="media-object" style="width:80px">
+                <img src="/assets/img/default-user-image.png" class="media-object" style="width:80px">
             </div>
             <div class="media-body">
-                <h4 class="media-heading">Mộc châu - mùa nắng vàng</h4>
-                <p>Swift là một trong những dòng laptop đầu tiên được Acer nâng cấp với vi xử lý Kaby Lake, cụ thể là các phiên
-                    bản Core i đầu 8, dòng ULV nhưng được cải tiến với 4 nhân, 8 luồng hứa hẹn mang lại hiệu năng tốt hơn
-                    so với các thế hệ trước.</p>
+                <h4 class="media-heading">
+                    <a href="javascript:void(0)" (click)="showDetail(item)">{{item.tourArticleTitle}}</a>
+                </h4>
+                <p>{{item.description}}
+                </p>
                 <div class="f-size">
                     <i class="fa fa-eye " aria-hidden="true" style="font-size: 17px; margin-left: 0;"></i> 1225
-                    <i class="fa fa-heart " aria-hidden="true"></i> 550
+                    <i class="fa fa-heart " aria-hidden="true"></i> {{item.countLike}}
                     <i class="fa fa-comment " aria-hidden="true"></i> 440
                     <i class="fa fa-flag" aria-hidden="true"></i> 0
                 </div>
             </div>
+            <hr>
         </div>
-
-        <hr>
-        <div class="media">
-            <div class="media-left">
-                <img src="../assets/img/default-user-image.png" class="media-object" style="width:80px">
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading">Mộc châu - mùa nắng vàng</h4>
-                <p>Swift là một trong những dòng laptop đầu tiên được Acer nâng cấp với vi xử lý Kaby Lake Refresh, cụ thể là
-                    các phiên bản Core i đầu 8, dòng ULV nhưng được cải tiến với 4 nhân, 8 luồng hứa hẹn mang lại hiệu năng
-                    tốt hơn so với các thế hệ trước.</p>
-                <div class="f-size">
-                    <i class="fa fa-eye " aria-hidden="true" style="font-size: 17px; margin-left: 0;"></i> 1225
-                    <i class="fa fa-heart " aria-hidden="true"></i> 550
-                    <i class="fa fa-comment " aria-hidden="true"></i> 440
-                    <i class="fa fa-flag" aria-hidden="true"></i> 0
-                </div>
-            </div>
-        </div>
-
-        <hr>
-        <div class="media">
-            <div class="media-left">
-                <img src="../assets/img/default-user-image.png" class="media-object" style="width:80px">
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading">Mộc châu - mùa nắng vàng</h4>
-                <p>Swift là một trong những dòng laptop đầu tiên được Acer nâng cấp với vi xử lý Kaby Lake Refresh, cụ thể là
-                    các phiên bản Core i đầu 8, dòng ULV nhưng được cải tiến với 4 nhân, 8 luồng hứa hẹn mang lại hiệu năng
-                    tốt hơn so với các thế hệ trước.</p>
-                <div class="f-size">
-                    <i class="fa fa-eye " aria-hidden="true" style="font-size: 17px; margin-left: 0;"></i> 1225
-                    <i class="fa fa-heart " aria-hidden="true"></i> 550
-                    <i class="fa fa-comment " aria-hidden="true"></i> 440
-                    <i class="fa fa-flag" aria-hidden="true"></i> 0
-                </div>
-            </div>
-        </div>
-
-        <hr>
-        <div class="media">
-            <div class="media-left">
-                <img src="../assets/img/default-user-image.png" class="media-object" style="width:80px">
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading">Mộc châu - mùa nắng vàng</h4>
-                <p>Swift là một trong những dòng laptop đầu tiên được Acer nâng cấp với vi xử lý Kaby Lake Refresh, cụ thể là
-                    các phiên bản Core i đầu 8, dòng ULV nhưng được cải tiến với 4 nhân, 8 luồng hứa hẹn mang lại hiệu năng
-                    tốt hơn so với các thế hệ trước.</p>
-                <div class="f-size">
-                    <i class="fa fa-eye " aria-hidden="true" style="font-size: 17px; margin-left: 0;"></i> 1225
-                    <i class="fa fa-heart " aria-hidden="true"></i> 550
-                    <i class="fa fa-comment " aria-hidden="true"></i> 440
-                    <i class="fa fa-flag" aria-hidden="true"></i> 0
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <div class="col-xs-12 col-sm-4 col-md-4 search-box">
@@ -193,12 +137,12 @@
                 <div class="form-g">
                     <label>Loại tìm kiếm:</label>
                     <div class="input">
-                        <select class="input-text">
-                            <option>Bài đăng</option>
-                            <option>Chuyến đi</option>
-                            <option>Địa điểm</option>
-                            <option>Thể loại</option>
-                            <option>Ngày</option>
+                        <select class="input-text" name="type-search" [(ngModel)]="typeSearch">
+                            <option value="1">Bài đăng</option>
+                            <option value="2"> Chuyến đi</option>
+                            <option value="3">Địa điểm</option>
+                            <option value="4">Thể loại</option>
+                            <option value="5">Ngày</option>
                         </select>
                     </div>
                 </div>
@@ -206,14 +150,14 @@
                 <div class="form-g">
                     <label>Từ khóa tìm kiếm:</label>
                     <div class="input">
-                        <input type="text" class="input-text" name="typeSearch" placeholder="Nhập từ khóa">
+                        <input type="text" class="input-text" name="typeSearch" placeholder="Nhập từ khóa" [(ngModel)]="textSearch">
                     </div>
                 </div>
 
                 <div class="form-g">
                     <div class="input text-center">
                         <!-- <input type="submit" class="btn-search" name="btnSearch" value="Tìm kiếm"> -->
-                        <a class="btn btn-search" routerLink="/main/search" href="#">
+                        <a class="btn btn-search" (click)="searchByType()" href="javascript:void(0)">
                             <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
                         </a>
                     </div>

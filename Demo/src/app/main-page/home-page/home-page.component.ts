@@ -19,12 +19,19 @@ import { debug } from 'util';
 export class HomePageComponent implements OnInit {
 
   public user: any = this.authentication.getLoggedInUser();
-  public searchWord: any;
+  public searchWord: any = {};
   public listTourPost: any[] = [];
   public listTourPostFavoriteBefore: any[] = [];
   public listTourPostFavoriteAfter: any[] = [];
   public listGroupTour: any[] = [];
   countI = 0;
+  listTypeSearch = {
+    1 : 'title',
+    2 : 'title',
+    3 : 'place',
+    4 : 'category',
+    5 : 'duration',
+  }
   constructor(
     private utilityService: UtilityService,
     private notifyService: NotificationService,
@@ -35,8 +42,10 @@ export class HomePageComponent implements OnInit {
   ngOnInit() {
     this.getAllTourPost();
   }
-  search() {
-    console.log(this.searchWord);
+  search( id ) {
+    // console.log(id);
+    // console.log(this.searchWord);
+    this.utilityService.navigate('/main/search/'+id+'/'+this.searchWord[this.listTypeSearch[id]]);
   }
 
   likeTourPost(tourPost: any) {

@@ -16,7 +16,7 @@ const MainPage_Router: Routes = [
             // localhost:4200/main/profile 
             { path: 'profile/:id', loadChildren: './profile-page/profile-page.module#ProfilePageModule', canActivate : [AuthGuard] },
             // localhost:4200/main/search
-            { path: 'search', loadChildren: './search-page/search-page.module#SearchPageModule' },
+            { path: 'search/:id/:text', loadChildren: './search-page/search-page.module#SearchPageModule' },
             // localhost:4200/main/listpost
             { path: 'listpost', loadChildren: './list-post-page/list-post-page.module#ListPostPageModule' },
             // localhost:4200/main/grouptour

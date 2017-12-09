@@ -13,6 +13,41 @@ export class CommonService {
         private dataService: DataService
     ) { }
 
+    searchByTitle(text, callback: (data) => void) {
+        return this.dataService.get('/tours/post/title/' + text).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                callback(err);
+            }
+        );
+    }
+
+    searchByAccount(text, callback: (data) => void) {
+        console.log(text);
+        return this.dataService.get('/tours/post/name/' + text).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                callback(err);
+            }
+        );
+    }
+
+    searchByDuration(text, callback: (data) => void) {
+        console.log(text);
+        return this.dataService.get('/tours/post/duration/' + text).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                callback(err);
+            }
+        );
+    }
+
     getAccountInfo(id, callback: (data) => void) {
         // console.log(id);
         return this.dataService.get('/user/account/' + id).subscribe(
