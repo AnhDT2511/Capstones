@@ -126,11 +126,11 @@
         <div id="save-link" class="tab-pane fade">
             <div class="col-xs-12 col-sm-12 col-md-12 label-save-link">
                 <h3>Link đã lưu</h3>
-                <div class="save-link">
+                <div class="save-link" *ngFor="let item of listSaveLink">
                     <span class="icon">
                         <i class="fa fa-link" aria-hidden="true"></i>
                     </span>
-                    <a href=""> Mộc châu - mùa nắng vàng </a>
+                    <a href="/main/tourpost/{{item.id}}"  > {{item.tourArticleTitle}} </a>
                 </div>
             </div>
         </div>

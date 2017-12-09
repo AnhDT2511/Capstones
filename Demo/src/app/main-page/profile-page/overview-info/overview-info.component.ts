@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SystemConstants } from '../../../shared/common';
-import { DataService, UtilityService, NotificationService, CommonService } from '../../../shared/service';
+import { DataService, UtilityService, NotificationService, CommonService, AuthenService } from '../../../shared/service';
 import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
@@ -10,20 +10,24 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['../profile-page.component.css']
 })
 export class OverviewInfoComponent implements OnInit {
+  user: any;
   listTourPost: any = [];
   listGroupPost: any = [];
   id: any = 0;
-  viewPersionInfo : boolean = true;
+  viewPersionInfo: boolean = true;
+  listSaveLink: any = [];
   constructor(
     private dataService: DataService,
     private utilityService: UtilityService,
     private activatedRoute: ActivatedRoute,
-
+    private commonService: CommonService,
+    private authentication: AuthenService
   ) {
+    this.user = this.authentication.getLoggedInUser();
   }
 
   ngOnInit() {
-    if(localStorage.getItem('viewPersional') != "true"){
+    if (localStorage.getItem('viewPersional') != "true") {
       this.viewPersionInfo = false;
     }
     this.id = localStorage.getItem('userID');
@@ -37,6 +41,15 @@ export class OverviewInfoComponent implements OnInit {
       });
     }, error => {
     });
+    this.commonService.getListBookMarkByAccount(this.user.id, data => {
+      data.forEach(element => {
+        if (element.deleted == 0) {
+          this.commonService.getTourPostByID(element.tourPostID, data => {
+            this.listSaveLink.push(data);
+          })
+        }
+      });
+    })
   }
   updateTourPost(id) {
     this.utilityService.navigate('/main/profile/0/createPost/' + id);

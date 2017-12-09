@@ -13,6 +13,7 @@ import { Like } from '../../shared/domain/like.user';
 import { Comment } from '../../shared/domain/comment.user';
 import { resetFakeAsyncZone } from '@angular/core/testing';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { concat } from 'rxjs/observable/concat';
 
 @Component({
   selector: 'app-tour-post-page',
@@ -25,7 +26,7 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
 
   user: any = this.authentication.getLoggedInUser();
   tourPostId: string;
-  tourPost: any = { 'liked': false, 'likedID': 0, 'countLiked': 0, 'bookmark': false };
+  tourPost: any = { 'liked': false, 'likedID': 0 };
   tourByDay: any;
   tourByDayDetail: any = [];
   statusComment: boolean = true;
@@ -33,7 +34,12 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
   hideForm: boolean = true;
   comment: string = "";
   report: any;
-  randomIndex : any;
+  randomIndex: any;
+  bookMarked: any = false;
+  liked: any = false;
+  listLikeObj: any;
+  listCheckbox: any = {};
+  reported: any = false;
   listPlace: any = ['Ha Noi',
     'Da Nang',
     'Sai Gon',
@@ -47,6 +53,13 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
     'purple',
     'green',
   ];
+  options = [
+    { name: 'Nội dung phản động', value: '1' },
+    { name: 'Nội dung sai, không đúng sự thật', value: '2' },
+    { name: 'Nội dung không đúng thuần phong - mỹ tục', value: '3' },
+    { name: 'Nội dung sao chép từ nguồn khác', value: '4' },
+    { name: 'Không đúng thuần phong - mỹ tục', value: '5' },
+  ]
   listComment: any;
 
   public tourpostId: number;
@@ -66,10 +79,10 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
       this.dataService.get('/tours/post/' + params.id).subscribe((response: any) => {
         this.tourPost = response;
         this.tourPost.postViewNumber += 1;
+        //tằng lượt xem
         this.commonService.updatePost(this.tourPost, data => {
         });
         this.dataService.get('/tours/post/' + response.id + '/like/get-all').subscribe((response: any) => {
-          this.tourPost["countLike"] = response.filter(item => item.deleted == 0).length;
           if (response != null) {
             if (this.user && response.findIndex(item => item.likeByID === this.user.id && item.deleted == 0) != -1) {
               this.tourPost.liked = true;
@@ -96,9 +109,33 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
           this.tourPost['authorID'] = data.id;
           this.tourPost['level'] = data.level;
         });
+        this.commonService.getBookMarkByAccountID(this.user.id, data => {
+          if (data.findIndex(item => item.tourPostID == this.tourPost.id && item.deleted == 0) != -1) {
+            this.bookMarked = true;
+          }
+        })
+        this.commonService.getLikeByTourPostID(this.user.id, data => {
+          this.tourPost['countLike'] = data.filter(item => item.deleted == 0).length;
+          if (data.findIndex(item => item.likeByID == this.user.id && item.deleted == 0) != -1) {
+            this.liked = true;
+          }
+          this.listLikeObj = data;
+        })
+        this.commonService.getReportByAccountID(this.user.id, data => {
+          if (data.findIndex(item => item.tourPostID == this.tourPost.id && item.deleted == 0) != -1) {
+            this.reported = true;
+          }
+        })
+        this.commonService.getNumberReport(this.tourPost.id, data => {
+          typeof(data) == "object" ? this.tourPost['countReport'] = 0 : this.tourPost['countReport'] = data;
+        })
+        this.commonService.getNumberComment(this.tourPost.id, data => {
+          typeof(data) == "object" ? this.tourPost['countComment'] = 0 : this.tourPost['countComment'] = data;
+        })
       }, error => {
       });
     });
+
   }
 
   ngOnInit() {
@@ -106,7 +143,7 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
     this.renderer.addClass(document.body, 'body-' + this.textArray[this.randomIndex]);
   }
   ngOnDestroy(): void {
-    this.renderer.removeClass(document.body, 'body-'+ this.textArray[this.randomIndex]);
+    this.renderer.removeClass(document.body, 'body-' + this.textArray[this.randomIndex]);
   }
   nagivateProfile() {
     this.utilityService.navigate(UrlConstants.PROFILE);
@@ -114,25 +151,68 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
   showPersonalInfo() {
     this.utilityService.navigate('/main/profile/' + this.tourPost.authorID);
   }
-  
-  bookMark(tourPost: any) {
-    if (this.user != null) {
-      let _bookmark = {
-        'tourPostID': tourPost.id,
-        'accountID': this.user.id,
-        'deleted': 0,
-        'createdTime': Date.now()
-      };
-      this.dataService.post('/user/account/' + this.user.id + '/Marking/', _bookmark).subscribe((response: any) => {
-        console.log(response);
-      }, error => {
-      });
-      this.notifyService.printSuccessMessage('Lưu bài viết thành công!');
-    } else if (this.user != null && tourPost.liked) {
+  submitReport() {
+    this.commonService.addReport({
+      'tourPostID': this.tourPost.id,
+      'reportedBy': this.user.id,
+      'description': 'other' in this.listCheckbox ? this.listCheckbox.other : '',
+      'deleted': 0,
+      'createTime': Date.now(),
+      'reasonReport': this.getKeyByValue(this.listCheckbox, true)
+    }, data => {
+      'countReport' in this.tourPost ? this.tourPost.countReport++ : this.tourPost['countReport'] = 1;
+      this.openCloseReport();
+      this.reported = true;
+      this.notifyService.printSuccessMessage('Báo cáo thành công');
+    })
+  }
 
-    } else {
-      this.notifyService.printErrorMessage('Xin hãy đăng nhập trước khi thực hiện hành động này!');
-    }
+  getKeyByValue(object, value) {
+    let stringVehicle = "";
+    Object.keys(object).filter(key => object[key] === value).forEach(element => {
+      if (element != undefined) {
+        stringVehicle += element + ",";
+      }
+    });
+    return stringVehicle.substring(0, stringVehicle.length - 1);;
+  }
+
+  bookMark(tourPost: any) {
+    let bookMarkObj;
+    this.commonService.getBookMarkByAccountID(this.user.id, data => {
+      bookMarkObj = data[data.findIndex(item => item.tourPostID == tourPost.id)];
+      if (this.user != null && bookMarkObj == undefined) {
+        let _bookmark = {
+          'tourPostID': tourPost.id,
+          'markingByID': this.user.id,
+          'deleted': 0,
+          'createTime': Date.now()
+        };
+        this.commonService.addBookMark(_bookmark, data => {
+          this.bookMarked = true;
+        })
+        this.notifyService.printSuccessMessage('Lưu bài viết thành công!');
+      } else if (this.user != null && bookMarkObj != undefined) {
+        let _bookmark = {
+          'id': bookMarkObj['id'],
+          'deleted': 0,
+          'updateTime': Date.now()
+        };
+        if (bookMarkObj['deleted'] == 0) {
+          _bookmark.deleted = 1;
+          this.notifyService.printSuccessMessage('Bỏ lưu bài viết thành công!');
+          this.bookMarked = false;
+        } else {
+          this.notifyService.printSuccessMessage('Lưu bài viết thành công!');
+          this.bookMarked = true;
+        }
+        this.commonService.updateBookMark(_bookmark, data => {
+        })
+
+      } else {
+        this.notifyService.printErrorMessage('Xin hãy đăng nhập trước khi thực hiện hành động này!');
+      }
+    })
   }
 
   sendComment() {
@@ -171,43 +251,40 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
   }
 
   openCloseReport() {
-    this.statusReport = !this.statusReport;
+    if (this.reported) {
+      this.notifyService.printErrorMessage('Báo cáo của bạn đã được ghi nhận, xin cảm ơn !');
+    } else {
+      this.statusReport = !this.statusReport;
+    }
   }
 
-  likeTourPost(tourPost: any) {
-    if (this.user != null && !tourPost.liked) {
-      let _like = new Like(null, tourPost.id, this.user.id, 0);
-      this.dataService.post('/tours/post/' + tourPost.id + '/Like', _like).subscribe((response: any) => {
+  likeTourPost() {
+    let existLike = this.listLikeObj.find(item => item.likeByID == this.user.id);
+    if (this.user != null && existLike == undefined) {
+      let _like = new Like(null, this.tourPost.id, this.user.id, 0);
+      this.dataService.post('/tours/post/' + this.tourPost.id + '/Like', _like).subscribe((response: any) => {
         this.tourPost.liked = true;
-        this.tourPost.likedID = response.id;
         this.tourPost.countLike++;
-        localStorage.removeItem('tourPost');
-        localStorage.setItem('tourPost', JSON.stringify(this.tourPost));
       }, error => {
       });
       this.notifyService.printSuccessMessage('Thích bài viết thành công!');
-    } else if (this.user != null && tourPost.liked) {
-      if (tourPost.likedID == 0) {
-        let _relike = new Like(tourPost.likedID, tourPost.id, this.user.id, 0);
-        this.dataService.put('/tours/post/' + tourPost.id + '/Like', _relike).subscribe((response: any) => {
-          this.tourPost.likedID = response.id;
-          this.tourPost.countLike++;
-          localStorage.removeItem('tourPost');
-          localStorage.setItem('tourPost', JSON.stringify(this.tourPost));
-        }, error => {
-        });
-        this.notifyService.printSuccessMessage('Thích bài viết thành công!');
-      } else {
-        let _dislike = new Like(tourPost.likedID, tourPost.id, this.user.id, 1);
-        this.dataService.put('/tours/post/' + tourPost.id + '/Like', _dislike).subscribe((response: any) => {
-          this.tourPost.likedID = 0;
-          this.tourPost.countLike--;
-          localStorage.removeItem('tourPost');
-          localStorage.setItem('tourPost', JSON.stringify(this.tourPost));
-        }, error => {
-        });
+    } else if (this.user != null && existLike != undefined) {
+      let _relike = new Like(existLike.id, this.tourPost.id, this.user.id, 0);
+      if (existLike.deleted == 0) {
+        _relike.deleted = 1;
+        existLike.deleted = 1;
         this.notifyService.printSuccessMessage('Bỏ thích bài viết thành công!');
+        this.liked = false;
+        this.tourPost.countLike--;
+      } else {
+        existLike.deleted = 0;
+        this.notifyService.printSuccessMessage('Thích bài viết thành công!');
+        this.liked = true;
+        this.tourPost.countLike++;
       }
+      this.dataService.put('/tours/post/' + this.tourPost.id + '/Like', _relike).subscribe((response: any) => {
+      }, error => {
+      });
     } else {
       this.notifyService.printErrorMessage('Xin hãy đăng nhập trước khi thực hiện hành động này!');
     }

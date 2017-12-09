@@ -136,8 +136,8 @@
     <!-- Begin: Like, View, Comment, Report -->
     <div class="view container">
         <div class="col-sm-5 col-md-5 v-left">
-            <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Thích" (click)=likeTourPost(tourPost)>
-                <i class="fa fa-heart " aria-hidden="true " [ngStyle]="{'color': (tourPost.liked && tourPost.likedID != 0) ? 'red': 'white'}"></i> {{tourPost.countLike}}
+            <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top" title="Thích" (click)=likeTourPost()>
+                <i class="fa fa-heart " aria-hidden="true " [ngStyle]="{'color': liked  ? 'red': 'white'}"></i> {{tourPost.countLike}}
             </a>
             <a href="#" data-toggle="tooltip" data-placement="top" title="Lượt xem">
                 <i class="fa fa-eye " aria-hidden="true " style="font-size: 23px; "></i> {{tourPost.postViewNumber}}
@@ -146,10 +146,10 @@
         <div class="col-sm-2 col-md-2"></div>
         <div class="col-sm-5 col-md-5 v-right">
             <a href="javascript:void(0)" (click)="openCloseCmt()" data-toggle="tooltip" data-placement="top" title="Bình luận">
-                <i class="fa fa-comment " aria-hidden="true "></i>
+                <i class="fa fa-comment " aria-hidden="true "></i>{{tourPost.countComment}}
             </a>
             <a href="javascript:void(0)" data-toggle="tooltip" (click)="openCloseReport()" data-placement="top" title="Tố cáo">
-                <i class="fa fa-flag" aria-hidden="true"></i> 0
+                <i class="fa fa-flag" aria-hidden="true" [ngStyle]="{'color': reported ? 'yellow': 'white'}"></i> {{tourPost.countReport}}
             </a>
         </div>
         <div class="clear-fix "></div>
@@ -306,52 +306,22 @@
             <form class="form-horizontal" action="">
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="remember"> Nội dung phản động</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="remember"> Nội dung sai, không đúng sự thật</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="remember"> Nội dung không đúng thuần phong - mỹ tục</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="remember"> Nội dung sao chép từ nguồn khác</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="remember"> Không đúng thuần phong - mỹ tục</label>
+                        <div class="checkbox" *ngFor="let option of options">
+                            <label >
+                                <input type="checkbox" name="options" value="{{option.value}}" [(ngModel)]="listCheckbox[option.value]">
+                                {{option.name}}
+                            </label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12" style="margin-top: 20px;">
-                        <textarea class="form-control" rows="3" id="comment" placeholder="Lý do khác..."></textarea>
+                        <textarea class="form-control" rows="3" name="other" placeholder="Lý do khác..." [(ngModel)]="listCheckbox.other"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12 text-right" style="margin-top: 5px;">
-                        <button type="submit" class="btn btn-submit">
+                        <button (click)="submitReport()" class="btn btn-submit">
                             <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp;Xác nhận
                         </button>
                         <a href="javascript:void(0)" class="btn btn-default" (click)="openCloseReport()">
@@ -393,7 +363,7 @@
         <a href="javascript:void(0)" id="ilike" (click)=likeTourPost(tourPost) class="ilike">{{(tourPost.liked && tourPost.likedID != 0) ? 'Bỏ thích' : 'Thích'}}</a>
         <a href="javascript:void(0)" id="icomment" class="icomment" (click)="openCloseCmt()">Bình luận</a>
         <a href="javascript:void(0)" id="ireport" class="ireport" (click)="openCloseReport()">Tố cáo</a>
-        <a href="javascript:void(0)" id="saveLink" class="save-link" (click)="bookMark(tourPost)">Lưu</a>
+        <a href="javascript:void(0)" id="saveLink" class="save-link" (click)="bookMark(tourPost)">{{ bookMarked ? 'Bỏ Lưu' : 'Lưu'}}</a>
         <a href="#" id="toTop" class="scrollToTop">To Top</a>
     </footer>
 </div>

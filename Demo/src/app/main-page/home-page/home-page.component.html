@@ -310,14 +310,14 @@
                                             <i class="fa fa-eye" aria-hidden="true" style="font-size: 17px;"></i> {{tourPost.postViewNumber}}
                                         </span>
                                     </div>
-                                    <div class="col-xs-12 col-sm-4 col-md-4 s-border" (click)=likeTourPost(tourPost)>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 s-border" (click)=likeTourPost(tourPost,true)>
                                         <span>
                                             <i class="fa fa-heart" aria-hidden="true" [ngStyle]="{'color': (tourPost.liked && tourPost.likedID != 0) ? 'red': 'gray'}"></i> {{tourPost.countLike}}
                                         </span>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <span>
-                                            <i class="fa fa-comment" aria-hidden="true"></i> {{tourPost.comment}}
+                                            <i class="fa fa-comment" aria-hidden="true"></i> {{tourPost.countComment}}
                                         </span>
                                     </div>
                                 </div>
@@ -348,17 +348,17 @@
                                 <div class="summary">
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <span>
-                                            <i class="fa fa-eye" aria-hidden="true" style="font-size: 17px;"></i>1357
+                                            <i class="fa fa-eye" aria-hidden="true" style="font-size: 17px;"></i>{{tourPost.postViewNumber}}
                                         </span>
                                     </div>
-                                    <div class="col-xs-12 col-sm-4 col-md-4 s-border" (click)=likeTourPost(tourPost)>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 s-border" (click)=likeTourPost(tourPost,true)>
                                         <span>
                                             <i class="fa fa-heart" aria-hidden="true" [ngStyle]="{'color': (tourPost.liked && tourPost.likedID != 0) ? 'red': 'gray'}"></i> {{tourPost.countLike}}
                                         </span>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <span>
-                                            <i class="fa fa-comment" aria-hidden="true"></i>
+                                            <i class="fa fa-comment" aria-hidden="true"></i> {{tourPost.countComment}}
                                         </span>
                                     </div>
                                 </div>
@@ -418,14 +418,14 @@
                                             <i class="fa fa-eye" aria-hidden="true" style="font-size: 17px;"></i> {{groupTour.postViewNumber}}
                                         </span>
                                     </div>
-                                    <div class="col-xs-12 col-sm-4 col-md-4 s-border" (click)=likeGroupPost(groupTour)>
+                                    <div class="col-xs-12 col-sm-4 col-md-4 s-border" (click)=likeTourPost(groupTour,false)>
                                         <span>
                                             <i class="fa fa-heart" aria-hidden="true" [ngStyle]="{'color': (groupTour.liked && groupTour.likedID != 0) ? 'red': 'gray'}"></i> {{groupTour.countLike}}
                                         </span>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-4">
                                         <span>
-                                            <i class="fa fa-comment" aria-hidden="true"></i> {{groupTour.comment}}
+                                            <i class="fa fa-users" aria-hidden="true"></i> {{groupTour.countMember}}
                                         </span>
                                     </div>
                                 </div>

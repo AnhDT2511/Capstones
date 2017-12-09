@@ -48,6 +48,126 @@ export class CommonService {
         );
     }
 
+    addBookMark(_bookmark, callback: (data) => void) {
+        // console.log(id);
+        return this.dataService.post('/user/account/marking/', _bookmark).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
+    updateBookMark(_bookmark, callback: (data) => void) {
+        // console.log(id);
+        return this.dataService.put('/user/account/marking/', _bookmark).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
+    addReport(_report, callback: (data) => void) {
+        // console.log(id);
+        return this.dataService.post('/tours/post/report-tour/', _report).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
+    getReportByAccountID(id, callback: (data) => void) {
+        // console.log(id);
+        return this.dataService.get('/tours/post/get-all-report-by-account/'+ id).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
+    getNumberReport(id, callback: (data) => void) {
+        // console.log(id);
+        return this.dataService.get('/tours/post/get-number-report-of-post/'+ id).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
+    getNumberComment(id, callback: (data) => void) {
+        // console.log(id);
+        return this.dataService.get('/tours/post/get-number-comment-of-post/'+ id).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
+    getBookMarkByAccountID(id, callback: (data) => void) {
+        // console.log(id);
+        return this.dataService.get('/user/account/marking/get-all/' + id).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
+    getLikeByTourPostID(id, callback: (data) => void) {
+        // console.log(id);
+        return this.dataService.get('/tours/post/'+ id +'/like/get-all/' ).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
+    getAllLike(callback: (data) => void) {
+        // console.log(id);
+        return this.dataService.get('/tours/post/like/get-all/').subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
+    getListBookMarkByAccount(id, callback: (data) => void) {
+        // console.log(id);
+        return this.dataService.get('/user/account/marking/get-all/' + id).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
     getAccountInfo(id, callback: (data) => void) {
         // console.log(id);
         return this.dataService.get('/user/account/' + id).subscribe(
@@ -87,6 +207,13 @@ export class CommonService {
         this.dataService.put('/tours/post/' + id + '/Like', _dislike).subscribe(res => {
             callback(res);
         }, error => {
+        });
+    }
+    getTourPostByID(id,  callback: (data) => void) {
+        this.dataService.get('/tours/post/'+ id).subscribe(res => {
+            callback(res);
+        }, error => {
+            callback(error);
         });
     }
     createPost(_tourPost,  callback: (data) => void) {
