@@ -29,12 +29,12 @@
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
         "../src/assets/js/jquery.vide.js",
+        "../node_modules/scrollreveal/dist/scrollreveal.js",
         "../node_modules/alertifyjs/build/alertify.js",
         "../src/assets/js/scrollToTop.js",
         "../src/assets/js/smoothScrolling.js",
         "../src/assets/js/nav.js",
-        "../src/assets/js/timeline.js",
-        "../systemjs.config.js"
+        "../src/assets/js/timeline.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

@@ -1,4 +1,4 @@
-<div id="cover" style="background-image: url(../assets/img/sea.jpg);">
+<div id="cover" style="background-image: url(../assets/img/group.jpg);">
     <div class="header-topbar">
         <div class="container">
             <ul class="pull-left">
@@ -190,6 +190,19 @@
                 </div>
             </div>
         </div>
+
+
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+            console.log('chat app');    
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.11&appId=252600558555529';
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="fb-comments" data-href="http://localhost:4200/main/grouptour/1" data-numposts="10"></div>
     </div>
 
     <div class="col-xs-12 col-sm-5 col-md-5 info-tour">

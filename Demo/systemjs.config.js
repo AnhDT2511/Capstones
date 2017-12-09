@@ -17,7 +17,8 @@ System.config({
   System.config({
     map: {
       'main': 'main.js',
-  
+      //moi them
+      // 'ng-scrollreveal': 'node_modules/ng-scrollreveal/bundles/ng-scrollreveal.min.js',
       // Angular specific mappings.
       '@angular/core': 'https://unpkg.com/@angular/core/bundles/core.umd.js',
       '@angular/animations': 'https://unpkg.com/@angular/animations/bundles/animations.umd.js',
@@ -62,5 +63,11 @@ System.config({
       // Thirdparty barrels.
       'rxjs': { main: 'index' },
     }
+    //moi them
+    // meta: {
+    //   './node_modules/scrollreveal/dist/scrollreveal.min.js': {
+    //           format: 'amd'
+    //       }
+    // }
   });
   

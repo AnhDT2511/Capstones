@@ -1,5 +1,6 @@
 /* cam xoa */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "../node_modules/ng2-slim-loading-bar/style.css";
 
 /*========================== COVER ============================*/
 @font-face {
@@ -26,7 +27,6 @@ h6 {
   padding-left: 0;
   padding-right: 0;
 }
-
 
 /*============ SCROLL TO TOP =============*/
 /* 

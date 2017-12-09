@@ -16,6 +16,7 @@ import { debug } from 'util';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
+
 export class HomePageComponent implements OnInit {
 
   public user: any = this.authentication.getLoggedInUser();
@@ -140,7 +141,7 @@ export class HomePageComponent implements OnInit {
       });
       //count comment
       this.dataService.get('/tours/post/' + this.listTourPost[i].id + '/comment/get-all').subscribe((response: any) => {
-        if(response.length != 0){
+        if (response.length != 0) {
           this.listTourPost[this.listTourPost.findIndex(item => item.id === response[0].tourPostID)].comment = response.length;
         }
       }, error => {
@@ -172,7 +173,7 @@ export class HomePageComponent implements OnInit {
       });
       //count comment
       this.dataService.get('/tours/post/' + this.listGroupTour[i].id + '/comment/get-all').subscribe((response: any) => {
-        if(response.length != 0){
+        if (response.length != 0) {
           this.listGroupTour[this.listGroupTour.findIndex(item => item.id === response[0].tourPostID)].comment = response.length;
         }
       }, error => {

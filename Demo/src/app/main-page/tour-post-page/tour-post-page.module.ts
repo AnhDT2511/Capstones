@@ -9,6 +9,7 @@ import { CommonService } from '../../shared/service/common.service'
 import { FormsModule } from '@angular/forms';
 import { AvatarModule } from 'ngx-avatar';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+// import { NgsRevealModule } from 'ng-scrollreveal';
 
 @NgModule({
     imports: [

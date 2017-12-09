@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Http, HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -12,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { AvatarModule } from 'ngx-avatar';
 import { UploadComponent } from './shared/upload/upload.component';
+import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 
 @NgModule({
   declarations: [
@@ -21,12 +23,13 @@ import { UploadComponent } from './shared/upload/upload.component';
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     AppRoutingModule,
     MatTooltipModule,
     BrowserAnimationsModule,
     SharedModule,
-    AvatarModule
-    // AngularFireModule.initializeApp(firebaseConfig)
+    AvatarModule,
+    SlimLoadingBarModule.forRoot()
   ],
   providers: [
     LoginService,

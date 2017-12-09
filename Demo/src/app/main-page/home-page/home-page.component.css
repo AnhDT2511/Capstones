@@ -512,6 +512,7 @@ body {
     background: linear-gradient(#fff, #f6f6f6);
     border-bottom: 1px solid #000;
     */
+    min-height: 100%;
 }
 
 #about .container h1 i {
@@ -536,6 +537,14 @@ body {
 
 
 /*================ TOP POST ===================*/
+#about, #top-place, #contact {
+    position:relative;
+    /* opacity:0.70; */
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
 
 #top-place {
     width: 100%;
@@ -545,6 +554,7 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    min-height: 600px;
     -webkit-background-size: cover;
 }
 
@@ -880,6 +890,10 @@ footer .infoMap #gmap {
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
     opacity: 0.85;
+}
+
+agm-map {
+    height: 350px;
 }
 
 footer .f-register {
