@@ -56,7 +56,7 @@ body {
     color: #fff;
   } */
 
-#cover {
+  #cover {
     position: relative;
     width: 100%;
     height: 100%;
@@ -503,16 +503,23 @@ body {
 
 /*================== ABOUT ====================*/
 
+.trans-color {
+    height: 60px;
+    background: -webkit-linear-gradient(#fff, #f4f8f9);
+    background: -o-linear-gradient(#fff, #f4f8f9);
+    background: -moz-linear-gradient(#fff, #f4f8f9);
+    background: linear-gradient(#fff, #f4f8f9);
+}
+
 #about {
     width: 100%;
-    padding: 30px 0;
+    padding: 50px 0 0;
     /* background: -webkit-linear-gradient(#fff, #f6f6f6);   
     background: -o-linear-gradient(#fff, #f6f6f6);  
     background: -moz-linear-gradient(#fff, #f6f6f6);   
     background: linear-gradient(#fff, #f6f6f6);
     border-bottom: 1px solid #000;
     */
-    min-height: 100%;
 }
 
 #about .container h1 i {
@@ -523,51 +530,87 @@ body {
 }
 
 #about .text-info {
-    padding: 50px 0;
+    padding: 75px 0;
 }
 
-#about .text-info h1 span {
-    font-size: 33px;
+#about .text-info .t-title {
+    border-bottom: 3px solid rgb(0, 195, 100);
+    width: 80px;
+    margin-left: 13px;
+    margin-bottom: 10px;
+}
+
+#about .text-info .t-title i {
+    font-size: 20px;
+    color: rgb(0, 195, 100);
+    margin-left: 13px;
+}
+
+#about .text-info h1 {
+    padding-left: 11px;
+}
+
+.f-size {
+    font-size: 35px;
     letter-spacing: 1px;
 }
 
-#about .text-info p {
+.lg-s {
+    font-size: 50px;
+}
+
+#about .text-info .text {
     color: #555e69;
+    font-size: 17px;
+    padding-left: 14px;
+    padding-top: 25px;
+    padding-right: 20px;
+}
+
+#about .text-info .text p {
+    margin-bottom: 10px;
+    line-height: 24px;
+}
+
+#about .text-info .text li {
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 2px;
 }
 
 
 /*================ TOP POST ===================*/
-#about, #top-place, #contact {
-    position:relative;
-    /* opacity:0.70; */
-    background-position:center;
-    background-size:cover;
-    background-repeat:no-repeat;
-    background-attachment:fixed;
-}
 
-#top-place {
+#top-post {
     width: 100%;
-    padding-top: 80px;
+    /* padding-top: 80px; */
     padding-bottom: 80px;
     position: relative;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    min-height: 600px;
     -webkit-background-size: cover;
 }
 
-#top-place .container h1 {
+#top-post .container .t-title {
+    border-bottom: 3px solid rgb(0, 195, 100);
+    width: 80px;
+    margin-left: 13px;
+    margin-bottom: 10px;
+}
+
+#top-post .container .t-title i {
+    font-size: 28px;
+    color: rgb(0, 195, 100);
+    margin-left: 10px;
+}
+
+#top-post .container h1 {
     margin-bottom: 50px;
+    padding-left: 11px;
 }
 
-#top-place .container h1 span {
-    font-size: 33px;
-    letter-spacing: 1px;
-}
-
-#top-place .container h1 i {
+#top-post .container h1 i {
     width: 50px;
     font-size: 35px;
     text-align: center;
@@ -578,66 +621,66 @@ body {
     text-transform: uppercase;
 }
 
-#top-place #myCarousel .item {
+#top-post #myCarousel .item {
     padding-left: 15px;
     padding-right: 15px;
 }
 
-#top-place .carousel-control.right {
+#top-post .carousel-control.right {
     right: -135px;
     background-image: none;
 }
 
-#top-place .carousel-control.left {
+#top-post .carousel-control.left {
     left: -155px;
     background-image: none;
 }
 
-#top-place .carousel-control i {
+#top-post .carousel-control i {
     color: #fff;
     top: 50%;
     position: absolute;
     font-size: 40px;
 }
 
-#top-place .thumbnail {
+#top-post .thumbnail {
     padding: 0;
     border: none;
     border-radius: 0 !important;
 }
 
-#top-place .thumbnail img {
+#top-post .thumbnail img {
     width: 100%;
     max-height: 250px;
 }
 
-#top-place .thumbnail .m-container {
+#top-post .thumbnail .m-container {
     position: relative;
     width: 100%;
     padding-left: 0;
     padding-right: 0;
 }
 
-#top-place .image {
+#top-post .image {
     display: block;
     width: 100%;
     height: auto;
 }
 
-#top-place .thumbnail .summary {
+#top-post .thumbnail .summary {
     display: block;
     text-align: center;
     width: 100%;
 }
 
-#top-place .thumbnail .summary i {
+#top-post .thumbnail .summary i {
     width: 30px;
     text-align: center;
 }
 
-#top-place .thumbnail .summary .col-xs-12,
-#top-place .thumbnail .summary .col-sm-4,
-#top-place .thumbnail .summary .col-md-4 {
+#top-post .thumbnail .summary .col-xs-12,
+#top-post .thumbnail .summary .col-sm-4,
+#top-post .thumbnail .summary .col-md-4 {
     padding: 15px 0;
     background-color: #fff;
     height: 50px;
@@ -645,9 +688,9 @@ body {
     color: #5a5a5a;
 }
 
-#top-place .thumbnail .summary .col-xs-12:hover,
-#top-place .thumbnail .summary .col-sm-4:hover,
-#top-place .thumbnail .summary .col-md-4:hover {
+#top-post .thumbnail .summary .col-xs-12:hover,
+#top-post .thumbnail .summary .col-sm-4:hover,
+#top-post .thumbnail .summary .col-md-4:hover {
     background-color: rgb(0, 195, 100);
     cursor: pointer;
     font-size: 17px;
@@ -656,18 +699,18 @@ body {
     padding: 13px 0;
 }
 
-#top-place .thumbnail .summary .s-border {
+#top-post .thumbnail .summary .s-border {
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
 }
 
-#top-place .thumbnail .clear-fix {
+#top-post .thumbnail .clear-fix {
     clear: both;
     content: "";
     display: block;
 }
 
-#top-place .thumbnail .description {
+#top-post .thumbnail .description {
     border-top: 1px solid #ccc;
     display: block;
     width: 100%;
@@ -676,33 +719,33 @@ body {
     color: #3e3e3e;
 }
 
-#top-place .thumbnail .description h3 {
+#top-post .thumbnail .description h3 {
     margin: 0 0 15px;
     min-height: 70px;
     text-align: center;
     line-height: 70px;
 }
 
-#top-place .thumbnail .description h3 span {
+#top-post .thumbnail .description h3 span {
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
 }
 
-#top-place .thumbnail .description p {
+#top-post .thumbnail .description p {
     font-size: 15px;
     margin-bottom: 5px;
     min-height: 65px;
 }
 
-#top-place .thumbnail .a-more {
+#top-post .thumbnail .a-more {
     padding: 0 0 40px;
     text-align: center;
     width: 100%;
     display: block;
 }
 
-#top-place .thumbnail .a-more a {
+#top-post .thumbnail .a-more a {
     padding: 6px 25px;
     border: 1px solid #828282;
     color: #3e3e3e;
@@ -711,7 +754,7 @@ body {
     font-size: 14px;
 }
 
-#top-place .thumbnail .a-more a:hover {
+#top-post .thumbnail .a-more a:hover {
     border: 1px solid rgb(0, 195, 100);
     background-color: rgb(0, 195, 100);
     color: #fff;
@@ -719,14 +762,14 @@ body {
     transition: 0.8s;
 }
 
-#top-place .btn-show-more {
+#top-post .btn-show-more {
     width: 100%;
     display: block;
     padding: 50px 0 0;
     text-align: center;
 }
 
-#top-place .btn-show-more a {
+#top-post .btn-show-more a {
     padding: 8px 35px;
     border: 1px solid rgb(0, 195, 100);
     background-color: rgb(0, 195, 100);
@@ -736,27 +779,17 @@ body {
     font-size: 15px;
 }
 
-#top-place .btn-show-more a:hover {
+#top-post .btn-show-more a:hover {
     background-color: rgba(0, 195, 100, 0.8);
     border: 1px solid rgba(0, 195, 100, 0.8);
     transition: 0.8s;
 }
 
 
-/*=================== TEST =====================*/
+/*============== VIDEO AD ================*/
 
-
-/*================ TOP PLACE ===================*/
-
-
-/*================== PLACE =====================*/
-
-
-/*================= CONTACT=====================*/
-
-#ccc {
+#video-ad {
     width: 100%;
-    height: 40%;
     position: relative;
     background-repeat: no-repeat;
     background-position: top;
@@ -765,17 +798,148 @@ body {
     background-attachment: fixed;
 }
 
-#ccc .banner-left {
-    display: table-cell;
-    vertical-align: middle;
-    width: 40%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.85);
+#video-ad .overlay {
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
-#ccc .banner-right {
-    display: table-cell;
-    vertical-align: middle;
+#video-ad .b-left {
+    padding: 100px 35px 100px 15px;
+}
+
+#video-ad .b-left .sub-title {
+    color: rgb(0, 214, 110);
+    border-bottom: 1px solid rgb(0, 195, 100);
+    display: inline-block;
+    margin-bottom: 10px;
+    padding-bottom: 2px;
+}
+
+#video-ad .b-left .sub-title span {
+    font-size: 26px;
+}
+
+#video-ad .b-left p {
+    margin: 25px 0 10px;
+    font-size: 17px;
+    line-height: 24px;
+}
+
+#video-ad .b-right {
+    padding: 80px 0;
+}
+
+#video-ad .b-right iframe {
+    -webkit-box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+}
+
+
+/*=============== NEW TOUR =================*/
+
+#new-tour {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    -webkit-background-size: cover;
+    background-attachment: fixed;
+}
+
+#new-tour .b-left {
+    padding: 80px 0 80px;
+}
+
+#new-tour .list-tour {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px 20px 0;
+}
+
+#new-tour .list-tour .tour {
+    border-bottom: 1px solid #a9a9a9;
+    margin-bottom: 12px;
+}
+
+#new-tour .list-tour .tour:last-child {
+    border-bottom: none;
+}
+
+#new-tour .list-tour .tour .media img {
+    border-radius: 50%;
+}
+
+#new-tour .list-tour .media-left,
+#new-tour .list-tour .media>.pull-left {
+    padding-right: 15px;
+}
+
+#new-tour .list-tour .media-heading {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+#new-tour .list-tour .media-body p {
+    margin: 0 0 15px;
+}
+
+#new-tour .list-tour .media-body p span {
+    margin: 0 10px;
+}
+
+#new-tour .b-right {
+    padding: 95px 0 80px 60px;
+}
+
+#new-tour .b-right .sub-title {
+    color: rgb(0, 214, 110);
+    border-bottom: 1px solid rgb(0, 214, 110);
+    display: inline-block;
+    margin-bottom: 10px;
+    padding-bottom: 2px;
+}
+
+#new-tour .b-right .sub-title span {
+    font-size: 26px;
+}
+
+#new-tour .b-right p {
+    margin: 25px 0 10px;
+    font-size: 17px;
+    line-height: 24px;
+    color: #fff;
+}
+
+.color-run2 {
+    background: linear-gradient(to right, #ffffff 0%, #ffffff 15%, #ffffff 35%, #ffffff 50%, #ffffff 85%, #00c364 90%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: color-text 20s linear infinite;
+}
+
+#new-tour .quota {
+    border-left: 4px solid #00f382;
+    padding-left: 15px;
+    color: #00f382 !important;
+}
+
+#new-tour .btn-show-more {
+    margin-top: 50px;
+}
+
+#new-tour .btn-show-more a {
+    padding: 8px 35px;
+    border: 1px solid rgb(0, 195, 100);
+    background-color: rgb(0, 195, 100);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 28px;
+    font-size: 15px;
+}
+
+#new-tour .btn-show-more a:hover {
+    background-color: rgba(0, 195, 100, 0.8);
+    border: 1px solid rgba(0, 195, 100, 0.8);
+    transition: 0.8s;
 }
 
 
@@ -789,7 +953,7 @@ body {
 }
 
 
-/*================= CONTACT ===================*/
+/*============= CONTACT ===============*/
 
 #contact {
     width: 100%;
@@ -871,12 +1035,43 @@ body {
     transition: 0.8s;
 }
 
+
+/*============== FOOTER ===============*/
+
+.infoMap .text {
+    font-size: 16px;
+    margin: 20px 0 15px;
+}
+
+.infoMap ul {
+    margin-bottom: 35px;
+}
+
+.infoMap ul li {
+    padding: 5px;
+}
+
+.infoMap ul li a {
+    color: #ccc;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+.infoMap ul li a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+.infoMap p i {
+    width: 20px;
+}
+
 /*================== FOOTER ===================*/
 
 footer {
     background-color: #161617;
     color: #bdbdbd;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 footer .infoMap {
@@ -885,15 +1080,11 @@ footer .infoMap {
 }
 
 footer .infoMap #gmap {
-    width: 100%;
+    width: 98%;
     height: 350px;
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
     opacity: 0.85;
-}
-
-agm-map {
-    height: 350px;
 }
 
 footer .f-register {
@@ -971,4 +1162,9 @@ footer .f-info a:hover {
     clear: both;
     content: "";
     display: block;
+}
+section {
+    background: none;
+    background-size: 100%;
+    background-image: none;
 }

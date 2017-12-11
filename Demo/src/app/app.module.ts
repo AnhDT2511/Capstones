@@ -14,6 +14,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { AvatarModule } from 'ngx-avatar';
 import { UploadComponent } from './shared/upload/upload.component';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
+import {NgAutoCompleteModule} from "ng-auto-complete";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
     BrowserAnimationsModule,
     SharedModule,
     AvatarModule,
-    SlimLoadingBarModule.forRoot()
+    NgAutoCompleteModule,
+    SlimLoadingBarModule.forRoot(),
   ],
   providers: [
     LoginService,

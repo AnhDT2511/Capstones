@@ -104,7 +104,6 @@
                   <span class="date">Ngày {{i + 1}}</span>
                   <span class="circle"></span>
                 </div>
-
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h4 class="panel-title">
@@ -121,20 +120,21 @@
                         </div>
                         <div class="form-group">
                           <div class="col-sm-6">
-                            <input type="text" class="form-control" placeholder="Tỉnh/Thành Phố" name="placeID"  [(ngModel)]="listTourDetail[i].placeID">
+                            <!-- <input type="text" class="form-control" placeholder="Tỉnh/Thành Phố" name="placeID"  [(ngModel)]="listTourDetail[i].placeID"> -->
+                            <ng-autocomplete (selected)="Selected($event,tourDetail)" [classes]="['']" [group]="groupCity"></ng-autocomplete>
                           </div>
-                          <div class="col-sm-6">
-                            <input type="text" class="form-control" placeholder="Địa điểm cụ thể" name="placeDetail" [(ngModel)]="listTourDetail[i].placeDetail">
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <div class="col-sm-12">
-                            <input type="text" class="form-control" placeholder="Nghỉ ở đâu ?" name="hotel" [(ngModel)]="listTourDetail[i].hotel">
+                          <div class="col-sm-6" style="margin-top:6px">
+                            <input type="text" class="form-control" placeholder="Địa điểm cụ thể" name="placeDetail" [(ngModel)]="tourDetail.placeDetail">
                           </div>
                         </div>
                         <div class="form-group">
                           <div class="col-sm-12">
-                            <input type="text" class="form-control" placeholder="Ăn gì?" name="food" [(ngModel)]="listTourDetail[i].food">
+                            <input type="text" class="form-control" placeholder="Nghỉ ở đâu ?" name="hotel" [(ngModel)]="tourDetail.hotel">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-sm-12">
+                            <input type="text" class="form-control" placeholder="Ăn gì?" name="food" [(ngModel)]="tourDetail.food">
                           </div>
                         </div>
                         <div class="form-group">
@@ -142,18 +142,15 @@
                             <div class="checkbox">
                               <label *ngFor="let option of options,let j = index;">
                                 <input type="checkbox" name="options" value="{{option.value}}" 
-                                [checked]="listTourDetail[i].checkbox[j+1]" (click)="setDisplayValue(i,j+1,$event.target.checked)">
+                                [checked]="tourDetail.checkbox[j+1]" (click)="setDisplayValue(i,j+1,$event.target.checked)">
                                 <i class="fa fa-{{option.name}}" style aria-hidden="true" data-toggle="tooltip" title="{{option.name}}"></i>
                               </label>
                             </div>
                           </div>
-                          <div class="col-sm-6">
-                            <input type="text" class="form-control" placeholder="Khác..." name="other" [(ngModel)]="listTourDetail[i].other">
-                          </div>
                         </div>
                         <div class="form-group">
                           <div class="col-sm-12">
-                            <textarea class="form-control" rows="3" name="setup" placeholder="Mô tả ngắn..." [(ngModel)]="listTourDetail[i].description"></textarea>
+                            <textarea class="form-control" rows="3" name="setup" placeholder="Mô tả ngắn..." [(ngModel)]="tourDetail.description"></textarea>
                           </div>
                         </div>
                         <!-- <div style="margin-right: -15px;">

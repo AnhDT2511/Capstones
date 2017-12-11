@@ -1,19 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { DataService, UtilityService, NotificationService, CommonService } from '../../../shared/service';
 import { TourPost } from '../../../shared/domain/tourPost.user';
-import { SystemConstants } from '../../../shared/common';
+import { SystemConstants, InfoContstants } from '../../../shared/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { CreateNewAutocompleteGroup, SelectedAutocompleteItem, NgAutocompleteComponent } from "ng-auto-complete";
 
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
+  encapsulation: ViewEncapsulation.None,
   styleUrls: ['./create-post.component.css']
 })
 export class CreatePostComponent implements OnInit {
+  @ViewChild(NgAutocompleteComponent)
+  public completer: NgAutocompleteComponent;
+
+  public groupCity = [
+    CreateNewAutocompleteGroup(
+      'Tỉnh/Thành Phố',
+      'completer',
+      InfoContstants.CITY_VN,
+      { titleKey: 'title', childrenKey: null },
+      // '',
+      // false
+    )
+  ];
+
   user: any = JSON.parse(localStorage.getItem(SystemConstants.CURRENT_USER));
-  tourPost: any ;
+  tourPost: any;
   listTourDetail: any;
-  id = 0 ;
+  id = 0;
   options = [
     { name: 'motorcycle', value: '1' },
     { name: 'taxi', value: '2' },
@@ -41,25 +57,26 @@ export class CreatePostComponent implements OnInit {
         this.dataservice.get('/tours/post/' + params.id + '/get-all').subscribe((response: any) => {
           response.forEach(element => {
             let splitVehicle = element.vehicle.split(",");
-            let objCheckbox  = {};
-            for(var i = 0 ; i <= 4 ; i++){
-              if(splitVehicle.indexOf(i.toString()) != -1){
+            let objCheckbox = {};
+            for (var i = 0; i <= 4; i++) {
+              if (splitVehicle.indexOf(i.toString()) != -1) {
                 objCheckbox[i] = true;
               }
             }
             this.listTourDetail.push({
-              placeID : element.placeID,
-              placeDetail : element.placeDetail,
-              hotel : element.hotel,
-              food : element.food,
-              other : element.other,
-              description : element.description,
-              day : element.day,
-              checkbox : objCheckbox,
-              id : element.id,
-              tourPostID : element.tourPostID,
-              createTime : element.createTime
+              placeID: element.placeID,
+              placeDetail: element.placeDetail,
+              hotel: element.hotel,
+              food: element.food,
+              other: element.other,
+              description: element.description,
+              day: element.day,
+              checkbox: objCheckbox,
+              id: element.id,
+              tourPostID: element.tourPostID,
+              createTime: element.createTime
             })
+            // this.tourPost.placeID != undefined ? this.completer.SelectItem('completer', this.tourPost.placeID) : null;
           });
         })
       } else {
@@ -70,13 +87,13 @@ export class CreatePostComponent implements OnInit {
   // showList() {
   //   console.log(this.listTourDetail);
   // }
-  setDisplayValue(tourpost,tourbyday,event){
+  setDisplayValue(tourpost, tourbyday, event) {
     this.listTourDetail[tourpost].checkbox[tourbyday] = event;
   }
   saveTourPost() {
     let date = Date.now();
-    let _tourPost: TourPost = new TourPost(0, this.user.id, 0, 0, 0, this.tourPost.title, 0,
-      date, this.tourPost.descriptionTourPost, 0, this.tourPost.note, this.tourPost.prepare,0,'13/12/1995',1,'');
+    let _tourPost: TourPost = new TourPost(0, this.user.id, this.tourPost.startPlaceID, 0, this.listTourDetail.length, this.tourPost.title, 0,
+      date, this.tourPost.descriptionTourPost, 0, this.tourPost.note, this.tourPost.prepare, 0, '', 0, '');
     this.commonservice.createPost(_tourPost, data => {
       let responseID = 0;
       responseID = data._body;
@@ -90,10 +107,10 @@ export class CreatePostComponent implements OnInit {
           });;
         }
         this.notifyservice.printSuccessMessage("Tạo bài viết thành công");
-        this.utiliservice.navigate('/main/profile/0');
-      } else if(this.id == 0) {
+        this.utiliservice.navigate('/main/tourpost/' + responseID);
+      } else if (this.id == 0) {
         this.notifyservice.printErrorMessage("Tên bài viết đã tồn tại trong hệ thống, vui lòng thử lại!!");
-      }else{
+      } else {
         _tourPost.id = this.id;
         this.commonservice.updatePost(_tourPost, data => {
         })
@@ -106,7 +123,7 @@ export class CreatePostComponent implements OnInit {
           });;
         }
         this.notifyservice.printSuccessMessage("Cập nhật bài viết thành công");
-        this.utiliservice.navigate('/main/profile/0');
+        this.utiliservice.navigate('/main/tourpost/' + _tourPost.id);
       }
     })
   }
@@ -126,6 +143,10 @@ export class CreatePostComponent implements OnInit {
       }
     });
     return stringVehicle;
+  }
+
+  Selected(item: SelectedAutocompleteItem, tourDetail) {
+    tourDetail.placeID = item.item.id;
   }
 
   ngOnInit() {

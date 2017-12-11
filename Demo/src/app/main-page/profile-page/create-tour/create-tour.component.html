@@ -1,198 +1,193 @@
-
-    <!-- RIGHT SIDE -->
-    <div class="col-xs-12 col-sm-9 col-md-9 create-post">
-        <div class="title-post">
-            <span>T</span>ạo nhóm
-        </div>
-
-        <div class="text-left h">
-            <h2>Tạo nhóm mới</h2>
-        </div>
-
-        <div class="panel-group" id="accordion">
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                            Tên hành trình
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapse1" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <form class="form-horizontal" action="">
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <textarea class="form-control" rows="3" name="title" placeholder="Tên hành trình..." [(ngModel)]="groupTour.tourArticleTitle"></textarea>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                            Mô tả ngắn về chuyến đi
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapse2" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <form class="form-horizontal" action="">
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <textarea class="form-control" rows="3" name="description" placeholder="Mô tả ngắn về chuyến đi..." [(ngModel)]="groupTour.description"></textarea>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                            Thông tin tóm tắt
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapse3" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <form class="form-horizontal" action="">
-                            <div class="form-group">
-                                <div class="col-sm-6">
-                                    <!-- <input type="text" class="form-control" placeholder="Điểm xuất phát" name="startLocation" [(ngModel)]="groupTour.startLocation"> -->
-                                    <select class="form-control" name="startLocation" style="padding: 6px 7px;" placeholder="Điểm xuất phát" [(ngModel)]="groupTour.startPlaceID">
-                                        <option value="1">Hà Nội</option>
-                                        <option value="2">Hải Phòng</option>
-                                        <option value="3">Đà Nẵng</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-6">
-                                    <!-- <input type="text" class="form-control" placeholder="Điểm dừng" name="endLocation" [(ngModel)]="groupTour.endLocation"> -->
-                                    <select class="form-control" name="endLocation" style="padding: 6px 7px;" placeholder="Điểm dừng" [(ngModel)]="groupTour.endPlaceID">
-                                        <option value="1">Hà Nội</option>
-                                        <option value="2">Hải Phòng</option>
-                                        <option value="3">Đà Nẵng</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-6">
-                                    <select class="form-control" name="category" style="padding: 6px 7px;" placeholder="Chọn thể loại" [(ngModel)]="groupTour.category">
-                                        <option value="1">Leo núi</option>
-                                        <option value="2">Văn hóa</option>
-                                        <option value="3">Tâm linh</option>
-                                    </select>
-                                </div>
-                                <!-- <div class="col-sm-6">
-                                    <input type="text" class="form-control" placeholder="Khác..." name="" [(ngModel)]="groupTour.Other">
-                                </div> -->
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-6">
-                                    <!-- <input type="text" class="form-control" placeholder="Thời gian chuyến đi" name="du-time" [(ngModel)]="groupTour.duration"> -->
-                                    <select class="form-control" name="duration" style="padding: 6px 7px;" placeholder="Thời gian chuyến đi" [(ngModel)]="groupTour.duration">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-6">
-                                    <input type="date" class="form-control" placeholder="Thời gian xuất phát" name="start-time" [(ngModel)]="groupTour.startTime">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
-                            Chuẩn bị
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapse4" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <form class="form-horizontal" action="">
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <textarea class="form-control" rows="3" name="setup" placeholder="Chuẩn bị..." [(ngModel)]="groupTour.prepare"></textarea>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel panel-default tour-details">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
-                            Hành trình chi tiết
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapse5" class="panel-collapse collapse">
-                    <div class="panel-body">
-
-                        <div class="">
-                            <button type="button" class="btn btn-warning" (click)="linkRefShow = !linkRefShow" style="margin-right: 5px;">Dẫn link tham khảo</button>
-                            <button type="button" class="btn btn-info" routerLink="/main/profile/0/createPost/0">Viết hành trình mới</button>
-                        </div>
-
-                        <div id="linkRef" [hidden] = "!linkRefShow">
-                            <h4 style="margin-bottom: 10px;">Nhập link tham khảo:</h4>
-                            <form class="form-horizontal" action="">
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <input type="text" class="form-control" placeholder="Dán link tham khảo tại đây" name="linkRef" [(ngModel)]="groupTour.referenceLink">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
-                            Lưu ý
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapse6" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <form class="form-horizontal" action="">
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <textarea class="form-control" rows="3" name="noti" placeholder="Lưu ý..." [(ngModel)]="groupTour.note"></textarea>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="btn-function text-right">
-            <button type="button" class="btn btn-primary" (click)="saveGroupTour()">
-                <i class="fa fa-paper-plane" aria-hidden="true"></i>Đăng bài</button>
-            <!-- <button type="button" class="btn btn-warning">
-                <i class="fa fa-eye" aria-hidden="true"></i>Xem trước</button> -->
-            <button type="button" class="btn btn-danger">
-                <i class="fa fa-times" aria-hidden="true"></i>Hủy</button>
-        </div>
+<!-- RIGHT SIDE -->
+<div class="col-xs-12 col-sm-9 col-md-9 create-post">
+    <div class="title-post">
+        <span>T</span>ạo nhóm
     </div>
+
+    <div class="text-left h">
+        <h2>Tạo nhóm mới</h2>
+    </div>
+
+    <div class="panel-group" id="accordion">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                        Tên hành trình
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <form class="form-horizontal" action="">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <textarea class="form-control" rows="3" name="title" placeholder="Tên hành trình..." [(ngModel)]="groupTour.tourArticleTitle"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                        Mô tả ngắn về chuyến đi
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form class="form-horizontal" action="">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <textarea class="form-control" rows="3" name="description" placeholder="Mô tả ngắn về chuyến đi..." [(ngModel)]="groupTour.description"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                        Thông tin tóm tắt
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form class="form-horizontal" action="">
+                        <div class="form-group">
+                            <div class="col-sm-2">
+                                <div style="padding-top:3px;">
+                                    <h4 style="text-align:right">
+                                        <i class="fa fa-play" aria-hidden="true"></i>
+                                    </h4>
+                                </div>
+                                <div style="padding-top:14px;">
+                                    <h4 style="text-align:right; margin-top:10px;">
+                                        <i class="fa fa-stop" aria-hidden="true"></i>
+                                    </h4>
+                                </div>
+                                <div style="padding-top:14px;">
+                                    <h4 style="text-align:right; margin-top:10px;">
+                                        <i class="fa fa-suitcase" aria-hidden="true"></i>
+                                    </h4>
+
+                                </div>
+                                <div style="padding-top:16px;">
+                                    <h4 style="text-align:right">
+                                        <i class="fa fa-sun-o" aria-hidden="true"></i>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="col-sm-7">
+                                <!-- <input type="text" class="form-control" placeholder="Điểm xuất phát" name="startLocation" [(ngModel)]="groupTour.startLocation"> -->
+                                <ng-autocomplete (selected)="Selected($event)" [classes]="['']" [group]="group"></ng-autocomplete>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-2">
+                                <h4 style="text-align:right">
+                                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                                </h4>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="date" class="form-control" placeholder="Thời gian xuất phát" name="start-time" [(ngModel)]="groupTour.startTime">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                        Chuẩn bị
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse4" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form class="form-horizontal" action="">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <textarea class="form-control" rows="3" name="setup" placeholder="Chuẩn bị..." [(ngModel)]="groupTour.prepare"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default tour-details">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+                        Hành trình chi tiết
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse5" class="panel-collapse collapse">
+                <div class="panel-body">
+
+                    <div class="">
+                        <button type="button" class="btn btn-warning" (click)="linkRefShow = !linkRefShow" style="margin-right: 5px;">Dẫn link tham khảo</button>
+                        <button type="button" class="btn btn-info" routerLink="/main/profile/0/createPost/0">Viết hành trình mới</button>
+                    </div>
+
+                    <div id="linkRef" [hidden]="!linkRefShow">
+                        <h4 style="margin-bottom: 10px;">Nhập link tham khảo:</h4>
+                        <form class="form-horizontal" action="">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control" placeholder="Dán link tham khảo tại đây" name="linkRef" [(ngModel)]="groupTour.referenceLink">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
+                        Lưu ý
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse6" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <form class="form-horizontal" action="">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <textarea class="form-control" rows="3" name="noti" placeholder="Lưu ý..." [(ngModel)]="groupTour.note"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="btn-function text-right">
+        <button type="button" class="btn btn-primary" (click)="saveGroupTour()">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>Đăng bài</button>
+        <!-- <button type="button" class="btn btn-warning">
+                <i class="fa fa-eye" aria-hidden="true"></i>Xem trước</button> -->
+        <button type="button" class="btn btn-danger" (click)="showGroupTour()">
+            <i class="fa fa-times" aria-hidden="true"></i>Hủy Bài</button>
+    </div>
+</div>
 <!-- </div> -->
 
 <!-- <div style="height: 100px; width: 100%;">

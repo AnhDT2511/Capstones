@@ -14,6 +14,7 @@ import { Comment } from '../../shared/domain/comment.user';
 import { resetFakeAsyncZone } from '@angular/core/testing';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { concat } from 'rxjs/observable/concat';
+import { InfoContstants } from '../../shared/common/index';
 
 @Component({
   selector: 'app-tour-post-page',
@@ -37,16 +38,9 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
   randomIndex: any;
   bookMarked: any = false;
   liked: any = false;
-  listLikeObj: any;
   listCheckbox: any = {};
   reported: any = false;
-  listPlace: any = ['Ha Noi',
-    'Da Nang',
-    'Sai Gon',
-    'Quang Ninh',
-    'Hai Phong',
-    'Bac Lieu',
-    'Nha Trang'];
+  listPlace: any = InfoContstants.CITY_VN;
   textArray = [
     'red',
     'blue',
@@ -82,23 +76,27 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
         //tằng lượt xem
         this.commonService.updatePost(this.tourPost, data => {
         });
-        this.dataService.get('/tours/post/' + response.id + '/like/get-all').subscribe((response: any) => {
-          if (response != null) {
-            if (this.user && response.findIndex(item => item.likeByID === this.user.id && item.deleted == 0) != -1) {
-              this.tourPost.liked = true;
-              this.tourPost.likedID = response[response.findIndex(item => item.likeByID === this.user.id)].id;
-            } else if (this.user && response.findIndex(item => item.likeByID === this.user.id && item.deleted == 1) != -1) {
-              this.tourPost.liked = true;
-              this.tourPost.likedID = 0
-            } else {
-              this.tourPost.liked = false;
-            }
-          }
-        }, error => {
-        });
         this.commonService.getTourByDayDetails(response.id, data => {
           for (let i in data) {
-            this.tourByDayDetail.push(data[i]);
+            let objectVehicle = {};
+            let item = data[i];
+            let arrayVehicle = item.vehicle.split(',');
+            arrayVehicle.forEach(element => {
+              switch (Number(element)) {
+                case 1:
+                  objectVehicle['motorcycle'] = true;
+                  break;
+                case 2:
+                  objectVehicle['taxi'] = true;
+                  break;
+                case 3:
+                  objectVehicle['bus'] = true;
+                  break;
+              }
+            });
+            item.vehicle = objectVehicle;
+            (item.placeID != undefined && item.placeID != 0) ? item.placeID = this.listPlace.find(it => it.id == item.placeID).title : null;
+            this.tourByDayDetail.push(item);
           }
         });
         this.commonService.getAccountDetailsInfo(this.tourPost.accountID, data => {
@@ -114,12 +112,11 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
             this.bookMarked = true;
           }
         })
-        this.commonService.getLikeByTourPostID(this.user.id, data => {
+        this.commonService.getLikeByTourPostID(this.tourPostId, data => {
           this.tourPost['countLike'] = data.filter(item => item.deleted == 0).length;
           if (data.findIndex(item => item.likeByID == this.user.id && item.deleted == 0) != -1) {
             this.liked = true;
           }
-          this.listLikeObj = data;
         })
         this.commonService.getReportByAccountID(this.user.id, data => {
           if (data.findIndex(item => item.tourPostID == this.tourPost.id && item.deleted == 0) != -1) {
@@ -127,10 +124,10 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
           }
         })
         this.commonService.getNumberReport(this.tourPost.id, data => {
-          typeof(data) == "object" ? this.tourPost['countReport'] = 0 : this.tourPost['countReport'] = data;
+          typeof (data) == "object" ? this.tourPost['countReport'] = 0 : this.tourPost['countReport'] = data;
         })
         this.commonService.getNumberComment(this.tourPost.id, data => {
-          typeof(data) == "object" ? this.tourPost['countComment'] = 0 : this.tourPost['countComment'] = data;
+          typeof (data) == "object" ? this.tourPost['countComment'] = 0 : this.tourPost['countComment'] = data;
         })
       }, error => {
       });
@@ -259,35 +256,35 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
   }
 
   likeTourPost() {
-    let existLike = this.listLikeObj.find(item => item.likeByID == this.user.id);
-    if (this.user != null && existLike == undefined) {
-      let _like = new Like(null, this.tourPost.id, this.user.id, 0);
-      this.dataService.post('/tours/post/' + this.tourPost.id + '/Like', _like).subscribe((response: any) => {
-        this.tourPost.liked = true;
-        this.tourPost.countLike++;
-      }, error => {
-      });
-      this.notifyService.printSuccessMessage('Thích bài viết thành công!');
-    } else if (this.user != null && existLike != undefined) {
-      let _relike = new Like(existLike.id, this.tourPost.id, this.user.id, 0);
-      if (existLike.deleted == 0) {
-        _relike.deleted = 1;
-        existLike.deleted = 1;
-        this.notifyService.printSuccessMessage('Bỏ thích bài viết thành công!');
-        this.liked = false;
-        this.tourPost.countLike--;
-      } else {
-        existLike.deleted = 0;
+    this.commonService.getLikeByTourPostID(this.tourPostId, data => {
+      let existLike = data.find(item => item.likeByID == this.user.id)
+      if (this.user != null && existLike == undefined) {
+        let _like = new Like(null, this.tourPost.id, this.user.id, 0);
+        this.dataService.post('/tours/post/' + this.tourPost.id + '/Like', _like).subscribe((response: any) => {
+          this.liked = true;
+          this.tourPost.countLike++;
+        }, error => {
+        });
         this.notifyService.printSuccessMessage('Thích bài viết thành công!');
-        this.liked = true;
-        this.tourPost.countLike++;
+      } else if (this.user != null && existLike != undefined) {
+        let _relike = new Like(existLike.id, this.tourPost.id, this.user.id, 0);
+        if (existLike.deleted == 0) {
+          _relike.deleted = 1;
+          this.notifyService.printSuccessMessage('Bỏ thích bài viết thành công!');
+          this.liked = false;
+          this.tourPost.countLike--;
+        } else {
+          this.notifyService.printSuccessMessage('Thích bài viết thành công!');
+          this.liked = true;
+          this.tourPost.countLike++;
+        }
+        this.dataService.put('/tours/post/' + this.tourPost.id + '/Like', _relike).subscribe((response: any) => {
+        }, error => {
+        });
+      } else {
+        this.notifyService.printErrorMessage('Xin hãy đăng nhập trước khi thực hiện hành động này!');
       }
-      this.dataService.put('/tours/post/' + this.tourPost.id + '/Like', _relike).subscribe((response: any) => {
-      }, error => {
-      });
-    } else {
-      this.notifyService.printErrorMessage('Xin hãy đăng nhập trước khi thực hiện hành động này!');
-    }
+    })
   }
 
   logout() {

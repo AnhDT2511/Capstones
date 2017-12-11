@@ -25,46 +25,6 @@
                     </li>
                 </ul>
                 <ul class="pull-right">
-                    <!-- <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-globe" aria-hidden="true"></i> Ngôn ngữ
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-angle-right" aria-hidden="true"></i> English
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-angle-right" aria-hidden="true"></i> Vietnamese
-                                </a>
-                            </li>
-                        </ul>
-                    </li> -->
-                    <!-- <li>
-                        <span class="rot">|</span>
-                    </li>
-                    <li>
-                        <a routerLink="/register" href="#" *ngIf="user == null">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Đăng ký
-                        </a>
-                        <a href="javascript:void(0)" (click)="logout()" *ngIf="user && user.userName  ">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Đăng xuất
-                        </a>
-                    </li>
-                    <li>
-                        <span class="rot">|</span>
-                    </li>
-                    <li>
-                        <a routerLink="/login" href="#" *ngIf="user == null">
-                            <i class="fa fa-sign-in" aria-hidden="true"></i> Đăng nhập
-                        </a>
-                        <a href="javascript:void(0)" (click)="nagivateProfile()" *ngIf="user && user.userName">
-                            <i class="fa fa-user-o" aria-hidden="true"></i> {{user.userName | uppercase}}
-                        </a>
-                    </li> -->
                     <li>
                         <a href="">
                             <i class="fa fa-question-circle" aria-hidden="true"></i> Giúp đỡ
@@ -170,7 +130,7 @@
     </div>
 
     <!-- Begin: Timeline -->
-    <section class="timeline" [ngsReveal]="{ reset: true}">
+    <section class="timeline" >
         <div class="container ">
             <div class="timeline-item " *ngIf="tourPost.prepare != null">
                 <div class="timeline-img "></div>
@@ -183,7 +143,7 @@
                 </div>
             </div>
         </div>
-        <div class="container ">
+        <div class="container">
             <div class="timeline-item " *ngFor="let tourDetail of tourByDayDetail ; let i = index;">
                 <div class="timeline-img "></div>
                 <div class="timeline-content timeline-card js--fadeInLeft ">
@@ -216,8 +176,8 @@
                     </div>
                     <div class="t-content">
                         <h4>
-                            <i class="fa fa-map-marker " aria-hidden="true " style="font-size: 24px; ">{{tourDetail.placeID}}</i>
-                            <!-- <i class="fa fa-long-arrow-right " aria-hidden="true " style="margin-left: 10px; "></i>Hà Nội -->
+                            <i class="fa fa-map-marker " aria-hidden="true " style="font-size: 24px; "></i>{{tourDetail.placeID}}
+                            <i class="fa fa-location-arrow" aria-hidden="true " style="margin-left: 10px; "></i>{{tourDetail.placeDetail}}
                         </h4>
                         <div class="date ">Ngày {{i+1}}</div>
                         <div [hidden]="hideForm">
@@ -228,9 +188,9 @@
                                 <i class="fa fa-cutlery " aria-hidden="true "></i>{{tourDetail.food}}
                             </h4>
                             <h4>
-                                <i class="fa fa-motorcycle " aria-hidden="true " [ngStyle]="{'color': tourDetail.vehicle == '1' ? '#FF1654' : 'gray','font-weight': tourDetail.vehicle == '1' ? 'bold' :''}"></i>
-                                <i class="fa fa-taxi " aria-hidden="true " [ngStyle]="{'color': tourDetail.vehicle == '2' ? '#FF1654' : 'gray','font-weight': tourDetail.vehicle == '2' ? 'bold' :''}"></i>
-                                <i class="fa fa-bus " aria-hidden="true " [ngStyle]="{'color': tourDetail.vehicle == '3' ? '#FF1654' : 'gray','font-weight': tourDetail.vehicle == '3' ? 'bold' :''}"></i>
+                                <i class="fa fa-motorcycle " aria-hidden="true " *ngIf="tourDetail.vehicle.motorcycle"></i>
+                                <i class="fa fa-taxi " aria-hidden="true " *ngIf="tourDetail.vehicle.taxi"></i>
+                                <i class="fa fa-bus " aria-hidden="true " *ngIf="tourDetail.vehicle.bus"></i>
                             </h4>
                             <p>
                                 {{tourDetail.description}}

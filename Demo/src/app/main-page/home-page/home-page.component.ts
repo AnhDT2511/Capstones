@@ -10,6 +10,7 @@ import { SystemConstants } from '../../shared/common/system.constants';
 import { Like } from '../../shared/domain/like.user';
 import { debug } from 'util';
 import { CommonService } from '../../shared/index';
+import { InfoContstants } from '../../shared/common/index';
 
 @Component({
   selector: 'app-home-page',
@@ -27,7 +28,6 @@ export class HomePageComponent implements OnInit {
   public listTourPostFavoriteAfter: any[] = [];
   public listGroupTour: any[] = [];
   public listLikeObj;
-  countI = 0;
   listTypeSearch = {
     1: 'title',
     2: 'title',
@@ -47,8 +47,6 @@ export class HomePageComponent implements OnInit {
     this.getAllTourPost();
   }
   search(id) {
-    // console.log(id);
-    // console.log(this.searchWord);
     this.utilityService.navigate('/main/search/' + id + '/' + this.searchWord[this.listTypeSearch[id]]);
   }
 
@@ -98,22 +96,19 @@ export class HomePageComponent implements OnInit {
             });
             this.listTourPost.push(_tourPost);
           } else {
-            var _groupTour = response[i];
-            let countLike = this.listLikeObj.filter(item => item.tourPostID == _groupTour.id && item.deleted == 0).length;
-            'countLike' in _groupTour ? _groupTour.countLike = countLike : _groupTour['countLike'] = countLike;
-            _groupTour['liked'] = this.listLikeObj.findIndex(item => item.likeByID == this.user.id && item.tourPostID == _groupTour.id && item.deleted == 0) != -1 ? true : false;
-            this.commonService.getNumberComment(_groupTour.id, data => {
-              typeof (data) == "object" ? _groupTour['countComment'] = 0 : _groupTour['countComment'] = data;
+            let _groupTour = response[i];
+            _groupTour.startPlaceID = InfoContstants.CITY_VN.find(item => item.id == _groupTour.startPlaceID).title;
+            _groupTour.endPlaceID = InfoContstants.CITY_VN.find(item => item.id == _groupTour.endPlaceID).title;
+            this.commonService.getNumberMember(_groupTour.id, data => {
+              typeof (data) == "object" ? _groupTour['countMember'] = 0 : _groupTour['countMember'] = data;
             });
             this.listGroupTour.push(_groupTour);
           }
         }
-      }, error => {
-      });
-      //count comment
-      this.dataService.get('/tours/post/' + this.listTourPost[i].id + '/comment/get-all').subscribe((response: any) => {
-        if (response.length != 0) {
-          this.listTourPost[this.listTourPost.findIndex(item => item.id === response[0].tourPostID)].comment = response.length;
+        for (let i = 0; i < 3; i++) {
+          if (this.listTourPost[i]) {
+            this.listTourPostFavoriteBefore.push(this.listTourPost[i])
+          }
         }
         for (let i = 3; i < 6; i++) {
           if (this.listTourPost[i]) {
@@ -122,27 +117,13 @@ export class HomePageComponent implements OnInit {
         }
       }, error => {
       });
-      //count comment
-      this.dataService.get('/tours/post/' + this.listGroupTour[i].id + '/comment/get-all').subscribe((response: any) => {
-        if (response.length != 0) {
-          this.listGroupTour[this.listGroupTour.findIndex(item => item.id === response[0].tourPostID)].comment = response.length;
-        }
-      }, error => {
-      });
-      // console.log(this.listTourPost);
-    }
-
+    })
   }
   detailGroupTour(_groupTour) {
-    // localStorage.removeItem("groupTour");
-    // localStorage.setItem("groupTour", JSON.stringify(_groupTour));
     this.utilityService.navigate('/main/grouptour/' + _groupTour.id);
   }
 
-
   detailTourPost(_tourPost) {
-    // localStorage.removeItem("tourPost");
-    // localStorage.setItem("tourPost", JSON.stringify(_tourPost));
     this.utilityService.navigate('/main/tourpost/' + _tourPost.id);
   }
 
@@ -156,29 +137,6 @@ export class HomePageComponent implements OnInit {
       localStorage.setItem("listGroupPost", JSON.stringify(this.listTourPost));
       this.utilityService.navigate("/main/listpost");
     }
-  }
-
-  getTourPost(tourpost): TourPost {
-    let _tourPost: TourPost;
-    _tourPost = new TourPost(
-      tourpost.id,
-      tourpost.accountID,
-      tourpost.startPlaceID,
-      tourpost.endPlaceID,
-      tourpost.duration,
-      tourpost.tourArticleTitle,
-      tourpost.deleted,
-      tourpost.createTime,
-      tourpost.description,
-      tourpost.postViewNumber,
-      tourpost.note,
-      tourpost.prepare,
-      tourpost.type,
-      tourpost.startTime,
-      tourpost.category,
-      tourpost.referenceLink
-    )
-    return _tourPost;
   }
   nagivateProfile() {
     this.utilityService.navigate(UrlConstants.PROFILE);

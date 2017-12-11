@@ -28,8 +28,9 @@ h6 {
   padding-right: 0;
 }
 
+
 /*============ SCROLL TO TOP =============*/
-/* 
+
 .scrollToTop {
   width: 40px;
   height: 40px;
@@ -60,4 +61,4 @@ h6 {
   clear: both;
   content: "";
   display: block;
-} */
+}

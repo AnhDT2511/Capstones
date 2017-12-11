@@ -104,59 +104,19 @@
             <span>N</span>hóm
         </div>
     </div>
-
     <div class="col-xs-12 col-sm-3 col-md-3 list-member">
         <h3>
             <i class="fa fa-users" aria-hidden="true"></i>Danh sách thành viên:</h3>
-        <div class="media">
+        <div class="media" *ngFor="let item of listMember">
             <div class="media-left">
                 <img src="../assets/img/default-user-image.png" class="media-object" style="width:44px">
             </div>
             <div class="media-body">
-                <h4 class="media-heading">Đinh Tuấn Anh</h4>
-                <p>Cấp độ: 3</p>
+                <h4 class="media-heading">{{item.userName | uppercase}}</h4>
+                <p>{{item.email}}</p>
             </div>
         </div>
-
-        <div class="media">
-            <div class="media-left">
-                <img src="../assets/img/default-user-image.png" class="media-object" style="width:44px">
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading">Nguyễn Thu Minh</h4>
-                <p>Cấp độ: 3</p>
-            </div>
-        </div>
-
-        <div class="media">
-            <div class="media-left">
-                <img src="../assets/img/default-user-image.png" class="media-object" style="width:44px">
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading">Trần Thị Quỳnh Như</h4>
-                <p>Cấp độ: 3</p>
-            </div>
-        </div>
-
-        <div class="media">
-            <div class="media-left">
-                <img src="../assets/img/default-user-image.png" class="media-object" style="width:44px">
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading">John Doe</h4>
-                <p>Cấp độ: 3</p>
-            </div>
-        </div>
-
-        <div class="media">
-            <div class="media-left">
-                <img src="../assets/img/default-user-image.png" class="media-object" style="width:44px">
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading">John Doe</h4>
-                <p>Cấp độ: 3</p>
-            </div>
-        </div>
+        <input type="button" value="{{joined ? 'Hủy Bỏ' : 'Tham Gia'}}" name="joinGroup" (click)="joinGroup()"> 
     </div>
 
     <div class="col-xs-12 col-sm-4 col-md-4 live-chat">
@@ -224,7 +184,7 @@
                 <label>
                     <i class="fa fa-map-marker" aria-hidden="true" style="font-size: 22px; margin-right: 11px;"></i> Xuất phát - điểm đến:
                 </label>
-                <p class="mg-l">{{listCity[groupTour.startPlaceID]}} - {{listCity[groupTour.endPlaceID]}}</p>
+                <p class="mg-l">{{groupTour.startPlaceID}} - {{groupTour.endPlaceID}}</p>
             </div>
             <div class="category">
                 <label>

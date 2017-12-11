@@ -48,6 +48,54 @@ export class CommonService {
         );
     }
 
+    joinGroup(_joinGroup, callback: (data) => void) {
+        // console.log(id);
+        return this.dataService.post('/tours/post/joingroup/', _joinGroup).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
+    updateJoinGroup(_joinGroup, callback: (data) => void) {
+        // console.log(id);
+        return this.dataService.put('/tours/post/joingroup/', _joinGroup).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
+    getMemberGroup(id, callback: (data) => void) {
+        // console.log(id);
+        return this.dataService.get('/tours/post/joingroup/get-all-by-tourpost/'+ id).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
+    getNumberMember(id, callback: (data) => void) {
+        // console.log(id);
+        return this.dataService.get('/tours/post/joingroup/get-number-by-tourpost/'+ id).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
     addBookMark(_bookmark, callback: (data) => void) {
         // console.log(id);
         return this.dataService.post('/user/account/marking/', _bookmark).subscribe(
