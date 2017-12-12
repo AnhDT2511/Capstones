@@ -24,24 +24,6 @@
                 </li>
             </ul>
             <ul class="pull-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-globe" aria-hidden="true"></i> Ngôn ngữ
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu top-menu">
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-angle-right" aria-hidden="true"></i> English
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-angle-right" aria-hidden="true"></i> Vietnamese
-                            </a>
-                        </li>
-                    </ul>
-                </li>
                 <li>
                     <span class="rot">|</span>
                 </li>
@@ -72,20 +54,30 @@
                             <i class="fa fa-home" aria-hidden="true"></i> Trang chủ
                         </a>
                     </li>
+                    <li>
+                        <a class="page-scroll" routerLink="/login" href="#" *ngIf="!checkLogin">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i> ĐĂNG NHẬP
+                        </a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" routerLink="/register" href="#" *ngIf="!checkLogin">
+                            <i class="fa fa-user-plus" aria-hidden="true"></i> ĐĂNG KÍ
+                        </a>
+                    </li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" *ngIf="checkLogin">
                             <i class="fa fa-user-circle-o" aria-hidden="true"></i> {{user.userName | uppercase}}
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu main-menu">
                             <li>
-                                <a href="javascript:void(0)" routerLink="/main/profile/0">
-                                    <i class="fa fa-user" aria-hidden="true"></i> Trang cá nhân
+                                <a href="#" data-toggle="modal" data-target="#modalMyInfo" (click)="nagivateProfile()" *ngIf="checkLogin">
+                                    <i class="fa fa-user" aria-hidden="true"></i> TRANG CÁ NHÂN
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" (click)="logout()">
-                                    <i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất
+                                <a href="javascript:void(0)" (click)="logout()" *ngIf="checkLogin">
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i> ĐĂNG XUẤT
                                 </a>
                             </li>
                         </ul>
@@ -116,7 +108,7 @@
                 <p>{{item.email}}</p>
             </div>
         </div>
-        <input type="button" value="{{joined ? 'Hủy Bỏ' : 'Tham Gia'}}" name="joinGroup" (click)="joinGroup()"> 
+        <input type="button" class="btn btn-submit" value="{{joined ? 'Hủy Bỏ' : 'Tham Gia'}}" name="joinGroup" (click)="joinGroup()"> 
     </div>
 
     <div class="col-xs-12 col-sm-4 col-md-4 live-chat">
@@ -196,7 +188,7 @@
                 <label>
                     <i class="fa fa-clock-o" aria-hidden="true" style="font-size: 20px;"></i> Thời gian:
                 </label>
-                <p class="mg-l">{{groupTour.duration}} ngày {{groupTour.duration - 1}} đêm</p>
+                <p class="mg-l" *ngIf="groupTour.duration != 0">{{groupTour.duration}} ngày {{groupTour.duration - 1}} đêm</p>
             </div>
             <div class="start-time">
                 <label>

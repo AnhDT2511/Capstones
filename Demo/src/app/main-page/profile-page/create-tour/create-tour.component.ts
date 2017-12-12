@@ -92,27 +92,50 @@ export class CreateTourComponent implements OnInit {
   }
 
   showGroupTour() {
-      console.log(this.groupTour);
+    console.log(this.groupTour);
   }
 
   saveGroupTour() {
-    let date = Date.now();
-    let _groupTour: TourPost = new TourPost(0, this.user.id, this.groupTour.startPlaceID, this.groupTour.endPlaceID, this.groupTour.duration, this.groupTour.tourArticleTitle, 0,
-      date, this.groupTour.description, 0, this.groupTour.note, this.groupTour.prepare, 1, this.groupTour.startTime, this.groupTour.category, this.groupTour.referenceLink);
-    if (this.id == 0) {
-      this.commonService.createPost(_groupTour, data => {
-        this.notifyService.printSuccessMessage("Tạo chuyến đi thành công");
-        this.utiliService.navigate('/main/grouptour/' + _groupTour.id);
-      })
+    if (!InfoContstants.isEmpty(this.groupTour)) {
+      let date = Date.now();
+      let _groupTour: TourPost = new TourPost(0, this.user.id, this.groupTour.startPlaceID, this.groupTour.endPlaceID, this.groupTour.duration, this.groupTour.tourArticleTitle, 0,
+        date, this.groupTour.description, 0, this.groupTour.note, this.groupTour.prepare, 1, this.groupTour.startTime, this.groupTour.category, this.groupTour.referenceLink);
+      if (this.id == 0) {
+        this.commonService.createPost(_groupTour, data => {
+          this.notifyService.printSuccessMessage("Tạo chuyến đi thành công");
+          this.utiliService.navigate('/main/grouptour/' + data._body);
+        })
+      } else {
+        _groupTour.id = this.id;
+        this.commonService.updatePost(_groupTour, data => {
+          this.notifyService.printSuccessMessage("Cập nhật chuyến đi thành công");
+          this.utiliService.navigate('/main/grouptour/' + _groupTour.id);
+        })
+      }
     } else {
-      _groupTour.id = this.id;
-      this.commonService.updatePost(_groupTour, data => {
-        this.notifyService.printSuccessMessage("Cập nhật chuyến đi thành công");
-        this.utiliService.navigate('/main/grouptour/' + _groupTour.id);
-      })
+      this.notifyService.printErrorMessage('Dữ liệu chưa được nhập!');
     }
-
   }
+
+  deleteTourPost() {
+    if (this.id == 0) {
+      if (!InfoContstants.isEmpty(this.groupTour)) {
+        this.notifyService.printConfirmationDialog('Bạn đã nhập dữ liệu, vậy bạn có muốn hủy bản nháp này!', () => {
+          this.groupTour = {};
+        });
+      } else {
+        this.notifyService.printErrorMessage('Bạn chưa nhập dữ liệu');
+      }
+    } else {
+      this.notifyService.printConfirmationDialog('Bạn có chắc chắn muốn xóa chuyến đi này!', () => {
+        this.groupTour.deleted = 1;
+        this.commonService.updatePost(this.groupTour, data => {
+          this.utiliService.navigate('/main/profile/0');
+        })
+      });
+    }
+  }
+
   Selected(item: SelectedAutocompleteItem) {
     // console.log(item);
     switch (item.group.key) {

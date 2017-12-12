@@ -1,34 +1,26 @@
-import { Injectable } from '@angular/core';
-import { DataService } from './data.service';
-import { UrlConstants } from '../common/url.constants';
-import { UtilityService } from './utility.service';
-
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpRequest, HttpEvent} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+ 
 @Injectable()
-export class UploadService {
-  public responseData: any;
-  
-  constructor(private dataService: DataService, private utilityService: UtilityService) { }
-
-  postWithFile(url: string, postData: any, files: File[]) {
-    let formData: FormData = new FormData();
-    formData.append('files', files[0], files[0].name);
-
-    if (postData !== "" && postData !== undefined && postData !== null) {
-      for (var property in postData) {
-        if (postData.hasOwnProperty(property)) {
-          formData.append(property, postData[property]);
-        }
-      }
-    }
-    var returnReponse = new Promise((resolve, reject) => {
-      this.dataService.postFile(url, formData).subscribe(
-        res => {
-          this.responseData = res;
-          resolve(this.responseData);
-        },
-        error => this.dataService.handleError(error)
-      );
+export class UploadFileService {
+ 
+  constructor(private http: HttpClient) {}
+ 
+  pushFileToStorage(file: File): Observable<HttpEvent<{}>> {
+    let formdata: FormData = new FormData();
+ 
+    formdata.append('file', file);
+ 
+    const req = new HttpRequest('POST', '/post', formdata, {
+      reportProgress: true,
+      responseType: 'text'
     });
-    return returnReponse;
+ 
+    return this.http.request(req);
   }
+ 
+  // getFiles(): Observable<string[]> {
+  //   // return this.http.get('/getallfiles')
+  // }
 }

@@ -22,6 +22,7 @@ import { InfoContstants } from '../../shared/common/index';
 export class HomePageComponent implements OnInit {
 
   public user: any = this.authentication.getLoggedInUser();
+  public checkLogin : any = false;
   public searchWord: any = {};
   public listTourPost: any[] = [];
   public listTourPostFavoriteBefore: any[] = [];
@@ -41,7 +42,11 @@ export class HomePageComponent implements OnInit {
     private authentication: AuthenService,
     private dataService: DataService,
     private commonService: CommonService
-  ) { }
+  ) {
+    if(!InfoContstants.isEmpty(this.user)){
+      this.checkLogin = true;
+    }
+   }
 
   ngOnInit() {
     this.getAllTourPost();
@@ -51,7 +56,10 @@ export class HomePageComponent implements OnInit {
   }
 
   likeTourPost(tourPost: any, type: any) {
-    let existLike = this.listLikeObj.find(item => item.likeByID == this.user.id && item.tourPostID == tourPost.id);
+    let existLike : any ;
+    if(!InfoContstants.isEmpty(this.user)){
+       existLike = this.listLikeObj.find(item => item.likeByID == this.user.id && item.tourPostID == tourPost.id);
+    }
     if (this.user != null && existLike == undefined) {
       let _like = new Like(null, tourPost.id, this.user.id, 0);
       this.dataService.post('/tours/post/' + tourPost.id + '/Like', _like).subscribe((response: any) => {
@@ -90,15 +98,17 @@ export class HomePageComponent implements OnInit {
           if (response[i].type == 0) {
             let _tourPost = response[i];
             _tourPost['countLike'] = this.listLikeObj.filter(item => item.tourPostID == _tourPost.id && item.deleted == 0).length;
-            _tourPost['liked'] = this.listLikeObj.findIndex(item => item.likeByID == this.user.id && item.tourPostID == _tourPost.id && item.deleted == 0) != -1 ? true : false;
+            if(this.checkLogin){
+              _tourPost['liked'] = this.listLikeObj.findIndex(item => item.likeByID == this.user.id && item.tourPostID == _tourPost.id && item.deleted == 0) != -1 ? true : false;
+            }
             this.commonService.getNumberComment(_tourPost.id, data => {
               typeof (data) == "object" ? _tourPost['countComment'] = 0 : _tourPost['countComment'] = data;
             });
             this.listTourPost.push(_tourPost);
           } else {
             let _groupTour = response[i];
-            _groupTour.startPlaceID = InfoContstants.CITY_VN.find(item => item.id == _groupTour.startPlaceID).title;
-            _groupTour.endPlaceID = InfoContstants.CITY_VN.find(item => item.id == _groupTour.endPlaceID).title;
+            _groupTour.startPlaceID = !InfoContstants.isEmpty(_groupTour.startPlaceID) ? InfoContstants.CITY_VN.find(item => item.id == _groupTour.startPlaceID).title : null;
+            _groupTour.endPlaceID = !InfoContstants.isEmpty(_groupTour.endPlaceID) ? InfoContstants.CITY_VN.find(item => item.id == _groupTour.endPlaceID).title : null;
             this.commonService.getNumberMember(_groupTour.id, data => {
               typeof (data) == "object" ? _groupTour['countMember'] = 0 : _groupTour['countMember'] = data;
             });

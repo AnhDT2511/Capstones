@@ -417,7 +417,7 @@
     </div>
 </section>
 
-<section id="video-ad" style="background-image: url(../assets/img/bg-section-banner.jpg);">
+<section id="video-ad" style="background-image: url(../assets/img/bg-section-banner.jpg); display:block!important">
     <div class="overlay">
         <div class="container">
             <div class="col-xs-12 col-sm-5 col-md-5 b-left">
@@ -447,7 +447,7 @@
                         <div class="media-body">
                             <a class="media-heading" (click)="detailGroupTour(groupTour)">{{groupTour.tourArticleTitle}}</a>
                             <p>{{groupTour.startPlaceID}} - {{groupTour.endPlaceID}}
-                                <span>|</span>{{groupTour.duration}} ngày {{groupTour.duration - 1}} đêm
+                                <span>|</span>{{groupTour.duration}} ngày {{groupTour.duration == 0 ? 0 : groupTour.duration - 1}} đêm
                                 <span>|</span>{{groupTour.countMember}} thành viên</p>
                         </div>
                     </div>
@@ -469,7 +469,7 @@
             <p class="quota">Giá trị của nhưng chuyến đi không phải là bao lâu, bao xa mà là nhưng người người bạn.</p>
 
             <div class="btn-show-more">
-                <a href="">Xem thêm</a>
+                <a href="javascript:void(0)" (click)="seeMore(0)">Xem thêm</a>
             </div>
         </div>
     </div>

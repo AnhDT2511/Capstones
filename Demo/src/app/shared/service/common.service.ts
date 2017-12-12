@@ -264,6 +264,13 @@ export class CommonService {
             callback(error);
         });
     }
+    getAllTourPost(callback: (data) => void) {
+        this.dataService.get('/tours/post/get-all').subscribe(res => {
+            callback(res);
+        }, error => {
+            callback(error);
+        });
+    }
     createPost(_tourPost,  callback: (data) => void) {
         this.dataService.post('/tours/post/', _tourPost).subscribe(res => {
             callback(res);

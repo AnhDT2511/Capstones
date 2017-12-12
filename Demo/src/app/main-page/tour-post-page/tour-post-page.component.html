@@ -57,26 +57,30 @@
                                 <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Tạo chuyến đi
                             </a>
                         </li>
-                        <!-- <li>
-                                <a href="login.html">
-                                    <i class="fa fa-sign-in" aria-hidden="true" style="font-size: 18px;"></i> Đăng nhập
-                                </a>
-                            </li> -->
-
+                        <li>
+                            <a class="page-scroll" routerLink="/login" href="#" *ngIf="!checkLogin">
+                                <i class="fa fa-sign-in" aria-hidden="true"></i> ĐĂNG NHẬP
+                            </a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" routerLink="/register" href="#" *ngIf="!checkLogin">
+                                <i class="fa fa-user-plus" aria-hidden="true"></i> ĐĂNG KÍ
+                            </a>
+                        </li>
                         <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" *ngIf="checkLogin">
                                 <i class="fa fa-user-circle-o" aria-hidden="true"></i> {{user.userName | uppercase}}
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu main-menu">
                                 <li>
-                                    <a href="javascript:void(0)" (click)="nagivateProfile()">
-                                        <i class="fa fa-user" aria-hidden="true"></i> Trang cá nhân
+                                    <a href="#" data-toggle="modal" data-target="#modalMyInfo" (click)="nagivateProfile()" *ngIf="checkLogin">
+                                        <i class="fa fa-user" aria-hidden="true"></i> TRANG CÁ NHÂN
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0)" (click)="logout()">
-                                        <i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất
+                                    <a href="javascript:void(0)" (click)="logout()" *ngIf="checkLogin">
+                                        <i class="fa fa-sign-out" aria-hidden="true"></i> ĐĂNG XUẤT
                                     </a>
                                 </li>
                             </ul>
@@ -320,7 +324,7 @@
             </div>
         </div>
 
-        <a href="javascript:void(0)" id="ilike" (click)=likeTourPost(tourPost) class="ilike">{{(tourPost.liked && tourPost.likedID != 0) ? 'Bỏ thích' : 'Thích'}}</a>
+        <a href="javascript:void(0)" id="ilike" (click)=likeTourPost(tourPost) class="ilike">{{ liked  ? 'Bỏ thích' : 'Thích'}}</a>
         <a href="javascript:void(0)" id="icomment" class="icomment" (click)="openCloseCmt()">Bình luận</a>
         <a href="javascript:void(0)" id="ireport" class="ireport" (click)="openCloseReport()">Tố cáo</a>
         <a href="javascript:void(0)" id="saveLink" class="save-link" (click)="bookMark(tourPost)">{{ bookMarked ? 'Bỏ Lưu' : 'Lưu'}}</a>

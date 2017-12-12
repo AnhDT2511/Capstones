@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService, UtilityService, NotificationService, CommonService } from '../../shared/service';
-import { SystemConstants, InfoContstants } from '../../shared/common';
+import { SystemConstants, InfoContstants ,UrlConstants} from '../../shared/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AuthenService } from '../../shared/index';
 import { Comment } from '../../shared/domain/comment.user';
@@ -12,22 +12,14 @@ import { Comment } from '../../shared/domain/comment.user';
 })
 export class GroupPageComponent implements OnInit {
   user: any = this.authentication.getLoggedInUser();
+  checkLogin: any = false;
   groupTourId: string;
   listComment: any;
   listMember: any = [];
   listJoinGroup: any = [];
   comment: string = "";
-  joined : boolean = true;
-  groupTour: any = {
-    // 'tourArticleTitle': 'Khám phá Ninh Bình',
-    // 'description': 'Chuyện sản phẩm của nhiều hãng khác nhau sử dụng chung một loại công nghệ màn hình, thậm chí là cùng tấm nền thật ra không mới. Nhưng câu chuyện chất lượng hình ảnh của chúng có như nhau hay không thì vẫn luôn là đề tài bàn tán của nhiều người.',
-    // 'category': '1,2',
-    // 'duration': 3,
-    // 'startTime': '05/12/2017',
-    // 'prepare': 'Áo ấm, mũ bảo hiểm, đồ sữa xe',
-    // 'note': 'Áo ấm, mũ bảo hiểm, đồ sữa xe',
-    // 'referenceLink': 'file:///E:/GitHub/tripnet-frontend/groupTour.html'
-  };
+  joined: boolean = true;
+  groupTour: any = {};
   listCategory: any = {
     '1': 'Leo núi',
     '2': 'Văn Hóa',
@@ -43,6 +35,9 @@ export class GroupPageComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private authentication: AuthenService
   ) {
+    if (!InfoContstants.isEmpty(this.user)) {
+      this.checkLogin = true;
+    }
     this.activatedRoute.params.subscribe((params: Params) => {
       this.groupTourId = params.id;
       this.dataService.get('/tours/post/' + params.id).subscribe((response: any) => {
@@ -52,68 +47,82 @@ export class GroupPageComponent implements OnInit {
           this.loadComment();
           this.loadMember();
         });
-         this.groupTour.startPlaceID = this.listCity.find(item => item.id == this.groupTour.startPlaceID).title;
-         this.groupTour.endPlaceID = this.listCity.find(item => item.id == this.groupTour.endPlaceID).title;
+        this.groupTour.startPlaceID = !InfoContstants.isEmpty(this.groupTour.startPlaceID) ? this.listCity.find(item => item.id == this.groupTour.startPlaceID).title : null;
+        this.groupTour.endPlaceID = !InfoContstants.isEmpty(this.groupTour.endPlaceID) ?  this.listCity.find(item => item.id == this.groupTour.endPlaceID).title : null;
       }, error => {
       });
     });
   }
 
   ngOnInit() {
-    // lấy thể loại theo id category
-    // let listCategory = this.groupTour.category.split(",");
-    // let stringCategory = "";
-    // listCategory.forEach(element => {
-    //   stringCategory += this.listCategory[element] + ",";
-    // });
-    // this.groupTour.category = stringCategory;
   }
 
   joinGroup() {
-    let joined = this.listJoinGroup.findIndex(item => item.joinGroupByID == this.user.id);
-    let _joinGroup = {
-      'tourPostID': this.groupTour.id,
-      'joinGroupByID': this.user.id,
-      'deleted': 0,
-      'createTime': Date.now()
+    if (this.checkLogin) {
+      let joined = this.listJoinGroup.findIndex(item => item.joinGroupByID == this.user.id);
+      let _joinGroup = {
+        'tourPostID': this.groupTour.id,
+        'joinGroupByID': this.user.id,
+        'deleted': 0,
+        'createTime': Date.now()
+      }
+      if (joined == -1) {
+        this.commonService.joinGroup(_joinGroup, data => {
+          this.notifyservice.printSuccessMessage('Tham gia chuyến đi thành công :D');
+          this.loadMember();
+        })
+      } else {
+        _joinGroup['id'] = this.listJoinGroup[joined].id;
+        _joinGroup['updatedTime'] = Date.now();
+        if (this.listJoinGroup[joined].deleted == 0) {
+          _joinGroup.deleted = 1;
+          this.notifyservice.printSuccessMessage('Hủy tham gia chuyến đi thành công :( ');
+        } else {
+          _joinGroup.deleted = 0;
+          this.notifyservice.printSuccessMessage('Tham gia chuyến đi thành công :D');
+        }
+        delete _joinGroup['createTime'];
+        this.commonService.updateJoinGroup(_joinGroup, data => {
+          this.loadMember();
+        })
+      }
+    }else{
+      this.notifyservice.printErrorMessage('Xin hãy đăng nhập trước khi thực hiện hành động này!');
     }
-    if (joined == -1) {
-      this.commonService.joinGroup(_joinGroup, data => {
-        this.loadMember();
-      })
-    } else {
-      _joinGroup['id'] = joined.id;
-      _joinGroup['updatedTime'] = Date.now();
-      delete _joinGroup['createTime'];
-      console.log(_joinGroup);
-      this.commonService.updateJoinGroup(_joinGroup, data => {
-        console.log(data);
-      })
-    }
-
+  }
+  
+  nagivateProfile() {
+    this.utiliservice.navigate(UrlConstants.PROFILE);
   }
 
   loadMember() {
     this.listMember = [];
     this.commonService.getMemberGroup(this.groupTour.id, data => {
       this.listJoinGroup = data;
-      this.joined = data.findIndex(item => item.joinGroupByID == this.user.id && item.deleted == 0) != -1 ? true : false
+      if (this.checkLogin) {
+        this.joined = data.findIndex(item => item.joinGroupByID == this.user.id && item.deleted == 0) != -1 ? true : false
+      }
       data.forEach(element => {
-        this.commonService.getAccountInfo(element.joinGroupByID, item => {
-          this.listMember.push(item);
-        })
+        if (element.deleted == 0) {
+          this.commonService.getAccountInfo(element.joinGroupByID, item => {
+            this.listMember.push(item);
+          })
+        }
       });
     })
   }
 
   sendComment() {
-    if (this.user != null) {
+    if (this.checkLogin && !InfoContstants.isEmpty(this.comment)) {
       let _comment = new Comment(this.comment, this.groupTour.id, this.user.id);
       this.dataService.post('/tours/post/' + this.groupTour.id + '/comment', _comment).subscribe((response: any) => {
         this.loadComment();
+        this.notifyservice.printSuccessMessage('Thêm bình luận thành công')
       }, error => {
       });
-    } else {
+    } else if(this.checkLogin && InfoContstants.isEmpty(this.comment)){
+      this.notifyservice.printErrorMessage('Bình luận không nên để trống');
+    }else{
       this.notifyservice.printErrorMessage('Xin hãy đăng nhập trước khi thực hiện hành động này!');
     }
   }
@@ -137,7 +146,7 @@ export class GroupPageComponent implements OnInit {
 
   logout() {
     window.localStorage.removeItem("CURRENT_USER");
-    this.user = this.authentication.getLoggedInUser();
+    this.checkLogin = false;
     this.notifyservice.printSuccessMessage("Đăng xuất thành công");
   }
 }
