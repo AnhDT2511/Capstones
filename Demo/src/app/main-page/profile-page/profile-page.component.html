@@ -193,15 +193,15 @@
 
     </div>
 </div>
-<form-upload (listImage)="getListImage($event)"></form-upload>
 <div id="" class="container">
     <div class="col-xs-12 col-sm-3 col-md-3 profile-side">
         <div class="profile-img">
-            <img src="../assets/img/default-user-image.png" alt="Avatar" class="image">
+            <img src="{{urlImage}}{{user.image}}" alt="Avatar" class="image">
             <div class="overlay" [hidden]="viewPersionInfo">
                 <div class="text">
-                    <a href="">
-                        <i class="fa fa-camera-retro" aria-hidden="true"></i>Cập nhật ảnh đại diện
+                    <a href="javascript:void(0)">
+                        <i class="fa fa-camera-retro" aria-hidden="true" for="upload"></i>Cập nhật ảnh đại diện
+                        <form-upload (listImage)="getListImage($event)" (result)="resultImage($event)"></form-upload>
                     </a>
                 </div>
             </div>

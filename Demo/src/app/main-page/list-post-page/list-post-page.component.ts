@@ -23,9 +23,7 @@ export class ListPostPageComponent implements OnInit {
     private utilityservice : UtilityService,
     private router: Router) { }
   showDetail(_tourPost) {
-    localStorage.removeItem("tourPost");
-    localStorage.setItem("tourPost", JSON.stringify(_tourPost));
-    this.utilityservice.navigate('/main/tourpost');
+    this.utilityservice.navigate('/main/tourpost/'+_tourPost.id);
   }
   ngOnInit() {
     console.log(this.listTourPost);

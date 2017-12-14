@@ -100,6 +100,9 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
             item.vehicle = objectVehicle;
             (item.placeID != undefined && item.placeID != 0) ? item.placeID = this.listPlace.find(it => it.id == item.placeID).title : null;
             this.tourByDayDetail.push(item);
+            this.commonService.getImageByTourByDayID(item.id,data =>{
+              console.log(data);
+            })
           }
         });
         this.commonService.getAccountDetailsInfo(this.tourPost.accountID, data => {
