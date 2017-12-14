@@ -108,7 +108,7 @@ export class CommonService {
         );
     }
 
-    uploadImage(_media, callback: (data) => void) {
+    addImage(_media, callback: (data) => void) {
         // console.log(id);
         return this.dataService.post('/tours/post/media/', _media).subscribe(
             res => {
@@ -120,9 +120,33 @@ export class CommonService {
         );
     }
 
+    uploadImage(_media, callback: (data) => void) {
+        // console.log(id);
+        return this.dataService.put('/tours/post/media/', _media).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
     getImageByAccountID(id, callback: (data) => void) {
         // console.log(id);
-        return this.dataService.post('/tours/post/media/get-by-account/' + Number(id)).subscribe(
+        return this.dataService.get('/tours/post/media/get-by-account/' + id).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
+    getImageByTourByDayID(id, callback: (data) => void) {
+        // console.log(id);
+        return this.dataService.get('/tours/post/media/get-by-tourbyday/' + id).subscribe(
             res => {
                 callback(res);
             },

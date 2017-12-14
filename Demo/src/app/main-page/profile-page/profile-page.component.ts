@@ -30,7 +30,7 @@ export class ProfilePageComponent implements OnInit {
   @ViewChild(FormUploadComponent)
   private formUpload: FormUploadComponent;
 
-  listImageName : any = [];
+  listImageName: any = [];
   user: any = {};
   userTemp: any = {};
   userDetails: any = {};
@@ -39,6 +39,7 @@ export class ProfilePageComponent implements OnInit {
   // model: any = {};
   viewPersionInfo: boolean = true;
   checkUserDetails: boolean = true;
+  urlImage = SystemConstants.BASE_IMAGE;
 
   constructor(
     private utilityService: UtilityService,
@@ -78,19 +79,33 @@ export class ProfilePageComponent implements OnInit {
 
   }
 
-  getListImage(ImageName){
-    this.commonService.uploadImage({
-      'name' : ImageName,
-      'deleted' : 0,
-      'createdTime' : Date.now(),
-      'accountID' : this.user.id
-    },data =>{
-    })
+  getListImage(ImageName) {
+
+    this.formUpload.upload(ImageName);
+  }
+
+  resultImage(result) {
+    let image = {
+      'name': result,
+      'deleted': 0,
+      'createdTime': Date.now(),
+      'accountID': this.user.id
+    };
+    if (this.user.image != 'default-user-image.png') {
+      image['id'] = this.user.imageID;
+      this.commonService.uploadImage(image, data => {
+      })
+    } else {
+      this.commonService.addImage(image, data => {
+      })
+    }
+    this.user['image'] = result;
   }
 
   getUserDetails(id: string) {
-    this.commonService.getImageByAccountID(id,data => {
-      console.log(data);
+    this.commonService.getImageByAccountID(id, data => {
+      data.length > 0 ? this.user['image'] = data[0].name : this.user['image'] = 'default-user-image.png';
+      this.user.imageID = data[0].id;
     })
     this.dataService.get('/user/accountdetails/' + id).subscribe((response: any) => {
       this.userDetails['fullName'] = response.firstName + ' ' + response.lastName;
@@ -138,9 +153,8 @@ export class ProfilePageComponent implements OnInit {
     // } else {
     //   this.notifyService.printErrorMessage('Có lỗi xảy ra khi cập nhật thông tin người dùng, xin hãy thử lại!');
     // }
-
   }
-  openInfo(){
+  openInfo() {
     this.userTemp = JSON.parse(JSON.stringify(this.user));
     this.userDetailsTemp = JSON.parse(JSON.stringify(this.userDetails));
   }

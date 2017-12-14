@@ -4,16 +4,20 @@ import { TourPost } from '../../../shared/domain/tourPost.user';
 import { SystemConstants, InfoContstants } from '../../../shared/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { CreateNewAutocompleteGroup, SelectedAutocompleteItem, NgAutocompleteComponent } from "ng-auto-complete";
+import { FormUploadComponent } from '../../../shared/form-upload/form-upload.component';
 
 @Component({
   selector: 'app-create-post',
-  templateUrl: './create-post.component.html',
   encapsulation: ViewEncapsulation.None,
+  templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.css']
 })
 export class CreatePostComponent implements OnInit {
   @ViewChild(NgAutocompleteComponent)
   public completer: NgAutocompleteComponent;
+
+  @ViewChild(FormUploadComponent)
+  private formUpload: FormUploadComponent;
 
   public groupCity = [
     CreateNewAutocompleteGroup(
@@ -31,6 +35,7 @@ export class CreatePostComponent implements OnInit {
   tourPostTemp: any;
   listTourDetail: any;
   listTourDetailTemp: any = [];
+  listImage: any = [];
   id = 0;
   options = [
     { name: 'motorcycle', value: '1' },
@@ -97,6 +102,42 @@ export class CreatePostComponent implements OnInit {
   setDisplayValue(tourpost, tourbyday, event) {
     this.listTourDetail[tourpost].checkbox[tourbyday] = event;
   }
+  getListImage(ImageName, tourByDayID) {
+    this.listImage.filter(item => item.day == tourByDayID.day).forEach(element => {
+      this.listImage.splice(this.listImage.findIndex(item => item == element), 1);
+    });
+    for (let i = 0; i < ImageName.length; i++) {
+      if (this.listImage.findIndex(item => item.name == ImageName[i].name && item.day == tourByDayID.day) == -1) {
+        this.listImage.push({
+          'day': tourByDayID.day,
+          'name': ImageName[i].name,
+          'image' : ImageName[i]
+        })
+      }
+    }
+  }
+  
+  uploadImage(id,day,type) {
+    let listDataImage : any = [];
+    this.listImage.filter(item => item.day == day).forEach(element => {
+        listDataImage.push(element['image']);
+    });
+    this.formUpload.upload(listDataImage);
+  }
+
+  result(item,id,type){
+    let image = {
+      'name': item,
+      'deleted': 0,
+      'createdTime': Date.now(),
+      'accountID': this.user.id,
+      'tourByDayID': id
+    };
+    console.log(item);
+    // this.commonservice.addImage(image, data => {
+    //   console.log('success');
+    // })
+  }
   validateTourPost(): boolean {
     for (let i in this.tourPost) {
       switch (i) {
@@ -136,11 +177,17 @@ export class CreatePostComponent implements OnInit {
     return true;
   }
   validateTourByDay() {
-    // if (JSON.stringify(this.listTourDetail) == JSON.stringify(this.listTourDetailTemp)) {
-    //   this.notifyservice.printErrorMessage('Hành trình chi tiết không nên để trống');
-    //   return false;
-    // }
+    if (JSON.stringify(this.listTourDetail) == JSON.stringify(this.listTourDetailTemp)) {
+      this.notifyservice.printErrorMessage('Hành trình chi tiết không nên để trống');
+      return false;
+    }
+    let index = this.listTourDetail.findIndex(item => JSON.stringify(item.checkbox) === "{}")
+    if(index != -1){
+      this.notifyservice.printErrorMessage('**Ngày ' + (index + 1)  + '**:Phương tiện không nên để trống');
+      return false;
+    }
     this.listTourDetail.forEach(element => {
+      // console.log(element);
       for (let i in element) {
         switch (i) {
           case 'hotel':
@@ -161,25 +208,6 @@ export class CreatePostComponent implements OnInit {
               return false;
             }
             break;
-          case 'checkbox':
-            let check : boolean = true;
-            if (InfoContstants.isEmpty(element[i])) {
-              this.notifyservice.printErrorMessage('**Ngày ' + element.day + '**:Phương tiện không nên để trống');
-              check = false;
-            } else {
-              for (let a in element[i]) {
-                let value = element[i][a + ""];
-                value ? '' : delete element[i][a + ""];
-              }
-              if (InfoContstants.isEmpty(element[i])) {
-                this.notifyservice.printErrorMessage('**Ngày ' + element.day + '**:Phương tiện không nên để trống');
-                check = false;
-              }
-            }
-            if(!check){
-              return false;
-            }
-            break;
         }
       }
     });
@@ -188,6 +216,8 @@ export class CreatePostComponent implements OnInit {
   saveTourPost() {
     let responseID = 0;
     if (this.validateTourPost() && this.validateTourByDay()) {
+      console.log(this.validateTourPost());
+      console.log(this.validateTourByDay());
       this.commonservice.getAllTourPost(data => {
         let date = Date.now();
         let _tourPost: TourPost = new TourPost(0, this.user.id, this.tourPost.startPlaceID, 0, this.listTourDetail.length, this.tourPost.title, 0,
@@ -200,7 +230,7 @@ export class CreatePostComponent implements OnInit {
           })
         } else if (this.id == 0 && validate != -1) {
           this.notifyservice.printErrorMessage('Tiêu đề đã tồn tại trong hệ thống');
-        } 
+        }
         else if (this.id != 0) {
           _tourPost.id = this.id;
           this.commonservice.updatePost(_tourPost, data => {
@@ -217,6 +247,7 @@ export class CreatePostComponent implements OnInit {
       this.listTourDetail[i]['vehicle'] = this.getKeyByValue(listVehicle, true).substring(0, this.getKeyByValue(listVehicle, true).length - 1);
       this.listTourDetail[i]['tourPostID'] = id;
       this.dataservice.post('/tours/post/' + id + '/day', this.listTourDetail[i]).subscribe((response: any) => {
+        this.uploadImage(response._body,this.listTourDetail[i].day,true);
       }, error => {
       });;
     }
@@ -227,6 +258,7 @@ export class CreatePostComponent implements OnInit {
       this.listTourDetail[i]['vehicle'] = this.getKeyByValue(listVehicle, true).substring(0, this.getKeyByValue(listVehicle, true).length - 1);
       this.listTourDetail[i]['updatedTime'] = Date.now();
       this.dataservice.put('/tours/post/' + id + '/day', this.listTourDetail[i]).subscribe((response: any) => {
+        this.uploadImage(response._body,this.listTourDetail[i].day,false);
       }, error => {
       });;
     }

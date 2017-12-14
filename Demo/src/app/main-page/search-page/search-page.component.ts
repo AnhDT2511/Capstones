@@ -37,6 +37,9 @@ export class SearchPageComponent implements OnInit {
   ngOnInit() {
 
   }
+  showDetail(item){
+    this.utilityService.navigate('/main/tourpost/'+ item.id);
+  }
   searchByType() {
     if (this.textSearch != "") {
       switch (Number(this.typeSearch)) {
