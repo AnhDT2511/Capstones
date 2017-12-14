@@ -11,6 +11,7 @@ import {
 import { ActivatedRoute, Params } from '@angular/router';
 import { TextChangeInfoComponent } from './dialog-change-info/dialog-change-info.component';
 import { CommonService } from '../../shared/index';
+import { FormUploadComponent } from '../../shared/form-upload/form-upload.component';
 
 @Component({
   selector: 'app-profile-page',
@@ -26,7 +27,10 @@ export class ProfilePageComponent implements OnInit {
   @ViewChild(TextChangeInfoComponent)
   private textChangeInfo: TextChangeInfoComponent;
 
+  @ViewChild(FormUploadComponent)
+  private formUpload: FormUploadComponent;
 
+  listImageName : any = [];
   user: any = {};
   userTemp: any = {};
   userDetails: any = {};
@@ -74,7 +78,20 @@ export class ProfilePageComponent implements OnInit {
 
   }
 
+  getListImage(ImageName){
+    this.commonService.uploadImage({
+      'name' : ImageName,
+      'deleted' : 0,
+      'createdTime' : Date.now(),
+      'accountID' : this.user.id
+    },data =>{
+    })
+  }
+
   getUserDetails(id: string) {
+    this.commonService.getImageByAccountID(id,data => {
+      console.log(data);
+    })
     this.dataService.get('/user/accountdetails/' + id).subscribe((response: any) => {
       this.userDetails['fullName'] = response.firstName + ' ' + response.lastName;
       this.userDetails['address'] = response.address;
@@ -89,37 +106,38 @@ export class ProfilePageComponent implements OnInit {
   }
 
   saveUserInfo() {
-    this.dataService.put("/user/account", JSON.stringify(this.user)).subscribe((response: any) => {
-      localStorage.removeItem(SystemConstants.CURRENT_USER);
-      localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(this.user));
-    }, error => {
-      this.valid = false;
-    });
+    console.log(this.listImageName);
+    // this.dataService.put("/user/account", JSON.stringify(this.user)).subscribe((response: any) => {
+    //   localStorage.removeItem(SystemConstants.CURRENT_USER);
+    //   localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(this.user));
+    // }, error => {
+    //   this.valid = false;
+    // });
 
-    this.userDetails['firstName'] = this.userDetails.fullName.substr(0, this.userDetails.fullName.indexOf(' '));
-    this.userDetails['lastName'] = this.userDetails.fullName.substr(this.userDetails.fullName.indexOf(' ') + 1);
-    this.userDetails['accountId'] = this.user.id;
-    delete this.userDetails['fullName'];
+    // this.userDetails['firstName'] = this.userDetails.fullName.substr(0, this.userDetails.fullName.indexOf(' '));
+    // this.userDetails['lastName'] = this.userDetails.fullName.substr(this.userDetails.fullName.indexOf(' ') + 1);
+    // this.userDetails['accountId'] = this.user.id;
+    // delete this.userDetails['fullName'];
 
-    this.getUserDetails(this.user.id);
-    if (this.checkUserDetails) {
-      this.dataService.put("/user/accountdetails", JSON.stringify(this.userDetails)).subscribe((response: any) => {
-        this.userDetails["fullName"] = this.userDetails.firstName + " " + this.userDetails.lastName;
-      }, error => {
-        this.valid = false;
-      });
-    } else {
-      this.dataService.post("/user/accountdetails", JSON.stringify(this.userDetails)).subscribe((response: any) => {
-        this.userDetails["fullName"] = this.userDetails.firstName + " " + this.userDetails.lastName;
-      }, error => {
-        this.valid = false;
-      });
-    }
-    if (this.valid) {
-      this.notifyService.printSuccessMessage('Cập nhật thông tin người dùng thành công!');
-    } else {
-      this.notifyService.printErrorMessage('Có lỗi xảy ra khi cập nhật thông tin người dùng, xin hãy thử lại!');
-    }
+    // this.getUserDetails(this.user.id);
+    // if (this.checkUserDetails) {
+    //   this.dataService.put("/user/accountdetails", JSON.stringify(this.userDetails)).subscribe((response: any) => {
+    //     this.userDetails["fullName"] = this.userDetails.firstName + " " + this.userDetails.lastName;
+    //   }, error => {
+    //     this.valid = false;
+    //   });
+    // } else {
+    //   this.dataService.post("/user/accountdetails", JSON.stringify(this.userDetails)).subscribe((response: any) => {
+    //     this.userDetails["fullName"] = this.userDetails.firstName + " " + this.userDetails.lastName;
+    //   }, error => {
+    //     this.valid = false;
+    //   });
+    // }
+    // if (this.valid) {
+    //   this.notifyService.printSuccessMessage('Cập nhật thông tin người dùng thành công!');
+    // } else {
+    //   this.notifyService.printErrorMessage('Có lỗi xảy ra khi cập nhật thông tin người dùng, xin hãy thử lại!');
+    // }
 
   }
   openInfo(){

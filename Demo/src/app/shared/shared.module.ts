@@ -3,13 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-
-// import { ArticleListComponent, ArticleMetaComponent, ArticlePreviewComponent } from './article-helpers';
-// import { FavoriteButtonComponent, FollowButtonComponent } from './buttons';
-// import { ListErrorsComponent } from './list-errors.component';
-// import { ShowAuthedDirective } from './show-authed.directive';
-// import { LayoutHeaderComponent, LayoutFooterComponent } from './layout'
-// import { ModalLoginComponent, DialogLoginButtonComponent } from './modal'
+import { FormUploadComponent } from './form-upload/form-upload.component'
 
 import {
   MatAutocompleteModule,
@@ -113,6 +107,7 @@ export class AppMaterialModules { }
     // LayoutFooterComponent,
     // ModalLoginComponent,
     // DialogLoginButtonComponent
+    FormUploadComponent
   ],
   // entryComponents: [ModalLoginComponent],
   exports: [
@@ -123,6 +118,7 @@ export class AppMaterialModules { }
     ReactiveFormsModule,
     HttpModule,
     RouterModule,
+    FormUploadComponent,
     // ModalLoginComponent,
     // DialogLoginButtonComponent,
     AppMaterialModules

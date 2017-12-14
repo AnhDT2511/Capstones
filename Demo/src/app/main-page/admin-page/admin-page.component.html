@@ -1,115 +1,100 @@
 <div class="page-content">
-  <!-- Begin: Small Menu -->
-  <nav class="small-menu" id="small-menu">
-    <div class="menu-inner-small">
-      <div class="logo-small">
-        <button onclick="openBigNav()">
+    <!-- Begin: Small Menu -->
+    <nav class="small-menu" id="small-menu">
+        <div class="menu-inner-small">
+            <div class="logo-small">
+                <button onclick="openBigNav()">
           <i class="fa fa-bars btn-menu" aria-hidden="true"></i>
         </button>
-      </div>
-      <ul id="menu-small" class="menu-point-small">
-        <li>
-          <i class="fa fa-tachometer fx-size point" aria-hidden="true"></i>
-          <ul style="top: 91px;">
-            <li>
-              <a routerLink="dashboard" href="#"> Dashboard </a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <i class="fa fa-users fx-size point" aria-hidden="true"></i>
-          <ul style="top: 132px;">
-            <li>
-              <a routerLink="usermanagement" href="#"> Quản lý thành viên </a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <i class="fa fa-pencil fx-size point" aria-hidden="true"></i>
-          <ul style="top: 173px;">
-            <li class="sli">
-              <a routerLink="postmanagement" href="#"> Quản lý bài đăng </a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <i class="fa fa-map-marker fx-size point" aria-hidden="true"></i>
-          <ul style="top: 214px;">
-            <li>
-              <a routerLink="placemanagement" href="javascript:void(0)"> Quản lý địa điểm </a>
-            </li>
-          </ul>
-        </li>
-        <!-- <li>
-          <i class="fa fa-bar-chart fx-size point" aria-hidden="true"></i>
-          <ul style="top: 255px;">
-            <li class="stitle"> Thống kê </li>
-            <li class="sli">
-              <a href="#"> Thống kê theo loại công việc </a>
-            </li>
-            <li class="sli">
-              <a href="#"> Thống kê doanh thu </a>
-            </li>
-          </ul>
-        </li> -->
-        <!-- <li>
-          <i class="fa fa-flag fx-size point" aria-hidden="true"></i>
-          <ul style="top: 296px;">
-            <li>
-              <a href="#"> Quản lý báo cáo </a>
-            </li>
-          </ul>
-        </li> -->
-        <!-- <li>
-          <i class="fa fa-comment fx-size point" aria-hidden="true"></i>
-          <ul style="top: 337px;">
-            <li>
-              <a href="#"> Góp ý - Báo cáo sự cố </a>
-            </li>
-          </ul>
-        </li> -->
-        <li>
-          <i class="fa fa-user-plus fx-size point" aria-hidden="true"></i>
-          <ul style="top: 378px;">
-            <li>
-              <a href="#"> Thêm quản trị viên </a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <!-- End: Small Menu -->
-  <!-- Begin: Big Menu -->
-  <nav class="big-menu" id="big-menu">
-    <div class="menu-inner-big">
-      <div class="logo">
-        <button onclick="openSmallNav()">
+            </div>
+            <ul id="menu-small" class="menu-point-small">
+                <li>
+                    <i class="fa fa-tachometer fx-size point" aria-hidden="true"></i>
+                    <ul style="top: 91px;">
+                        <li>
+                            <a routerLink="dashboard" href="#"> Dashboard </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <i class="fa fa-user-circle-o fx-size point" aria-hidden="true"></i>
+                    <ul style="top: 132px;">
+                        <li>
+                            <a routerLink="usermanagement" href="#"> Quản lý thành viên</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <i class="fa fa-pencil fx-size point" aria-hidden="true"></i>
+                    <ul style="top: 173px;">
+                        <li class="sli">
+                            <a routerLink="postmanagement" href="#"> Quản lý bài đăng </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- <li>
+                    <i class="fa fa-users fx-size point" aria-hidden="true"></i>
+                    <ul style="top: 214px;">
+                        <li>
+                            <a routerLink="tourmanagement" href="#"> Quản lý chuyến đi </a>
+                        </li>
+                    </ul>
+                </li> -->
+                <li>
+                    <i class="fa fa-flag-o fx-size point" aria-hidden="true"></i>
+                    <ul style="top: 214px;">
+                        <li>
+                            <a routerLink="reportmanagement" href="#"> Quản lý báo cáo </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- <li>
+                    <i class="fa fa-user-plus fx-size point" aria-hidden="true"></i>
+                    <ul style="top: 378px;">
+                        <li>
+                            <a href="#"> Thêm quản trị viên </a>
+                        </li>
+                    </ul>
+                </li> -->
+            </ul>
+        </div>
+    </nav>
+    <!-- End: Small Menu -->
+    <!-- Begin: Big Menu -->
+    <nav class="big-menu" id="big-menu">
+        <div class="menu-inner-big">
+            <div class="logo">
+                <button onclick="openSmallNav()">
           <i class="fa fa-bars btn-menu" aria-hidden="true"></i>
         </button>
-      </div>
-      <ul id="menu-big" class="menu-point-big">
-        <li>
-          <a routerLink="dashboard" href="javascript:void(0)">
-            <i class="fa fa-tachometer fx-size" aria-hidden="true"></i> Dashboard
-          </a>
-        </li>
-        <li>
-          <a routerLink="usermanagement" href="javascript:void(0)">
-            <i class="fa fa-users fx-size" aria-hidden="true"></i> Quản lý thành viên
-          </a>
-        </li>
-        <li>
-          <a routerLink="postmanagement" href="javascript:void(0)">
-            <i class="fa fa-pencil fx-size" aria-hidden="true"></i> Quản lý bài đăng
-          </a>
-        </li>
-        <li>
-          <a routerLink="placemanagement" href="javascript:void(0)">
-            <i class="fa fa-map-marker fx-size" aria-hidden="true"></i> Quản lý địa điểm
-          </a>
-        </li>
-        <!-- <li>
+            </div>
+            <ul id="menu-big" class="menu-point-big">
+                <li>
+                    <a routerLink="dashboard" href="javascript:void(0)">
+                        <i class="fa fa-tachometer fx-size" aria-hidden="true"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="usermanagement" href="javascript:void(0)">
+                        <i class="fa fa-user-circle-o fx-size" aria-hidden="true"></i> Quản lý thành viên
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="postmanagement" href="javascript:void(0)">
+                        <i class="fa fa-pencil fx-size" aria-hidden="true"></i> Quản lý bài đăng
+                    </a>
+                </li>
+                <!-- <li>
+                    <a routerLink="tourmanagement" href="javascript:void(0)">
+                        <i class="fa fa-users fx-size" aria-hidden="true"></i> Quản lý chuyến đi
+                    </a>
+                </li> -->
+                <li>
+                    <a routerLink="reportmanagement" href="javascript:void(0)">
+                        <i class="fa fa-users fx-size" aria-hidden="true"></i> Quản lý báo cáo
+                    </a>
+                </li>
+                <!-- <li>
           <a href="#">
             <i class="fa fa-bar-chart fx-size" aria-hidden="true"></i> Thống kê
             <i class="fa fa-chevron-right bt-right" aria-hidden="true"></i>
@@ -123,58 +108,58 @@
             </li>
           </ul>
         </li> -->
-        <!-- <li>
+                <!-- <li>
           <a href="#">
             <i class="fa fa-flag fx-size" aria-hidden="true"></i> Quản lý báo cáo
           </a>
         </li> -->
-        <!-- <li>
+                <!-- <li>
           <a href="#">
             <i class="fa fa-comment fx-size" aria-hidden="true"></i> Góp ý - Báo cáo sự cố
           </a>
         </li> -->
-        <li>
-          <a href="#">
-            <i class="fa fa-user-plus fx-size" aria-hidden="true"></i> Thêm quản trị viên
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-  <!-- End: Big Menu -->
-  <main id="main-content">
-    <!-- Begin: Header -->
-    <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12 clearfix">
-        <div class="profile dropdown">
-          <button href="#" class="dropdown-toggle btn-profile" data-toggle="dropdown" aria-expanded="false">
+                <!-- <li>
+                    <a href="#">
+                        <i class="fa fa-flag-o fx-size" aria-hidden="true"></i> Quản lí báo cáo
+                    </a>
+                </li> -->
+            </ul>
+        </div>
+    </nav>
+    <!-- End: Big Menu -->
+    <main id="main-content">
+        <!-- Begin: Header -->
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 clearfix">
+                <div class="profile dropdown">
+                    <button href="#" class="dropdown-toggle btn-profile" data-toggle="dropdown" aria-expanded="false">
             <img src="http://demo.neontheme.com/assets/images/thumb-1@2x.png" alt="" class="img-circle"> ADMIN
           </button>
-          <ul class="dropdown-menu">
-            <li class="caret"></li>
-            <li>
-              <a href="">
-                <i class="fa fa-user" aria-hidden="true"></i> Thay đổi thông tin </a>
-            </li>
-            <li>
-              <a href="">
-                <i class="fa fa-key" aria-hidden="true"></i> Đổi mật khẩu </a>
-            </li>
-          </ul>
+                    <ul class="dropdown-menu">
+                        <li class="caret"></li>
+                        <li>
+                            <a href="">
+                                <i class="fa fa-user" aria-hidden="true"></i> Thay đổi thông tin </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fa fa-key" aria-hidden="true"></i> Đổi mật khẩu </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <hr>
-    <!-- End: Header -->
-    <!-- <h4 id="loading" style="text-align: center;">
+        <hr>
+        <!-- End: Header -->
+        <!-- <h4 id="loading" style="text-align: center;">
       <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
       <br/>
       <br/>Loading...
     </h4> -->
 
-    <!-- Table -->
-    <!-- <ng2-smart-table [settings]="settings1" [source]="data"></ng2-smart-table>
+        <!-- Table -->
+        <!-- <ng2-smart-table [settings]="settings1" [source]="data"></ng2-smart-table>
     <ng2-smart-table [settings]="settings2"></ng2-smart-table> -->
-    <router-outlet></router-outlet>
-  </main>
+        <router-outlet></router-outlet>
+    </main>
 </div>

@@ -7,6 +7,8 @@ import { NotificationService } from '../../shared/service/notification.service';
 import { DashboardPageModule } from './dashboard-page/dashboard-page.module';
 import { UserManagementPageModule } from './user-management-page/user-management-page.module';
 import { PostManagementPageModule } from './post-management-page/post-management-page.module';
+import { TourManagementPageModule } from './tour-management-page/tour-management-page.module';
+import { ReportManagementPageModule } from './report-management-page/report-management-page.module';
 
 @NgModule({
     imports: [
@@ -16,6 +18,8 @@ import { PostManagementPageModule } from './post-management-page/post-management
         DashboardPageModule,
         UserManagementPageModule,
         PostManagementPageModule,
+        TourManagementPageModule,
+        ReportManagementPageModule
     ],
     declarations: [
         AdminPageComponent

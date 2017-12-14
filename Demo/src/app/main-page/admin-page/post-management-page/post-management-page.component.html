@@ -7,27 +7,33 @@
                     <mfDefaultSorter by="name">ID</mfDefaultSorter>
                 </th>
                 <th style="width: 25%">
-                    <mfDefaultSorter by="tourArticleTitle">Tiêu đề</mfDefaultSorter>
+                    <mfDefaultSorter by="tourArticleTitle">TITLE</mfDefaultSorter>
                 </th>
-                <th style="width: 40%">
-                    <mfDefaultSorter by="description">Mô tả</mfDefaultSorter>
+                <th style="width: 35%">
+                    <mfDefaultSorter by="description">DESCRIPTION</mfDefaultSorter>
                 </th>
-                <th style="width: 10%">
-                    <mfDefaultSorter by="duration">Thời gian</mfDefaultSorter>
-                </th>
-                <th style="width: 10%">
-                    <mfDefaultSorter by="accountID">Đăng bởi</mfDefaultSorter>
+                <th style="width: 5%">
+                    <mfDefaultSorter by="duration">DURATION</mfDefaultSorter>
                 </th>
                 <th style="width: 10%">
+                    <mfDefaultSorter by="createdar">CREATED AT</mfDefaultSorter>
+                </th>
+                <th style="width: 5%">
+                    <mfDefaultSorter by="viewed">VIEWED</mfDefaultSorter>
+                </th>
+                <th style="width: 10%">
+                    <mfDefaultSorter by="viewed">POSTED BY</mfDefaultSorter>
+                </th>
+                <th style="width: 5%">
                     <mfDefaultSorter>Action</mfDefaultSorter>
                 </th>
             </tr>
-            <tr>
-                <th colspan="6">
-                    Tìm kiếm bài đăng
-                    <input class="form-control" [(ngModel)]="filterQuery"/>
+            <!-- <tr>
+                <th colspan="8">
+                    SEARCH TITLE
+                    <input class="form-control" [(ngModel)]="filterQuery" />
                 </th>
-            </tr>
+            </tr> -->
         </thead>
         <tbody>
             <tr *ngFor="let item of mf.data">
@@ -35,9 +41,11 @@
                 <td>{{item.tourArticleTitle}}</td>
                 <td>{{item.description}}</td>
                 <td>{{item.duration}}</td>
-                <td>{{item.accountID}}</td>
+                <td>{{item.createTime}}</td>
+                <td>{{item.postViewNumber}}</td>
+                <td>{{item.details.firstName}} {{item.details.lastName}}</td>
                 <td>
-                    <button class="btn btn-danger">Delete</button>
+                    <button class="btn btn-danger" (click)="deletePost(item.id)">DELETE</button>
                 </td>
             </tr>
         </tbody>

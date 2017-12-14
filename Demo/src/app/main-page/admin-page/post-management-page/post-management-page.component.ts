@@ -14,7 +14,8 @@ import { DataService } from './../../../shared/service/data.service';
 
 export class PostManagementPageComponent implements OnInit {
 
-  data = [];
+  public data = [];
+  public dataDetail = [];
   public filterQuery = '';
 
   constructor(private authenService: AuthenService,
@@ -23,14 +24,34 @@ export class PostManagementPageComponent implements OnInit {
     private dataService: DataService) { }
 
   ngOnInit() {
-    this.getAllTourPost();
+    this.getAllPost();
   }
 
-  getAllTourPost() {
+  getAllPost() {
     this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
-      this.data = response;
-      console.log(response);
+      this.data = response.filter(item => item.deleted == 0 && item.type == 0);
+      console.log(this.data);
+      for (let i in this.data) {
+        this.data[i]['details'] = {}
+        this.dataService.get('/user/accountdetails/' + this.data[i].accountID).subscribe((response: any) => {
+          this.dataDetail = response;
+          this.data[i]['details'] = this.dataDetail;
+          console.log(this.data[i]['details']);
+          //merger
+        });
+      }
     }, error => {
     });
   }
+
+  deletePost(id) {
+    this.dataService.put('/tours/post/',{
+      'id' : id,
+      'deleted' : 1
+    }).subscribe((response: any) => {
+      console.log('ok delete post');
+      this.getAllPost();
+    });
+  }
+
 }

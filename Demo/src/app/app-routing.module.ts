@@ -2,7 +2,6 @@ import { NgModule , ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found.component';
 import { AuthGuard } from './shared/guards/auth.guard';
-import { UploadComponent } from './shared/upload/upload.component';
 
 const routesConfig: Routes = [
     { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -12,7 +11,6 @@ const routesConfig: Routes = [
     { path: 'forgetpassword', loadChildren : './forget-password-page/forget-password-page.module#ForgetPasswordPageModule' },
     { path: 'utility', loadChildren : './utility-page/utility-page.module#UtilityPageModule' },
     { path: 'admin', loadChildren : './main-page/admin-page/admin-page.module#AdminPageModule' , canActivate : [AuthGuard]  },
-    { path: 'upload', component : UploadComponent },
     { path: '**', component: PageNotFoundComponent },
 ];
 

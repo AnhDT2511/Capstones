@@ -108,6 +108,30 @@ export class CommonService {
         );
     }
 
+    uploadImage(_media, callback: (data) => void) {
+        // console.log(id);
+        return this.dataService.post('/tours/post/media/', _media).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
+    getImageByAccountID(id, callback: (data) => void) {
+        // console.log(id);
+        return this.dataService.post('/tours/post/media/get-by-account/' + Number(id)).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
     updateBookMark(_bookmark, callback: (data) => void) {
         // console.log(id);
         return this.dataService.put('/user/account/marking/', _bookmark).subscribe(
@@ -265,8 +289,8 @@ export class CommonService {
         });
     }
     getAllTourPost(callback: (data) => void) {
-        this.dataService.get('/tours/post/get-all').subscribe(res => {
-            callback(res);
+       this.dataService.get('/tours/post/get-all').subscribe(res => {
+             callback(res);
         }, error => {
             callback(error);
         });
