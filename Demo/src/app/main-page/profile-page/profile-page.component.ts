@@ -33,9 +33,16 @@ export class ProfilePageComponent implements OnInit {
   listImageName: any = [];
   user: any = {};
   userTemp: any = {};
-  userDetails: any = {};
+  userDetails: any = {
+    'fullName' : null,
+    'address' : null,
+    'gender' : null,
+    'job' : null,
+    'phoneNumber' : null,
+    'dob' : null,
+    'id' : null,
+  };
   userDetailsTemp: any = {};
-  valid = true;
   // model: any = {};
   viewPersionInfo: boolean = true;
   checkUserDetails: boolean = true;
@@ -95,7 +102,7 @@ export class ProfilePageComponent implements OnInit {
       'createdTime': Date.now(),
       'accountID': this.user.id
     };
-    if (this.user.image != 'default-user-image.png') {
+    if (this.user.avatar != 'default-user-image.png') {
       image['id'] = this.user.imageID;
       this.commonService.updateImage(image, data => {
       })
@@ -110,7 +117,7 @@ export class ProfilePageComponent implements OnInit {
     this.commonService.getImageByAccountID(id, data => {
       let findAvatar = data.find(item => item.accountID == id && item.tourByDayID == 0);
       this.user['avatar'] = findAvatar != undefined ? findAvatar.name : 'default-user-image.png';
-      this.user.imageID = findAvatar.id;
+      findAvatar != undefined ? this.user.imageID = findAvatar.id : this.user.imageID = 0 ;
     })
     this.dataService.get('/user/accountdetails/' + id).subscribe((response: any) => {
       this.userDetails['fullName'] = response.firstName + ' ' + response.lastName;
@@ -126,37 +133,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   saveUserInfo() {
-    this.dataService.put("/user/account", JSON.stringify(this.user)).subscribe((response: any) => {
-      localStorage.removeItem(SystemConstants.CURRENT_USER);
-      localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(this.user));
-    }, error => {
-      this.valid = false;
-    });
-
-    this.userDetails['firstName'] = this.userDetails.fullName.substr(0, this.userDetails.fullName.indexOf(' '));
-    this.userDetails['lastName'] = this.userDetails.fullName.substr(this.userDetails.fullName.indexOf(' ') + 1);
-    this.userDetails['accountId'] = this.user.id;
-    delete this.userDetails['fullName'];
-
-    this.getUserDetails(this.user.id);
-    if (this.checkUserDetails) {
-      this.dataService.put("/user/accountdetails", JSON.stringify(this.userDetails)).subscribe((response: any) => {
-        this.userDetails["fullName"] = this.userDetails.firstName + " " + this.userDetails.lastName;
-      }, error => {
-        this.valid = false;
-      });
-    } else {
-      this.dataService.post("/user/accountdetails", JSON.stringify(this.userDetails)).subscribe((response: any) => {
-        this.userDetails["fullName"] = this.userDetails.firstName + " " + this.userDetails.lastName;
-      }, error => {
-        this.valid = false;
-      });
-    }
-    if (this.valid) {
-      this.notifyService.printSuccessMessage('Cập nhật thông tin người dùng thành công!');
-    } else {
-      this.notifyService.printErrorMessage('Có lỗi xảy ra khi cập nhật thông tin người dùng, xin hãy thử lại!');
-    }
+    
   }
   openInfo() {
     this.userTemp = JSON.parse(JSON.stringify(this.user));

@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       if (data !== null) {
         this.notificationService.printSuccessMessage(MessageContstants.LOGIN_SUCCESS);
         this.router.navigate([UrlConstants.HOME]);
-        console.log(window.localStorage);
+        // console.log(window.localStorage);
       } else {
         this.notificationService.printErrorMessage(MessageContstants.INFO_LOGIN_WRONG);
         this.loading = false;

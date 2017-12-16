@@ -90,16 +90,16 @@
                                 <!-- <app-text-change-info [userInfo]="user"></app-text-change-info> -->
                             </li>
                             <li [hidden]="viewPersionInfo">
-                                <a href="javascript:void(0)" data-toggle="modal" data-target="#modalMyInfo" (click)="openInfo()">
+                                <a href="javascript:void(0)" data-toggle="modal" data-target="#modalMyInfo" (click)="openChangeInfo()">
                                     <i class="fa fa-user" aria-hidden="true"></i> Thông tin
                                 </a>
-                                <!-- <app-text-change-info [userInfo]="user"></app-text-change-info> -->
+                                <app-text-change-info [userInfo]="userDetails"></app-text-change-info>
                             </li>
                             <li [hidden]="viewPersionInfo">
                                 <a href="javascript:void(0)" (click)="openChangePass()">
                                     <i class="fa fa-key" aria-hidden="true"></i> Đổi mật khẩu
                                 </a>
-                                <app-text-change-pass [userInfo]="user">123456</app-text-change-pass>
+                                <app-text-change-pass [userInfo]="user"></app-text-change-pass>
                             </li>
                             <li>
                                 <a href="javascript:void(0)" (click)="logout()">
@@ -113,85 +113,6 @@
 
         </div>
     </nav>
-</div>
-
-<!-- modal my info  -->
-<div class="modal fade" id="modalMyInfo" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Thông tin cá nhân</h4>
-            </div>
-            <form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && saveUserInfo()" #f="ngForm" novalidate>
-                <div class="modal-body" style="padding-right: 60px;">
-                    <div class="form-horizontal">
-                        <div class="form-group">
-                            <label class="control-label col-sm-4" for="userName">Tên hiển thị:</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="userName" placeholder="" name="userName" [(ngModel)]="user.userName" #userName="ngModel"
-                                    required minlength="6" maxlength="20">
-                                <div [hidden]="userName.valid || userName.pristine" class="alert alert-danger">
-                                    <div [hidden]="!userName.hasError('required')"> Tên hiển thị được yêu cầu! </div>
-                                    <div [hidden]="!userName.hasError('minlength')"> Tên hiển thị tối thiểu có 6 kí tự.</div>
-                                    <div [hidden]="!userName.hasError('maxlength')"> Tên hiển thị tối đa có 20 kí tự. </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4" for="fullName">Họ và tên:</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="fullName" placeholder="" name="fullName" [(ngModel)]="userDetails.fullName" #fullName="ngModel"
-                                    required>
-                                <div [hidden]="fullName.valid || fullName.pristine" class="alert alert-danger">
-                                    Họ và tên được yêu cầu!
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4" for="job">Nghề nghiệp:</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="job" placeholder="" name="job" [(ngModel)]="userDetails.job" #job="ngModel" required>
-                                <div [hidden]="job.valid || job.pristine" class="alert alert-danger">
-                                    Nghề nghiệp được yêu cầu!
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4" for="phone">Phone:</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="phone" placeholder="" name="phone" [(ngModel)]="userDetails.phoneNumber" #phoneNumber="ngModel"
-                                    required minlength="10" maxlength="13" pattern="^[0-9\-\+]{9,15}$">
-                                <div [hidden]="phoneNumber.valid || phoneNumber.pristine" class="alert alert-danger">
-                                    <div [hidden]="!phoneNumber.hasError('required')">Số điện thoại được yêu cầu!</div>
-                                    <div [hidden]="!phoneNumber.hasError('pattern')">Số điện thoại không hợp lệ!
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-4" for="address">Địa chỉ:</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="address" placeholder="" name="address" [(ngModel)]="userDetails.address" #address="ngModel"
-                                    required>
-                                <div [hidden]="address.valid || address.pristine" class="alert alert-danger">
-                                    Địa chỉ được yêu cầu!
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button [disabled]="!f.form.valid" class="btn btn-primary">&nbsp;
-                        <i class="fa fa-check" aria-hidden="true"></i> Lưu&nbsp;</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="closeInfo()">Đóng</button>
-                </div>
-            </form>
-        </div>
-
-    </div>
 </div>
 <div id="" class="container">
     <div class="col-xs-12 col-sm-3 col-md-3 profile-side">
@@ -225,15 +146,13 @@
             <!-- <h5>Credit : {{user.credit}}</h5> -->
             <b>Credit:</b>
             <div class="progress">
-                <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0"
-                    aria-valuemax="100" [style.width.%]="user.credit">
+                <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" [style.width.%]="user.credit">
                 </div>
             </div>
             <!-- <h5>Point : {{user.point}}</h5> -->
             <b>Point:</b>
             <div class="progress">
-                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="90" aria-valuemin="0"
-                    aria-valuemax="100" [style.width.%]="user.point">
+                <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" [style.width.%]="user.point">
                 </div>
             </div>
         </div>

@@ -1,11 +1,61 @@
-<form name="form" (ngSubmit)="f.form.valid && savePassChanged() " #f="ngForm" novalidate>
-  <h1 mat-dialog-title>Thay đổi thông tin cá nhân</h1>
-  <mat-form-field>
-    <input matInput placeholder="Tên hiển thị:" [(ngModel)]="user.userName" #userName="ngModel" name="userName" required>
-  </mat-form-field>
-  <div mat-dialog-actions>
-    <button type="submit" [disabled]="model.newpwd != model.renewpwd || !f.form.valid" mat-raised-button>
-      <i class="fa fa-check" aria-hidden="true"></i> Lưu </button>
-    <button mat-button (click)="onNoClick()" tabindex="-1">No Thanks</button>
-  </div>
+<form class="form-horizontal" name="form" (ngSubmit)="f.form.valid && saveInfoChanged()" #f="ngForm" novalidate>
+    <div class="modal-body" style="padding-right: 60px;">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="userName">Tên hiển thị:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="userName" placeholder="" name="userName" [(ngModel)]="user.userName" #userName="ngModel" required minlength="6" maxlength="20">
+                    <div [hidden]="userName.valid || userName.pristine" class="alert alert-danger">
+                        <div [hidden]="!userName.hasError('required')"> Tên hiển thị được yêu cầu! </div>
+                        <div [hidden]="!userName.hasError('minlength')"> Tên hiển thị tối thiểu có 6 kí tự.</div>
+                        <div [hidden]="!userName.hasError('maxlength')"> Tên hiển thị tối đa có 20 kí tự. </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="fullName">Họ và tên:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="fullName" placeholder="" name="fullName" [(ngModel)]="userDetails.fullName" #fullName="ngModel" required>
+                    <div [hidden]="fullName.valid || fullName.pristine" class="alert alert-danger">
+                        Họ và tên được yêu cầu!
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="job">Nghề nghiệp:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="job" placeholder="" name="job" [(ngModel)]="userDetails.job" #job="ngModel" required>
+                    <div [hidden]="job.valid || job.pristine" class="alert alert-danger">
+                        Nghề nghiệp được yêu cầu!
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="phone">Phone:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="phone" placeholder="" name="phone" [(ngModel)]="userDetails.phoneNumber" #phoneNumber="ngModel" required minlength="10" maxlength="13" pattern="^[0-9\-\+]{9,15}$">
+                    <div [hidden]="phoneNumber.valid || phoneNumber.pristine" class="alert alert-danger">
+                        <div [hidden]="!phoneNumber.hasError('required')">Số điện thoại được yêu cầu!</div>
+                        <div [hidden]="!phoneNumber.hasError('pattern')">Số điện thoại không hợp lệ!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="address">Địa chỉ:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="address" placeholder="" name="address" [(ngModel)]="userDetails.address" #address="ngModel" required>
+                    <div [hidden]="address.valid || address.pristine" class="alert alert-danger">
+                        Địa chỉ được yêu cầu!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button [disabled]="!f.form.valid" class="btn btn-primary">&nbsp;
+          <i class="fa fa-check" aria-hidden="true"></i> Lưu&nbsp;</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="onNoClick()">Đóng</button>
+    </div>
 </form>

@@ -4,6 +4,7 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
 import { UserManagementPageComponent } from './user-management-page/user-management-page.component';
 import { PostManagementPageComponent } from './post-management-page/post-management-page.component';
 import { TourManagementPageComponent } from './tour-management-page/tour-management-page.component';
+import { ReportManagementPageComponent } from './report-management-page/report-management-page.component';
 
 const AdminPage_Router: Routes = [
         {

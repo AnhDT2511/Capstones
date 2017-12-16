@@ -127,7 +127,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
@@ -139,7 +139,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
@@ -151,7 +151,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
@@ -163,7 +163,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
