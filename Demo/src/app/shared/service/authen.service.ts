@@ -14,10 +14,13 @@ export class AuthenService {
     //   "&grant_type=password";
     let headers = new Headers();
     // headers.append("Content-Type", "application/x-www-form-urlencoded");
+    // headers.delete("Authorization");
+    // headers.append("Authorization", 'Basic ' + btoa('quandt@gmail.com:long@123'));
     headers.append("Content-Type", "application/json");
     let options = new RequestOptions({ headers: headers });
 
-    return this._http.post(SystemConstants.BASE_API + '/user/account/login', model, options).map((response: Response) => {
+    return this._http.post(SystemConstants.BASE_API + '/account/login', model, options).map((response: Response) => {
+      console.log(JSON.stringify(response));
       let _body = JSON.parse(JSON.parse(JSON.stringify(response))._body)[0];
       // delete _body["password"];
       // delete _body["createTime"];

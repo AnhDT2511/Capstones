@@ -23,7 +23,7 @@ export class HomePageComponent implements OnInit {
 
   public user: any = this.authentication.getLoggedInUser();
   baseFolder: String = SystemConstants.BASE_IMAGE;
-  public checkLogin : any = false;
+  public checkLogin: any = false;
   public searchWord: any = {};
   public listTourPost: any[] = [];
   public listTourPostFavoriteBefore: any[] = [];
@@ -44,10 +44,10 @@ export class HomePageComponent implements OnInit {
     private dataService: DataService,
     private commonService: CommonService
   ) {
-    if(!InfoContstants.isEmpty(this.user)){
+    if (!InfoContstants.isEmpty(this.user)) {
       this.checkLogin = true;
     }
-   }
+  }
 
   ngOnInit() {
     this.getAllTourPost();
@@ -57,9 +57,9 @@ export class HomePageComponent implements OnInit {
   }
 
   likeTourPost(tourPost: any, type: any) {
-    let existLike : any ;
-    if(!InfoContstants.isEmpty(this.user)){
-       existLike = this.listLikeObj.find(item => item.likeByID == this.user.id && item.tourPostID == tourPost.id);
+    let existLike: any;
+    if (!InfoContstants.isEmpty(this.user)) {
+      existLike = this.listLikeObj.find(item => item.likeByID == this.user.id && item.tourPostID == tourPost.id);
     }
     if (this.user != null && existLike == undefined) {
       let _like = new Like(null, tourPost.id, this.user.id, 0);
@@ -94,31 +94,33 @@ export class HomePageComponent implements OnInit {
   getAllTourPost() {
     this.commonService.getAllLike(data => {
       this.listLikeObj = data;
+    })
+    setTimeout(() => {
       this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
         for (var i in response) {
           if (response[i].type == 0 && response[i].deleted == 0) {
             let _tourPost = response[i];
-            _tourPost['countLike'] = this.listLikeObj.filter(item => item.tourPostID == _tourPost.id && item.deleted == 0).length;
-            if(this.checkLogin){
-              _tourPost['liked'] = this.listLikeObj.findIndex(item => item.likeByID == this.user.id && item.tourPostID == _tourPost.id && item.deleted == 0) != -1 ? true : false;
+            _tourPost['countLike'] = this.listLikeObj != undefined ? this.listLikeObj.filter(item => item.tourPostID == _tourPost.id && item.deleted == 0).length : '';
+            if (this.checkLogin) {
+              _tourPost['liked'] = this.listLikeObj != undefined ? this.listLikeObj.findIndex(item => item.likeByID == this.user.id && item.tourPostID == _tourPost.id && item.deleted == 0) != -1 ? true : false : '';
             }
             this.commonService.getNumberComment(_tourPost.id, data => {
               typeof (data) == "object" ? _tourPost['countComment'] = 0 : _tourPost['countComment'] = data;
             });
-            this.commonService.getImageByTourPostID(_tourPost.id,data => {
-              data.length > 0 ? _tourPost['image'] = data[0].name : _tourPost['image'] ='default-tour-post.jpg'
+            this.commonService.getImageByTourPostID(_tourPost.id, data => {
+              data.length > 0 ? _tourPost['image'] = data[0].name : _tourPost['image'] = 'default-tour-post.jpg'
             })
             this.listTourPost.push(_tourPost);
-          } else if(response[i].deleted == 0) {
+          } else if (response[i].deleted == 0) {
             let _groupTour = response[i];
-            _groupTour.startPlaceID = InfoContstants.CITY_VN.find(item => item.id == _groupTour.startPlaceID).title ;
-            _groupTour.endPlaceID =  InfoContstants.CITY_VN.find(item => item.id == _groupTour.endPlaceID).title ;
+            _groupTour.startPlaceID = InfoContstants.CITY_VN.find(item => item.id == _groupTour.startPlaceID).title;
+            _groupTour.endPlaceID = InfoContstants.CITY_VN.find(item => item.id == _groupTour.endPlaceID).title;
             this.commonService.getNumberMember(_groupTour.id, data => {
               typeof (data) == "object" ? _groupTour['countMember'] = 0 : _groupTour['countMember'] = data;
             });
-            this.commonService.getImageByAccountID(_groupTour.accountID,data => {
-              let image = data.find(item => item.deleted == 0 && item.tourByDayID == 0 && item.tourPostID == 0 );
-              _groupTour['image'] = image == undefined ?  'user.png' : image.name;
+            this.commonService.getImageByAccountID(_groupTour.accountID, data => {
+              let image = data.find(item => item.deleted == 0 && item.tourByDayID == 0 && item.tourPostID == 0);
+              _groupTour['image'] = image == undefined ? 'user.png' : image.name;
             })
             this.listGroupTour.push(_groupTour);
           }
@@ -135,7 +137,7 @@ export class HomePageComponent implements OnInit {
         }
       }, error => {
       });
-    })
+    }, 300)
   }
   detailGroupTour(_groupTour) {
     this.utilityService.navigate('/main/grouptour/' + _groupTour.id);

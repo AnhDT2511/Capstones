@@ -9,9 +9,10 @@ export class RegisterService {
     constructor(private http: Http) { }
 
     register(model) {
-        let registerUrl = SystemConstants.BASE_API + "/user/account/";
+        let registerUrl = SystemConstants.BASE_API + "/account/register";
+        
         let headers1 = new Headers();
-        headers1.append('Access-Control-Allow-Origin', '*');
+        // headers1.append('Access-Control-Allow-Origin', '*');
         headers1.append('Content-Type', 'application/json');
         return this.http.post(registerUrl, JSON.stringify(model), { headers: headers1 });
         

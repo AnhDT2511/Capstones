@@ -25,7 +25,7 @@ export class CommonService {
     }
 
     searchByAccount(text, callback: (data) => void) {
-        console.log(text);
+        // console.log(text);
         return this.dataService.get('/tours/post/name/' + text).subscribe(
             res => {
                 callback(res);
@@ -37,7 +37,7 @@ export class CommonService {
     }
 
     searchByDuration(text, callback: (data) => void) {
-        console.log(text);
+        // console.log(text);
         return this.dataService.get('/tours/post/duration/' + text).subscribe(
             res => {
                 callback(res);
@@ -55,7 +55,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
@@ -67,7 +67,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
@@ -79,7 +79,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
@@ -91,7 +91,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
@@ -103,7 +103,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
@@ -115,7 +115,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
@@ -175,7 +175,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
@@ -187,7 +187,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
@@ -199,7 +199,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
@@ -211,7 +211,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
@@ -223,7 +223,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
@@ -235,7 +235,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
@@ -247,7 +247,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
@@ -259,7 +259,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
@@ -271,7 +271,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
@@ -283,7 +283,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }
@@ -294,7 +294,7 @@ export class CommonService {
                 callback(res);
             },
             err => {
-                console.error(err);
+                // console.error(err);
             }
         );
     }

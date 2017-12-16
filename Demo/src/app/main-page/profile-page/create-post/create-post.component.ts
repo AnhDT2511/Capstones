@@ -168,47 +168,54 @@ export class CreatePostComponent implements OnInit {
   }
 
   validateTourByDay() {
+    let check = true;
     if (JSON.stringify(this.listTourDetail) == JSON.stringify(this.listTourDetailTemp)) {
       this.notifyservice.printErrorMessage('Hành trình chi tiết không nên để trống');
       return false;
     }
-    let index = this.listTourDetail.findIndex(item => JSON.stringify(item.checkbox) === "{}")
-    if (index != -1) {
-      this.notifyservice.printErrorMessage('**Ngày ' + (index + 1) + '**:Phương tiện không nên để trống');
-      return false;
-    }
+    // let index = this.listTourDetail.findIndex(item => JSON.stringify(item.checkbox) === "{}")
+    // if (index != -1) {
+    //   this.notifyservice.printErrorMessage('**Ngày ' + (index + 1) + '**:Phương tiện không nên để trống');
+    //   return false;
+    // }
+    console.log(this.listTourDetail);
     this.listTourDetail.forEach(element => {
-      // console.log(element);
       for (let i in element) {
         switch (i) {
+          case 'placeID':
+            if (element[i] == "") {
+              this.notifyservice.printErrorMessage('**Ngày ' + element.day + '**:Tỉnh/Thành Phố không nên để trống');
+              check = false;
+            }
+            break;
           case 'hotel':
-            if (InfoContstants.isEmpty(element[i])) {
+            if (element[i] == "") {
               this.notifyservice.printErrorMessage('**Ngày ' + element.day + '**:Nơi nghỉ không nên để trống');
-              return false;
+              check = false;
             }
             break;
           case 'food':
-            if (InfoContstants.isEmpty(element[i])) {
+            if (element[i] == "") {
               this.notifyservice.printErrorMessage('**Ngày ' + element.day + '**:Đồ ăn không nên để trống');
-              return false;
+              check = false;
             }
             break;
-          case 'placeID':
-            if (InfoContstants.isEmpty(element[i])) {
-              this.notifyservice.printErrorMessage('**Ngày ' + element.day + '**:Địa điểm không nên để trống');
-              return false;
+          case 'checkbox':
+            if (JSON.stringify(element[i]) === "{}") {
+              this.notifyservice.printErrorMessage('**Ngày ' + element.day + '**:Phương tiện không nên để trống');
+              check = false;
             }
             break;
         }
       }
     });
-    return true;
+    if (check) {
+      return true;
+    }
   }
   saveTourPost() {
     let responseID = 0;
     if (this.validateTourPost() && this.validateTourByDay()) {
-      // console.log(this.validateTourPost());
-      // console.log(this.validateTourByDay());
       this.commonservice.getAllTourPost(data => {
         let date = Date.now();
         let _tourPost: TourPost = new TourPost(0, this.user.id, this.tourPost.startPlaceID, 0, this.listTourDetail.length, this.tourPost.title, 0,

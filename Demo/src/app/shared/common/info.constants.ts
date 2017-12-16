@@ -69,7 +69,7 @@ export class InfoContstants {
     public static hasOwnProperty = Object.prototype.hasOwnProperty;
 
     public static isEmpty(obj) {
-
+        // if (obj == "") return true;
         // null and undefined are "empty"
         if (obj == null) return true;
 
