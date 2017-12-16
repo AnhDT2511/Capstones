@@ -85,7 +85,7 @@
             </div>
         </div>
 
-        <div id="activities" class="tab-pane fade">
+        <!-- <div id="activities" class="tab-pane fade">
             <div class="col-xs-12 col-sm-12 col-md-12 label-activities">
                 <div class="alert alert-success">
                     <strong>Success!</strong> Indicates a successful or positive action.
@@ -103,21 +103,21 @@
                     <strong>Danger!</strong> Indicates a dangerous or potentially negative action.
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div id="manage-post" class="tab-pane fade">
             <div class="col-xs-12 col-sm-12 col-md-12 label-manage-post">
                 <div class="col-md-12" *ngFor="let item of listTourPost">
                     <h3>
-                        <a href="/main/tourpost/{{item.tourPostID}}" class="alert-link">{{item.title}}</a>
+                        <a href="/main/tourpost/{{item.id}}" class="alert-link">{{item.title}}</a>
                     </h3>
                     <p>{{item.description}}</p>
                     <div>
                         <span class="badge">Đăng lúc {{item.createdTime | date}}</span>
                     </div>
                     <div class="pull-right">
-                        <button class="btn btn-default label label-info">Sửa</button>
-                        <button class="btn btn-default label label-danger">Xóa</button>
+                        <button class="btn btn-default label label-info" (click)="updateTourPost(item.id)">Sửa</button>
+                        <button class="btn btn-default label label-danger" (click)="deleteTourPost(item)">Xóa</button>
                     </div>
                     <hr>
                 </div>
@@ -128,15 +128,15 @@
             <div class="col-xs-12 col-sm-12 col-md-12 label-manage-post">
                 <div class="col-md-12" *ngFor="let item of listGroupPost">
                     <h3>
-                        <a href="javascript:void(0)" class="alert-link">{{item.title}}</a>
+                        <a href="/main/grouptour/{{item.id}}" class="alert-link">{{item.title}}</a>
                     </h3>
                     <p>{{item.description}}</p>
                     <div>
                         <span class="badge">Đăng lúc {{item.createdTime | date}}</span>
                     </div>
                     <div class="pull-right">
-                        <button class="btn btn-default label label-info" (click)="updateGroupPost(item.tourPostID)">Sửa</button>
-                        <button class="btn btn-default label label-danger">Xóa</button>
+                        <button class="btn btn-default label label-info" (click)="updateGroupPost(item.id)">Sửa</button>
+                        <button class="btn btn-default label label-danger" (click)="deleteGroupTour(item)">Xóa</button>
                     </div>
                     <hr>
                 </div>
@@ -152,7 +152,7 @@
                     </span>
                     <a href="/main/tourpost/{{item.id}}"> {{item.tourArticleTitle}}</a>
                     <div class="pull-right">
-                        <button class="btn btn-default label label-danger">Xóa</button>
+                        <button class="btn btn-default label label-danger" (click)="deleteBookMark(item)">Xóa</button>
                     </div>
                 </div>
             </div>

@@ -38,6 +38,7 @@ export class CreatePostComponent implements OnInit {
   listImage: any = [];
   resultImage: any = [];
   id = 0;
+  changeText: boolean = false;
   options = [
     { name: 'motorcycle', value: '1' },
     { name: 'taxi', value: '2' },
@@ -57,6 +58,7 @@ export class CreatePostComponent implements OnInit {
       this.id = params.id;
 
       if (params.id != 0) {
+        this.changeText = true;
         this.dataservice.get('/tours/post/' + params.id).subscribe((response: any) => {
           this.tourPost = response;
           this.tourPost['title'] = response.tourArticleTitle;
@@ -67,7 +69,7 @@ export class CreatePostComponent implements OnInit {
         })
         this.dataservice.get('/tours/post/' + params.id + '/get-all').subscribe((response: any) => {
           response.forEach(element => {
-            let splitVehicle = element.vehicle.split(",");
+            let splitVehicle = element.vehicle != null ? element.vehicle.split(",") : "";
             let objCheckbox = {};
             for (var i = 0; i <= 4; i++) {
               if (splitVehicle.indexOf(i.toString()) != -1) {
@@ -92,6 +94,7 @@ export class CreatePostComponent implements OnInit {
           this.listTourDetailTemp = JSON.parse(JSON.stringify(this.listTourDetail))
         })
       } else {
+        this.changeText = false;
         this.tourPost = { 'title': '', 'descriptionTourPost': '', 'prepare': '', 'note': '' };
         this.addMoreDetails();
       }
@@ -178,7 +181,7 @@ export class CreatePostComponent implements OnInit {
     //   this.notifyservice.printErrorMessage('**Ngày ' + (index + 1) + '**:Phương tiện không nên để trống');
     //   return false;
     // }
-    console.log(this.listTourDetail);
+    // console.log(this.listTourDetail);
     this.listTourDetail.forEach(element => {
       for (let i in element) {
         switch (i) {
@@ -220,7 +223,7 @@ export class CreatePostComponent implements OnInit {
         let date = Date.now();
         let _tourPost: TourPost = new TourPost(0, this.user.id, this.tourPost.startPlaceID, 0, this.listTourDetail.length, this.tourPost.title, 0,
           date, this.tourPost.descriptionTourPost, 0, this.tourPost.note, this.tourPost.prepare, 0, '', 0, '');
-        let validate = data.findIndex(item => item.tourArticleTitle.toString() == this.tourPost.title);
+        let validate = data.findIndex(item => item.tourArticleTitle != null && item.tourArticleTitle.toString() == this.tourPost.title);
         if (this.id == 0 && validate == -1) {
           this.commonservice.createPost(_tourPost, data => {
             this.addTourByDay(data._body);
@@ -276,20 +279,30 @@ export class CreatePostComponent implements OnInit {
       let listVehicle = this.listTourDetail[i].checkbox;
       this.listTourDetail[i]['vehicle'] = this.getKeyByValue(listVehicle, true).substring(0, this.getKeyByValue(listVehicle, true).length - 1);
       this.listTourDetail[i]['updatedTime'] = Date.now();
-      this.dataservice.put('/tours/post/' + id + '/day', this.listTourDetail[i]).subscribe((response: any) => {
-      }, error => {
-      });;
+      if (this.listTourDetail[i]['id'] != undefined) {
+        this.dataservice.put('/tours/post/' + id + '/day', this.listTourDetail[i]).subscribe((response: any) => {
+        }, error => {
+        });;
+      } else {
+        this.listTourDetail[i]['tourPostID'] = id;
+        this.dataservice.post('/tours/post/' + id + '/day', this.listTourDetail[i]).subscribe((response: any) => {
+          this.listTourDetail[i]['id'] = response._body;
+        }, error => {
+        });;
+      }
       let listDataImage = [];
       this.listImage.filter(item => item.day == i + 1).forEach(element => {
         listDataImage.push(element['image']);
-        this.commonservice.getImageByTourByDayID(this.listTourDetail[i].id, data => {
-          data.forEach(element => {
-            let item = element;
-            item.deleted = 1;
-            this.commonservice.updateImage(item, data => {
-            })
-          });
-        })
+        setTimeout(() => {
+          this.commonservice.getImageByTourByDayID(this.listTourDetail[i].id, data => {
+            data.forEach(element => {
+              let item = element;
+              item.deleted = 0;
+              this.commonservice.addImage(item, data => {
+              })
+            });
+          })
+        },200)
       });
       this.resultImage = this.formUpload.upload(listDataImage, this.listTourDetail[i].id);
     }

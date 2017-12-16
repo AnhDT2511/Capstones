@@ -21,7 +21,8 @@ export class OverviewInfoComponent implements OnInit {
     private utilityService: UtilityService,
     private activatedRoute: ActivatedRoute,
     private commonService: CommonService,
-    private authentication: AuthenService
+    private authentication: AuthenService,
+    private notifiService: NotificationService
   ) {
     this.user = this.authentication.getLoggedInUser();
   }
@@ -34,16 +35,18 @@ export class OverviewInfoComponent implements OnInit {
     this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
       response.forEach(element => {
         //console.log(element);
-        if (element.accountID === Number(this.id) && element.type == 0) {
-          this.listTourPost.push({ 'tourPostID': element.id, 'title': element.tourArticleTitle, 'description': element.description, 'createdTime': element.createTime })
-        } else if (element.accountID === Number(this.id) && element.type == 1) {
-          this.listGroupPost.push({ 'tourPostID': element.id, 'title': element.tourArticleTitle, 'description': element.description, 'createdTime': element.createTime })
+        if (element.deleted == 0) {
+          if (element.accountID === Number(this.id) && element.type == 0) {
+            this.listTourPost.push({ 'id': element.id, 'title': element.tourArticleTitle, 'description': element.description, 'createdTime': element.createTime })
+          } else if (element.accountID === Number(this.id) && element.type == 1) {
+            this.listGroupPost.push({ 'id': element.id, 'title': element.tourArticleTitle, 'description': element.description, 'createdTime': element.createTime })
+          }
         }
       });
     }, error => {
     });
     //console.log(this.listTourPost);
-   // console.log(this.listGroupPost);
+    console.log(this.listGroupPost);
     this.commonService.getListBookMarkByAccount(this.user.id, data => {
       data.forEach(element => {
         if (element.deleted == 0) {
@@ -56,6 +59,35 @@ export class OverviewInfoComponent implements OnInit {
     });
   }
 
+  deleteTourPost(item) {
+    this.notifiService.printConfirmationDialog('Bạn có chắc chắn muốn xóa bài viết này!', () => {
+      item.deleted = 1;
+      this.commonService.updatePost(item, data => {
+        this.listTourPost.splice(this.listTourPost.findIndex(i => i.id == item.id),1);
+        // this.utilityService.navigate('/main/profile/0');
+      })
+    });
+  }
+
+  deleteGroupTour(item) {
+    this.notifiService.printConfirmationDialog('Bạn có chắc chắn muốn xóa chuyến đi này!', () => {
+      item.deleted = 1;
+      this.commonService.updatePost(item, data => {
+        this.listGroupPost.splice(this.listGroupPost.findIndex(i => i.id == item.id),1);
+        // this.utilityService.navigate('/main/profile/0');
+      })
+    });
+  }
+
+  deleteBookMark(item){
+    this.notifiService.printConfirmationDialog('Bạn có muốn xóa bài đã lưu này', () => {
+      item.deleted = 1;
+      this.commonService.updateBookMark(item, data => {
+        this.listSaveLink.splice(this.listSaveLink.findIndex(i => i.id == item.id),1);
+        // this.utilityService.navigate('/main/profile/0');
+      })
+    });
+  }
   updateTourPost(id) {
     this.utilityService.navigate('/main/profile/0/createPost/' + id);
   }
@@ -63,5 +95,5 @@ export class OverviewInfoComponent implements OnInit {
   updateGroupPost(id) {
     this.utilityService.navigate('/main/profile/0/createTour/' + id);
   }
-  
+
 }

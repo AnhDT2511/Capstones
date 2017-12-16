@@ -1,12 +1,14 @@
 <!-- RIGHT SIDE -->
 <div class="col-xs-12 col-sm-9 col-md-9 create-post">
-    <div class="title-post">
-        <span>T</span>ạo nhóm
+    <div class="title-post" *ngIf="!changeText">
+        <span>T</span>ạo chuyến đi
     </div>
-
-    <div class="text-left h">
+    <div class="title-post" *ngIf="changeText">
+        <span>C</span>ập nhật chuyến đi
+    </div>
+    <!-- <div class="text-left h">
         <h2>Tạo nhóm mới</h2>
-    </div>
+    </div> -->
 
     <div class="panel-group" id="accordion">
 
@@ -222,7 +224,7 @@
 </footer> -->
 <!-- End: Footer -->
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('[data-toggle="tooltip"]').tooltip();
     });
 

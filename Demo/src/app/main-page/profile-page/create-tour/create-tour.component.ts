@@ -49,6 +49,7 @@ export class CreateTourComponent implements OnInit {
   listDay: any = [];
   user: any = JSON.parse(localStorage.getItem(SystemConstants.CURRENT_USER));
   groupTour: any = {};
+  changeText : boolean = false;
   place: any = {
     '1': 'Ha'
   }
@@ -77,6 +78,7 @@ export class CreateTourComponent implements OnInit {
       this.groupTour = {};
       this.id = params.id;
       if (params.id != 0) {
+        this.changeText = true;
         this.dataService.get('/tours/post/' + params.id).subscribe((response: any) => {
           this.groupTour = response;
           this.groupTour.startPlaceID != undefined ? this.completer.SelectItem('start', this.groupTour.startPlaceID) : null;
