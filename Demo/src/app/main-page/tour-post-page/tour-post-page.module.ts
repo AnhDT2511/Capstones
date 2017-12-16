@@ -10,13 +10,15 @@ import { FormsModule } from '@angular/forms';
 import { AvatarModule } from 'ngx-avatar';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 // import { NgsRevealModule } from 'ng-scrollreveal';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @NgModule({
     imports: [
         TourPostPageRouter,
         CommonModule,
         FormsModule,
-        AvatarModule
+        AvatarModule,
+        CarouselModule
     ],
     declarations: [
         TourPostPageComponent

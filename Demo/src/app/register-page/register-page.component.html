@@ -46,7 +46,7 @@
               <input type="password" name="password1" class="form-control" placeholder="Nhập lại mật khẩu" [(ngModel)]="model.password1"
                 #password1="ngModel" validateEqual="password" required>
               <div [hidden]="password1.valid || password1.pristine" class="alert alert-danger">
-                Mật khẩu không đúng
+                Mật khẩu không khớp
               </div>
             </td>
           </tr>

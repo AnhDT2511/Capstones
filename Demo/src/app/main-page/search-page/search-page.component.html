@@ -24,24 +24,6 @@
                 </li>
             </ul>
             <ul class="pull-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-globe" aria-hidden="true"></i> Ngôn ngữ
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu top-menu">
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-angle-right" aria-hidden="true"></i> English
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-angle-right" aria-hidden="true"></i> Vietnamese
-                            </a>
-                        </li>
-                    </ul>
-                </li>
                 <li>
                     <span class="rot">|</span>
                 </li>
@@ -98,101 +80,135 @@
 
 </div>
 
-<div id="" class="container">
-    <div class="col-xs-12 col-sm-8 col-md-8 list-result">
-        <div class="brand">
-            <span>T</span>ìm kiếm
-        </div>
-
-        <h3 style="margin-top: 18px;">Danh sách kết quả: </h3>
-
-        <hr>
-        <div class="media" *ngFor="let item of listResult">
-            <div class="media-left">
-                <img src="/assets/img/default-user-image.png" class="media-object" style="width:80px">
+<div id="">
+    <div class="container">
+        <div class="col-xs-12 col-sm-12 col-md-12 list-title">
+            <div class="brand">
+                <span>T</span>ìm kiếm
             </div>
-            <div class="media-body">
-                <h4 class="media-heading">
-                    <a href="javascript:void(0)" (click)="showDetail(item)">{{item.tourArticleTitle}}</a>
-                </h4>
-                <p>{{item.description}}
-                </p>
-                <div class="f-size">
-                    <i class="fa fa-eye " aria-hidden="true" style="font-size: 17px; margin-left: 0;"></i> 1225
-                    <i class="fa fa-heart " aria-hidden="true"></i> {{item.countLike}}
-                    <i class="fa fa-comment " aria-hidden="true"></i> 440
-                    <i class="fa fa-flag" aria-hidden="true"></i> 0
+        </div>
+    </div>
+
+    <div class="search-box">
+        <div class="container">
+            <div class="col-xs-12 col-sm-6 col-md-6 p-padding">
+                <div class="box">
+                    <div class="box-content">
+
+                        <div class="form-g">
+                            <label>Loại tìm kiếm:</label>
+                            <div class="input">
+                                <select class="input-text" [(ngModel)]="typeSearch">
+                                    <option value = "1">Bài đăng</option>
+                                    <option value = "2">Chuyến đi</option>
+                                    <option value = "3">Địa điểm</option>
+                                    <option value = "4">Thể loại</option>
+                                    <option value = "5">Ngày</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 p-padding">
+                <div class="box">
+                    <div class="box-content">
+                        <div class="form-g">
+                            <label>Từ khóa tìm kiếm:</label>
+                            <div class="input">
+                                <input type="text" class="input-text" name="textSearch" placeholder="Nhập từ khóa" [(ngModel)]="textSearch">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="box-content">
+                    <div class="form-g">
+                        <div class="input text-center">
+                            <input type="submit" class="btn-search" name="btnSearch" value="Tìm kiếm" (click)="searchByType()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="col-xs-12 col-sm-6 col-md-6 list-result">
+
+            <h3 style="margin-top: 18px;">Danh sách bài viết: </h3>
+
+            <hr>
+            <div class="media" *ngFor="let item of listResultTourPost;">
+                <div class="media-left">
+                    <img [src]="baseFolder + item.image" class="media-object" style="width:80px">
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <a href="javascript:void(0)" routerLink = "/main/tourpost/{{item.id}}" >{{item.tourArticleTitle}}</a>
+                    </h4>
+                    <p>{{item.description}}</p>
+                    <div class="f-size">
+                        <i class="fa fa-eye " aria-hidden="true" style="font-size: 17px; margin-left: 0;"></i> 1225
+                        <i class="fa fa-heart " aria-hidden="true"></i> 550
+                        <i class="fa fa-comment " aria-hidden="true"></i> 440
+                        <i class="fa fa-flag" aria-hidden="true"></i> 0
+                    </div>
                 </div>
             </div>
             <hr>
         </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-56 list-result">
+
+            <h3 style="margin-top: 18px;">Danh sách chuyến đi: </h3>
+
+            <hr>
+            <div class="media" *ngFor="let item of listResultGroupTour;">
+                <div class="media-left">
+                    <img [src]="baseFolder + item.image" class="media-object" style="width:80px">
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <a routerLink = "/main/grouptour/{{item.id}}" href="javascript:void(0)">{{item.tourArticleTitle}}</a>
+                    </h4>
+                    <p>{{item.description}}</p>
+                    <div class="f-size">
+                        <i class="fa fa-eye " aria-hidden="true" style="font-size: 17px; margin-left: 0;"></i> 1225
+                        <i class="fa fa-heart " aria-hidden="true"></i> 550
+                        <i class="fa fa-comment " aria-hidden="true"></i> 440
+                        <i class="fa fa-flag" aria-hidden="true"></i> 0
+                    </div>
+                </div>
+            </div>
     </div>
 
-    <div class="col-xs-12 col-sm-4 col-md-4 search-box">
-        <i class="fa fa-wpexplorer" aria-hidden="true"></i>
-        <div class="box">
-            <h4>Tìm kiếm</h4>
-            <div class="box-content">
+    <!-- Begin: Footer -->
+    <footer>
+        <div class="container-fruid text-center f-social">
+            <a href="" class="btn-fb">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+            <a href="" class="btn-gplus">
+                <i class="fa fa-google-plus" aria-hidden="true"></i>
+            </a>
+            <a href="" class="btn-instagram">
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+            </a>
+        </div>
 
-                <div class="form-g">
-                    <label>Loại tìm kiếm:</label>
-                    <div class="input">
-                        <select class="input-text" name="type-search" [(ngModel)]="typeSearch">
-                            <option value="1">Bài đăng</option>
-                            <option value="2"> Chuyến đi</option>
-                            <option value="3">Địa điểm</option>
-                            <option value="4">Thể loại</option>
-                            <option value="5">Ngày</option>
-                        </select>
-                    </div>
+        <div class="container-fruid f-info">
+            <div class="container">
+                <div class="col-md-6">
+                    ©2017 TripNet - Mạng chia sẽ kinh nghiệm du lịch
                 </div>
-
-                <div class="form-g">
-                    <label>Từ khóa tìm kiếm:</label>
-                    <div class="input">
-                        <input type="text" class="input-text" name="typeSearch" placeholder="Nhập từ khóa" [(ngModel)]="textSearch">
-                    </div>
+                <div class="col-md-6 text-right">
+                    <a href="">Điều khoản sự dụng </a>
+                    <a href="">Cookies </a>
                 </div>
-
-                <div class="form-g">
-                    <div class="input text-center">
-                        <!-- <input type="submit" class="btn-search" name="btnSearch" value="Tìm kiếm"> -->
-                        <a class="btn btn-search" (click)="searchByType()" href="javascript:void(0)">
-                            <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
-                        </a>
-                    </div>
-                </div>
+                <div class="clear-fix"></div>
             </div>
         </div>
-    </div>
-</div>
-<!-- </div> -->
-
-<!-- Begin: Footer -->
-<footer>
-    <div class="container-fruid text-center f-social">
-        <a href="" class="btn-fb">
-            <i class="fa fa-facebook" aria-hidden="true"></i>
-        </a>
-        <a href="" class="btn-gplus">
-            <i class="fa fa-google-plus" aria-hidden="true"></i>
-        </a>
-        <a href="" class="btn-instagram">
-            <i class="fa fa-instagram" aria-hidden="true"></i>
-        </a>
-    </div>
-
-    <div class="container-fruid f-info">
-        <div class="container">
-            <div class="col-md-6">
-                ©2017 TripNet - Mạng chia sẽ kinh nghiệm du lịch
-            </div>
-            <div class="col-md-6 text-right">
-                <a href="">Điều khoản sự dụng </a>
-                <a href="">Cookies </a>
-            </div>
-            <div class="clear-fix"></div>
-        </div>
-    </div>
-</footer>
-<!-- End: Footer -->
+    </footer>
+    <!-- End: Footer -->

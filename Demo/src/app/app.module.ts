@@ -14,6 +14,7 @@ import { AvatarModule } from 'ngx-avatar';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { NgAutoCompleteModule } from "ng-auto-complete";
 import { CommonModule } from '@angular/common';  
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CommonModule } from '@angular/common';
     AvatarModule,
     NgAutoCompleteModule,
     CommonModule,
+    CarouselModule.forRoot(),
     SlimLoadingBarModule.forRoot(),
   ],
   providers: [
