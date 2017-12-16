@@ -14,11 +14,12 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   loading = false;
   model: any = {
-    photoId: "../../assets/img/default-user-image.png",   //defaut
-    credit: 78,                                            //defaut
-    point: 55,                                             //defaut
-    deleted: 1,                                           //defaut
-    roleId: 2                                             //defaut
+    // photoId: "default-user-image.png",   //defaut
+    // credit: 0,                                            //defaut
+    // point: 0,
+    createdTime : Date.now(),                                             //defaut
+    deleted: 0,                                           //defaut
+    roleId: 1                                             //defaut
   };
   constructor(
     private registerService: RegisterService,

@@ -46,5 +46,4 @@ $(function() {
         duration: 800,
     });
 
-    console.log('Day la file timeline.js');
 });

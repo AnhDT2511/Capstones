@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2 ,AfterViewChecked, ElementRef } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 import { UtilityService } from '../../shared/service/utility.service';
 import { UrlConstants } from '../../shared/common/url.constants';
@@ -11,10 +11,9 @@ import { debug } from 'util';
 import { TourPost } from '../../shared/domain/tourPost.user';
 import { Like } from '../../shared/domain/like.user';
 import { Comment } from '../../shared/domain/comment.user';
-import { resetFakeAsyncZone } from '@angular/core/testing';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { concat } from 'rxjs/observable/concat';
-import { InfoContstants } from '../../shared/common/index';
+import { InfoContstants, SystemConstants } from '../../shared/common/index';
 
 @Component({
   selector: 'app-tour-post-page',
@@ -33,7 +32,7 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
   tourByDayDetail: any = [];
   statusComment: boolean = true;
   statusReport: boolean = true;
-  hideForm: boolean = true;
+  baseFolder: String = SystemConstants.BASE_IMAGE;
   comment: string = "";
   report: any;
   randomIndex: any;
@@ -41,6 +40,7 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
   liked: any = false;
   listCheckbox: any = {};
   reported: any = false;
+  hideForm : boolean = false;
   listPlace: any = InfoContstants.CITY_VN;
   textArray = [
     'red',
@@ -66,7 +66,8 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
     private dataService: DataService,
     private activatedRoute: ActivatedRoute,
     private commonService: CommonService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private elementRef: ElementRef
   ) {
     if (!InfoContstants.isEmpty(this.user)) {
       this.checkLogin = true;
@@ -99,20 +100,34 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
             });
             item.vehicle = objectVehicle;
             (item.placeID != undefined && item.placeID != 0) ? item.placeID = this.listPlace.find(it => it.id == item.placeID).title : null;
-            this.tourByDayDetail.push(item);
             this.commonService.getImageByTourByDayID(item.id,data =>{
-              console.log(data);
+              let listImage = [];
+              item['listImage'] = [];
+              data.filter(item => item.deleted == 0).forEach(element => {
+                listImage.push(element.name);
+              });
+              item['listImage'] = listImage;
             })
+            setTimeout(() => {
+              this.tourByDayDetail.push(item);
+              // console.log(this.tourByDayDetail);
+            },300)
           }
         });
         this.commonService.getAccountDetailsInfo(this.tourPost.accountID, data => {
           this.tourPost['author'] = data.firstName + ' ' + data.lastName;
         });
 
+        this.commonService.getImageByAccountID(this.tourPost.accountID,i => {
+          let image = i.find(item => item.deleted == 0 && item.tourPostID == 0 && item.tourByDayID == 0);
+          this.tourPost['imageAuthor'] = image == undefined ?  'user.png' : image.name;
+        })
+
         this.commonService.getAccountInfo(this.tourPost.accountID, data => {
           this.tourPost['authorID'] = data.id;
           this.tourPost['level'] = data.level;
         });
+
         if (this.checkLogin) {
           this.commonService.getBookMarkByAccountID(this.user.id, data => {
             if (data.findIndex(item => item.tourPostID == this.tourPost.id && item.deleted == 0) != -1) {
@@ -140,13 +155,20 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
       }, error => {
       });
     });
-
   }
 
   ngOnInit() {
     this.randomIndex = Math.floor(Math.random() * this.textArray.length);
     this.renderer.addClass(document.body, 'body-' + this.textArray[this.randomIndex]);
   }
+
+  // ngAfterViewChecked() {
+  //   var s = document.createElement("script");
+  //   s.type = "text/javascript";
+  //   s.src = "../../assets/js/timeline.js";
+  //   this.elementRef.nativeElement.appendChild(s);
+  // }
+
   ngOnDestroy(): void {
     this.renderer.removeClass(document.body, 'body-' + this.textArray[this.randomIndex]);
   }

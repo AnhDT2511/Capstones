@@ -36,6 +36,7 @@ export class CreatePostComponent implements OnInit {
   listTourDetail: any;
   listTourDetailTemp: any = [];
   listImage: any = [];
+  resultImage: any = [];
   id = 0;
   options = [
     { name: 'motorcycle', value: '1' },
@@ -99,6 +100,9 @@ export class CreatePostComponent implements OnInit {
   // showList() {
   //   console.log(this.listTourDetail);
   // }
+  viewTourPost(_tourPost) {
+    this.utiliservice.navigate('/main/tourpost/' + _tourPost.id)
+  }
   setDisplayValue(tourpost, tourbyday, event) {
     this.listTourDetail[tourpost].checkbox[tourbyday] = event;
   }
@@ -111,33 +115,19 @@ export class CreatePostComponent implements OnInit {
         this.listImage.push({
           'day': tourByDayID.day,
           'name': ImageName[i].name,
-          'image' : ImageName[i]
+          'image': ImageName[i]
         })
       }
     }
   }
-  
-  uploadImage(id,day,type) {
-    let listDataImage : any = [];
-    this.listImage.filter(item => item.day == day).forEach(element => {
-        listDataImage.push(element['image']);
-    });
-    this.formUpload.upload(listDataImage);
+
+  uploadImage() {
+    // let listDataImage : any = [];
+    // this.listImage.filter(item => item.day == day).forEach(element => {
+    //     listDataImage.push(element['image']);
+    // });
   }
 
-  result(item,id,type){
-    let image = {
-      'name': item,
-      'deleted': 0,
-      'createdTime': Date.now(),
-      'accountID': this.user.id,
-      'tourByDayID': id
-    };
-    console.log(item);
-    // this.commonservice.addImage(image, data => {
-    //   console.log('success');
-    // })
-  }
   validateTourPost(): boolean {
     for (let i in this.tourPost) {
       switch (i) {
@@ -176,14 +166,15 @@ export class CreatePostComponent implements OnInit {
     }
     return true;
   }
+
   validateTourByDay() {
     if (JSON.stringify(this.listTourDetail) == JSON.stringify(this.listTourDetailTemp)) {
       this.notifyservice.printErrorMessage('Hành trình chi tiết không nên để trống');
       return false;
     }
     let index = this.listTourDetail.findIndex(item => JSON.stringify(item.checkbox) === "{}")
-    if(index != -1){
-      this.notifyservice.printErrorMessage('**Ngày ' + (index + 1)  + '**:Phương tiện không nên để trống');
+    if (index != -1) {
+      this.notifyservice.printErrorMessage('**Ngày ' + (index + 1) + '**:Phương tiện không nên để trống');
       return false;
     }
     this.listTourDetail.forEach(element => {
@@ -216,8 +207,8 @@ export class CreatePostComponent implements OnInit {
   saveTourPost() {
     let responseID = 0;
     if (this.validateTourPost() && this.validateTourByDay()) {
-      console.log(this.validateTourPost());
-      console.log(this.validateTourByDay());
+      // console.log(this.validateTourPost());
+      // console.log(this.validateTourByDay());
       this.commonservice.getAllTourPost(data => {
         let date = Date.now();
         let _tourPost: TourPost = new TourPost(0, this.user.id, this.tourPost.startPlaceID, 0, this.listTourDetail.length, this.tourPost.title, 0,
@@ -227,6 +218,7 @@ export class CreatePostComponent implements OnInit {
           this.commonservice.createPost(_tourPost, data => {
             this.addTourByDay(data._body);
             this.notifyservice.printSuccessMessage("Tạo bài viết thành công");
+            this.tourPost['id'] = data._body;
           })
         } else if (this.id == 0 && validate != -1) {
           this.notifyservice.printErrorMessage('Tiêu đề đã tồn tại trong hệ thống');
@@ -237,31 +229,75 @@ export class CreatePostComponent implements OnInit {
             this.updateTourByDay(this.id);
           })
           this.notifyservice.printSuccessMessage("Cập nhật bài viết thành công");
+          this.utiliservice.navigate('/main/profile/0/overview');
         }
       })
     }
   }
+
   addTourByDay(id) {
     for (let i = 0; i < this.listTourDetail.length; i++) {
       let listVehicle = this.listTourDetail[i].checkbox;
       this.listTourDetail[i]['vehicle'] = this.getKeyByValue(listVehicle, true).substring(0, this.getKeyByValue(listVehicle, true).length - 1);
       this.listTourDetail[i]['tourPostID'] = id;
       this.dataservice.post('/tours/post/' + id + '/day', this.listTourDetail[i]).subscribe((response: any) => {
-        this.uploadImage(response._body,this.listTourDetail[i].day,true);
+        let listDataImage = [];
+        this.listImage.filter(item => item.day == i + 1).forEach(element => {
+          listDataImage.push(element['image']);
+        });
+        this.resultImage = this.formUpload.upload(listDataImage, response._body);
       }, error => {
       });;
     }
+    setTimeout(() => {
+      this.resultImage.forEach(element => {
+        this.commonservice.addImage({
+          'name': element,
+          'accountID': this.user.id,
+          'tourByDayID': element.split('_')[2],
+          'createdTime': Date.now(),
+          'tourPostID': id,
+        }, data => {
+        })
+      });
+      this.listImage = [];
+    }, 300);
   }
+
   updateTourByDay(id) {
     for (let i = 0; i < this.listTourDetail.length; i++) {
       let listVehicle = this.listTourDetail[i].checkbox;
       this.listTourDetail[i]['vehicle'] = this.getKeyByValue(listVehicle, true).substring(0, this.getKeyByValue(listVehicle, true).length - 1);
       this.listTourDetail[i]['updatedTime'] = Date.now();
       this.dataservice.put('/tours/post/' + id + '/day', this.listTourDetail[i]).subscribe((response: any) => {
-        this.uploadImage(response._body,this.listTourDetail[i].day,false);
       }, error => {
       });;
+      let listDataImage = [];
+      this.listImage.filter(item => item.day == i + 1).forEach(element => {
+        listDataImage.push(element['image']);
+        this.commonservice.getImageByTourByDayID(this.listTourDetail[i].id, data => {
+          data.forEach(element => {
+            let item = element;
+            item.deleted = 1;
+            this.commonservice.updateImage(item, data => {
+            })
+          });
+        })
+      });
+      this.resultImage = this.formUpload.upload(listDataImage, this.listTourDetail[i].id);
     }
+    setTimeout(() => {
+      this.resultImage.forEach(element => {
+        this.commonservice.addImage({
+          'name': element,
+          'accountID': this.user.id,
+          'tourByDayID': element.split('_')[2],
+          'tourPostID': id,
+          'createdTime': Date.now()
+        }, data => {
+        })
+      });
+    }, 300);
   }
   deleteTourPost() {
     this.notifyservice.printConfirmationDialog('Bạn có chắc chắn muốn xóa bài viết này!', () => {

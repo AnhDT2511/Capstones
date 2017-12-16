@@ -4,7 +4,6 @@ import { DashboardPageComponent } from './dashboard-page/dashboard-page.componen
 import { UserManagementPageComponent } from './user-management-page/user-management-page.component';
 import { PostManagementPageComponent } from './post-management-page/post-management-page.component';
 import { TourManagementPageComponent } from './tour-management-page/tour-management-page.component';
-import { ReportManagementPageComponent } from './report-management-page/report-management-page.component';
 
 const AdminPage_Router: Routes = [
         {
@@ -15,7 +14,6 @@ const AdminPage_Router: Routes = [
                         { path: 'dashboard', component : DashboardPageComponent },                        
                         { path: 'usermanagement', component : UserManagementPageComponent },
                         { path: 'postmanagement', component : PostManagementPageComponent },
-                        { path: 'reportmanagement', component : ReportManagementPageComponent }
                 ]
         }
 ];

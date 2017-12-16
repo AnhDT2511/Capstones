@@ -47,8 +47,8 @@ export class GroupPageComponent implements OnInit {
           this.loadComment();
           this.loadMember();
         });
-        this.groupTour.startPlaceID = !InfoContstants.isEmpty(this.groupTour.startPlaceID) ? this.listCity.find(item => item.id == this.groupTour.startPlaceID).title : null;
-        this.groupTour.endPlaceID = !InfoContstants.isEmpty(this.groupTour.endPlaceID) ?  this.listCity.find(item => item.id == this.groupTour.endPlaceID).title : null;
+        this.groupTour.startPlaceID =  this.listCity.find(item => item.id == this.groupTour.startPlaceID).title ;
+        this.groupTour.endPlaceID =  this.listCity.find(item => item.id == this.groupTour.endPlaceID).title ;
       }, error => {
       });
     });

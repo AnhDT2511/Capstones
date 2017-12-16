@@ -116,7 +116,7 @@
                         <div class="form-group">
                           <div class="col-sm-12">
                             <!-- <input type="file" class="btn-file" name="file"> -->
-                            <form-upload (listImage)="getListImage($event,tourDetail)" (result)="result($event)"></form-upload>
+                            <form-upload (listImage)="getListImage($event,tourDetail)" ></form-upload>
                           </div>
                         </div>
                         <div class="form-group">
@@ -211,8 +211,8 @@
   <div class="btn-function text-right">
     <button type="button" class="btn btn-primary" (click)="saveTourPost()">
       <i class="fa fa-paper-plane" aria-hidden="true"></i>Đăng bài</button>
-    <!-- <button type="button" class="btn btn-warning">
-      <i class="fa fa-eye" aria-hidden="true"></i>Xem trước</button> -->
+    <button type="button" class="btn btn-warning" (click)="viewTourPost(tourPost)" *ngIf="tourPost.id != null">
+      <i class="fa fa-eye" aria-hidden="true"></i>Xem Bài Viết</button>
     <button type="button" class="btn btn-danger" (click)="deleteTourPost()">
       <i class="fa fa-times" aria-hidden="true"></i>Hủy Bài</button>
   </div>

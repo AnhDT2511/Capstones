@@ -624,6 +624,7 @@ body {
 #top-post #myCarousel .item {
     padding-left: 15px;
     padding-right: 15px;
+    max-height: 622px;
 }
 
 #top-post .carousel-control.right {
@@ -664,7 +665,7 @@ body {
 #top-post .image {
     display: block;
     width: 100%;
-    height: auto;
+    height: 226px;
 }
 
 #top-post .thumbnail .summary {

@@ -438,7 +438,7 @@ header .header-topbar ul>li>span.rot {
 }
 
 .t-content {
-    padding: 0 30px 15px;
+    padding: 0px 30px 15px;
 }
 
 .timeline-content::after {
@@ -464,7 +464,7 @@ header .header-topbar ul>li>span.rot {
 }
 
 .timeline a {
-    background: #3F51B5;
+    /* background: #3F51B5; */
     color: #FFFFFF;
     padding: 8px 20px;
     text-transform: uppercase;
@@ -479,7 +479,7 @@ header .header-topbar ul>li>span.rot {
 .timeline a:hover,
 .timeline a:active,
 .timeline a:focus {
-    background: #32408f;
+    /* background: #32408f; */
     color: #FFFFFF;
     text-decoration: none;
 }

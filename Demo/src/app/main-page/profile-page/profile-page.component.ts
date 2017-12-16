@@ -40,7 +40,9 @@ export class ProfilePageComponent implements OnInit {
   viewPersionInfo: boolean = true;
   checkUserDetails: boolean = true;
   urlImage = SystemConstants.BASE_IMAGE;
-
+  baseFolder: String = SystemConstants.BASE_IMAGE;
+  resultImage : any = [];
+  
   constructor(
     private utilityService: UtilityService,
     private notifyService: NotificationService,
@@ -80,32 +82,35 @@ export class ProfilePageComponent implements OnInit {
   }
 
   getListImage(ImageName) {
-
-    this.formUpload.upload(ImageName);
+    this.resultImage =  this.formUpload.upload(ImageName,0);
+    setTimeout(() => {
+      this.upLoadImage();
+    }, 300);
   }
 
-  resultImage(result) {
+  upLoadImage() {
     let image = {
-      'name': result,
+      'name': this.resultImage[0],
       'deleted': 0,
       'createdTime': Date.now(),
       'accountID': this.user.id
     };
     if (this.user.image != 'default-user-image.png') {
       image['id'] = this.user.imageID;
-      this.commonService.uploadImage(image, data => {
+      this.commonService.updateImage(image, data => {
       })
     } else {
       this.commonService.addImage(image, data => {
       })
     }
-    this.user['image'] = result;
+    this.user['avatar'] = this.resultImage[0];
   }
 
   getUserDetails(id: string) {
     this.commonService.getImageByAccountID(id, data => {
-      data.length > 0 ? this.user['image'] = data[0].name : this.user['image'] = 'default-user-image.png';
-      this.user.imageID = data[0].id;
+      let findAvatar = data.find(item => item.accountID == id && item.tourByDayID == 0);
+      this.user['avatar'] = findAvatar != undefined ? findAvatar.name : 'default-user-image.png';
+      this.user.imageID = findAvatar.id;
     })
     this.dataService.get('/user/accountdetails/' + id).subscribe((response: any) => {
       this.userDetails['fullName'] = response.firstName + ' ' + response.lastName;
@@ -121,38 +126,37 @@ export class ProfilePageComponent implements OnInit {
   }
 
   saveUserInfo() {
-    console.log(this.listImageName);
-    // this.dataService.put("/user/account", JSON.stringify(this.user)).subscribe((response: any) => {
-    //   localStorage.removeItem(SystemConstants.CURRENT_USER);
-    //   localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(this.user));
-    // }, error => {
-    //   this.valid = false;
-    // });
+    this.dataService.put("/user/account", JSON.stringify(this.user)).subscribe((response: any) => {
+      localStorage.removeItem(SystemConstants.CURRENT_USER);
+      localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(this.user));
+    }, error => {
+      this.valid = false;
+    });
 
-    // this.userDetails['firstName'] = this.userDetails.fullName.substr(0, this.userDetails.fullName.indexOf(' '));
-    // this.userDetails['lastName'] = this.userDetails.fullName.substr(this.userDetails.fullName.indexOf(' ') + 1);
-    // this.userDetails['accountId'] = this.user.id;
-    // delete this.userDetails['fullName'];
+    this.userDetails['firstName'] = this.userDetails.fullName.substr(0, this.userDetails.fullName.indexOf(' '));
+    this.userDetails['lastName'] = this.userDetails.fullName.substr(this.userDetails.fullName.indexOf(' ') + 1);
+    this.userDetails['accountId'] = this.user.id;
+    delete this.userDetails['fullName'];
 
-    // this.getUserDetails(this.user.id);
-    // if (this.checkUserDetails) {
-    //   this.dataService.put("/user/accountdetails", JSON.stringify(this.userDetails)).subscribe((response: any) => {
-    //     this.userDetails["fullName"] = this.userDetails.firstName + " " + this.userDetails.lastName;
-    //   }, error => {
-    //     this.valid = false;
-    //   });
-    // } else {
-    //   this.dataService.post("/user/accountdetails", JSON.stringify(this.userDetails)).subscribe((response: any) => {
-    //     this.userDetails["fullName"] = this.userDetails.firstName + " " + this.userDetails.lastName;
-    //   }, error => {
-    //     this.valid = false;
-    //   });
-    // }
-    // if (this.valid) {
-    //   this.notifyService.printSuccessMessage('Cập nhật thông tin người dùng thành công!');
-    // } else {
-    //   this.notifyService.printErrorMessage('Có lỗi xảy ra khi cập nhật thông tin người dùng, xin hãy thử lại!');
-    // }
+    this.getUserDetails(this.user.id);
+    if (this.checkUserDetails) {
+      this.dataService.put("/user/accountdetails", JSON.stringify(this.userDetails)).subscribe((response: any) => {
+        this.userDetails["fullName"] = this.userDetails.firstName + " " + this.userDetails.lastName;
+      }, error => {
+        this.valid = false;
+      });
+    } else {
+      this.dataService.post("/user/accountdetails", JSON.stringify(this.userDetails)).subscribe((response: any) => {
+        this.userDetails["fullName"] = this.userDetails.firstName + " " + this.userDetails.lastName;
+      }, error => {
+        this.valid = false;
+      });
+    }
+    if (this.valid) {
+      this.notifyService.printSuccessMessage('Cập nhật thông tin người dùng thành công!');
+    } else {
+      this.notifyService.printErrorMessage('Có lỗi xảy ra khi cập nhật thông tin người dùng, xin hãy thử lại!');
+    }
   }
   openInfo() {
     this.userTemp = JSON.parse(JSON.stringify(this.user));

@@ -120,7 +120,7 @@ export class CommonService {
         );
     }
 
-    uploadImage(_media, callback: (data) => void) {
+    updateImage(_media, callback: (data) => void) {
         // console.log(id);
         return this.dataService.put('/tours/post/media/', _media).subscribe(
             res => {
@@ -147,6 +147,18 @@ export class CommonService {
     getImageByTourByDayID(id, callback: (data) => void) {
         // console.log(id);
         return this.dataService.get('/tours/post/media/get-by-tourbyday/' + id).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                console.error(err);
+            }
+        );
+    }
+
+    getImageByTourPostID(id, callback: (data) => void) {
+        // console.log(id);
+        return this.dataService.get('/tours/post/media/get-by-tourpost/' + id).subscribe(
             res => {
                 callback(res);
             },
