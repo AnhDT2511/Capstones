@@ -33,28 +33,35 @@ export class OverviewInfoComponent implements OnInit {
     this.id = localStorage.getItem('userID');
     this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
       response.forEach(element => {
+        //console.log(element);
         if (element.accountID === Number(this.id) && element.type == 0) {
-          this.listTourPost.push({ 'tourPostID': element.id, 'title': element.tourArticleTitle })
+          this.listTourPost.push({ 'tourPostID': element.id, 'title': element.tourArticleTitle, 'description': element.description, 'createdTime': element.createTime })
         } else if (element.accountID === Number(this.id) && element.type == 1) {
-          this.listGroupPost.push({ 'tourPostID': element.id, 'title': element.tourArticleTitle })
+          this.listGroupPost.push({ 'tourPostID': element.id, 'title': element.tourArticleTitle, 'description': element.description, 'createdTime': element.createTime })
         }
       });
     }, error => {
     });
+    //console.log(this.listTourPost);
+   // console.log(this.listGroupPost);
     this.commonService.getListBookMarkByAccount(this.user.id, data => {
       data.forEach(element => {
         if (element.deleted == 0) {
-          this.commonService.getTourPostByID(element.tourPostID, data => {
-            this.listSaveLink.push(data);
+          this.commonService.getTourPostByID(element.tourPostID, i => {
+            this.listSaveLink.push(i);
           })
         }
+        //console.log(this.listSaveLink);
       });
-    })
+    });
   }
+
   updateTourPost(id) {
     this.utilityService.navigate('/main/profile/0/createPost/' + id);
   }
+
   updateGroupPost(id) {
     this.utilityService.navigate('/main/profile/0/createTour/' + id);
   }
+  
 }

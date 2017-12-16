@@ -131,30 +131,34 @@
 
         <div class="level-info">
             <h5>
-                <b>{{userDetails.fullName}}</b>
+                <b>{{userDetails.fullName | uppercase}}</b>
             </h5>
             <h5>
-                <b>Email:</b> {{user.email}}</h5>
+                <b>Email:</b> {{user.email}}
+            </h5>
             <h5>
-                <b>Job:</b> {{userDetails.job}}</h5>
+                <b>SDT:</b> {{userDetails.phoneNumber}}
+
+            </h5>
             <h5>
-                <b>Phone:</b> {{userDetails.phoneNumber}}</h5>
+                <b>Nghề nghiệp:</b> {{userDetails.job}}
+            </h5>
             <div>
                 <i class="fa fa-mars fa-2x" [ngStyle]="{'color': userDetails.gender == '1' ? '#308DB5' : 'gray','font-weight':userDetails.gender == '1' ? 'bold' :''}"></i>
                 <i class="fa fa-venus fa-2x" [ngStyle]="{'color': userDetails.gender == '2' ? '#FF1654' : 'gray','font-weight':userDetails.gender == '2' ? 'bold' :''}"></i>
             </div>
             <!-- <h5>Credit : {{user.credit}}</h5> -->
-            <b>Credit:</b>
+            <!-- <b>Credit:</b>
             <div class="progress">
                 <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" [style.width.%]="user.credit">
                 </div>
-            </div>
+            </div> -->
             <!-- <h5>Point : {{user.point}}</h5> -->
-            <b>Point:</b>
+            <!-- <b>Point:</b>
             <div class="progress">
                 <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" [style.width.%]="user.point">
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="btn-tour" [hidden]="viewPersionInfo">
             <a href="javascript:void(0)" class="btn-overview" routerLink="/main/profile/0">
@@ -192,8 +196,6 @@
             <i class="fa fa-instagram" aria-hidden="true"></i>
         </a>
     </div>
-
-
 
     <div class="container-fruid f-info">
         <div class="container">
