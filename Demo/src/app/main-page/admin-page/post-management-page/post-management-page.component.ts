@@ -30,13 +30,13 @@ export class PostManagementPageComponent implements OnInit {
   getAllPost() {
     this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
       this.data = response.filter(item => item.deleted == 0 && item.type == 0);
-      console.log(this.data);
+      // console.log(this.data);
       for (let i in this.data) {
         this.data[i]['details'] = {}
         this.dataService.get('/user/accountdetails/' + this.data[i].accountID).subscribe((response: any) => {
           this.dataDetail = response;
           this.data[i]['details'] = this.dataDetail;
-          console.log(this.data[i]['details']);
+          // console.log(this.data[i]['details']);
           //merger
         });
       }
@@ -45,12 +45,14 @@ export class PostManagementPageComponent implements OnInit {
   }
 
   deletePost(id) {
-    this.dataService.put('/tours/post/',{
-      'id' : id,
-      'deleted' : 1
-    }).subscribe((response: any) => {
-      console.log('ok delete post');
-      this.getAllPost();
+    this.notificationService.printConfirmationDialog('Bạn có chắc chắn muốn xóa bài viết này!', () => {
+      this.dataService.put('/tours/post/', {
+        'id': id,
+        'deleted': 1
+      }).subscribe((response: any) => {
+        // console.log('ok delete post');
+        this.getAllPost();
+      });
     });
   }
 

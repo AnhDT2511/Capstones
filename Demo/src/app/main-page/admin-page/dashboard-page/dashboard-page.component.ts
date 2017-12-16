@@ -16,10 +16,11 @@ export class DashboardPageComponent implements OnInit {
 
   listUser: any;
   listPost: any;
+  listTour: any;
   listComment: any;
   public numUsers;
   public numPosts;
-  public numComments;
+  public numTours;
 
   constructor(private authenService: AuthenService,
     private notificationService: NotificationService,
@@ -29,30 +30,39 @@ export class DashboardPageComponent implements OnInit {
   ngOnInit() {
     this.getAllUser();
     this.getAllPost();
-    this.getAllComment();
+    this.getAllTour();
   }
 
   getAllUser() {
     this.dataService.get('/user/account/get-all').subscribe((response: any) => {
       this.listUser = response;
-      this.numUsers = response.length;
+      this.numUsers = this.listUser.length;
+      console.log(this.numUsers);
     }, error => {
     });
   }
 
   getAllPost() {
     this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
-      this.listPost = response;
-      this.numPosts = response.length;
+      this.listPost = response.filter(item => item.type == 0 && item.deleted == 0);;
+      this.numPosts =  this.listPost.length;
     }, error => {
     });
   }
 
-  getAllComment() {
-    this.dataService.get('/tours/post/comment/get-all').subscribe((response: any) => {
-      this.listComment = response;
-      this.numComments = response.length;
+  getAllTour() {
+    this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
+      this.listTour = response.filter(item => item.type == 1 && item.deleted == 0);;
+      this.numTours =  this.listTour.length;
     }, error => {
     });
   }
+
+  // getAllComment() {
+  //   this.dataService.get('/tours/post/comment/get-all').subscribe((response: any) => {
+  //     this.listComment = response;
+  //     this.numComments = response.length;
+  //   }, error => {
+  //   });
+  // }
 }

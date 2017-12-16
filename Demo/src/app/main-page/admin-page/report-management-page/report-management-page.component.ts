@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NotificationService } from '../../../shared/service/notification.service';
 import { AuthenService } from '../../../shared/service/authen.service';
 import { MessageContstants } from '../../../shared/common/message.constants';
@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { DataService } from './../../../shared/service/data.service';
 import * as _ from "lodash";
 import { CommonService } from '../../../shared/index';
+import { InfoContstants } from '../../../shared/common/index';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { Promise } from 'q';
 
 @Component({
   selector: 'app-report-management',
@@ -16,10 +19,21 @@ import { CommonService } from '../../../shared/index';
 
 export class ReportManagementPageComponent implements OnInit {
 
+  @ViewChild('childModal') childModal: ModalDirective;
   public data = [];
-  public dataDetail = [];
+  public dataDetail: any = [];
   public filterQuery = '';
+  listReport: any = '';
 
+  showChildModal(id) {
+    this.getPostReport(id);
+    this.childModal.show();
+
+  }
+
+  hideChildModal(): void {
+    this.childModal.hide();
+  }
   constructor(private authenService: AuthenService,
     private notificationService: NotificationService,
     private router: Router,
@@ -29,32 +43,54 @@ export class ReportManagementPageComponent implements OnInit {
   ngOnInit() {
     this.getAllReport();
   }
-  
+
   getAllReport() {
     this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
-      this.data = response;
-      console.log(this.data);
+      this.data = response.filter(item => item.type == 0 && item.deleted == 0);
+      // console.log(this.data);
       for (let i in this.data) {
-        this.data[i]['details'] = {}
-        this.dataService.get('/tours/post/get-all-report-of-post/' + this.data[i].id).subscribe((response: any) => {
-          this.dataDetail = response;
-          this.data[i]['details'] = this.dataDetail;
-          console.log(this.data[i]['details']);
+        this.data[i]['number'];
+        this.dataService.get('/tours/post/get-number-report-of-post/' + this.data[i].id).subscribe((res: any) => {
+          let number = res;
+          this.data[i]['number'] = typeof (number) != "number" ? 0 : number;
         });
       }
     }, error => {
-
     });
-
   }
 
-  acceptReport(id) {
-    this.dataService.put('/user/account', {
-      'id': id,
-      'deleted': 0
-    }).subscribe((response: any) => {
-      console.log('ok');
-      this.getAllReport();
+  getPostReport(id) {
+    // console.log(this.data);
+    this.dataService.get('/tours/post/get-all-report-of-post/' + id).subscribe((response: any) => {
+      // setTimeout(() => {
+      this.dataDetail = response;
+      // },300);
+      // this.data[i]['details'] = this.dataDetail;
+      console.log(this.data);
+      let listReport = '';
+      response.forEach(function (element) {
+        element.reasonReport.split(",").forEach(e => {
+          listReport.indexOf(e) != -1 ? '' : listReport += e + ",";
+        });
+        //  listReport = listReport.substring(0,listReport.length-1);
+      })
+      //this.listReport = listReport;
+    });
+    //console.log(this.listReport);
+    // console.log('ndsds');
+    // let test = this.listReport.split(',').join('\n');
+    // console.log(test);
+  }
+
+
+  acceptReport(tourpost) {
+    let item = tourpost;
+    this.notificationService.printConfirmationDialog('Bạn có chắc chắn muốn xóa bài viết này!', () => {
+      item.deleted = 1
+      this.dataService.put('/tours/post/', item).subscribe((response: any) => {
+        // console.log('ok delete post');
+        this.getAllReport();
+      });
     });
   }
 

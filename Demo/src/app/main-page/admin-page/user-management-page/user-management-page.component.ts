@@ -29,45 +29,34 @@ export class UserManagementPageComponent implements OnInit {
   ngOnInit() {
     this.getAllUser();
   }
-  
+
   getAllUser() {
     this.dataService.get('/user/account/get-all').subscribe((response: any) => {
       this.data = response;
-      console.log(this.data);
+      // console.log(this.data);
       for (let i in this.data) {
         this.data[i]['details'] = {}
         this.dataService.get('/user/accountdetails/' + this.data[i].id).subscribe((response: any) => {
           this.dataDetail = response;
           this.data[i]['details'] = this.dataDetail;
-          console.log(this.data[i]['details']);
+          // console.log(this.data[i]['details']);
           //merger
         });
       }
     }, error => {
 
     });
-    //1 for object account
-    //2 get detail id 
-    //3 object detail
-    //4 {email ,detais : {}}
   }
 
   deleteUser(id) {
-    this.dataService.put('/user/account', {
-      'id': id,
-      'deleted': 0
-    }).subscribe((response: any) => {
-      console.log('ok');
-      this.getAllUser();
+    this.notificationService.printConfirmationDialog('Bạn có chắc chắn muốn xóa người dùng này!', () => {
+      this.dataService.put('/user/account', {
+        'id': id,
+        'deleted': 0
+      }).subscribe((response: any) => {
+        // console.log('ok');
+        this.getAllUser();
+      });
     });
-  }
-
-  openInfo() {
-    // this.userTemp = JSON.parse(JSON.stringify(this.user));
-    // this.userDetailsTemp = JSON.parse(JSON.stringify(this.userDetails));
-  }
-  closeInfo() {
-    // this.user = this.userTemp;
-    // this.userDetails = this.userDetailsTemp;
   }
 }

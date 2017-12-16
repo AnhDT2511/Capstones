@@ -14,6 +14,8 @@ const AdminPage_Router: Routes = [
                         { path: 'dashboard', component : DashboardPageComponent },                        
                         { path: 'usermanagement', component : UserManagementPageComponent },
                         { path: 'postmanagement', component : PostManagementPageComponent },
+                        { path: 'reportmanagement', component : ReportManagementPageComponent },
+                        { path: 'tourmanagement', component : TourManagementPageComponent },
                 ]
         }
 ];

@@ -7,12 +7,14 @@ import { NotificationService } from '../../../shared/service/notification.servic
 import { AuthenService } from '../../../shared/service/authen.service';
 // import { DataFilterPipe } from './data-filter.pipe';
 import { DataTableModule } from "angular2-datatable";
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    DataTableModule
+    DataTableModule,
+    ModalModule.forRoot()
   ],
   providers: [AuthenService, NotificationService],
   declarations: [ReportManagementPageComponent]
