@@ -100,7 +100,7 @@
                 <div class="panel-body">
                     <div id="timeline-content">
                         <ul id="timeline">
-                            <li class="work" *ngFor="let tourDetail of listTourDetail; let i = index;">
+                            <li class="work" *ngFor="let tourDetail of filterItemsOfType('0'); let i = index;">
                                 <input class="radio" id="work {{i}}" name="works" type="radio" checked>
                                 <div class="relative">
                                     <span class="date">Ngày {{i + 1}}</span>
@@ -111,6 +111,9 @@
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#sub-accordion" href="#c{{i}}">Viết nội dung ở đây</a>
                                         </h4>
+                                        <button type="button" class="btn btn-danger" (click)="removeDetails(tourDetail)">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </button>
                                     </div>
                                     <div id="c{{i}}" class="panel-collapse collapse">
                                         <div class="panel-body">
@@ -216,6 +219,6 @@
         <button type="button" class="btn btn-warning" (click)="viewTourPost(tourPost)" *ngIf="tourPost.id != null">
       <i class="fa fa-eye" aria-hidden="true"></i>Xem Bài Viết</button>
         <button type="button" class="btn btn-danger" (click)="deleteTourPost()">
-      <i class="fa fa-times" aria-hidden="true"></i>Hủy Bài</button>
+      <i class="fa fa-recycle" aria-hidden="true"></i>Khôi phục</button>
     </div>
 </div>

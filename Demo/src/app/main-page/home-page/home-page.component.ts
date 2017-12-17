@@ -64,6 +64,9 @@ export class HomePageComponent implements OnInit {
     if (this.user != null && existLike == undefined) {
       let _like = new Like(null, tourPost.id, this.user.id, 0);
       this.dataService.post('/tours/post/' + tourPost.id + '/Like', _like).subscribe((response: any) => {
+        this.commonService.getAllLike(data => {
+          this.listLikeObj = JSON.parse(JSON.stringify(data));
+        })
         tourPost.liked = true;
         tourPost.countLike++;
       }, error => {

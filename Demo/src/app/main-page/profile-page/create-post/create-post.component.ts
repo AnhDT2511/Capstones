@@ -87,7 +87,8 @@ export class CreatePostComponent implements OnInit {
               checkbox: objCheckbox,
               id: element.id,
               tourPostID: element.tourPostID,
-              createTime: element.createTime
+              createTime: element.createTime,
+              deleted : element.deleted
             })
             // this.tourPost.placeID != undefined ? this.completer.SelectItem('completer', this.tourPost.placeID) : null;
           });
@@ -160,7 +161,7 @@ export class CreatePostComponent implements OnInit {
           break;
       }
     }
-    if (InfoContstants.isEmpty(this.tourPost) || (JSON.stringify(this.tourPost) == JSON.stringify(this.tourPostTemp) && JSON.stringify(this.listTourDetail) == JSON.stringify(this.listTourDetailTemp))) {
+    if (this.listImage.length == 0 && (JSON.stringify(this.tourPost) == JSON.stringify(this.tourPostTemp) && JSON.stringify(this.listTourDetail) == JSON.stringify(this.listTourDetailTemp))) {
       this.notifyservice.printErrorMessage('Không có dữ liệu nào thay đổi');
       return false;
     }
@@ -169,13 +170,21 @@ export class CreatePostComponent implements OnInit {
     }
     return true;
   }
-
+  filterItemsOfType(type) {
+    return this.listTourDetail.filter(x => x.deleted == type);
+  }
   validateTourByDay() {
     let check = true;
-    if (JSON.stringify(this.listTourDetail) == JSON.stringify(this.listTourDetailTemp)) {
-      this.notifyservice.printErrorMessage('Hành trình chi tiết không nên để trống');
-      return false;
-    }
+    let nullTourDetail = {
+      checkbox: {}, day: this.listTourDetail.length + 1,
+      deleted: 0, createTime: Date.now(), placeID: '', hotel: '', food: ''
+    };
+    this.listTourDetail.forEach(element => {
+      if (JSON.stringify(element) == JSON.stringify(nullTourDetail)) {
+        this.notifyservice.printErrorMessage('Hành trình chi tiết không nên để trống');
+        return false;
+      }
+    });
     // let index = this.listTourDetail.findIndex(item => JSON.stringify(item.checkbox) === "{}")
     // if (index != -1) {
     //   this.notifyservice.printErrorMessage('**Ngày ' + (index + 1) + '**:Phương tiện không nên để trống');
@@ -290,21 +299,21 @@ export class CreatePostComponent implements OnInit {
         }, error => {
         });;
       }
-      let listDataImage = [];
-      this.listImage.filter(item => item.day == i + 1).forEach(element => {
-        listDataImage.push(element['image']);
-        setTimeout(() => {
+      setTimeout(() => {
+        let listDataImage = [];
+        this.listImage.filter(item => item.day == i + 1).forEach(element => {
+          listDataImage.push(element['image']);
           this.commonservice.getImageByTourByDayID(this.listTourDetail[i].id, data => {
             data.forEach(element => {
               let item = element;
-              item.deleted = 0;
-              this.commonservice.addImage(item, data => {
+              item.deleted = 1;
+              this.commonservice.updateImage(item, data => {
               })
             });
           })
-        },200)
-      });
-      this.resultImage = this.formUpload.upload(listDataImage, this.listTourDetail[i].id);
+        });
+        this.resultImage = this.formUpload.upload(listDataImage, this.listTourDetail[i].id);
+      }, 150)
     }
     setTimeout(() => {
       this.resultImage.forEach(element => {
@@ -319,14 +328,14 @@ export class CreatePostComponent implements OnInit {
       });
     }, 300);
   }
+
   deleteTourPost() {
-    this.notifyservice.printConfirmationDialog('Bạn có chắc chắn muốn xóa bài viết này!', () => {
-      this.tourPost.deleted = 1;
-      this.commonservice.updatePost(this.tourPost, data => {
-        this.utiliservice.navigate('/main/profile/0');
-      })
+    this.notifyservice.printConfirmationDialog('Dữ liệu bạn vừa nhập sẽ bị mất khi thực hiện hành động này!', () => {
+      this.listTourDetail = JSON.parse(JSON.stringify(this.listTourDetailTemp));
+      this.tourPost = JSON.parse(JSON.stringify(this.tourPostTemp));
     });
   }
+
   addMoreDetails() {
     this.listTourDetail.push({
       checkbox: {}, day: this.listTourDetail.length + 1,
@@ -335,6 +344,11 @@ export class CreatePostComponent implements OnInit {
     this.listTourDetailTemp = JSON.parse(JSON.stringify(this.listTourDetail));
   }
 
+  removeDetails(item) {
+    this.notifyservice.printConfirmationDialog('Bạn có chắc chắn muốn xóa dữ liệu ngày này!', () => {
+      this.listTourDetail.find(i => i.id == item.id).deleted = 1;
+    });
+  }
   getKeyByValue(object, value) {
     let stringVehicle = "";
     Object.keys(object).filter(key => object[key] === value).forEach(element => {

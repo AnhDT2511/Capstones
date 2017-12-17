@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService, UtilityService, NotificationService, CommonService } from '../../shared/service';
-import { SystemConstants, InfoContstants ,UrlConstants} from '../../shared/common';
+import { SystemConstants, InfoContstants, UrlConstants } from '../../shared/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AuthenService } from '../../shared/index';
 import { Comment } from '../../shared/domain/comment.user';
@@ -14,12 +14,13 @@ export class GroupPageComponent implements OnInit {
   user: any = this.authentication.getLoggedInUser();
   checkLogin: any = false;
   groupTourId: string;
-  listComment: any;
+  listComment: any = [];
   listMember: any = [];
   listJoinGroup: any = [];
   comment: string = "";
   joined: boolean = true;
   groupTour: any = {};
+  baseFolder: any = SystemConstants.BASE_IMAGE;
   listCategory: any = {
     '1': 'Leo núi',
     '2': 'Văn Hóa',
@@ -47,8 +48,8 @@ export class GroupPageComponent implements OnInit {
           this.loadComment();
           this.loadMember();
         });
-        this.groupTour.startPlaceID =  this.listCity.find(item => item.id == this.groupTour.startPlaceID).title ;
-        this.groupTour.endPlaceID =  this.listCity.find(item => item.id == this.groupTour.endPlaceID).title ;
+        this.groupTour.startPlaceID = this.listCity.find(item => item.id == this.groupTour.startPlaceID).title;
+        this.groupTour.endPlaceID = this.listCity.find(item => item.id == this.groupTour.endPlaceID).title;
       }, error => {
       });
     });
@@ -86,11 +87,11 @@ export class GroupPageComponent implements OnInit {
           this.loadMember();
         })
       }
-    }else{
+    } else {
       this.notifyservice.printErrorMessage('Xin hãy đăng nhập trước khi thực hiện hành động này!');
     }
   }
-  
+
   nagivateProfile() {
     this.utiliservice.navigate(UrlConstants.PROFILE);
   }
@@ -104,9 +105,18 @@ export class GroupPageComponent implements OnInit {
       }
       data.forEach(element => {
         if (element.deleted == 0) {
+          let account = element;
+
           this.commonService.getAccountInfo(element.joinGroupByID, item => {
-            this.listMember.push(item);
+            account = item;
           })
+          setTimeout(() => {
+            this.commonService.getImageByAccountID(element.joinGroupByID, data => {
+              let image = data.find(item => item.deleted == 0 && item.tourByDayID == 0 && item.tourPostID == 0);
+              account['image'] = image == undefined ? 'user.png' : image.name;
+            })
+            this.listMember.push(account);
+          }, 200)
         }
       });
     })
@@ -120,23 +130,29 @@ export class GroupPageComponent implements OnInit {
         this.notifyservice.printSuccessMessage('Thêm bình luận thành công')
       }, error => {
       });
-    } else if(this.checkLogin && InfoContstants.isEmpty(this.comment)){
+    } else if (this.checkLogin && InfoContstants.isEmpty(this.comment)) {
       this.notifyservice.printErrorMessage('Bình luận không nên để trống');
-    }else{
+    } else {
       this.notifyservice.printErrorMessage('Xin hãy đăng nhập trước khi thực hiện hành động này!');
     }
   }
 
   loadComment() {
+    //lấy tất cả commment
+    this.listComment = [];
     this.dataService.get('/tours/post/' + this.groupTour.id + '/comment/get-all').subscribe((response: any) => {
-      this.listComment = response;
-      for (var i in this.listComment) {
-        this.dataService.get('/user/account/' + this.listComment[i].commentByID).subscribe((response: any) => {
-          for (var i in this.listComment) {
-            if (this.listComment[i].commentByID == response.id) {
-              this.listComment[i]['userName'] = response.userName;
-            }
-          }
+      for (var i in response) {
+        let group = response[i];
+        // lấy dữ liệu người dùng  
+        this.dataService.get('/user/account/' + group.commentByID).subscribe((res: any) => {
+          group['userName'] = res.userName;
+          this.commonService.getImageByAccountID(group.commentByID, data => {
+            let image = data.find(item => item.deleted == 0 && item.tourByDayID == 0 && item.tourPostID == 0);
+            group['image'] = image == undefined ? 'user.png' : image.name;
+          })
+          setTimeout(() => {
+            this.listComment.push(group);
+          }, 300)
         }, error => {
         });
       }
