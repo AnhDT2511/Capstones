@@ -34,13 +34,7 @@ export class CreateTourComponent implements OnInit {
     CreateNewAutocompleteGroup(
       'Thể Loại',
       'category',
-      [
-        { title: 'Cắm Trại', id: '1' },
-        { title: 'Văn Hóa', id: '2' },
-        { title: 'Biển', id: '3' },
-        { title: 'Leo Núi', id: '4' },
-        { title: 'Thiên Nhiên', id: '5' },
-      ],
+      InfoContstants.CATEGORY,
       { titleKey: 'title', childrenKey: null },
       '',
       false

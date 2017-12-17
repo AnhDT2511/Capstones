@@ -1,4 +1,13 @@
 export class InfoContstants {
+    public static CATEGORY = [
+        { id : '1' ,title: 'Văn Hóa'},
+        { id : '2' ,title: 'Leo Núi'},
+        { id : '3' ,title: 'Biển'},
+        { id : '4' ,title: 'Chùa'},
+        { id : '5' ,title: 'Hoang Sơ'},
+        { title: 'Cắm Trại', id: '6' },
+        { title: 'Thiên Nhiên', id: '7' },
+    ]
     public static CITY_VN = [
         { id: '1', title: ' An Giang' },
         { id: '2', title: ' Bà Rịa-Vũng Tàu' },

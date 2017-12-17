@@ -1,17 +1,20 @@
 /* cam xoa */
+
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "../node_modules/ng2-slim-loading-bar/style.css";
 
 /*========================== COVER ============================*/
-@font-face {
+
+
+/* @font-face {
   font-family: SourceSansPro;
   src: url(/fonts/SourceSansPro.OTF);
-}
+} */
 
 html,
 body {
-  height: 100%;
-  font-family: SourceSansPro;
+    height: 100%;
+    font-family: SourceSansPro;
 }
 
 h1,
@@ -20,45 +23,45 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0;
+    margin: 0;
 }
 
 .padding-zero {
-  padding-left: 0;
-  padding-right: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 
 /*============ SCROLL TO TOP =============*/
 
 .scrollToTop {
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  font-weight: bold;
-  color: #ffffff;
-  text-decoration: none;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  display: none;
-  border: 1px solid #00bd61;
-  border-right: none;
-  border-left: none;
-  font-size: 25px;
-  background-color: #00bd61;
-  border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    border: 1px solid #00bd61;
+    border-right: none;
+    border-left: none;
+    font-size: 25px;
+    background-color: #00bd61;
+    border-radius: 50%;
 }
 
 .scrollToTop:hover {
-  text-decoration: none;
-  color: #fff;
-  opacity: 0.8;
-  transition: 0.5s;
+    text-decoration: none;
+    color: #fff;
+    opacity: 0.8;
+    transition: 0.5s;
 }
 
 .clear-fix {
-  clear: both;
-  content: "";
-  display: block;
+    clear: both;
+    content: "";
+    display: block;
 }

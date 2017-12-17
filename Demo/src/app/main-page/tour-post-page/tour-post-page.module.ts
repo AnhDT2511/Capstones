@@ -11,6 +11,8 @@ import { AvatarModule } from 'ngx-avatar';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 // import { NgsRevealModule } from 'ng-scrollreveal';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { ViewTextPageModule } from './viewtext-page/viewtext-page.module'
+import { TimelinePageModule } from './timeline-page/timeline-page.module'
 
 @NgModule({
     imports: [
@@ -18,7 +20,8 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
         CommonModule,
         FormsModule,
         AvatarModule,
-        CarouselModule
+        ViewTextPageModule,
+        TimelinePageModule
     ],
     declarations: [
         TourPostPageComponent

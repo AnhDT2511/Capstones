@@ -152,13 +152,13 @@ export class HomePageComponent implements OnInit {
 
   seeMore(id) {
     if (id == 1) {
-      localStorage.removeItem("listTourPost");
-      localStorage.setItem("listTourPost", JSON.stringify(this.listTourPost));
-      this.utilityService.navigate("/main/listpost");
+      // localStorage.removeItem("listTourPost");
+      // localStorage.setItem("listTourPost", JSON.stringify(this.listTourPost));
+      this.utilityService.navigate("/main/listpost/0");
     } else {
-      localStorage.removeItem("listGroupPost");
-      localStorage.setItem("listGroupPost", JSON.stringify(this.listTourPost));
-      this.utilityService.navigate("/main/listpost");
+      // localStorage.removeItem("listGroupPost");
+      // localStorage.setItem("listGroupPost", JSON.stringify(this.listTourPost));
+      this.utilityService.navigate("/main/listpost/1");
     }
   }
   nagivateProfile() {

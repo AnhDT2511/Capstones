@@ -94,14 +94,17 @@
 </div>
 <div id="" class="container">
     <div class="col-xs-12 col-sm-8 col-md-8 list-result">
-        <div class="brand">
-            <span>D</span>anh sách bài viết
+        <div class="brand" *ngIf="!changeText">
+            <span>B</span>ài viết
+        </div>
+        <div class="brand" *ngIf="changeText">
+            <span>C</span>huyến đi
         </div>
         <h3 style="margin-top: 18px;">Tất cả bài viết: </h3>
         <hr>
         <div class="media" *ngFor="let item of listTourPost">
             <div class="media-left">
-                <img src="/assets/img/default-user-image.png" class="media-object" style="width:80px">
+                <img [src]="baseFolder + item.image" class="media-object" style="width:80px">
             </div>
             <div class="media-body">
                 <h4 class="media-heading">
@@ -110,9 +113,9 @@
                 <p>{{item.description}}
                 </p>
                 <div class="f-size">
-                    <i class="fa fa-eye " aria-hidden="true" style="font-size: 17px; margin-left: 0;"></i> 1225
+                    <i class="fa fa-eye " aria-hidden="true" style="font-size: 17px; margin-left: 0;"></i> {{item.postViewNumber}}
                     <i class="fa fa-heart " aria-hidden="true"></i> {{item.countLike}}
-                    <i class="fa fa-comment " aria-hidden="true"></i> 440
+                    <i class="fa fa-comment " aria-hidden="true"></i> {{item.countCommnent}}
                     <i class="fa fa-flag" aria-hidden="true"></i> 0
                 </div>
             </div>
@@ -128,25 +131,25 @@
                 <div class="form-g">
                     <label>Loại tìm kiếm:</label>
                     <div class="input">
-                        <select class="input-text">
-                            <option>Bài đăng</option>
-                            <option>Chuyến đi</option>
-                            <option>Địa điểm</option>
-                            <option>Thể loại</option>
-                            <option>Ngày</option>
+                        <select class="input-text" [(ngModel)]="typeSearch">
+                            <option value = "1" *ngIf="!changeText">Bài đăng</option>
+                            <option value = "2" *ngIf="changeText">Chuyến đi</option>
+                            <option value = "3">Địa điểm</option>
+                            <option value = "4">Thể loại</option>
+                            <option value = "5">Ngày</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-g">
                     <label>Từ khóa tìm kiếm:</label>
                     <div class="input">
-                        <input type="text" class="input-text" name="typeSearch" placeholder="Nhập từ khóa">
+                        <input type="text" class="input-text" name="typeSearch" placeholder="Nhập từ khóa" [(ngModel)]="textSearch">
                     </div>
                 </div>
                 <div class="form-g">
                     <div class="input text-center">
                         <!-- <input type="submit" class="btn-search" name="btnSearch" value="Tìm kiếm"> -->
-                        <a class="btn btn-search" routerLink="/main/search" href="#">
+                        <a class="btn btn-search" href="javascript:void(0)" (click)="searchByType()">
                             <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
                         </a>
                     </div>

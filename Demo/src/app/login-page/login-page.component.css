@@ -1,7 +1,7 @@
-@font-face {
+/* @font-face {
     font-family: SourceSansPro;
     src: url(/assets/fonts/SourceSansPro.OTF);
-}
+} */
 
 html,
 body {
@@ -110,7 +110,7 @@ body {
 #cover table tr td p {
     font-size: 14px;
     margin: 0 0 5px;
-    color : #000;
+    color: #000;
 }
 
 #cover table tr td p a {

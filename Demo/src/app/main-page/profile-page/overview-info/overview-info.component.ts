@@ -45,7 +45,7 @@ export class OverviewInfoComponent implements OnInit {
       });
     }, error => {
     });
-    //console.log(this.listTourPost);
+    console.log(this.listTourPost);
     console.log(this.listGroupPost);
     this.commonService.getListBookMarkByAccount(this.user.id, data => {
       data.forEach(element => {
@@ -88,6 +88,7 @@ export class OverviewInfoComponent implements OnInit {
       })
     });
   }
+  
   updateTourPost(id) {
     this.utilityService.navigate('/main/profile/0/createPost/' + id);
   }
