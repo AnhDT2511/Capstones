@@ -9,7 +9,7 @@ export class RegisterService {
     constructor(private http: Http) { }
 
     register(model) {
-        let registerUrl = SystemConstants.BASE_API + "/account/register";
+        let registerUrl = SystemConstants.BASE_API + "/user/account";
         
         let headers1 = new Headers();
         // headers1.append('Access-Control-Allow-Origin', '*');

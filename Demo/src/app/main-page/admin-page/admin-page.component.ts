@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
+import { AuthenService, UtilityService, NotificationService } from '../../shared/index';
+import { UrlConstants, SystemConstants } from '../../shared/common/index';
 
 @Component({
   selector: 'app-admin-page',
@@ -11,7 +13,17 @@ import { ViewEncapsulation } from '@angular/core';
 export class AdminPageComponent implements OnInit {
 
 
-  constructor() { }
+  constructor(
+    private _authenService : AuthenService,
+    private _utilityService : UtilityService,
+    private _notifyService : NotificationService
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if(!this._authenService.isUserAuthenticated()){
+      this._notifyService.printErrorMessage('Xin hãy đăng nhập tài khoản admin');
+      localStorage.removeItem(SystemConstants.CURRENT_USER);
+      this._utilityService.navigateToLogin();
+    }
+  }
 }

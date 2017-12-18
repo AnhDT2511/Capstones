@@ -114,12 +114,14 @@ export class ProfilePageComponent implements OnInit {
   }
 
   getUserDetails(id: string) {
+    console.log(id);
     this.commonService.getImageByAccountID(id, data => {
       let findAvatar = data.find(item => item.accountID == id && item.tourByDayID == 0);
       this.user['avatar'] = findAvatar != undefined ? findAvatar.name : 'default-user-image.png';
       findAvatar != undefined ? this.user.imageID = findAvatar.id : this.user.imageID = 0 ;
     })
     this.dataService.get('/user/accountdetails/' + id).subscribe((response: any) => {
+      console.log(response);
       this.userDetails['fullName'] = response.firstName + ' ' + response.lastName;
       this.userDetails['address'] = response.address;
       this.userDetails['gender'] = response.gender;

@@ -16,13 +16,10 @@ export class AuthenService {
     headers.append("Authorization", 'Basic ' + btoa(model.email + ':' + model.password));
     let options = new RequestOptions({ headers: headers });
 
-    console.log(options);
-    console.log(model);
-    return this._http.post(SystemConstants.BASE_API + '/user/login', model, options).map((response: Response) => {
+    // console.log(options);
+    // console.log(model);
+    return this._http.post(SystemConstants.BASE_API + '/user/account/login', model, options).map((response: Response) => {
       let _body = JSON.parse(JSON.parse(JSON.stringify(response))._body)[0];
-      // delete _body["password"];
-      // delete _body["createTime"];
-      // delete _body["deleted"];
       let user: LoggedInUser = _body;
       if (user) {
         localStorage.removeItem(SystemConstants.CURRENT_USER);
@@ -36,7 +33,7 @@ export class AuthenService {
 
   isUserAuthenticated(): boolean {
     let user = localStorage.getItem(SystemConstants.CURRENT_USER);
-    if (user != null) {
+    if (JSON.parse(user).roleID == 1) {
       return true;
     }
     else
