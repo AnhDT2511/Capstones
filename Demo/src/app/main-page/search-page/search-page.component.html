@@ -99,11 +99,10 @@
                             <label>Loại tìm kiếm:</label>
                             <div class="input">
                                 <select class="input-text" [(ngModel)]="typeSearch">
-                                    <option value = "1">Bài đăng</option>
-                                    <option value = "2">Chuyến đi</option>
-                                    <option value = "3">Địa điểm</option>
-                                    <option value = "4">Thể loại</option>
-                                    <option value = "5">Ngày</option>
+                                    <option value = "1">Tiêu đề</option>
+                                    <option value = "2">Địa điểm</option>
+                                    <option value = "3">Thể loại</option>
+                                    <option value = "4">Ngày</option>
                                 </select>
                             </div>
                         </div>
@@ -116,7 +115,7 @@
                         <div class="form-g">
                             <label>Từ khóa tìm kiếm:</label>
                             <div class="input">
-                                <input type="text" class="input-text" name="textSearch" placeholder="Nhập từ khóa" [(ngModel)]="textSearch">
+                                <input type="text" class="input-text" name="textSearch" placeholder="Nhập từ khóa" [(ngModel)]="textSearch" (keyup.enter)="searchByType()">
                             </div>
                         </div>
                     </div>
@@ -146,7 +145,7 @@
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading">
-                        <a href="javascript:void(0)" routerLink = "/main/tourpost/{{item.id}}" >{{item.tourArticleTitle}}</a>
+                        <a href="javascript:void(0)" routerLink="/main/tourpost/{{item.id}}">{{item.tourArticleTitle}}</a>
                     </h4>
                     <p>{{item.description}}</p>
                     <div class="f-size">
@@ -171,7 +170,7 @@
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading">
-                        <a routerLink = "/main/grouptour/{{item.id}}" href="javascript:void(0)">{{item.tourArticleTitle}}</a>
+                        <a routerLink="/main/grouptour/{{item.id}}" href="javascript:void(0)">{{item.tourArticleTitle}}</a>
                     </h4>
                     <p>{{item.description}}</p>
                     <div class="f-size">
@@ -182,33 +181,33 @@
                     </div>
                 </div>
             </div>
-    </div>
-
-    <!-- Begin: Footer -->
-    <footer>
-        <div class="container-fruid text-center f-social">
-            <a href="" class="btn-fb">
-                <i class="fa fa-facebook" aria-hidden="true"></i>
-            </a>
-            <a href="" class="btn-gplus">
-                <i class="fa fa-google-plus" aria-hidden="true"></i>
-            </a>
-            <a href="" class="btn-instagram">
-                <i class="fa fa-instagram" aria-hidden="true"></i>
-            </a>
         </div>
 
-        <div class="container-fruid f-info">
-            <div class="container">
-                <div class="col-md-6">
-                    ©2017 TripNet - Mạng chia sẽ kinh nghiệm du lịch
-                </div>
-                <div class="col-md-6 text-right">
-                    <a href="">Điều khoản sự dụng </a>
-                    <a href="">Cookies </a>
-                </div>
-                <div class="clear-fix"></div>
+        <!-- Begin: Footer -->
+        <footer>
+            <div class="container-fruid text-center f-social">
+                <a href="" class="btn-fb">
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                </a>
+                <a href="" class="btn-gplus">
+                    <i class="fa fa-google-plus" aria-hidden="true"></i>
+                </a>
+                <a href="" class="btn-instagram">
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                </a>
             </div>
-        </div>
-    </footer>
-    <!-- End: Footer -->
+
+            <div class="container-fruid f-info">
+                <div class="container">
+                    <div class="col-md-6">
+                        ©2017 TripNet - Mạng chia sẽ kinh nghiệm du lịch
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a href="">Điều khoản sự dụng </a>
+                        <a href="">Cookies </a>
+                    </div>
+                    <div class="clear-fix"></div>
+                </div>
+            </div>
+        </footer>
+        <!-- End: Footer -->

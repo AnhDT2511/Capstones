@@ -187,11 +187,11 @@ export class ViewTextPageComponent implements OnInit, OnDestroy {
   }
   
   ngOnInit() {
-    this.randomIndex = Math.floor(Math.random() * this.textArray.length);
     this.renderer.addClass(document.body, 'body-white');
   }
 
   ngOnDestroy(): void {
+    this.renderer.removeClass(document.body, 'body-white');
   }
   nagivateProfile() {
     this.utilityService.navigate(UrlConstants.PROFILE);

@@ -160,7 +160,7 @@
                 </h2>
                 <div class="form-group form-horizontal">
                     <div class="col-sm-12">
-                        <input type="text" name="searchTitle" class="form-control" placeholder="Nhập từ khóa số ngày" [(ngModel)]="searchWord.title" (keyup.enter)="search(1)">
+                        <input type="text" name="searchTitle" class="form-control" placeholder="Nhập từ khóa bài đăng" [(ngModel)]="searchWord.title" (keyup.enter)="search(1)">
                     </div>
                 </div>
                 <div class="form-group form-horizontal">
@@ -178,12 +178,12 @@
                 </h2>
                 <div class="form-group form-horizontal">
                     <div class="col-sm-12">
-                        <input type="text" name="searchGroup" class="form-control" placeholder="Nhập từ khóa chuyến đi" [(ngModel)]="searchWord.groupTour" (keyup.enter)="search(2)">
+                        <input type="text" name="searchGroup" class="form-control" placeholder="Nhập từ khóa chuyến đi" [(ngModel)]="searchWord.groupTour" (keyup.enter)="search(1)">
                     </div>
                 </div>
                 <div class="form-group form-horizontal">
                     <div class="col-sm-4 col-sm-offset-4">
-                        <a class="btn btn-search" (click)="search(2)" href="javascript:void(0)">
+                        <a class="btn btn-search" (click)="search(1)" href="javascript:void(0)">
                             <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
                         </a>
                     </div>
@@ -196,12 +196,12 @@
                 </h2>
                 <div class="form-group form-horizontal">
                     <div class="col-sm-12">
-                        <input type="text" name="searchPlace" class="form-control" placeholder="Nhập từ khóa địa điểm" [(ngModel)]="searchWord.place" (keyup.enter)="search(3)">
+                        <input type="text" name="searchPlace" class="form-control" placeholder="Nhập từ khóa địa điểm" [(ngModel)]="searchWord.place" (keyup.enter)="search(2)">
                     </div>
                 </div>
                 <div class="form-group form-horizontal">
                     <div class="col-sm-4 col-sm-offset-4">
-                        <a class="btn btn-search" (click)="search(3)" href="javascript:void(0)">
+                        <a class="btn btn-search" (click)="search(2)" href="javascript:void(0)">
                             <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
                         </a>
                     </div>
@@ -214,12 +214,12 @@
                 </h2>
                 <div class="form-group form-horizontal">
                     <div class="col-sm-12">
-                        <input type="text" name="searchCategory" class="form-control" placeholder="Nhập từ khóa thể loại" [(ngModel)]="searchWord.category" (keyup.enter)="search(4)">
+                        <input type="text" name="searchCategory" class="form-control" placeholder="Nhập từ khóa thể loại" [(ngModel)]="searchWord.category" (keyup.enter)="search(3)">
                     </div>
                 </div>
                 <div class="form-group form-horizontal">
                     <div class="col-sm-4 col-sm-offset-4">
-                        <a class="btn btn-search" (click)="search(4)" href="javascript:void(0)">
+                        <a class="btn btn-search" (click)="search(3)" href="javascript:void(0)">
                             <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
                         </a>
                     </div>
@@ -232,12 +232,12 @@
                 </h2>
                 <div class="form-group form-horizontal">
                     <div class="col-sm-12">
-                        <input type="text" name="searchDuration" class="form-control" placeholder="Nhập từ khóa số ngày" [(ngModel)]="searchWord.duration" (keyup.enter)="search(5)">
+                        <input type="text" name="searchDuration" class="form-control" placeholder="Nhập từ khóa số ngày" [(ngModel)]="searchWord.duration" (keyup.enter)="search(4)">
                     </div>
                 </div>
                 <div class="form-group form-horizontal">
                     <div class="col-sm-4 col-sm-offset-4">
-                        <a class="btn btn-search" (click)="search(5)" href="javascript:void(0)">
+                        <a class="btn btn-search" (click)="search(4)" href="javascript:void(0)">
                             <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
                         </a>
                     </div>
@@ -559,7 +559,7 @@
 
     <div class="container-fruid text-center f-register">
         <span>Đăng ký hoàn toàn miễn phí</span>
-        <a href="">Đăng ký ngay!</a>
+        <a href="javascript:void(0)" routerLink="/register">Đăng ký ngay!</a>
     </div>
 
     <div class="container-fruid text-center f-social">

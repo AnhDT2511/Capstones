@@ -62,7 +62,11 @@ export class ListPostPageComponent implements OnInit {
     })
   }
   showDetail(_tourPost) {
-    this.utilityservice.navigate('/main/tourpost/' + _tourPost.id);
+    if(_tourPost.type == 0){
+      this.utilityservice.navigate('/main/tourpost/' + _tourPost.id);
+    }else{
+      this.utilityservice.navigate('/main/grouptour/'+ _tourPost.id);
+    }
   }
   ngOnInit() {
   }

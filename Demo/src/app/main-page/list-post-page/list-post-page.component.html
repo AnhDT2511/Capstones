@@ -143,7 +143,7 @@
                 <div class="form-g">
                     <label>Từ khóa tìm kiếm:</label>
                     <div class="input">
-                        <input type="text" class="input-text" name="typeSearch" placeholder="Nhập từ khóa" [(ngModel)]="textSearch">
+                        <input type="text" class="input-text" name="textSearch" placeholder="Nhập từ khóa" [(ngModel)]="textSearch" (keyup.enter)="searchByType()">
                     </div>
                 </div>
                 <div class="form-g">

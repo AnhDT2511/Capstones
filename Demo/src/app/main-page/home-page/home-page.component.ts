@@ -32,10 +32,9 @@ export class HomePageComponent implements OnInit {
   public listLikeObj;
   listTypeSearch = {
     1: 'title',
-    2: 'title',
-    3: 'place',
-    4: 'category',
-    5: 'duration',
+    2: 'place',
+    3: 'category',
+    4: 'duration',
   }
   constructor(
     private utilityService: UtilityService,
