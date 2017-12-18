@@ -20,7 +20,7 @@
     /* height: 45%; */
     left: 0;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(53, 3, 3, 0.4);
 }
 
 #cover .header-topbar {
@@ -407,9 +407,9 @@
 
 .create-post .title-post {
     font-size: 60px;
-    margin-top: -153px;
+    margin-top: -150px;
     color: #fff;
-    font-weight: 900;
+    font-weight: 600;
     text-transform: uppercase;
     margin-left: -10px;
     line-height: 1.05;

@@ -25,6 +25,27 @@
                     </li>
                 </ul>
                 <ul class="pull-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-globe" aria-hidden="true"></i> Ngôn ngữ
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu top-menu">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-angle-right" aria-hidden="true"></i> English
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-angle-right" aria-hidden="true"></i> Vietnamese
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="rot">|</span>
+                    </li>
                     <li>
                         <a href="">
                             <i class="fa fa-question-circle" aria-hidden="true"></i> Giúp đỡ
@@ -204,7 +225,7 @@
             <h5>Bình luận </h5>
             <a href="javascript:void(0)" class="closebtn" (click)="openCloseCmt()">&times;</a>
         </header>
-        <main>
+        <main id="style-3">
             <!-- Left-aligned media object -->
             <div class="media" *ngFor="let item of listComment ; let i = index;">
                 <div class="media-left">
@@ -215,7 +236,7 @@
                     <p>{{item.content}}</p>
                 </div>
             </div>
-            <hr>
+            <div id="bottom"></div>
         </main>
         <div class="write-comment">
             <!-- <form class="form-horizontal" action=""> -->

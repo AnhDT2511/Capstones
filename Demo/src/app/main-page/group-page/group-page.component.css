@@ -221,12 +221,13 @@
 
 .container .brand {
     font-size: 60px;
-    margin-top: -123px;
+    margin-top: -120px;
     color: #fff;
-    font-weight: 900;
+    font-weight: 600;
     text-transform: uppercase;
     line-height: 1.05;
     letter-spacing: 5px;
+    padding-left: 5px;
 }
 
 .container .brand span {
@@ -254,9 +255,7 @@
     }
 }
 
-.list-member {
-    margin-top: 10px;
-}
+.list-member {}
 
 .list-member>h3 {
     font-size: 20px;
@@ -287,19 +286,42 @@
 
 /*========== CHAT BOX ==========*/
 
-.live-chat {
-    margin-top: 10px;
+.live-cm {}
+
+.live-cm input {
+    position: absolute;
+    margin-top: -78px;
+    right: -6px;
 }
 
-.live-chat>h3 {
+.live-cm .btn {
+    padding: 6px 30px;
+    font-size: 15px;
+}
+
+.live-cm>h3 {
     font-size: 20px;
     border-bottom: 1px solid #ccc;
     padding-bottom: 15px;
     margin-bottom: 10px;
 }
 
-.live-chat>h3>i {
+.live-cm>h3>i {
     margin-right: 10px;
+}
+
+.live-cm .media {
+    margin-top: 10px;
+}
+
+.live-cm .media .media-heading {
+    margin-top: 3px;
+    margin-bottom: 2px;
+    font-size: 16px;
+}
+
+.live-cm img {
+    border-radius: 50%;
 }
 
 
@@ -308,7 +330,7 @@
 .info-tour>i {
     position: absolute;
     font-size: 65px;
-    margin-top: -130px;
+    margin-top: -129px;
     color: #ffdd00;
     margin-left: 320px;
 }
@@ -317,6 +339,7 @@
     background-color: #ffdd00;
     padding: 36px 20px;
     margin-top: -68px;
+    min-height: 600px;
 }
 
 .info-tour .box i {
@@ -362,7 +385,7 @@ footer .f-social {
 }
 
 footer .f-social a {
-    padding: 14px 13px 12px;
+    padding: 14px 11px 12px;
     border: none;
     margin: 0 15px;
     border-radius: 50%;
@@ -414,10 +437,13 @@ footer .f-info a:hover {
 }
 
 .write-comment {
-    padding: 15px 15px 0;
     width: 100%;
     background: #fff;
     border-bottom: 1px solid #eee;
+}
+
+.write-comment textarea {
+    margin: 15px 0;
 }
 
 .write-comment .btn-submit {
@@ -425,7 +451,6 @@ footer .f-info a:hover {
     background-color: #337ab7;
     color: #fff;
     font-size: 14px;
-    margin-right: 5px;
 }
 
 .write-comment .btn-submit:hover {

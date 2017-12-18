@@ -550,9 +550,9 @@
 
 .tab-menu .my-profile {
     font-size: 60px;
-    margin-top: -153px;
+    margin-top: -150px;
     color: #fff;
-    font-weight: 900;
+    font-weight: 600;
     text-transform: uppercase;
     line-height: 1.05;
     letter-spacing: 5px;
@@ -747,7 +747,7 @@
 /* TAB MANAGE POST */
 
 .tab-menu .label-manage-post {
-    padding-top: 15px;
+    padding-top: 0;
     padding-bottom: 15px;
 }
 
@@ -879,6 +879,8 @@ footer .f-social {
 
 footer .f-social a {
     padding: 14px 13px 12px;
+    height: 50px;
+    width: 50px;
     border: none;
     margin: 0 15px;
     border-radius: 50%;

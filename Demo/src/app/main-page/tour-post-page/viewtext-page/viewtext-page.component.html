@@ -161,7 +161,7 @@
                     </div>
                     <hr>
                 </div>
-                <hr>
+
                 <div class="noti">
                     <label>Lưu ý</label>
                     <p>
@@ -196,7 +196,7 @@
                 <div class="function-icon">
                     <a href="javascript:void(0)" class="btn-like" data-toggle="tooltip" data-placement="top" title="Thích" (click)=likeTourPost()>
                         <!-- <i class="fa fa-heart cl" aria-hidden="true "></i> -->
-                        <i class="fa fa-heart-o cl" aria-hidden="true" [ngStyle]="{'color': liked  ? 'red': 'blue'}"></i>
+                        <i class="fa fa-heart-o cl" aria-hidden="true" [ngStyle]="{'color': liked  ? 'red': 'while'}"></i>
                     </a>
                     <span class="cl-like">{{tourPost.countLike}}</span>
                 </div>
@@ -212,7 +212,7 @@
                 <div class="function-icon">
                     <a href="javascript:void(0)" (click)="openCloseReport()" class="btn-report" data-toggle="tooltip" data-placement="top" title="Tố cáo">
                         <!-- <i class="fa fa-flag cl" aria-hidden="true"></i> -->
-                        <i class="fa fa-flag-o cl" aria-hidden="true" [ngStyle]="{'color': reported ? 'red': 'blue'}"></i>
+                        <i class="fa fa-flag-o cl" aria-hidden="true" [ngStyle]="{'color': reported ? 'red': 'while'}"></i>
                     </a>
                     <span class="cl-report">{{tourPost.countReport}}</span>
                 </div>
@@ -233,7 +233,7 @@
             <h5>Bình luận </h5>
             <a href="javascript:void(0)" class="closebtn" (click)="openCloseCmt()">&times;</a>
         </header>
-        <main>
+        <main id="style-3">
             <!-- Left-aligned media object -->
             <div class="media" *ngFor="let item of listComment ; let i = index;">
                 <div class="media-left">
@@ -244,7 +244,6 @@
                     <p>{{item.content}}</p>
                 </div>
             </div>
-            <hr>
         </main>
         <div class="write-comment">
             <!-- <form class="form-horizontal" action=""> -->
@@ -272,7 +271,7 @@
     <div id="report" class="report" [ngStyle]="{'width' : statusReport == false ? '450px' : '0px'}">
         <header>
             <h5>Tố cáo bài viết</h5>
-            <a href="javascript:void(0)" class="closebtn" onclick="closeReport()">&times;</a>
+            <a href="javascript:void(0)" class="closebtn" (click)="openCloseReport()">&times;</a>
         </header>
         <main>
             <h4>Lý do:</h4>
@@ -292,7 +291,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-12 text-right" style="margin-top: 5px;">
+                    <div class="col-sm-12 text-right" style="margin-top: 5px; padding-right: 27px;">
                         <button (click)="submitReport()" class="btn btn-submit">
                                 <i class="fa fa-paper-plane" aria-hidden="true"></i>&nbsp;&nbsp;Xác nhận
                             </button>

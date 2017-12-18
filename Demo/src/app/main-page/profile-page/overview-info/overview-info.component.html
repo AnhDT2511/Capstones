@@ -41,6 +41,7 @@
                         </div>
                         <div class="number">{{listTourPost.length}}</div>
                         <h3>Tổng số bài viết đã đăng</h3>
+                        <p></p>
                         <!-- <p>số bài viết đã đăng lên website.</p> -->
                     </div>
                     <hr>
@@ -115,9 +116,9 @@
                     <div>
                         <span class="badge">Đăng lúc {{item.createdTime | date}}</span>
                     </div>
-                    <div class="pull-right">
-                        <button class="btn btn-default label label-info" (click)="updateTourPost(item.id)">Sửa</button>
-                        <button class="btn btn-default label label-danger" (click)="deleteTourPost(item)">Xóa</button>
+                    <div class="pull-right" style="margin-top: -12px;">
+                        <button class="btn btn-success" (click)="updateTourPost(item.id)">Sửa</button>
+                        <button class="btn btn-danger" (click)="deleteTourPost(item)">Xóa</button>
                     </div>
                     <hr>
                 </div>
@@ -152,7 +153,7 @@
                     </span>
                     <a href="/main/tourpost/{{item.id}}"> {{item.tourArticleTitle}}</a>
                     <div class="pull-right">
-                        <button class="btn btn-default label label-danger" (click)="deleteBookMark(item)">Xóa</button>
+                        <button class="btn btn-danger" (click)="deleteBookMark(item)">Xóa</button>
                     </div>
                 </div>
             </div>
