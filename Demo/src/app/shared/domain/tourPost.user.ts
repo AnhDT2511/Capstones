@@ -20,7 +20,7 @@ export class TourPost {
         this.prepare = prepare;
         this.type = type;
         this.startTime = startTime;
-        this.category = category;
+        this.categoryID = category;
         this.referenceLink = referenceLink;
     }
     public id: any;
@@ -37,6 +37,6 @@ export class TourPost {
     public prepare: any ;
     public type: any ;
     public startTime: any ;
-    public category: any ;
+    public categoryID: any ;
     public referenceLink: any ;
 }

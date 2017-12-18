@@ -22,6 +22,8 @@ export class DataService {
   get(uri: string) {
     // this.headers.delete("x-auth-token");
     // this.headers.append("x-auth-token", 'd4c48f10-c5b4-4ef0-9226-dc614b3cd2d7');
+    // this.headers.delete("Authorization");
+    // this.headers.append("Authorization", 'Basic ' + btoa('quandt@gmail.com:long@123'));
     return this._http.get(SystemConstants.BASE_API + uri, { headers: this.headers }).map(this.extractData);
   }
   post(uri: string, data?: any) {

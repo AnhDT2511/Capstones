@@ -190,7 +190,6 @@ export class CreatePostComponent implements OnInit {
     //   this.notifyservice.printErrorMessage('**Ngày ' + (index + 1) + '**:Phương tiện không nên để trống');
     //   return false;
     // }
-    // console.log(this.listTourDetail);
     this.listTourDetail.forEach(element => {
       for (let i in element) {
         switch (i) {
@@ -229,12 +228,13 @@ export class CreatePostComponent implements OnInit {
     let responseID = 0;
     if (this.validateTourPost() && this.validateTourByDay()) {
       this.commonservice.getAllTourPost(data => {
+        console.log(data);
         let date = Date.now();
         let _tourPost: TourPost = new TourPost(0, this.user.id, this.tourPost.startPlaceID, 0, this.listTourDetail.length, this.tourPost.title, 0,
-          date, this.tourPost.descriptionTourPost, 0, this.tourPost.note, this.tourPost.prepare, 0, '', 0, '');
+          date, this.tourPost.descriptionTourPost, 0, this.tourPost.note, this.tourPost.prepare, 0, '', 1, '');
         let validate = data.findIndex(item => item.tourArticleTitle != null && item.tourArticleTitle.toString() == this.tourPost.title);
         if (this.id == 0 && validate == -1) {
-          this.commonservice.createPost(_tourPost, data => {
+          this.commonservice.createPost(JSON.stringify(_tourPost), data => {
             this.addTourByDay(data._body);
             this.notifyservice.printSuccessMessage("Tạo bài viết thành công");
             this.tourPost['id'] = data._body;
