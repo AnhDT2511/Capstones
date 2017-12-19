@@ -35,9 +35,9 @@
           <tr>
             <td>
               <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu" [(ngModel)]="model.password" #password="ngModel"
-                required>
+                required minlength="8">
               <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
-                Mật khẩu được yêu cầu
+                Mật khẩu được yêu cầu (Tối thiểu 8 kí tự)
               </div>
             </td>
           </tr>

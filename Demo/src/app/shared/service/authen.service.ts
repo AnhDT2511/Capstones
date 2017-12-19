@@ -3,10 +3,12 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { SystemConstants } from '../common/system.constants';
 import { LoggedInUser } from '../domain/loggedin.user';
 import 'rxjs/add/operator/map';
+import { NotificationService } from './notification.service';
 @Injectable()
 export class AuthenService {
 
-  constructor(private _http: Http) { }
+  constructor(private _http: Http,
+  private notifyService : NotificationService) { }
 
   login(model) {
     let headers = new Headers();
@@ -55,11 +57,23 @@ export class AuthenService {
         userData.password,
         userData.createTime,
         userData.deleted
-        )        
+      )
     }
     else
       user = null;
     return user;
+  }
+
+  hasPermission(): boolean {
+    var user = this.getLoggedInUser();
+    var result: boolean = false;
+    var roles: any = user.roleId;
+    if (roles == 1) {
+      // this.notifyService.printErrorMessage('Bạn phải có quyền admin !');
+      // this.utilityService.navigateToLogin;
+      return false;
+    }
+    return true
   }
   // checkAccess(functionId: string) {
   //   var user = this.getLoggedInUser();

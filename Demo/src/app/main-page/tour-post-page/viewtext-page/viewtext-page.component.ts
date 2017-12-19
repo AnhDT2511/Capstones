@@ -255,6 +255,41 @@ export class ViewTextPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  submitReport() {
+    for (let i in this.listCheckbox) {
+      let value = this.listCheckbox["" + i];
+      value ? '' : delete this.listCheckbox["" + i];
+    }
+    if (this.checkLogin && !InfoContstants.isEmpty(this.listCheckbox)) {
+      this.commonService.addReport({
+        'tourPostID': this.tourPost.id,
+        'reportedBy': this.user.id,
+        'description': 'other' in this.listCheckbox ? this.listCheckbox.other : '',
+        'deleted': 0,
+        'createTime': Date.now(),
+        'reasonReport': this.getKeyByValue(this.listCheckbox, true)
+      }, data => {
+        'countReport' in this.tourPost ? this.tourPost.countReport++ : this.tourPost['countReport'] = 1;
+        this.openCloseReport();
+        this.reported = true;
+        this.notifyService.printSuccessMessage('Báo cáo thành công');
+      })
+    } else if (this.checkLogin && InfoContstants.isEmpty(this.listCheckbox)) {
+      this.notifyService.printErrorMessage('Bạn chưa chọn lý do cần báo cáo');
+    }
+    else {
+      this.notifyService.printErrorMessage('Xin hãy đăng nhập trước khi thực hiện hành động này');
+    }
+  }
+  getKeyByValue(object, value) {
+    let stringVehicle = "";
+    Object.keys(object).filter(key => object[key] === value).forEach(element => {
+      if (element != undefined) {
+        stringVehicle += element + ",";
+      }
+    });
+    return stringVehicle.substring(0, stringVehicle.length - 1);;
+  }
   loadComment() {
     this.dataService.get('/tours/post/' + this.tourPost.id + '/comment/get-all').subscribe((response: any) => {
       this.listComment = response;

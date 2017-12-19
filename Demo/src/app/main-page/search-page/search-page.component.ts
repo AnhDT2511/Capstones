@@ -36,62 +36,68 @@ export class SearchPageComponent implements OnInit {
   ) {
     this.user = this.authentication.getLoggedInUser();
     this.activatedRoute.params.subscribe((params: Params) => {
-      this.textSearch = params.text;
+      this.textSearch = params.text.toLowerCase();
       this.typeSearch = params.id;
       this.searchByType();
     })
   }
 
   ngOnInit() {
-
   }
   showDetail(item) {
     this.utilityService.navigate('/main/tourpost/' + item.id);
   }
-  getImage(data) {
-    this.listResultTourPost = [];
-    this.listResultGroupTour = [];
-    data.forEach(element => {
-      let tourPost = element;
-      this.commonService.getImageByAccountID(element.accountID, i => {
-        let image = i.find(item => item.deleted == 0 && item.tourPostID == 0 && item.tourByDayID == 0);
-        tourPost['image'] = image == undefined ? 'user.png' : image.name;
-        tourPost.type == 0 ? this.listResultTourPost.push(tourPost) : this.listResultGroupTour.push(tourPost);
-      })
-    });;
-  }
+  // getImage(data) {
+  //   this.listResultTourPost = [];
+  //   this.listResultGroupTour = [];
+  //   data.forEach(element => {
+  //     let tourPost = element;
+  //     this.commonService.getImageByAccountID(element.accountID, i => {
+  //       let image = i.find(item => item.deleted == 0 && item.tourPostID == 0 && item.tourByDayID == 0);
+  //       tourPost['image'] = image == undefined ? 'user.png' : image.name;
+  //       tourPost.type == 0 ? this.listResultTourPost.push(tourPost) : this.listResultGroupTour.push(tourPost);
+  //     })
+  //   });;
+  // }
   getDataOfAll() {
     this.commonService.getAllTourByDay(data =>{
       this.listResultTourByDay = data;
     })
-    
     this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
-      let listAll = response;
-      listAll.forEach(element => {
-        this.commonService.getNumberComment(element.id, data => {
-          typeof (data) == "object" ? element['countComment'] = 0 : element['countComment'] = data;
-        });
-        this.commonService.getAllLike(data => {
-          element['countLike'] = data != undefined ? data.filter(item => item.tourPostID == element.id && item.deleted == 0).length : '';
-        })
-        this.commonService.getImageByAccountID(element.accountID, data => {
-          let image = data.find(item => item.deleted == 0 && item.tourByDayID == 0 && item.tourPostID == 0);
-          element['image'] = image == undefined ? 'user.png' : image.name;
-        })
-      });
+      let listAll = this.getDataLikeComment(response);
       setTimeout(() => {
         this.listResultTourPostTemp = listAll.filter(item => item.deleted == 0 && item.type == 0);
         this.listResultGroupTourTemp = listAll.filter(item => item.deleted == 0 && item.type == 1);
       }, 250)
     })
   }
+  getDataLikeComment(item){
+    item.forEach(element => {
+      this.commonService.getNumberComment(element.id, data => {
+        typeof (data) == "object" ? element['countComment'] = 0 : element['countComment'] = data;
+      });
+      this.commonService.getAllLike(data => {
+        element['countLike'] = data != undefined ? data.filter(item => item.tourPostID == element.id && item.deleted == 0).length : '';
+      })
+      this.commonService.getImageByAccountID(element.accountID, data => {
+        let image = data.find(item => item.deleted == 0 && item.tourByDayID == 0 && item.tourPostID == 0);
+        element['image'] = image == undefined ? 'user.png' : image.name;
+      })
+    });
+    return item;
+  }
+
   searchByType() {
     if (this.textSearch != "") {
       switch (Number(this.typeSearch)) {
         case 1: {
           //theo tiêu đề
-          this.commonService.searchByTitle(this.textSearch, data => {
-            this.getImage(data);
+          this.commonService.searchByTitle(this.textSearch.toLowerCase(), data => {
+            let listAll = this.getDataLikeComment(data);
+            setTimeout(() => {
+              this.listResultTourPost = listAll.filter(item => item.deleted == 0 && item.type == 0);
+              this.listResultGroupTour = listAll.filter(item => item.deleted == 0 && item.type == 1);
+            }, 250)
           });
           break;
         }
@@ -101,7 +107,7 @@ export class SearchPageComponent implements OnInit {
           this.listResultTourPost = [];
           this.listResultGroupTour = [];
           setTimeout(() => {
-            let indexCity = this.listPlace.filter(item => item.title.toLowerCase().indexOf(this.textSearch) >= 0);
+            let indexCity = this.listPlace.filter(item => item.title.toLowerCase().indexOf(this.textSearch.toLowerCase()) >= 0);
             indexCity.forEach(element => {
               this.listResultTourByDay.filter(item => item.placeID == Number(element.id)).forEach(e => {
                 let tourPostFromTourByDay = this.listResultTourPostTemp.find(i => i.id == e.tourPostID);
@@ -123,7 +129,7 @@ export class SearchPageComponent implements OnInit {
           this.listResultGroupTour = [];
           if (this.textSearch != "") {
             setTimeout(() => {
-              let indexCategory = this.listCategory.filter(item => item.title.toLowerCase().indexOf(this.textSearch) >= 0);
+              let indexCategory = this.listCategory.filter(item => item.title.toLowerCase().indexOf(this.textSearch.toLowerCase()) >= 0);
               indexCategory.forEach(element => {
                 this.listResultTourPostTemp.filter(item => item.category == Number(element.id)).forEach(e => {
                   this.listResultTourPost.findIndex(i => JSON.stringify(i) == JSON.stringify(e)) == -1 ? this.listResultTourPost.push(e) : '';
@@ -141,8 +147,12 @@ export class SearchPageComponent implements OnInit {
         }
         case 4: {
           // theo ngày
-          this.commonService.searchByDuration(this.textSearch, data => {
-            this.getImage(data);
+          this.commonService.searchByDuration(this.textSearch.toLowerCase(), data => {
+            let listAll = this.getDataLikeComment(data);
+            setTimeout(() => {
+              this.listResultTourPost = listAll.filter(item => item.deleted == 0 && item.type == 0);
+              this.listResultGroupTour = listAll.filter(item => item.deleted == 0 && item.type == 1);
+            }, 250)
           })
           break;
         }

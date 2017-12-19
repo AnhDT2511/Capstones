@@ -20,10 +20,10 @@ export class AdminPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // if(!this._authenService.isUserAuthenticated()){
-    //   this._notifyService.printErrorMessage('Xin hãy đăng nhập tài khoản admin');
-    //   localStorage.removeItem(SystemConstants.CURRENT_USER);
-    //   this._utilityService.navigateToLogin();
-    // }
+    if(!this._authenService.hasPermission()){
+      this._notifyService.printErrorMessage('Xin hãy đăng nhập tài khoản admin');
+      localStorage.removeItem(SystemConstants.CURRENT_USER);
+      this._utilityService.navigateToLogin();
+    }
   }
 }
