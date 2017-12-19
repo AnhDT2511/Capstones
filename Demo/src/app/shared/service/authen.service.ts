@@ -33,7 +33,7 @@ export class AuthenService {
 
   isUserAuthenticated(): boolean {
     let user = localStorage.getItem(SystemConstants.CURRENT_USER);
-    if (JSON.parse(user).roleID == 1) {
+    if (user != null) {
       return true;
     }
     else
