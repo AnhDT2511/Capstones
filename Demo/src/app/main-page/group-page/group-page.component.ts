@@ -22,11 +22,7 @@ export class GroupPageComponent implements OnInit {
   groupTour: any = {};
   chat : String = "";
   baseFolder: any = SystemConstants.BASE_IMAGE;
-  listCategory: any = {
-    '1': 'Leo núi',
-    '2': 'Văn Hóa',
-    '3': 'Hành trình',
-  }
+  listCategory = InfoContstants.CATEGORY;
   listCity: any = InfoContstants.CITY_VN;
 
   constructor(
@@ -51,6 +47,7 @@ export class GroupPageComponent implements OnInit {
         });
         this.groupTour.startPlaceID = this.listCity.find(item => item.id == this.groupTour.startPlaceID).title;
         this.groupTour.endPlaceID = this.listCity.find(item => item.id == this.groupTour.endPlaceID).title;
+        this.groupTour.category = this.listCategory.find(item => item.id == this.groupTour.category).title;
       }, error => {
       });
     });

@@ -4,7 +4,8 @@
             <div class="form-group">
                 <label class="control-label col-sm-4" for="userName">Tên hiển thị:</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="userName" placeholder="" name="userName" [(ngModel)]="user.userName" #userName="ngModel" required minlength="6" maxlength="20">
+                    <input type="text" class="form-control" id="userName" placeholder="" name="userName" [(ngModel)]="user.userName" #userName="ngModel"
+                        required minlength="6" maxlength="20">
                     <div [hidden]="userName.valid || userName.pristine" class="alert alert-danger">
                         <div [hidden]="!userName.hasError('required')"> Tên hiển thị được yêu cầu! </div>
                         <div [hidden]="!userName.hasError('minlength')"> Tên hiển thị tối thiểu có 6 kí tự.</div>
@@ -15,9 +16,19 @@
             <div class="form-group">
                 <label class="control-label col-sm-4" for="fullName">Họ và tên:</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="fullName" placeholder="" name="fullName" [(ngModel)]="userDetails.fullName" #fullName="ngModel" required>
+                    <input type="text" class="form-control" id="fullName" placeholder="" name="fullName" [(ngModel)]="userDetails.fullName" #fullName="ngModel"
+                        required>
                     <div [hidden]="fullName.valid || fullName.pristine" class="alert alert-danger">
                         Họ và tên được yêu cầu!
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4" for="job">Giới tính:</label>
+                <div class="col-sm-8">
+                    <div>
+                        <i class="fa fa-mars fa-2x" [ngStyle]="{'color': userDetails.gender == '1' ? '#308DB5' : 'gray','font-weight':userDetails.gender == '1' ? 'bold' :''}" (click)="userDetails.gender = '1'"></i>
+                        <i class="fa fa-venus fa-2x" [ngStyle]="{'color': userDetails.gender == '2' ? '#FF1654' : 'gray','font-weight':userDetails.gender == '2' ? 'bold' :''}" (click)="userDetails.gender = '2'"></i>
                     </div>
                 </div>
             </div>
@@ -33,7 +44,8 @@
             <div class="form-group">
                 <label class="control-label col-sm-4" for="phone">Phone:</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="phone" placeholder="" name="phone" [(ngModel)]="userDetails.phoneNumber" #phoneNumber="ngModel" required minlength="10" maxlength="13" pattern="^[0-9\-\+]{9,15}$">
+                    <input type="text" class="form-control" id="phone" placeholder="" name="phone" [(ngModel)]="userDetails.phoneNumber" #phoneNumber="ngModel"
+                        required minlength="10" maxlength="13" pattern="^[0-9\-\+]{9,15}$">
                     <div [hidden]="phoneNumber.valid || phoneNumber.pristine" class="alert alert-danger">
                         <div [hidden]="!phoneNumber.hasError('required')">Số điện thoại được yêu cầu!</div>
                         <div [hidden]="!phoneNumber.hasError('pattern')">Số điện thoại không hợp lệ!
@@ -44,7 +56,8 @@
             <div class="form-group">
                 <label class="control-label col-sm-4" for="address">Địa chỉ:</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="address" placeholder="" name="address" [(ngModel)]="userDetails.address" #address="ngModel" required>
+                    <input type="text" class="form-control" id="address" placeholder="" name="address" [(ngModel)]="userDetails.address" #address="ngModel"
+                        required>
                     <div [hidden]="address.valid || address.pristine" class="alert alert-danger">
                         Địa chỉ được yêu cầu!
                     </div>
@@ -55,7 +68,7 @@
     </div>
     <div class="modal-footer">
         <button [disabled]="!f.form.valid" class="btn btn-primary">&nbsp;
-          <i class="fa fa-check" aria-hidden="true"></i> Lưu&nbsp;</button>
+            <i class="fa fa-check" aria-hidden="true"></i> Lưu&nbsp;</button>
         <button type="button" class="btn btn-default" data-dismiss="modal" (click)="onNoClick()">Đóng</button>
     </div>
 </form>

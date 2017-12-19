@@ -16,7 +16,6 @@ export class TextChangeInfoComponent {
   }
 
   openDialog(): void {
-    console.log(this.userInfo);
     let dialogRef = this.dialog.open(DialogChangeInfoComponent, {
       width: 'auto',
       data: this.userInfo

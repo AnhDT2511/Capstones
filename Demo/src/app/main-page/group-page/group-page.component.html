@@ -117,7 +117,7 @@
 
     <div class="col-xs-12 col-sm-4 col-md-4 live-cm">
 
-        <input type="button" class="btn btn-success" value="{{joined ? 'Hủy Tham Gia' : 'Tham Gia'}}" name="joinGroup" (click)="joinGroup()">
+        <input type="button" class="btn btn-success" value="{{joined ? 'Hủy Tham Gia' : 'Tham Gia'}}" name="joinGroup" (click)="joinGroup()" *ngIf="user.id != groupTour.accountID">
 
         <h3>
             <i class="fa fa-assistive-listening-systems" aria-hidden="true"></i>Thảo luận:
@@ -178,7 +178,7 @@
                 <label>
                     <i class="fa fa-bullseye" aria-hidden="true" style="font-size: 20px;"></i> Thể loại:
                 </label>
-                <p class="mg-l">{{listCategory[groupTour.category]}}</p>
+                <p class="mg-l">{{groupTour.category}}</p>
             </div>
             <div class="d-time">
                 <label>

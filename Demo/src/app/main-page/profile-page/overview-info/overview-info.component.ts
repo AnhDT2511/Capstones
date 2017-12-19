@@ -32,38 +32,39 @@ export class OverviewInfoComponent implements OnInit {
       this.viewPersionInfo = false;
     }
     this.id = localStorage.getItem('userID');
-    this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
-      response.forEach(element => {
-        //console.log(element);
-        if (element.deleted == 0) {
-          if (element.accountID === Number(this.id) && element.type == 0) {
-            this.listTourPost.push({ 'id': element.id, 'title': element.tourArticleTitle, 'description': element.description, 'createdTime': element.createTime })
-          } else if (element.accountID === Number(this.id) && element.type == 1) {
-            this.listGroupPost.push({ 'id': element.id, 'title': element.tourArticleTitle, 'description': element.description, 'createdTime': element.createTime })
+    this.listGroupPost = [];
+    this.listTourPost = [];
+    this.listSaveLink = [];
+    setTimeout(() => {
+      this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
+        response.forEach(element => {
+          if (element.deleted == 0) {
+            if (element.accountID === Number(this.id) && element.type == 0) {
+              this.listTourPost.push({ 'id': element.id, 'title': element.tourArticleTitle, 'description': element.description, 'createdTime': element.createTime })
+            } else if (element.accountID === Number(this.id) && element.type == 1) {
+              this.listGroupPost.push({ 'id': element.id, 'title': element.tourArticleTitle, 'description': element.description, 'createdTime': element.createTime })
+            }
           }
-        }
+        });
+      }, error => {
       });
-    }, error => {
-    });
-    // console.log(this.listTourPost);
-    // console.log(this.listGroupPost);
-    this.commonService.getListBookMarkByAccount(this.user.id, data => {
-      data.forEach(element => {
-        if (element.deleted == 0) {
-          this.commonService.getTourPostByID(element.tourPostID, i => {
-            this.listSaveLink.push(i);
-          })
-        }
-        //console.log(this.listSaveLink);
+      this.commonService.getListBookMarkByAccount(this.user.id, data => {
+        data.forEach(element => {
+          if (element.deleted == 0) {
+            this.commonService.getTourPostByID(element.tourPostID, i => {
+              this.listSaveLink.push(i);
+            })
+          }
+        });
       });
-    });
+    },300)
   }
 
   deleteTourPost(item) {
     this.notifiService.printConfirmationDialog('Bạn có chắc chắn muốn xóa bài viết này!', () => {
       item.deleted = 1;
       this.commonService.updatePost(item, data => {
-        this.listTourPost.splice(this.listTourPost.findIndex(i => i.id == item.id),1);
+        this.listTourPost.splice(this.listTourPost.findIndex(i => i.id == item.id), 1);
         // this.utilityService.navigate('/main/profile/0');
       })
     });
@@ -73,22 +74,22 @@ export class OverviewInfoComponent implements OnInit {
     this.notifiService.printConfirmationDialog('Bạn có chắc chắn muốn xóa chuyến đi này!', () => {
       item.deleted = 1;
       this.commonService.updatePost(item, data => {
-        this.listGroupPost.splice(this.listGroupPost.findIndex(i => i.id == item.id),1);
+        this.listGroupPost.splice(this.listGroupPost.findIndex(i => i.id == item.id), 1);
         // this.utilityService.navigate('/main/profile/0');
       })
     });
   }
 
-  deleteBookMark(item){
+  deleteBookMark(item) {
     this.notifiService.printConfirmationDialog('Bạn có muốn xóa bài đã lưu này', () => {
       item.deleted = 1;
       this.commonService.updateBookMark(item, data => {
-        this.listSaveLink.splice(this.listSaveLink.findIndex(i => i.id == item.id),1);
+        this.listSaveLink.splice(this.listSaveLink.findIndex(i => i.id == item.id), 1);
         // this.utilityService.navigate('/main/profile/0');
       })
     });
   }
-  
+
   updateTourPost(id) {
     this.utilityService.navigate('/main/profile/0/createPost/' + id);
   }

@@ -45,7 +45,7 @@ export class FormUploadComponent implements OnInit {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress.percentage = Math.round(100 * event.loaded / event.total);
         } else if (event instanceof HttpResponse) {
-          this.notifyService.printSuccessMessage('Upload File thành công');
+          // this.notifyService.printSuccessMessage('Upload File thành công');
         }
       })
       // console.log(this.event['partialText']);

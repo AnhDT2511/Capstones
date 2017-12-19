@@ -32,13 +32,14 @@ export class CreatePostComponent implements OnInit {
 
   user: any = JSON.parse(localStorage.getItem(SystemConstants.CURRENT_USER));
   tourPost: any;
-  tourPostTemp: any;
+  tourPostTemp: any = {};
   listTourDetail: any;
   listTourDetailTemp: any = [];
   listImage: any = [];
   resultImage: any = [];
   id = 0;
   changeText: boolean = false;
+  listCategory : any = InfoContstants.CATEGORY;
   options = [
     { name: 'motorcycle', value: '1' },
     { name: 'taxi', value: '2' },
@@ -88,7 +89,7 @@ export class CreatePostComponent implements OnInit {
               id: element.id,
               tourPostID: element.tourPostID,
               createTime: element.createTime,
-              deleted: element.deleted
+              deleted: element.deleted,
             })
             // this.tourPost.placeID != undefined ? this.completer.SelectItem('completer', this.tourPost.placeID) : null;
           });
@@ -101,9 +102,7 @@ export class CreatePostComponent implements OnInit {
       }
     });
   }
-  // showList() {
-  //   console.log(this.listTourDetail);
-  // }
+
   viewTourPost(_tourPost) {
     this.utiliservice.navigate('/main/tourpost/' + _tourPost.id)
   }
@@ -230,7 +229,7 @@ export class CreatePostComponent implements OnInit {
       this.commonservice.getAllTourPost(data => {
         let date = Date.now();
         let _tourPost: TourPost = new TourPost(0, this.user.id, this.tourPost.startPlaceID, 0, this.listTourDetail.length, this.tourPost.title, 0,
-          date, this.tourPost.descriptionTourPost, 0, this.tourPost.note, this.tourPost.prepare, 0, '', 1, '');
+          date, this.tourPost.descriptionTourPost, 0, this.tourPost.note, this.tourPost.prepare, 0, '', this.tourPost.category, '');
         let validate = data.findIndex(item => item.tourArticleTitle != null && item.tourArticleTitle.toString() == this.tourPost.title);
         if (this.id == 0 && validate == -1) {
           this.commonservice.createPost(JSON.stringify(_tourPost), data => {
@@ -332,6 +331,7 @@ export class CreatePostComponent implements OnInit {
   deleteTourPost() {
     this.notifyservice.printConfirmationDialog('Dữ liệu bạn vừa nhập sẽ bị mất khi thực hiện hành động này!', () => {
       this.listTourDetail = JSON.parse(JSON.stringify(this.listTourDetailTemp));
+      console.log(this.tourPostTemp);
       this.tourPost = JSON.parse(JSON.stringify(this.tourPostTemp));
     });
   }

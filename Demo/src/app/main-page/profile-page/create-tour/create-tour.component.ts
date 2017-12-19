@@ -92,22 +92,34 @@ export class CreateTourComponent implements OnInit {
   }
 
   saveGroupTour() {
+    let exists : boolean = false;
     if (!InfoContstants.isEmpty(this.groupTour)) {
       let date = Date.now();
       let _groupTour: TourPost = new TourPost(0, this.user.id, this.groupTour.startPlaceID, this.groupTour.endPlaceID, this.groupTour.duration, this.groupTour.tourArticleTitle, 0,
         date, this.groupTour.description, 0, this.groupTour.note, this.groupTour.prepare, 1, this.groupTour.startTime, this.groupTour.category, this.groupTour.referenceLink);
       if (this.id == 0) {
-        this.commonService.createPost(_groupTour, data => {
-          this.notifyService.printSuccessMessage("Tạo chuyến đi thành công");
-          let _joinGroup = {
-            'tourPostID': data._body,
-            'joinGroupByID': this.user.id,
-            'deleted': 0,
-            'createTime': Date.now()
+        this.commonService.getAllTourPost(data => {
+          data.forEach(element => {
+            if (element.tourArticleTitle == _groupTour.tourArticleTitle) {
+              exists = true;
+            } 
+          });
+          if(!exists){
+            this.commonService.createPost(_groupTour, data => {
+              this.notifyService.printSuccessMessage("Tạo chuyến đi thành công");
+              let _joinGroup = {
+                'tourPostID': data._body,
+                'joinGroupByID': this.user.id,
+                'deleted': 0,
+                'createTime': Date.now()
+              }
+              this.commonService.joinGroup(_joinGroup, data => {
+              })
+              this.utiliService.navigate('/main/profile/0');
+            })
+          }else{
+            this.notifyService.printErrorMessage("Tiêu đề chuyến đi đã tồn tại, xin vui lòng thử lại")
           }
-          this.commonService.joinGroup(_joinGroup, data => {
-          })
-          this.utiliService.navigate('/main/profile/0');
         })
       } else {
         _groupTour.id = this.id;
