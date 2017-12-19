@@ -88,7 +88,7 @@ export class CreatePostComponent implements OnInit {
               id: element.id,
               tourPostID: element.tourPostID,
               createTime: element.createTime,
-              deleted : element.deleted
+              deleted: element.deleted
             })
             // this.tourPost.placeID != undefined ? this.completer.SelectItem('completer', this.tourPost.placeID) : null;
           });
@@ -228,7 +228,6 @@ export class CreatePostComponent implements OnInit {
     let responseID = 0;
     if (this.validateTourPost() && this.validateTourByDay()) {
       this.commonservice.getAllTourPost(data => {
-        console.log(data);
         let date = Date.now();
         let _tourPost: TourPost = new TourPost(0, this.user.id, this.tourPost.startPlaceID, 0, this.listTourDetail.length, this.tourPost.title, 0,
           date, this.tourPost.descriptionTourPost, 0, this.tourPost.note, this.tourPost.prepare, 0, '', 1, '');
@@ -238,8 +237,9 @@ export class CreatePostComponent implements OnInit {
             this.addTourByDay(data._body);
             this.notifyservice.printSuccessMessage("Tạo bài viết thành công");
             this.tourPost['id'] = data._body;
+            this.utiliservice.navigate('/main/profile/0/overview');
           })
-        } else if (this.id == 0 && validate != -1) {
+        } else if (this.id == 0 && validate  != -1) {
           this.notifyservice.printErrorMessage('Tiêu đề đã tồn tại trong hệ thống');
         }
         else if (this.id != 0) {
@@ -280,7 +280,7 @@ export class CreatePostComponent implements OnInit {
         })
       });
       this.listImage = [];
-    }, 300);
+    }, 500);
   }
 
   updateTourByDay(id) {

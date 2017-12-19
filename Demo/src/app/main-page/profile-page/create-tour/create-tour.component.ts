@@ -43,7 +43,7 @@ export class CreateTourComponent implements OnInit {
   listDay: any = [];
   user: any = JSON.parse(localStorage.getItem(SystemConstants.CURRENT_USER));
   groupTour: any = {};
-  changeText : boolean = false;
+  changeText: boolean = false;
   place: any = {
     '1': 'Ha'
   }
@@ -99,13 +99,21 @@ export class CreateTourComponent implements OnInit {
       if (this.id == 0) {
         this.commonService.createPost(_groupTour, data => {
           this.notifyService.printSuccessMessage("Tạo chuyến đi thành công");
-          this.utiliService.navigate('/main/grouptour/' + data._body);
+          let _joinGroup = {
+            'tourPostID': data._body,
+            'joinGroupByID': this.user.id,
+            'deleted': 0,
+            'createTime': Date.now()
+          }
+          this.commonService.joinGroup(_joinGroup, data => {
+          })
+          this.utiliService.navigate('/main/profile/0');
         })
       } else {
         _groupTour.id = this.id;
         this.commonService.updatePost(_groupTour, data => {
           this.notifyService.printSuccessMessage("Cập nhật chuyến đi thành công");
-          this.utiliService.navigate('/main/grouptour/' + _groupTour.id);
+          this.utiliService.navigate('/main/profile/0');
         })
       }
     } else {

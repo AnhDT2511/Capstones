@@ -89,6 +89,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   getListImage(ImageName) {
+    console.log(ImageName);
     this.resultImage =  this.formUpload.upload(ImageName,0);
     setTimeout(() => {
       this.upLoadImage();
@@ -120,7 +121,7 @@ export class ProfilePageComponent implements OnInit {
       this.user['avatar'] = findAvatar != undefined ? findAvatar.name : 'default-user-image.png';
       findAvatar != undefined ? this.user.imageID = findAvatar.id : this.user.imageID = 0 ;
     })
-    this.dataService.get('/user/accountdetails/' + id).subscribe((response: any) => {
+    this.dataService.get('/user/accountdetail-by-accountID/' + id).subscribe((response: any) => {
       console.log(response);
       this.userDetails['fullName'] = response.firstName + ' ' + response.lastName;
       this.userDetails['address'] = response.address;

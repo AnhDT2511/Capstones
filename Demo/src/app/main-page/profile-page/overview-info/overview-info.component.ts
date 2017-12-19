@@ -45,8 +45,8 @@ export class OverviewInfoComponent implements OnInit {
       });
     }, error => {
     });
-    console.log(this.listTourPost);
-    console.log(this.listGroupPost);
+    // console.log(this.listTourPost);
+    // console.log(this.listGroupPost);
     this.commonService.getListBookMarkByAccount(this.user.id, data => {
       data.forEach(element => {
         if (element.deleted == 0) {

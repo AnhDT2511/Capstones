@@ -152,6 +152,48 @@ export class ViewTextPageComponent implements OnInit, OnDestroy {
     });
   }
 
+  bookMark(tourPost: any) {
+    if (this.checkLogin) {
+      let bookMarkObj;
+      this.commonService.getBookMarkByAccountID(this.user.id, data => {
+        bookMarkObj = data[data.findIndex(item => item.tourPostID == tourPost.id)];
+        if (this.user != null && bookMarkObj == undefined) {
+          let _bookmark = {
+            'tourPostID': tourPost.id,
+            'markingByID': this.user.id,
+            'deleted': 0,
+            'createTime': Date.now()
+          };
+          this.commonService.addBookMark(_bookmark, data => {
+            this.bookMarked = true;
+          })
+          this.notifyService.printSuccessMessage('Lưu bài viết thành công!');
+        } else if (this.user != null && bookMarkObj != undefined) {
+          let _bookmark = {
+            'id': bookMarkObj['id'],
+            'deleted': 0,
+            'updateTime': Date.now()
+          };
+          if (bookMarkObj['deleted'] == 0) {
+            _bookmark.deleted = 1;
+            this.notifyService.printErrorMessage('Bỏ lưu bài viết thành công!');
+            this.bookMarked = false;
+          } else {
+            this.notifyService.printSuccessMessage('Lưu bài viết thành công!');
+            this.bookMarked = true;
+          }
+          this.commonService.updateBookMark(_bookmark, data => {
+          })
+
+        } else {
+          this.notifyService.printErrorMessage('Xin hãy đăng nhập trước khi thực hiện hành động này!');
+        }
+      })
+    } else {
+      this.notifyService.printErrorMessage('Xin hãy đăng nhập trước khi thực hiện hành động này!');
+    }
+  }
+
   likeTourPost() {
     if (this.checkLogin) {
       this.commonService.getLikeByTourPostID(this.tourPostId, data => {
@@ -168,7 +210,7 @@ export class ViewTextPageComponent implements OnInit, OnDestroy {
           let _relike = new Like(existLike.id, this.tourPost.id, this.user.id, 0);
           if (existLike.deleted == 0) {
             _relike.deleted = 1;
-            this.notifyService.printSuccessMessage('Bỏ thích bài viết thành công!');
+            this.notifyService.printErrorMessage('Bỏ thích bài viết thành công!');
             this.liked = false;
             this.tourPost.countLike--;
           } else {
@@ -185,7 +227,7 @@ export class ViewTextPageComponent implements OnInit, OnDestroy {
       this.notifyService.printErrorMessage('Xin hãy đăng nhập trước khi thực hiện hành động này!');
     }
   }
-  
+
   ngOnInit() {
     this.renderer.addClass(document.body, 'body-white');
   }

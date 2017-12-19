@@ -20,6 +20,7 @@ export class SearchPageComponent implements OnInit {
   listResultGroupTour: any = [];
   listResultTourPostTemp: any = [];
   listResultGroupTourTemp: any = [];
+  listResultTourByDay: any = [];
   listPlace: any = InfoContstants.CITY_VN;
   listCategory: any = InfoContstants.CATEGORY;
   baseFolder: String = SystemConstants.BASE_IMAGE;
@@ -60,6 +61,10 @@ export class SearchPageComponent implements OnInit {
     });;
   }
   getDataOfAll() {
+    this.commonService.getAllTourByDay(data =>{
+      this.listResultTourByDay = data;
+    })
+    
     this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
       let listAll = response;
       listAll.forEach(element => {
@@ -84,20 +89,25 @@ export class SearchPageComponent implements OnInit {
     if (this.textSearch != "") {
       switch (Number(this.typeSearch)) {
         case 1: {
+          //theo tiêu đề
           this.commonService.searchByTitle(this.textSearch, data => {
             this.getImage(data);
           });
           break;
         }
         case 2: {
+          //theo địa điểm
           this.getDataOfAll();
           this.listResultTourPost = [];
           this.listResultGroupTour = [];
           setTimeout(() => {
             let indexCity = this.listPlace.filter(item => item.title.toLowerCase().indexOf(this.textSearch) >= 0);
             indexCity.forEach(element => {
-              this.listResultTourPostTemp.filter(item => item.startPlaceID == Number(element.id) || item.endPlaceID == Number(element.id)).forEach(e => {
-                this.listResultTourPost.findIndex(i => JSON.stringify(i) == JSON.stringify(e)) == -1 ? this.listResultTourPost.push(e) : '';
+              this.listResultTourByDay.filter(item => item.placeID == Number(element.id)).forEach(e => {
+                let tourPostFromTourByDay = this.listResultTourPostTemp.find(i => i.id == e.tourPostID);
+                if(tourPostFromTourByDay != undefined){
+                  this.listResultTourPost.findIndex(i => JSON.stringify(i) == JSON.stringify(tourPostFromTourByDay)) == -1 ? this.listResultTourPost.push(tourPostFromTourByDay) : '';
+                }
               });;
               this.listResultGroupTourTemp.filter(item => item.startPlaceID == Number(element.id) || item.endPlaceID == Number(element.id)).forEach(e => {
                 this.listResultGroupTour.findIndex(i => JSON.stringify(i) == JSON.stringify(e)) == -1 ? this.listResultGroupTour.push(e) : '';
@@ -107,6 +117,7 @@ export class SearchPageComponent implements OnInit {
           break;
         }
         case 3: {
+          //theo category
           this.getDataOfAll();
           this.listResultTourPost = [];
           this.listResultGroupTour = [];
@@ -129,6 +140,7 @@ export class SearchPageComponent implements OnInit {
           break
         }
         case 4: {
+          // theo ngày
           this.commonService.searchByDuration(this.textSearch, data => {
             this.getImage(data);
           })

@@ -289,7 +289,7 @@ export class CommonService {
     }
 
     getAccountDetailsInfo(id, callback: (data) => void) {
-        return this.dataService.get('/user/accountdetails/' + id).subscribe(
+        return this.dataService.get('/user/accountdetail-by-accountID/' + id).subscribe(
             res => {
                 callback(res);
             },
@@ -331,6 +331,13 @@ export class CommonService {
             callback(error);
         });
     }
+    getAllTourByDay(callback: (data) => void) {
+        this.dataService.get('/tours/post/get-all-tour-by-day').subscribe(res => {
+              callback(res);
+         }, error => {
+             callback(error);
+         });
+     }
     createPost(_tourPost,  callback: (data) => void) {
         this.dataService.post('/tours/post/', _tourPost).subscribe(res => {
             callback(res);

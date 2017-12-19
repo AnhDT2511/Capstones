@@ -20,6 +20,7 @@ export class GroupPageComponent implements OnInit {
   comment: string = "";
   joined: boolean = true;
   groupTour: any = {};
+  chat : String = "";
   baseFolder: any = SystemConstants.BASE_IMAGE;
   listCategory: any = {
     '1': 'Leo núi',
@@ -67,20 +68,24 @@ export class GroupPageComponent implements OnInit {
         'deleted': 0,
         'createTime': Date.now()
       }
+      debugger;
       if (joined == -1) {
+        debugger;
         this.commonService.joinGroup(_joinGroup, data => {
-          this.notifyservice.printSuccessMessage('Tham gia chuyến đi thành công :D');
+          this.notifyservice.printSuccessMessage('Tham gia chuyến đi thành công');
           this.loadMember();
         })
       } else {
+        debugger;
         _joinGroup['id'] = this.listJoinGroup[joined].id;
         _joinGroup['updatedTime'] = Date.now();
-        if (this.listJoinGroup[joined].deleted == 0) {
+        if (this.joined) {
           _joinGroup.deleted = 1;
-          this.notifyservice.printSuccessMessage('Hủy tham gia chuyến đi thành công :( ');
+          this.notifyservice.printErrorMessage('Hủy tham gia chuyến đi thành công ');
+          // console.log(this.listJoinGroup);
         } else {
           _joinGroup.deleted = 0;
-          this.notifyservice.printSuccessMessage('Tham gia chuyến đi thành công :D');
+          this.notifyservice.printSuccessMessage('Tham gia chuyến đi thành công');
         }
         delete _joinGroup['createTime'];
         this.commonService.updateJoinGroup(_joinGroup, data => {
@@ -95,9 +100,13 @@ export class GroupPageComponent implements OnInit {
   nagivateProfile() {
     this.utiliservice.navigate(UrlConstants.PROFILE);
   }
+  showChat(){
+    window.location.href = "http://localhost:8080/chat/" + this.chat;
+  }
 
   loadMember() {
     this.listMember = [];
+    this.listJoinGroup = [];
     this.commonService.getMemberGroup(this.groupTour.id, data => {
       this.listJoinGroup = data;
       if (this.checkLogin) {
@@ -106,7 +115,6 @@ export class GroupPageComponent implements OnInit {
       data.forEach(element => {
         if (element.deleted == 0) {
           let account = element;
-
           this.commonService.getAccountInfo(element.joinGroupByID, item => {
             account = item;
           })

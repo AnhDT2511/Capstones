@@ -57,6 +57,7 @@ export class DialogChangePassComponent {
         localStorage.removeItem(SystemConstants.CURRENT_USER);
         localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(this.data));
         this.notifyService.printSuccessMessage('Cập nhật mật khẩu thành công');
+        this.onNoClick();
       }, error => {
         this.notifyService.printErrorMessage("Có lỗi xảy ra khi cập nhật thông tin người dùng, xin hãy thử lại!!");
       });

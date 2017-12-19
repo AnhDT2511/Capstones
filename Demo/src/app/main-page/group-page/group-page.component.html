@@ -111,7 +111,7 @@
             </div>
         </div>
 
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#chat">Open Modal</button>
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#chat">Tạo phòng chat</button>
 
     </div>
 
@@ -218,21 +218,20 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="chat" role="dialog">
-    <div class="modal-dialog">
 
-        <!-- Modal content-->
+<div class="modal fade" id="chat" role="dialog">
+    <div class="modal-dialog modal-sm">
+
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Nhập tên phòng chat</h4>
             </div>
             <div class="modal-body">
-                <textarea class="form-control" rows="3" id="comment" placeholder="Bình luận của bạn..." name="chat" [(ngModel)]="chat"></textarea>
+                <input type="text" class="form-control" placeholder="Nhập tên phòng chat..." name="chat" [(ngModel)]="chat" />
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" routerLink="https://localhost:8080/chat/{{chat}}">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="showChat()">Tạo</button>
             </div>
         </div>
 
