@@ -37,8 +37,8 @@
                 <td>{{item.description}}</td>
                 <td>{{item.number}}</td>
                 <td>
-                    <button class="btn {{item.checkBan ? 'btn-success' : 'btn-danger'}}" (click)="acceptReport(item)">
-                        <i class="fa fa-pencil-trash-o" aria-hidden="true"></i> {{item.checkBan ? 'ACCEPTION' : 'REJECT'}}
+                    <button class="btn {{item.checkBan ? 'btn-danger' : 'btn-success'}}" (click)="acceptReport(item)">
+                        <i class="fa fa-pencil-trash-o" aria-hidden="true"></i> {{item.checkBan ? 'REJECT' : 'ACCEPTION'}}
                     </button>
                 </td>
             </tr>

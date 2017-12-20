@@ -195,5 +195,6 @@ export class GroupPageComponent implements OnInit {
     window.localStorage.removeItem("CURRENT_USER");
     this.checkLogin = false;
     this.notifyservice.printSuccessMessage("Đăng xuất thành công");
+    this.utiliservice.navigate(UrlConstants.HOME);
   }
 }

@@ -28,9 +28,9 @@ export class TourManagementPageComponent implements OnInit {
 
   getAllTour() {
     this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
-      this.data = response.filter(item => item.type == 1 );
+      this.data = response.filter(item => item.type == 1);
       // console.log(this.data);
-      this.data.forEach((e) =>{
+      this.data.forEach((e) => {
         e.deleted == 1 ? e['checkBan'] = true : e['checkBan'] = false;
       })
     }, error => {
@@ -57,4 +57,5 @@ export class TourManagementPageComponent implements OnInit {
         });
       });
     }
+  }
 }
