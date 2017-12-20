@@ -76,7 +76,7 @@ export class HomePageComponent implements OnInit {
       if (existLike.deleted === 0) {
         _relike.deleted = 1;
         existLike.deleted = 1;
-        this.notifyService.printSuccessMessage(type ? 'Bỏ thích bài viết thành công!' : 'Bỏ thích nhóm thành công!');
+        this.notifyService.printErrorMessage(type ? 'Bỏ thích bài viết thành công!' : 'Bỏ thích nhóm thành công!');
         tourPost.liked = false;
         tourPost.countLike--;
       } else {
@@ -174,7 +174,6 @@ export class HomePageComponent implements OnInit {
   // resetLogin()  {
   //   // this.utilityService.navigate(UrlConstants.LOGIN); 
   //   console.log(this.userName);
-  //   debugger;
   //   // this.userName = null;
   //   window.localStorage.removeItem("CURRENT_USER");
   // }

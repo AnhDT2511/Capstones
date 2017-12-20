@@ -33,7 +33,7 @@ export class PostManagementPageComponent implements OnInit {
       // console.log(this.data);
       for (let i in this.data) {
         this.data[i]['details'] = {}
-        this.dataService.get('/user/accountdetails/' + this.data[i].accountID).subscribe((response: any) => {
+        this.dataService.get('/user/accountdetail-by-accountID/' + this.data[i].accountID).subscribe((response: any) => {
           this.dataDetail = response;
           this.data[i]['details'] = this.dataDetail;
           // console.log(this.data[i]['details']);

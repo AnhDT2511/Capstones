@@ -29,7 +29,7 @@ export class TourManagementPageComponent implements OnInit {
   getAllTour() {
     this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
       this.data = response.filter(item => item.type == 1 && item.deleted == 0);
-      console.log(this.data);
+      // console.log(this.data);
     }, error => {
     });
   }

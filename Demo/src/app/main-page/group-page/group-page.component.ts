@@ -65,15 +65,12 @@ export class GroupPageComponent implements OnInit {
         'deleted': 0,
         'createTime': Date.now()
       }
-      debugger;
       if (joined == -1) {
-        debugger;
         this.commonService.joinGroup(_joinGroup, data => {
           this.notifyservice.printSuccessMessage('Tham gia chuyến đi thành công');
           this.loadMember();
         })
       } else {
-        debugger;
         _joinGroup['id'] = this.listJoinGroup[joined].id;
         _joinGroup['updatedTime'] = Date.now();
         if (this.joined) {

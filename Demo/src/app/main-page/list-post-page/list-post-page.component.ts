@@ -62,6 +62,7 @@ export class ListPostPageComponent implements OnInit {
               typeof(data) == "object" ? element['countMember'] = 0 : element['countMember'] = data;
             })
             this.listTourPostTemp.push(element);
+            // console.log(element);
           });
         }, 200)
         this.commonService.getAllTourByDay(data => {

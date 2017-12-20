@@ -89,7 +89,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   getListImage(ImageName) {
-    console.log(ImageName);
+    // console.log(ImageName);
     this.resultImage =  this.formUpload.upload(ImageName,0);
     setTimeout(() => {
       this.upLoadImage();

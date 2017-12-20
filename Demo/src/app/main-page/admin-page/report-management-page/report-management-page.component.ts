@@ -66,7 +66,7 @@ export class ReportManagementPageComponent implements OnInit {
       this.dataDetail = response;
       // },300);
       // this.data[i]['details'] = this.dataDetail;
-      console.log(this.data);
+      // console.log(this.data);
       let listReport = '';
       response.forEach(function (element) {
         element.reasonReport.split(",").forEach(e => {

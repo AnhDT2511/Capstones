@@ -32,15 +32,15 @@ export class UserManagementPageComponent implements OnInit {
 
   getAllUser() {
     this.dataService.get('/user/account/get-all').subscribe((response: any) => {
-      this.data = response;
-      // console.log(this.data);
+      this.data = response.filter(item => item.roleId == 1);
       for (let i in this.data) {
-        this.data[i]['details'] = {}
-        this.dataService.get('/user/accountdetails/' + this.data[i].id).subscribe((response: any) => {
-          this.dataDetail = response;
-          this.data[i]['details'] = this.dataDetail;
-          // console.log(this.data[i]['details']);
-          //merger
+        this.data[i]['details'] = {};
+        this.dataService.get('/user/accountdetail-by-accountID/' + this.data[i].id).subscribe((res: any) => {
+          if(JSON.stringify(res) != "{}"){
+            this.dataDetail = res;
+            this.data[i]['details'] = this.dataDetail;
+            // console.log(this.data[i]['details']);
+          }
         });
       }
     }, error => {

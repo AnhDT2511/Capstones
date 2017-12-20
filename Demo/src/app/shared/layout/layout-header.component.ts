@@ -23,6 +23,6 @@ export class LayoutHeaderComponent implements OnInit {
     logout(){
         localStorage.removeItem(SystemConstants.CURRENT_USER);
         this.utilityService.navigate(UrlConstants.LOGIN);
-        console.log(window.localStorage);
+        // console.log(window.localStorage);
     }
 }

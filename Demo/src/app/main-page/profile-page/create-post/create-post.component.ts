@@ -331,7 +331,7 @@ export class CreatePostComponent implements OnInit {
   deleteTourPost() {
     this.notifyservice.printConfirmationDialog('Dữ liệu bạn vừa nhập sẽ bị mất khi thực hiện hành động này!', () => {
       this.listTourDetail = JSON.parse(JSON.stringify(this.listTourDetailTemp));
-      console.log(this.tourPostTemp);
+      // console.log(this.tourPostTemp);
       this.tourPost = JSON.parse(JSON.stringify(this.tourPostTemp));
     });
   }

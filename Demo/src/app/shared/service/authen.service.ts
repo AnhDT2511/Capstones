@@ -4,11 +4,16 @@ import { SystemConstants } from '../common/system.constants';
 import { LoggedInUser } from '../domain/loggedin.user';
 import 'rxjs/add/operator/map';
 import { NotificationService } from './notification.service';
+import { Router } from '@angular/router';
+import { UrlConstants } from '../common/url.constants';
+import { MessageContstants } from '../common/message.constants';
+
 @Injectable()
 export class AuthenService {
 
   constructor(private _http: Http,
-  private notifyService : NotificationService) { }
+    private notifyService: NotificationService,
+    private router: Router) { }
 
   login(model) {
     let headers = new Headers();
@@ -23,10 +28,19 @@ export class AuthenService {
     return this._http.post(SystemConstants.BASE_API + '/user/account/login', model, options).map((response: Response) => {
       let _body = JSON.parse(JSON.parse(JSON.stringify(response))._body)[0];
       let user: LoggedInUser = _body;
-      if (user) {
+      if (user && _body.deleted == 0) {
         localStorage.removeItem(SystemConstants.CURRENT_USER);
         localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(user));
+        if (user.roleId != 0) {
+          this.router.navigate([UrlConstants.HOME]);
+        } else {
+          this.router.navigate([UrlConstants.ADMIN]);
+        }
+        this.notifyService.printSuccessMessage(MessageContstants.LOGIN_SUCCESS);
+      } else if (_body.deleted == 1) {
+        this.notifyService.printErrorMessage('Tài khoản của bạn không hợp lệ hoặc đã bị khóa');
       }
+
     });
   }
   logout() {
