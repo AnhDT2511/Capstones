@@ -110,7 +110,7 @@
 .navbar-default {
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
 }
 
 .navbar-brand {
@@ -216,18 +216,24 @@
     }
 }
 
+.media img {
+    height: 80px;
+    width: 80px;
+}
+
 
 /*========== SEARCH ==========*/
 
 .list-result .brand {
     font-size: 60px;
-    margin-top: -143px;
+    margin-top: -140px;
     color: #fff;
-    font-weight: 900;
+    font-weight: 600;
     text-transform: uppercase;
     line-height: 1.05;
-    letter-spacing: 5px;
+    letter-spacing: 3px;
     padding-bottom: 3px;
+    margin-left: -10px;
 }
 
 .list-result .brand span {

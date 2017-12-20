@@ -12,7 +12,16 @@ export class CommonService {
         private http: Http,
         private dataService: DataService
     ) { }
-
+    getInfoChatRoom(id, callback: (data) => void) {
+        return this.dataService.get('/chat-room/by-group-tour-id/' + id).subscribe(
+            res => {
+                callback(res);
+            },
+            err => {
+                callback(err);
+            }
+        );
+    }
     searchByTitle(text, callback: (data) => void) {
         return this.dataService.get('/tours/post/title/' + text).subscribe(
             res => {

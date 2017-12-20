@@ -11,6 +11,7 @@ import { Comment } from '../../shared/domain/comment.user';
   styleUrls: ['./group-page.component.css']
 })
 export class GroupPageComponent implements OnInit {
+  hideJoinRoom: boolean = false;
   user: any = this.authentication.getLoggedInUser();
   checkLogin: any = false;
   groupTourId: string;
@@ -20,7 +21,7 @@ export class GroupPageComponent implements OnInit {
   comment: string = "";
   joined: boolean = true;
   groupTour: any = {};
-  chat : String = "";
+  nameRoom: String = "";
   baseFolder: any = SystemConstants.BASE_IMAGE;
   listCategory = InfoContstants.CATEGORY;
   listCity: any = InfoContstants.CITY_VN;
@@ -47,15 +48,33 @@ export class GroupPageComponent implements OnInit {
         });
         this.groupTour.startPlaceID = this.listCity.find(item => item.id == this.groupTour.startPlaceID).title;
         this.groupTour.endPlaceID = this.listCity.find(item => item.id == this.groupTour.endPlaceID).title;
-        this.groupTour.category = this.listCategory.find(item => item.id == this.groupTour.category).title;
+		this.groupTour.category = this.listCategory.find(item => item.id == this.groupTour.category).title;
+        this.commonService.getInfoChatRoom(this.groupTourId, data => {
+          if (JSON.stringify(data) == "{}" && this.groupTour.accountID == this.user.id) {
+            this.createRoom = true;
+            this.hideJoinRoom = true;
+          } else if (JSON.stringify(data) == "{}" && this.groupTour.accountID != this.user.id) {
+            this.hideJoinRoom = true;
+          } else {
+            this.roomInfo = data;
+          }
+        })
       }, error => {
       });
+
     });
   }
 
   ngOnInit() {
-  }
 
+  }
+  createOrJoin() {
+    if (this.createRoom) {
+      window.location.href = "http://localhost:8080/chat/create/" + this.nameRoom + "/" + Number(this.user.id )+ "/" + Number(this.groupTourId);
+    } else {
+      window.location.href = "http://localhost:8080/chat/join/" + this.roomInfo.roomName + "/" + Number(this.roomInfo.id) + "/" + Number(this.user.id);
+    }
+  }
   joinGroup() {
     if (this.checkLogin) {
       let joined = this.listJoinGroup.findIndex(item => item.joinGroupByID == this.user.id);
@@ -94,9 +113,7 @@ export class GroupPageComponent implements OnInit {
   nagivateProfile() {
     this.utiliservice.navigate(UrlConstants.PROFILE);
   }
-  showChat(){
-    window.location.href = "http://localhost:8080/chat/" + this.chat;
-  }
+
 
   loadMember() {
     this.listMember = [];

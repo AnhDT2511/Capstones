@@ -878,6 +878,8 @@ article {
 
 #new-tour .list-tour .tour .media img {
     border-radius: 50%;
+    width: 44px;
+    height: 44px;
 }
 
 #new-tour .list-tour .media-left,
@@ -889,6 +891,16 @@ article {
     margin-top: 5px;
     margin-bottom: 5px;
     color: #000;
+    font-size: 17px;
+}
+
+#new-tour .list-tour .media-body a {
+    cursor: pointer;
+}
+
+#new-tour .list-tour .media-body a:hover {
+    text-decoration: none;
+    color: #00c364;
 }
 
 #new-tour .list-tour .media-body p {
