@@ -14,6 +14,7 @@ import { InfoContstants } from "../../../shared/common"
 export class CreateTourComponent implements OnInit {
   @ViewChild(NgAutocompleteComponent)
   public completer: NgAutocompleteComponent;
+  linkRefShow: boolean = false;
   public group = [
     CreateNewAutocompleteGroup(
       'Chặng đầu',
@@ -80,6 +81,8 @@ export class CreateTourComponent implements OnInit {
           this.groupTour.category != undefined ? this.completer.SelectItem('category', this.groupTour.category) : null;
           this.groupTour.duration != undefined ? this.completer.SelectItem('duration', this.groupTour.duration) : null;
         })
+      } else {
+        this.groupTour = { 'tourArticleTitle': '', 'description': '', 'prepare': '', 'note': '', 'startTime': '' };
       }
     });
   }
@@ -88,48 +91,87 @@ export class CreateTourComponent implements OnInit {
   }
 
   showGroupTour() {
-    console.log(this.groupTour);
+    // console.log(this.groupTour);
   }
-
-  saveGroupTour() {
-    let exists : boolean = false;
-    if (!InfoContstants.isEmpty(this.groupTour)) {
-      let date = Date.now();
-      let _groupTour: TourPost = new TourPost(0, this.user.id, this.groupTour.startPlaceID, this.groupTour.endPlaceID, this.groupTour.duration, this.groupTour.tourArticleTitle, 0,
-        date, this.groupTour.description, 0, this.groupTour.note, this.groupTour.prepare, 1, this.groupTour.startTime, this.groupTour.category, this.groupTour.referenceLink);
-      if (this.id == 0) {
-        this.commonService.getAllTourPost(data => {
-          data.forEach(element => {
-            if (element.tourArticleTitle == _groupTour.tourArticleTitle) {
-              exists = true;
-            } 
-          });
-          if(!exists){
-            this.commonService.createPost(_groupTour, data => {
-              this.notifyService.printSuccessMessage("Tạo chuyến đi thành công");
-              let _joinGroup = {
-                'tourPostID': data._body,
-                'joinGroupByID': this.user.id,
-                'deleted': 0,
-                'createTime': Date.now()
-              }
-              this.commonService.joinGroup(_joinGroup, data => {
-              })
-              this.utiliService.navigate('/main/profile/0');
-            })
-          }else{
-            this.notifyService.printErrorMessage("Tiêu đề chuyến đi đã tồn tại, xin vui lòng thử lại")
+  validateGroupTour() {
+    for (let i in this.groupTour) {
+      // console.log(this.groupTour[i]);
+      switch (i) {
+        case 'tourArticleTitle':
+          if (InfoContstants.isEmpty(this.groupTour[i])) {
+            this.notifyService.printErrorMessage('Ô tiêu đề không nên để trống');
+            return false;
           }
-        })
-      } else {
-        _groupTour.id = this.id;
-        this.commonService.updatePost(_groupTour, data => {
-          this.notifyService.printSuccessMessage("Cập nhật chuyến đi thành công");
-          this.utiliService.navigate('/main/profile/0');
-        })
+          break;
+        case 'description':
+          if (InfoContstants.isEmpty(this.groupTour[i])) {
+            this.notifyService.printErrorMessage('Ô miêu tả không nên để trống');
+            return false;
+          }
+          break;
+        case 'prepare':
+          if (InfoContstants.isEmpty(this.groupTour[i])) {
+            this.notifyService.printErrorMessage('Ô chuẩn bị không nên để trống');
+            return false;
+          }
+          break;
+        case 'note':
+          if (InfoContstants.isEmpty(this.groupTour[i])) {
+            this.notifyService.printErrorMessage('Ô chú ý không nên để trống');
+            return false;
+          }
+          break;
+        case 'startTime':
+          if (InfoContstants.isEmpty(this.groupTour[i])) {
+            this.notifyService.printErrorMessage('Thời gian bắt đầu không nên để trống');
+            return false;
+          }
+          break;
       }
-    } else {
-      this.notifyService.printErrorMessage('Dữ liệu chưa được nhập!');
+    }
+    return true;
+  }
+  saveGroupTour() {
+    if (this.validateGroupTour()) {
+      let exists: boolean = false;
+      if (!InfoContstants.isEmpty(this.groupTour)) {
+        let date = Date.now();
+        let _groupTour: TourPost = new TourPost(0, this.user.id, this.groupTour.startPlaceID, this.groupTour.endPlaceID, this.groupTour.duration, this.groupTour.tourArticleTitle, 0,
+          date, this.groupTour.description, 0, this.groupTour.note, this.groupTour.prepare, 1, this.groupTour.startTime, this.groupTour.category, this.groupTour.referenceLink);
+        if (this.id == 0) {
+          this.commonService.getAllTourPost(data => {
+            data.forEach(element => {
+              if (element.tourArticleTitle == _groupTour.tourArticleTitle) {
+                exists = true;
+              }
+            });
+            if (!exists) {
+              this.commonService.createPost(_groupTour, data => {
+                this.notifyService.printSuccessMessage("Tạo chuyến đi thành công");
+                let _joinGroup = {
+                  'tourPostID': data._body,
+                  'joinGroupByID': this.user.id,
+                  'deleted': 0,
+                  'createTime': Date.now()
+                }
+                this.commonService.joinGroup(_joinGroup, data => {
+                })
+                this.utiliService.navigate('/main/profile/0');
+              })
+            } else {
+              this.notifyService.printErrorMessage("Tiêu đề chuyến đi đã tồn tại, xin vui lòng thử lại")
+            }
+          })
+        } else {
+          _groupTour.id = this.id;
+          this.commonService.updatePost(_groupTour, data => {
+            this.notifyService.printSuccessMessage("Cập nhật chuyến đi thành công");
+            this.utiliService.navigate('/main/profile/0');
+          })
+        }
+      } else {
+        this.notifyService.printErrorMessage('Dữ liệu chưa được nhập!');
+      }
     }
   }
 
@@ -137,7 +179,7 @@ export class CreateTourComponent implements OnInit {
     if (this.id == 0) {
       if (!InfoContstants.isEmpty(this.groupTour)) {
         this.notifyService.printConfirmationDialog('Bạn đã nhập dữ liệu, vậy bạn có muốn hủy bản nháp này!', () => {
-          this.groupTour = {};
+          this.groupTour = { 'tourArticleTitle': '', 'description': '', 'prepare': '', 'note': '', 'startTime': '' };
         });
       } else {
         this.notifyService.printErrorMessage('Bạn chưa nhập dữ liệu');

@@ -112,13 +112,13 @@
         </div>
 
         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#chat" *ngIf="createRoom"> Tạo phòng chat </button>
-        <button type="button" class="btn btn-info btn-lg" (click)="createOrJoin()" *ngIf="!hideJoinRoom ">  Tham Gia Nhóm Chat</button>
+        <button type="button" class="btn btn-info btn-lg" (click)="createOrJoin()" *ngIf="user && !hideJoinRoom ">  Tham Gia Nhóm Chat</button>
 
     </div>
 
     <div class="col-xs-12 col-sm-4 col-md-4 live-cm">
 
-        <input type="button" class="btn btn-success" value="{{joined ? 'Hủy Tham Gia' : 'Tham Gia'}}" name="joinGroup" (click)="joinGroup()" *ngIf="user.id != groupTour.accountID">
+        <input type="button" class="btn btn-success" value="{{joined ? 'Hủy Tham Gia' : 'Tham Gia'}}" name="joinGroup" (click)="joinGroup()" *ngIf="user && user.id != groupTour.accountID">
 
         <h3>
             <i class="fa fa-assistive-listening-systems" aria-hidden="true"></i>Thảo luận:

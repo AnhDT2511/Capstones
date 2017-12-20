@@ -324,11 +324,11 @@
             </div>
         </div>
 
-        <a href="javascript:void(0)" id="viewText" (click)="viewText(tourPost)" class="viewText">Chỉ xem chữ</a>
-        <a href="javascript:void(0)" id="ilike" (click)=likeTourPost(tourPost) class="ilike">{{ liked ? 'Bỏ thích' : 'Thích'}}</a>
-        <a href="javascript:void(0)" id="icomment" class="icomment" (click)="openCloseCmt()">Bình luận</a>
-        <a href="javascript:void(0)" id="ireport" class="ireport" (click)="openCloseReport()">Tố cáo</a>
-        <a href="javascript:void(0)" id="saveLink" class="save-link" (click)="bookMark(tourPost)">{{ bookMarked ? 'Bỏ Lưu' : 'Lưu'}}</a>
+        <a href="javascript:void(0)" id="viewText" (click)="viewText(tourPost)" class="viewText" [ngStyle]="{'margin-right' : statusReport == false || statusComment == false ? '435px' : '0px'}">Chỉ xem chữ</a>
+        <a href="javascript:void(0)" id="ilike" (click)=likeTourPost(tourPost) class="ilike" [ngStyle]="{'margin-right' : statusReport == false || statusComment == false ? '435px' : '0px'}">{{ liked ? 'Bỏ thích' : 'Thích'}}</a>
+        <a href="javascript:void(0)" id="icomment" class="icomment" (click)="openCloseCmt()" [ngStyle]="{'margin-right' : statusReport == false || statusComment == false ? '435px' : '0px'}">Bình luận</a>
+        <a href="javascript:void(0)" id="ireport" class="ireport" (click)="openCloseReport()" [ngStyle]="{'margin-right' : statusReport == false || statusComment == false ? '435px' : '0px'}">Tố cáo</a>
+        <a href="javascript:void(0)" id="saveLink" class="save-link" (click)="bookMark(tourPost)" [ngStyle]="{'margin-right' : statusReport == false  || statusComment == false ? '435px' : '0px'}">{{ bookMarked ? 'Bỏ Lưu' : 'Lưu'}}</a>
         <a href="#" id="toTop" class="scrollToTop">To Top</a>
 
     </footer>

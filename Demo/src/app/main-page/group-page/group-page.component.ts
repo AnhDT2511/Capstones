@@ -22,6 +22,8 @@ export class GroupPageComponent implements OnInit {
   joined: boolean = true;
   groupTour: any = {};
   nameRoom: String = "";
+  createRoom: boolean = false;
+  roomInfo: any = {};
   baseFolder: any = SystemConstants.BASE_IMAGE;
   listCategory = InfoContstants.CATEGORY;
   listCity: any = InfoContstants.CITY_VN;
@@ -48,17 +50,22 @@ export class GroupPageComponent implements OnInit {
         });
         this.groupTour.startPlaceID = this.listCity.find(item => item.id == this.groupTour.startPlaceID).title;
         this.groupTour.endPlaceID = this.listCity.find(item => item.id == this.groupTour.endPlaceID).title;
-		this.groupTour.category = this.listCategory.find(item => item.id == this.groupTour.category).title;
-        this.commonService.getInfoChatRoom(this.groupTourId, data => {
-          if (JSON.stringify(data) == "{}" && this.groupTour.accountID == this.user.id) {
-            this.createRoom = true;
-            this.hideJoinRoom = true;
-          } else if (JSON.stringify(data) == "{}" && this.groupTour.accountID != this.user.id) {
-            this.hideJoinRoom = true;
-          } else {
-            this.roomInfo = data;
-          }
-        })
+        this.groupTour.category = this.listCategory.find(item => item.id == this.groupTour.category).title;
+        setTimeout(() => {
+          this.commonService.getInfoChatRoom(this.groupTourId, data => {
+            if (JSON.stringify(data) == "{}" && this.groupTour.accountID == this.user.id) {
+              this.createRoom = true;
+              this.hideJoinRoom = true;
+            } else if (JSON.stringify(data) == "{}" && this.groupTour.accountID != this.user.id) {
+              this.hideJoinRoom = true;
+            } else if (this.joined != true) {
+              this.hideJoinRoom = true;
+            } else {
+              this.hideJoinRoom = false;
+              this.roomInfo = data;
+            }
+          })
+        }, 300)
       }, error => {
       });
 
@@ -70,7 +77,7 @@ export class GroupPageComponent implements OnInit {
   }
   createOrJoin() {
     if (this.createRoom) {
-      window.location.href = "http://localhost:8080/chat/create/" + this.nameRoom + "/" + Number(this.user.id )+ "/" + Number(this.groupTourId);
+      window.location.href = "http://localhost:8080/chat/create/" + this.nameRoom + "/" + Number(this.user.id) + "/" + Number(this.groupTourId);
     } else {
       window.location.href = "http://localhost:8080/chat/join/" + this.roomInfo.roomName + "/" + Number(this.roomInfo.id) + "/" + Number(this.user.id);
     }
@@ -86,6 +93,7 @@ export class GroupPageComponent implements OnInit {
       }
       if (joined == -1) {
         this.commonService.joinGroup(_joinGroup, data => {
+          this.hideJoinRoom = false;
           this.notifyservice.printSuccessMessage('Tham gia chuyến đi thành công');
           this.loadMember();
         })
@@ -94,10 +102,12 @@ export class GroupPageComponent implements OnInit {
         _joinGroup['updatedTime'] = Date.now();
         if (this.joined) {
           _joinGroup.deleted = 1;
+          this.hideJoinRoom = true;
           this.notifyservice.printErrorMessage('Hủy tham gia chuyến đi thành công ');
           // console.log(this.listJoinGroup);
         } else {
           _joinGroup.deleted = 0;
+          this.hideJoinRoom = false;
           this.notifyservice.printSuccessMessage('Tham gia chuyến đi thành công');
         }
         delete _joinGroup['createTime'];
@@ -147,6 +157,7 @@ export class GroupPageComponent implements OnInit {
       this.dataService.post('/tours/post/' + this.groupTour.id + '/comment', _comment).subscribe((response: any) => {
         this.loadComment();
         this.notifyservice.printSuccessMessage('Thêm bình luận thành công')
+        this.comment = "";
       }, error => {
       });
     } else if (this.checkLogin && InfoContstants.isEmpty(this.comment)) {

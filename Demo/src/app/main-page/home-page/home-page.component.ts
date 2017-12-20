@@ -112,7 +112,7 @@ export class HomePageComponent implements OnInit {
             this.commonService.getImageByTourPostID(_tourPost.id, data => {
               data.length > 0 ? _tourPost['image'] = data[0].name : _tourPost['image'] = 'default-tour-post.jpg'
             })
-            _tourPost.description.length > 155 ? _tourPost.description = _tourPost.description.slice(0,155) + " ..." : _tourPost.description;
+            _tourPost.description.length > 120 ? _tourPost.description = _tourPost.description.slice(0,117) + " ..." : _tourPost.description;
             this.listTourPost.push(_tourPost);
           } else if (response[i].deleted == 0) {
             let _groupTour = response[i];

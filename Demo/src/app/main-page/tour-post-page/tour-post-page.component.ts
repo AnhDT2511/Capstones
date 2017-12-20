@@ -262,6 +262,7 @@ export class TourPostPageComponent implements OnInit, OnDestroy {
       let _comment = new Comment(this.comment, this.tourPost.id, this.user.id);
       this.dataService.post('/tours/post/' + this.tourPost.id + '/comment', _comment).subscribe((response: any) => {
         this.loadComment();
+        this.comment = "";
       }, error => {
       });
     } else if(this.checkLogin && InfoContstants.isEmpty(this.comment)){

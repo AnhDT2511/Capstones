@@ -54,20 +54,30 @@
                             <i class="fa fa-home" aria-hidden="true"></i> Trang chủ
                         </a>
                     </li>
+                    <li>
+                        <a class="page-scroll" routerLink="/login" href="#" *ngIf="user == null">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i> ĐĂNG NHẬP
+                        </a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" routerLink="/register" href="#" *ngIf="user == null">
+                            <i class="fa fa-user-plus" aria-hidden="true"></i> ĐĂNG KÍ
+                        </a>
+                    </li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" *ngIf="user && user.userName">
                             <i class="fa fa-user-circle-o" aria-hidden="true"></i> {{user.userName | uppercase}}
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu main-menu">
                             <li>
-                                <a href="javascript:void(0)" routerLink="/main/profile">
-                                    <i class="fa fa-user" aria-hidden="true"></i> Trang cá nhân
+                                <a href="#" data-toggle="modal" data-target="#modalMyInfo" (click)="nagivateProfile()" *ngIf="user && user.userName">
+                                    <i class="fa fa-user" aria-hidden="true"></i> TRANG CÁ NHÂN
                                 </a>
                             </li>
                             <li>
-                                <a href="javascript:void(0)" (click)="logout()">
-                                    <i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất
+                                <a href="javascript:void(0)" (click)="logout()" *ngIf="user && user.userName">
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i> ĐĂNG XUẤT
                                 </a>
                             </li>
                         </ul>
@@ -175,7 +185,7 @@
                     <p>{{item.description}}</p>
                     <div class="f-size">
                         <i class="fa fa-eye " aria-hidden="true" style="font-size: 17px; margin-left: 0;"></i> {{item.postViewNumber}}
-                        <i class="fa fa-heart " aria-hidden="true"></i> {{item.countLike}}
+                        <i class="fa fa-users " aria-hidden="true"></i> {{item.countMember}}
                         <i class="fa fa-comment " aria-hidden="true"></i> {{item.countComment}}
                         <!-- <i class="fa fa-flag" aria-hidden="true"></i> 0 -->
                     </div>

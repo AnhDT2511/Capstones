@@ -179,7 +179,9 @@ export class TimeLinePageComponent implements OnInit, OnDestroy {
       let value = this.listCheckbox["" + i];
       value ? '' : delete this.listCheckbox["" + i];
     }
-    if (this.checkLogin && !InfoContstants.isEmpty(this.listCheckbox)) {
+    if (this.checkLogin && this.tourPost.accountID == this.user.id) {
+      this.notifyService.printErrorMessage('Bạn không thể báo cáo bài viết của chính mình');
+    } else if (this.checkLogin && !InfoContstants.isEmpty(this.listCheckbox)) {
       this.commonService.addReport({
         'tourPostID': this.tourPost.id,
         'reportedBy': this.user.id,
@@ -191,6 +193,10 @@ export class TimeLinePageComponent implements OnInit, OnDestroy {
         'countReport' in this.tourPost ? this.tourPost.countReport++ : this.tourPost['countReport'] = 1;
         this.openCloseReport();
         this.reported = true;
+        this.commonService.getNumberReport(this.tourPost.id, data => {
+          typeof (data) == "object" ? this.tourPost['countReport'] = 0 : this.tourPost['countReport'] = data;
+        })
+        this.listCheckbox = {};
         this.notifyService.printSuccessMessage('Báo cáo thành công');
       })
     } else if (this.checkLogin && InfoContstants.isEmpty(this.listCheckbox)) {
@@ -258,6 +264,7 @@ export class TimeLinePageComponent implements OnInit, OnDestroy {
       let _comment = new Comment(this.comment, this.tourPost.id, this.user.id);
       this.dataService.post('/tours/post/' + this.tourPost.id + '/comment', _comment).subscribe((response: any) => {
         this.loadComment();
+        this.comment = "";
       }, error => {
       });
     } else if (this.checkLogin && InfoContstants.isEmpty(this.comment)) {
@@ -270,6 +277,7 @@ export class TimeLinePageComponent implements OnInit, OnDestroy {
   loadComment() {
     this.dataService.get('/tours/post/' + this.tourPost.id + '/comment/get-all').subscribe((response: any) => {
       this.listComment = response;
+      this.tourPost['countComment'] = response.length;
       for (var i in this.listComment) {
         this.dataService.get('/user/account/' + this.listComment[i].commentByID).subscribe((response: any) => {
           for (var i in this.listComment) {
@@ -286,7 +294,7 @@ export class TimeLinePageComponent implements OnInit, OnDestroy {
   viewText(item) {
     localStorage.removeItem('tourPost');
     localStorage.setItem('tourPost', this.tourPost);
-    this.utilityService.navigate("/main/tourpost/" + this.tourPost.id + "/text/"+ this.tourPost.id);
+    this.utilityService.navigate("/main/tourpost/" + this.tourPost.id + "/text/" + this.tourPost.id);
   }
   openCloseCmt() {
     this.loadComment();

@@ -47,18 +47,7 @@ export class SearchPageComponent implements OnInit {
   showDetail(item) {
     this.utilityService.navigate('/main/tourpost/' + item.id);
   }
-  // getImage(data) {
-  //   this.listResultTourPost = [];
-  //   this.listResultGroupTour = [];
-  //   data.forEach(element => {
-  //     let tourPost = element;
-  //     this.commonService.getImageByAccountID(element.accountID, i => {
-  //       let image = i.find(item => item.deleted == 0 && item.tourPostID == 0 && item.tourByDayID == 0);
-  //       tourPost['image'] = image == undefined ? 'user.png' : image.name;
-  //       tourPost.type == 0 ? this.listResultTourPost.push(tourPost) : this.listResultGroupTour.push(tourPost);
-  //     })
-  //   });;
-  // }
+
   getDataOfAll() {
     this.commonService.getAllTourByDay(data =>{
       this.listResultTourByDay = data;
@@ -82,6 +71,9 @@ export class SearchPageComponent implements OnInit {
       this.commonService.getImageByAccountID(element.accountID, data => {
         let image = data.find(item => item.deleted == 0 && item.tourByDayID == 0 && item.tourPostID == 0);
         element['image'] = image == undefined ? 'user.png' : image.name;
+      })
+      this.commonService.getNumberMember(element.id,data => {
+        typeof(data) == "object" ? element['countMember'] = 0 : element['countMember'] = data;
       })
     });
     return item;

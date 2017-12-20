@@ -103,24 +103,16 @@ export class AppMaterialModules { }
     AppMaterialModules
   ],
   declarations: [
-    // LayoutHeaderComponent,
-    // LayoutFooterComponent,
-    // ModalLoginComponent,
-    // DialogLoginButtonComponent
     FormUploadComponent
   ],
   // entryComponents: [ModalLoginComponent],
   exports: [
-    // LayoutHeaderComponent,
-    // LayoutFooterComponent,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
     RouterModule,
     FormUploadComponent,
-    // ModalLoginComponent,
-    // DialogLoginButtonComponent,
     AppMaterialModules
   ]
 })
