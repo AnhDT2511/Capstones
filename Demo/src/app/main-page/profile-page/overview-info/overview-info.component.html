@@ -117,8 +117,8 @@
                         <span class="badge">Đăng lúc {{item.createdTime | date}}</span>
                     </div>
                     <div class="pull-right" style="margin-top: -12px;">
-                        <button class="btn btn-success" (click)="updateTourPost(item.id)">Sửa</button>
-                        <button class="btn btn-danger" (click)="deleteTourPost(item)">Xóa</button>
+                        <button class="btn btn-success" (click)="updateTourPost(item.id)" *ngIf="!viewPersionInfo">Sửa</button>
+                        <button class="btn btn-danger" (click)="deleteTourPost(item)" *ngIf="!viewPersionInfo">Xóa</button>
                     </div>
                     <hr>
                 </div>
@@ -136,8 +136,8 @@
                         <span class="badge">Đăng lúc {{item.createdTime | date}}</span>
                     </div>
                     <div class="pull-right">
-                        <button class="btn btn-success" (click)="updateGroupPost(item.id)">Sửa</button>
-                        <button class="btn btn-danger" (click)="deleteGroupTour(item)">Xóa</button>
+                        <button class="btn btn-success" (click)="updateGroupPost(item.id)" *ngIf="!viewPersionInfo">Sửa</button>
+                        <button class="btn btn-danger" (click)="deleteGroupTour(item)" *ngIf="!viewPersionInfo">Xóa</button>
                     </div>
                     <hr>
                 </div>
