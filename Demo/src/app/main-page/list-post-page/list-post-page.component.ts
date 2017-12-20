@@ -78,6 +78,9 @@ export class ListPostPageComponent implements OnInit {
       this.utilityservice.navigate('/main/grouptour/' + _tourPost.id);
     }
   }
+  nagivateProfile() {
+    this.utilityservice.navigate(UrlConstants.PROFILE);
+  }
   ngOnInit() {
   }
   searchByType() {

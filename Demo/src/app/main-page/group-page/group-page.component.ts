@@ -60,6 +60,7 @@ export class GroupPageComponent implements OnInit {
               this.hideJoinRoom = true;
             } else if (this.joined != true) {
               this.hideJoinRoom = true;
+              this.roomInfo = data;
             } else {
               this.hideJoinRoom = false;
               this.roomInfo = data;

@@ -79,6 +79,10 @@ export class SearchPageComponent implements OnInit {
     return item;
   }
 
+  nagivateProfile() {
+    this.utilityService.navigate(UrlConstants.PROFILE);
+  }
+
   searchByType() {
     if (this.textSearch != "") {
       switch (Number(this.typeSearch)) {
