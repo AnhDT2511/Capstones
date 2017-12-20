@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loading = true;
+    this.model.password = btoa(this.model.password);
     this.authenService.login(this.model).subscribe(data => {
       if (data !== null) {
         // console.log(window.localStorage);

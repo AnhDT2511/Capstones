@@ -37,7 +37,9 @@
                 <td>{{item.duration}}</td>
                 <td>{{item.accountID}}</td>
                 <td>
-                    <button class="btn btn-danger">Delete</button>
+                    <button class="btn {{item.checkBan ? 'btn-success' : 'btn-danger'}}" (click)="deletePost(item)">
+                        <i class="fa fa-pencil-trash-o" aria-hidden="true"></i> {{item.checkBan ? 'UNPUBLIC' : 'PUBLIC'}}
+                    </button>
                 </td>
             </tr>
         </tbody>

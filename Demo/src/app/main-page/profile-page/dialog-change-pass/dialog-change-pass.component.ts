@@ -46,13 +46,13 @@ export class DialogChangePassComponent {
     
 
   checkPassOld() {
-    this.data.password === this.model.oldpwd ? this.passOldValid = true : this.passOldValid = false;
+    this.data.password === btoa(this.model.oldpwd) ? this.passOldValid = true : this.passOldValid = false;
   }
   
   savePassChanged() {
     this.checkPassOld();
     if (this.model.renewpwd === this.model.newpwd && this.passOldValid) {
-      this.data.password = this.model.renewpwd;
+      this.data.password = btoa(this.model.renewpwd);
       this.dataService.put('/user/account', JSON.stringify(this.data)).subscribe((response: any) => {
         localStorage.removeItem(SystemConstants.CURRENT_USER);
         localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(this.data));

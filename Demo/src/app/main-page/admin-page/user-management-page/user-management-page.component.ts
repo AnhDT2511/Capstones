@@ -35,11 +35,11 @@ export class UserManagementPageComponent implements OnInit {
       this.data = response.filter(item => item.roleId == 1);
       for (let i in this.data) {
         this.data[i]['details'] = {};
+        this.data[i].deleted == 1 ? this.data[i]['checkBan'] = true : this.data[i]['checkBan'] = false;
         this.dataService.get('/user/accountdetail-by-accountID/' + this.data[i].id).subscribe((res: any) => {
-          if(JSON.stringify(res) != "{}"){
+          if (JSON.stringify(res) != "{}") {
             this.dataDetail = res;
             this.data[i]['details'] = this.dataDetail;
-            // console.log(this.data[i]['details']);
           }
         });
       }
@@ -48,15 +48,25 @@ export class UserManagementPageComponent implements OnInit {
     });
   }
 
-  deleteUser(id) {
-    this.notificationService.printConfirmationDialog('Bạn có chắc chắn muốn xóa người dùng này!', () => {
-      this.dataService.put('/user/account', {
-        'id': id,
-        'deleted': 0
-      }).subscribe((response: any) => {
-        // console.log('ok');
-        this.getAllUser();
+  deleteUser(item) {
+    if (item.checkBan) {
+      this.notificationService.printConfirmationDialog('Bạn có chắc chắn muốn cấp lại quyền truy cập cho người dùng này!', () => {
+        let banUser = item;
+        item.deleted = 0;
+        this.dataService.put('/user/account', banUser).subscribe((response: any) => {
+          // console.log('ok');
+          this.getAllUser();
+        });
       });
-    });
+    } else {
+      this.notificationService.printConfirmationDialog('Bạn có chắc chắn từ chối truy cấp đối với cho người dùng này!', () => {
+        let banUser = item;
+        item.deleted = 1;
+        this.dataService.put('/user/account', banUser).subscribe((response: any) => {
+          // console.log('ok');
+          this.getAllUser();
+        });
+      });
+    }
   }
 }

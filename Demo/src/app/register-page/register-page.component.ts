@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.loading = true;
-    console.log(this.model);
+    this.model.password = btoa(this.model.password);
     this.registerService.register(this.model).subscribe(data => {
       if (data !== null) {
         this.notificationService.printSuccessMessage(MessageContstants.REGISTER_SUCCESS);

@@ -29,10 +29,11 @@ export class PostManagementPageComponent implements OnInit {
 
   getAllPost() {
     this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
-      this.data = response.filter(item => item.deleted == 0 && item.type == 0);
+      this.data = response.filter(item => item.type == 0);
       // console.log(this.data);
       for (let i in this.data) {
         this.data[i]['details'] = {}
+        this.data[i].deleted == 1 ? this.data[i]['checkBan'] = true : this.data[i]['checkBan'] = false;
         this.dataService.get('/user/accountdetail-by-accountID/' + this.data[i].accountID).subscribe((response: any) => {
           this.dataDetail = response;
           this.data[i]['details'] = this.dataDetail;
@@ -44,16 +45,26 @@ export class PostManagementPageComponent implements OnInit {
     });
   }
 
-  deletePost(id) {
-    this.notificationService.printConfirmationDialog('Bạn có chắc chắn muốn xóa bài viết này!', () => {
-      this.dataService.put('/tours/post/', {
-        'id': id,
-        'deleted': 1
-      }).subscribe((response: any) => {
-        // console.log('ok delete post');
-        this.getAllPost();
+  deletePost(item) {
+    if (item.checkBan) {
+      this.notificationService.printConfirmationDialog('Bạn có chắc chắn muốn cấp lại quyền truy cập cho bài viết này!', () => {
+        let banUser = item;
+        item.deleted = 0;
+        this.dataService.put('/tours/post/', banUser).subscribe((response: any) => {
+          // console.log('ok');
+          this.getAllPost();
+        });
       });
-    });
+    } else {
+      this.notificationService.printConfirmationDialog('Bạn có chắc chắn ẩn bài viết này!', () => {
+        let banUser = item;
+        item.deleted = 1;
+        this.dataService.put('/tours/post/', banUser).subscribe((response: any) => {
+          // console.log('ok');
+          this.getAllPost();
+        });
+      });
+    }
   }
 
 }

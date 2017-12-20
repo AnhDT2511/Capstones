@@ -61,8 +61,8 @@
                     <!-- <button class="btn btn-info">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sửa
                     </button> -->
-                    <button class="btn btn-danger" (click)="deleteUser(item.id)">
-                            <i class="fa fa-pencil-trash-o" aria-hidden="true"></i> DELETE
+                    <button class="btn {{item.checkBan ? 'btn-success' : 'btn-danger'}}" (click)="deleteUser(item)">
+                            <i class="fa fa-pencil-trash-o" aria-hidden="true"></i> {{item.checkBan ? 'UNBAN' : 'BAN'}}
                     </button>
                 </td>
             </tr>

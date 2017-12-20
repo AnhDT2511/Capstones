@@ -46,10 +46,11 @@ export class ReportManagementPageComponent implements OnInit {
 
   getAllReport() {
     this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
-      this.data = response.filter(item => item.type == 0 && item.deleted == 0);
+      this.data = response.filter(item => item.type == 0 );
       // console.log(this.data);
       for (let i in this.data) {
         this.data[i]['number'];
+        this.data[i].deleted == 1 ? this.data[i]['checkBan'] = true : this.data[i]['checkBan'] = false;
         this.dataService.get('/tours/post/get-number-report-of-post/' + this.data[i].id).subscribe((res: any) => {
           let number = res;
           this.data[i]['number'] = typeof (number) != "number" ? 0 : number;
@@ -84,14 +85,25 @@ export class ReportManagementPageComponent implements OnInit {
 
 
   acceptReport(tourpost) {
-    let item = tourpost;
-    this.notificationService.printConfirmationDialog('Bạn có chắc chắn muốn xóa bài viết này!', () => {
-      item.deleted = 1
-      this.dataService.put('/tours/post/', item).subscribe((response: any) => {
-        // console.log('ok delete post');
-        this.getAllReport();
+    if (tourpost.checkBan) {
+      this.notificationService.printConfirmationDialog('Bạn có chắc chắn chấp nhận báo cáo của bài viết này!', () => {
+        let banUser = tourpost;
+        tourpost.deleted = 0;
+        this.dataService.put('/tours/post/', banUser).subscribe((response: any) => {
+          // console.log('ok');
+          this.getAllReport();
+        });
       });
-    });
+    } else {
+      this.notificationService.printConfirmationDialog('Bạn có chắc chắn hủy báo cáo bài viết này!', () => {
+        let banUser = tourpost;
+        tourpost.deleted = 1;
+        this.dataService.put('/tours/post/', banUser).subscribe((response: any) => {
+          // console.log('ok');
+          this.getAllReport();
+        });
+      });
+    }
   }
 
 }

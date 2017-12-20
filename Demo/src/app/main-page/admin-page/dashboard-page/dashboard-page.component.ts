@@ -37,7 +37,6 @@ export class DashboardPageComponent implements OnInit {
     this.dataService.get('/user/account/get-all').subscribe((response: any) => {
       this.listUser = response;
       this.numUsers = this.listUser.length;
-      console.log(this.numUsers);
     }, error => {
     });
   }
@@ -57,7 +56,7 @@ export class DashboardPageComponent implements OnInit {
     }, error => {
     });
   }
-
+  
   // getAllComment() {
   //   this.dataService.get('/tours/post/comment/get-all').subscribe((response: any) => {
   //     this.listComment = response;

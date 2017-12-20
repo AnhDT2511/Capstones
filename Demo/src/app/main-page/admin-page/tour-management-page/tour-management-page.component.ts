@@ -28,9 +28,33 @@ export class TourManagementPageComponent implements OnInit {
 
   getAllTour() {
     this.dataService.get('/tours/post/get-all').subscribe((response: any) => {
-      this.data = response.filter(item => item.type == 1 && item.deleted == 0);
+      this.data = response.filter(item => item.type == 1 );
       // console.log(this.data);
+      this.data.forEach((e) =>{
+        e.deleted == 1 ? e['checkBan'] = true : e['checkBan'] = false;
+      })
     }, error => {
     });
   }
+
+  deletePost(item) {
+    if (item.checkBan) {
+      this.notificationService.printConfirmationDialog('Bạn có chắc chắn muốn cấp lại quyền truy cập cho chuyến đi này!', () => {
+        let banUser = item;
+        item.deleted = 0;
+        this.dataService.put('/tours/post/', banUser).subscribe((response: any) => {
+          // console.log('ok');
+          this.getAllTour();
+        });
+      });
+    } else {
+      this.notificationService.printConfirmationDialog('Bạn có chắc chắn ẩn chuyến đi này!', () => {
+        let banUser = item;
+        item.deleted = 1;
+        this.dataService.put('/tours/post/', banUser).subscribe((response: any) => {
+          // console.log('ok');
+          this.getAllTour();
+        });
+      });
+    }
 }

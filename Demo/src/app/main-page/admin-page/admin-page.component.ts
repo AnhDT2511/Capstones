@@ -26,4 +26,10 @@ export class AdminPageComponent implements OnInit {
       this._utilityService.navigateToLogin();
     }
   }
+
+  logout() {
+    window.localStorage.removeItem('CURRENT_USER');
+    this._notifyService.printSuccessMessage('Đăng xuất thành công!');
+    this._utilityService.navigate(UrlConstants.LOGIN);
+  }
 }

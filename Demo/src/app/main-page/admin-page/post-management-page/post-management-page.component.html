@@ -45,7 +45,9 @@
                 <td>{{item.postViewNumber}}</td>
                 <td>{{item.details.firstName}} {{item.details.lastName}}</td>
                 <td>
-                    <button class="btn btn-danger" (click)="deletePost(item.id)">DELETE</button>
+                    <button class="btn {{item.checkBan ? 'btn-success' : 'btn-danger'}}" (click)="deletePost(item)">
+                        <i class="fa fa-pencil-trash-o" aria-hidden="true"></i> {{item.checkBan ? 'PUBLIC' : 'UNPUBLIC'}}
+                    </button>
                 </td>
             </tr>
         </tbody>
