@@ -227,7 +227,6 @@ export class CreatePostComponent implements OnInit {
     let responseID = 0;
     if (this.validateTourPost() && this.validateTourByDay()) {
       this.commonservice.getAllTourPost(data => {
-        console.log(data);
         let date = Date.now();
         let _tourPost: TourPost = new TourPost(0, this.user.id, this.tourPost.startPlaceID, 0, this.listTourDetail.length, this.tourPost.title, 0,
           date, this.tourPost.descriptionTourPost, 0, this.tourPost.note, this.tourPost.prepare, 0, '', this.tourPost.category, '');

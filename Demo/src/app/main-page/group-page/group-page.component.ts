@@ -78,9 +78,9 @@ export class GroupPageComponent implements OnInit {
   }
   createOrJoin() {
     if (this.createRoom) {
-      window.location.href = "http://localhost:8080/chat/create/" + this.nameRoom + "/" + Number(this.user.id) + "/" + Number(this.groupTourId);
+      window.location.href = SystemConstants.BASE_API + "/chat/create/" + this.nameRoom + "/" + Number(this.user.id) + "/" + Number(this.groupTourId);
     } else {
-      window.location.href = "http://localhost:8080/chat/join/" + this.roomInfo.roomName + "/" + Number(this.roomInfo.id) + "/" + Number(this.user.id);
+      window.location.href = SystemConstants.BASE_API + "/chat/join/" + this.roomInfo.roomName + "/" + Number(this.roomInfo.id) + "/" + Number(this.user.id);
     }
   }
   joinGroup() {
