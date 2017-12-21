@@ -38,7 +38,7 @@ export class AuthenService {
         }
         this.notifyService.printSuccessMessage(MessageContstants.LOGIN_SUCCESS);
       } else if (_body.deleted == 1) {
-        this.notifyService.printErrorMessage('Tài khoản của bạn không hợp lệ hoặc đã bị khóa');
+        this.notifyService.printErrorMessage('T�i kho?n c?a b?n kh�ng h?p l? ho?c d� b? kh�a');
       }
 
     });
@@ -83,7 +83,7 @@ export class AuthenService {
     var result: boolean = false;
     var roles: any = user.roleId;
     if (roles == 1) {
-      // this.notifyService.printErrorMessage('Bạn phải có quyền admin !');
+      // this.notifyService.printErrorMessage('B?n ph?i c� quy?n admin !');
       // this.utilityService.navigateToLogin;
       return false;
     }
