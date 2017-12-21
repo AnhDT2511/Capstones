@@ -1,7 +1,12 @@
-.btn-file {
+
+.btn-upload-img .btn-file::-webkit-file-upload-button {
     background-color: #00bd61;
     border: none;
     color: #fff;
     padding: 7px 12px 8px;
     border-radius: 4px;
+}
+
+.btn-upload-img  [type=file] {
+    color: #757575;
 }

@@ -51,6 +51,7 @@ export class ViewTextPageComponent implements OnInit, OnDestroy {
     { name: 'Nội dung sao chép từ nguồn khác', value: '4' },
     { name: 'Không đúng thuần phong - mỹ tục', value: '5' },
   ]
+
   listComment: any;
 
   public tourpostId: number;

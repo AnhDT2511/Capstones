@@ -159,9 +159,9 @@
         <div class="container ">
             <div class="timeline-item " *ngIf="tourPost.prepare != null">
                 <div class="timeline-img body-purple"></div>
-                <div class="timeline-content ">
-                    <div class="date ">Bắt đầu</div>
-                    <h3>Chuẩn bị</h3>
+                <div class="timeline-content pull-right x">
+                    <div class="date " style="left: 0; right: auto;">Bắt đầu</div>
+                    <h3 style="margin-top: 40px;">Chuẩn bị</h3>
                     <blockquote>
                         {{tourPost.prepare}}
                     </blockquote>
@@ -171,7 +171,7 @@
         <div class="container">
             <div class="timeline-item " *ngFor="let tourDetail of tourByDayDetail ; let i = index;">
                 <div class="timeline-img body-purple"></div>
-                <div class="timeline-content timeline-card js--fadeInLeft ">
+                <div class="timeline-content timeline-card">
                     <div class="timeline-img-header" *ngIf="tourDetail.listImage.length > 0">
                         <carousel>
                             <slide *ngFor="let item of tourDetail.listImage">

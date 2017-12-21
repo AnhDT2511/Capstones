@@ -72,9 +72,12 @@
                 <div class="panel-body">
                     <form class="form-horizontal" action="">
                         <div class="form-group">
-                            <div class="col-sm-12">
+                            <div class="col-sm-2 col-sm-offset-2">
+                                <label style="margin-top: 6px;">Chọn thể loại:</label>
+                            </div>
+                            <div class="col-sm-6">
                                 <div class="input">
-                                    <select class="input-text" name="category" [(ngModel)]="tourPost.category">
+                                    <select class="form-control" name="category" [(ngModel)]="tourPost.category">
                                         <option *ngFor="let item of listCategory" value="{{item.id}}">{{item.title}}</option>
                                     </select>
                                 </div>
@@ -136,7 +139,7 @@
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#sub-accordion" href="#c{{i}}">Viết nội dung ở đây</a>
                                         </h4>
-                                        <button type="button" class="btn btn-danger" (click)="removeDetails(tourDetail)" *ngIf="filterItemsOfType('0').length > 1">
+                                        <button type="button" class="btn-remove" (click)="removeDetails(tourDetail)" *ngIf="filterItemsOfType('0').length > 1">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
                                         </button>
                                     </div>

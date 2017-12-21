@@ -124,7 +124,7 @@
             <i class="fa fa-assistive-listening-systems" aria-hidden="true"></i>Thảo luận:
         </h3>
 
-        <main>
+        <main id="style-3">
             <!-- Left-aligned media object -->
             <div class="media" *ngFor="let item of listComment ; let i = index;">
                 <div class="media-left">
@@ -155,8 +155,13 @@
     </div>
 
     <div class="col-xs-12 col-sm-5 col-md-5 info-tour">
-        <i class="fa fa-car" aria-hidden="true"></i>
-        <div class="box">
+        <a href="javascript:void(0)" (click)="createOrJoin()" *ngIf="user && !hideJoinRoom ">
+            <i class="fa fa-commenting-o" aria-hidden="true"><span>Tham gia chat</span></i>
+        </a>
+        <a href="javascript:void(0)" data-toggle="modal" data-target="#chat" *ngIf="createRoom">
+            <i class="fa fa-commenting-o" aria-hidden="true"><span>Tạo phòng chat</span></i>
+        </a>
+        <div class="box" id="style-2">
             <div class="title">
                 <label>
                     <i class="fa fa-pagelines" aria-hidden="true"></i> Tên chuyến đi:
@@ -238,6 +243,20 @@
 
     </div>
 </div>
+
+<!-- Begin: Chat -->
+<div id="chat" class="chat">
+        <header>
+            <h5>Thảo luận trực tuyến</h5>
+            <a href="javascript:void(0)" class="closebtn" onclick="closeChat()">&times;</a>
+        </header>
+        <main>
+            <div class="container">
+                <iframe src="http://localhost:8080/chat/join/Ha%20Noi%20di%20Ho%20Chi%20Minh/115/41" style="width: 400px; height:910px; border: none;"></iframe>
+            </div>
+        </main>
+    </div>
+    <!-- End: Chat -->
 
 <!-- Begin: Footer -->
 <footer>

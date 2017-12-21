@@ -452,6 +452,12 @@ header .header-topbar ul>li>span.rot {
     border-color: transparent transparent transparent #f5f5f5;
 }
 
+.x::after{
+    border-width: 10px 15px 10px 0 !important;
+    border-color: transparent #f5f5f5 transparent transparent !important;
+    left: -15px !important;
+}
+
 .timeline-img {
     width: 30px;
     height: 30px;

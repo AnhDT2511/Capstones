@@ -24,6 +24,24 @@
                 </li>
             </ul>
             <ul class="pull-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-globe" aria-hidden="true"></i> Ngôn ngữ
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu top-menu">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-angle-right" aria-hidden="true"></i> English
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-angle-right" aria-hidden="true"></i> Vietnamese
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li>
                     <span class="rot">|</span>
                 </li>
@@ -151,7 +169,7 @@
             <hr>
             <div class="media" *ngFor="let item of listResultTourPost;">
                 <div class="media-left">
-                    <img [src]="baseFolder + item.image" class="media-object" style="width:80px">
+                    <img [src]="baseFolder + item.image" class="media-object" style="width:80px; height: 80px;">
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading">
@@ -166,7 +184,6 @@
                     </div>
                 </div>
             </div>
-            <hr>
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-56 list-result">
@@ -176,7 +193,7 @@
             <hr>
             <div class="media" *ngFor="let item of listResultGroupTour;">
                 <div class="media-left">
-                    <img [src]="baseFolder + item.image" class="media-object" style="width:80px">
+                    <img [src]="baseFolder + item.image" class="media-object" style="width:80px; height: 80px;">
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading">
@@ -192,7 +209,7 @@
                 </div>
             </div>
         </div>
-
+        </div>
         <!-- Begin: Footer -->
         <footer>
             <div class="container-fruid text-center f-social">

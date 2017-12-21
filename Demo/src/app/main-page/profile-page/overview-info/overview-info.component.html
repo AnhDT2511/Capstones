@@ -60,9 +60,9 @@
                 </div>
 
                 <div class="col-xs-12 col-sm-6 col-md-6 mark2">
-                    <div class="tile total-post">
-                        <div class="icon-total-post">
-                            <i class="fa fa-files-o" aria-hidden="true"></i>
+                    <div class="tile total-tour">
+                        <div class="icon-total-tour">
+                            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
                         </div>
                         <div class="number">{{listGroupPost.length}}</div>
                         <h3>Tổng số nhóm đã tạo</h3>
@@ -115,11 +115,12 @@
                     <p>{{item.description}}</p>
                     <div>
                         <span class="badge">Đăng lúc {{item.createdTime | date}}</span>
+                        <div class="pull-right">
+                            <button class="btn btn-success" (click)="updateTourPost(item.id)" *ngIf="!viewPersionInfo"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Sửa</button>
+                            <button class="btn btn-danger" (click)="deleteTourPost(item)" *ngIf="!viewPersionInfo"><i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp; Xóa</button>
+                        </div>
                     </div>
-                    <div class="pull-right" style="margin-top: -12px;">
-                        <button class="btn btn-success" (click)="updateTourPost(item.id)" *ngIf="!viewPersionInfo">Sửa</button>
-                        <button class="btn btn-danger" (click)="deleteTourPost(item)" *ngIf="!viewPersionInfo">Xóa</button>
-                    </div>
+                    
                     <hr>
                 </div>
             </div>
@@ -134,11 +135,12 @@
                     <p>{{item.description}}</p>
                     <div>
                         <span class="badge">Đăng lúc {{item.createdTime | date}}</span>
+                        <div class="pull-right">
+                            <button class="btn btn-success" (click)="updateGroupPost(item.id)" *ngIf="!viewPersionInfo"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp; Sửa</button>
+                            <button class="btn btn-danger" (click)="deleteGroupTour(item)" *ngIf="!viewPersionInfo"><i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp; Xóa</button>
+                        </div>
                     </div>
-                    <div class="pull-right">
-                        <button class="btn btn-success" (click)="updateGroupPost(item.id)" *ngIf="!viewPersionInfo">Sửa</button>
-                        <button class="btn btn-danger" (click)="deleteGroupTour(item)" *ngIf="!viewPersionInfo">Xóa</button>
-                    </div>
+                    
                     <hr>
                 </div>
             </div>
@@ -153,7 +155,7 @@
                     </span>
                     <a href="/main/tourpost/{{item.id}}"> {{item.tourArticleTitle}}</a>
                     <div class="pull-right">
-                        <button class="btn btn-danger" (click)="deleteBookMark(item)">Xóa</button>
+                        <button class="btn btn-danger" (click)="deleteBookMark(item)"><i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp; Xóa</button>
                     </div>
                 </div>
             </div>

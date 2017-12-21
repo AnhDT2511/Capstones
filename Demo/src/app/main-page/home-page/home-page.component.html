@@ -250,7 +250,7 @@
                 </h2>
                 <div class="form-group form-horizontal">
                     <div class="col-sm-12">
-                        <input type="text" name="searchDuration" class="form-control" placeholder="Nhập từ khóa số ngày" [(ngModel)]="searchWord.duration" (keyup.enter)="search(4)">
+                        <input type="number" min="1" name="searchDuration" class="form-control" placeholder="Nhập từ khóa số ngày" [(ngModel)]="searchWord.duration" (keyup.enter)="search(4)">
                     </div>
                 </div>
                 <div class="form-group form-horizontal">

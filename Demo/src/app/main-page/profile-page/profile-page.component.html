@@ -116,8 +116,7 @@
             <div class="overlay" [hidden]="viewPersionInfo">
                 <div class="text">
                     <a href="javascript:void(0)">
-                        <i class="fa fa-camera-retro" aria-hidden="true" for="upload"></i>Cập nhật ảnh đại diện
-                        <form-upload (listImage)="getListImage($event)"></form-upload>
+                        <form-upload (listImage)="getListImage($event)" style="margin: 0 0 0 65px;"></form-upload>
                     </a>
                 </div>
             </div>
@@ -157,7 +156,7 @@
         </div>
         <div class="btn-tour" [hidden]="viewPersionInfo">
             <a href="javascript:void(0)" class="btn-overview" routerLink="/main/profile/0">
-                <i class="fa fa-address-card-o" aria-hidden="true"></i> Thông Tin Cá Nhân
+                <i class="fa fa-address-card-o" aria-hidden="true"></i> Trang Cá Nhân
             </a>
         </div>
         <div class="btn-tour" [hidden]="viewPersionInfo">
