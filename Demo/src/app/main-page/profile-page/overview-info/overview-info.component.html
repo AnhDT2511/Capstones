@@ -155,7 +155,7 @@
                     </span>
                     <a href="/main/tourpost/{{item.id}}"> {{item.tourArticleTitle}}</a>
                     <div class="pull-right">
-                        <button class="btn btn-danger" (click)="deleteBookMark(item)"><i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp; Xóa</button>
+                        <button class="btn btn-danger" (click)="deleteBookMark(item)" *ngIf="!viewPersionInfo"><i class="fa fa-trash-o" aria-hidden="true"></i>&nbsp; Xóa</button>
                     </div>
                 </div>
             </div>

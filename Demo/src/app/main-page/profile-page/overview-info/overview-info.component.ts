@@ -52,6 +52,7 @@ export class OverviewInfoComponent implements OnInit {
         data.forEach(element => {
           if (element.deleted == 0) {
             this.commonService.getTourPostByID(element.tourPostID, i => {
+              i['bookMarkID'] = element.id;
               this.listSaveLink.push(i);
             })
           }
@@ -82,9 +83,9 @@ export class OverviewInfoComponent implements OnInit {
 
   deleteBookMark(item) {
     this.notifiService.printConfirmationDialog('Bạn có muốn xóa bài đã lưu này', () => {
-      item.deleted = 1;
-      this.commonService.updateBookMark(item, data => {
-        this.listSaveLink.splice(this.listSaveLink.findIndex(i => i.id == item.id), 1);
+      let bookMark = {'id' : item.bookMarkID , 'deleted' : 1};
+      this.commonService.updateBookMark(bookMark, data => {
+        this.listSaveLink.splice(this.listSaveLink.findIndex(i => i.bookMarkID == bookMark.id), 1);
         // this.utilityService.navigate('/main/profile/0');
       })
     });
